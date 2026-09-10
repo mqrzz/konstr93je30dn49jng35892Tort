@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О нас — Flowgram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="nav-footer.js"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<header class="page-hero wrap">
+  <h1>Делаем конструктор ботов, которым не стыдно пользоваться</h1>
+  <p>Flowgram начался с одного вопроса: почему создание Telegram-бота до сих пор требует нанимать разработчика или мучиться с чужим кодом.</p>
+</header>
+
+<section style="border-top:none;padding-top:0;">
+  <div class="wrap">
+    <div class="about-stats">
+      <div class="about-stat"><div class="num">2026</div><div class="lbl">Год основания</div></div>
+      <div class="about-stat"><div class="num">1 200+</div><div class="lbl">Ботов на платформе</div></div>
+      <div class="about-stat"><div class="num">4.6M</div><div class="lbl">Сообщений в месяц</div></div>
+      <div class="about-stat"><div class="num">99.9%</div><div class="lbl">Аптайм за квартал</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:720px;">
+    <div class="section-head" style="text-align:left;margin-bottom:0;max-width:100%;">
+      <h2 style="font-size:32px;">Как всё начиналось</h2>
+    </div>
+    <p style="color:var(--text-dim);font-size:15px;line-height:1.75;margin-top:20px;">Мы делали ботов на заказ для магазинов и небольших сервисов и каждый раз собирали одну и ту же инфраструктуру заново: вебхуки, очередь, хранение сценария, панель для клиента. В какой-то момент стало очевидно, что эту часть работы можно сделать один раз — и хорошо.</p>
+    <p style="color:var(--text-dim);font-size:15px;line-height:1.75;margin-top:16px;">Так родился Flowgram: тот же движок, что держит ботов у наших первых клиентов, но доступный любому — без необходимости держать своего разработчика на подхвате.</p>
+  </div>
+</section>
+
+<section id="philosophy">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Во что мы верим</h2>
+      <p>Три вещи, которые определяют каждое решение в продукте.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Просто по умолчанию</h3>
+        <p>Если для базового сценария нужно читать документацию — это наша недоработка, а не недостаток внимания пользователя.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/></svg></div>
+        <h3>Данные — ваши</h3>
+        <p>Токен бота, аудитория и переписка принадлежат вам. Мы не продаём доступ к ним и не используем для рекламы.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Надёжность важнее фич</h3>
+        <p>Новая нода подождёт до следующего релиза. Бот, который не отвечает клиентам — нет.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Присоединяйтесь к команде</h2>
+    <a class="btn btn-primary" href="careers.html">Открытые позиции</a>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script src="script.js"></script>
+</body>
+</html>

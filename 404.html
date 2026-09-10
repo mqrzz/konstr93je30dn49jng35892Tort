@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Страница не найдена — Flowgram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="nav-footer.js"></script>
+</head>
+<body>
+<div class="err-wrap">
+  <svg class="err-node" viewBox="0 0 220 120" fill="none">
+    <line x1="40" y1="30" x2="110" y2="70" stroke="rgba(255,255,255,.14)" stroke-width="1.4"/>
+    <line x1="180" y1="30" x2="110" y2="70" stroke="rgba(255,255,255,.14)" stroke-width="1.4" stroke-dasharray="4 5"/>
+    <line x1="110" y1="70" x2="110" y2="110" stroke="rgba(255,255,255,.14)" stroke-width="1.4"/>
+    <rect x="10" y="12" width="60" height="30" rx="8" fill="#0d0d0d" stroke="var(--stroke)"/>
+    <text x="40" y="31" text-anchor="middle" font-family="Inter" font-size="11" fill="#e0e0e0">/start</text>
+    <rect x="150" y="12" width="60" height="30" rx="8" fill="#0d0d0d" stroke="var(--stroke)" stroke-dasharray="3 4"/>
+    <text x="180" y="31" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--text-faint)">?</text>
+    <circle cx="110" cy="70" r="18" fill="#0d0d0d" stroke="var(--stroke)"/>
+    <text x="110" y="75" text-anchor="middle" font-family="Inter" font-size="14" fill="#e0e0e0">✕</text>
+  </svg>
+  <div class="err-code">ОШИБКА 404</div>
+  <h1 class="err-title">Такой ноды в сценарии нет</h1>
+  <p class="err-sub">Страница, которую вы ищете, не существует или была перемещена. Проверьте адрес или вернитесь на главную.</p>
+  <div class="err-actions">
+    <a class="btn btn-primary" href="index.html">На главную</a>
+    <a class="btn btn-secondary" href="docs.html">Открыть документацию</a>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

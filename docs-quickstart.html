@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Быстрый старт — Flowgram Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="nav-footer.js"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<section class="docs-shell">
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docsSidebar">
+  <div class="grp">
+    <div class="grp-title">Начало работы</div>
+    <a href="docs.html" data-page="overview">Обзор</a>
+    <a href="docs-quickstart.html" data-page="quickstart">Быстрый старт</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Конструктор</div>
+    <a href="docs-nodes.html" data-page="nodes">Справочник нод</a>
+    <a href="docs-nodes.html#variables" data-page="nodes">Переменные и условия</a>
+    <a href="docs-nodes.html#versions" data-page="nodes">Версии и публикация</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">API</div>
+    <a href="docs-api.html" data-page="api">Аутентификация</a>
+    <a href="docs-api.html#messages" data-page="api">Messages API</a>
+    <a href="docs-api.html#limits" data-page="api">Rate limits</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Вебхуки</div>
+    <a href="docs-webhooks.html" data-page="webhooks">Регистрация вебхука</a>
+    <a href="docs-webhooks.html#events" data-page="webhooks">Типы событий</a>
+    <a href="docs-webhooks.html#signature" data-page="webhooks">Проверка подписи</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Ещё</div>
+    <a href="pricing.html">Тарифы и лимиты</a>
+    <a href="security.html">Безопасность</a>
+  </div>
+</aside>
+
+    <article class="docs-article">
+      <div class="docs-crumb"><a href="docs.html">Документация</a> / Быстрый старт</div>
+      <button class="docs-menu-btn" onclick="toggleDocsMenu()">Разделы документации <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+
+      <h1>Быстрый старт</h1>
+      <p class="lead">От пустого аккаунта до отвечающего бота — пять шагов, без строчки кода.</p>
+
+      <h2>1. Создайте бота через BotFather</h2>
+      <p>Откройте <code class="inline">@BotFather</code> в Telegram, отправьте команду <code class="inline">/newbot</code> и следуйте инструкциям. В конце BotFather выдаст токен вида:</p>
+      <div class="docs-table" style="margin-bottom:8px;"><table style="width:100%;"><tr><td style="padding:12px 14px;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:8px;font-family:var(--mono);font-size:13px;color:#e0e0e0;">847291:AAH4d9x2K...опущено</td></tr></table></div>
+      <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>Никому не показывайте токен — он даёт полный доступ к боту. Flowgram хранит его в зашифрованном виде.</div>
+
+      <h2>2. Подключите бота в Flowgram</h2>
+      <p>В кабинете нажмите <b>Создать бота</b>, вставьте токен из BotFather. Flowgram проверит его через Telegram API и автоматически зарегистрирует вебхук — вручную ничего настраивать не нужно.</p>
+
+      <h2>3. Соберите первый сценарий</h2>
+      <p>Откройте конструктор и начните с триггера <code class="inline">/start</code>. Добавьте ноду <b>Сообщение</b> с приветственным текстом, затем — ноду <b>Кнопки</b> с двумя-тремя вариантами продолжения диалога.</p>
+      <ul>
+        <li>Перетащите блок из левой панели на канвас</li>
+        <li>Соедините его с предыдущей нодой, потянув от точки на нижней грани</li>
+        <li>Кликните по ноде, чтобы отредактировать текст справа</li>
+      </ul>
+
+      <h2>4. Проверьте в песочнице</h2>
+      <p>Нажмите <b>Тест</b> в верхней панели конструктора и отправьте <code class="inline">/start</code> тестовому боту — сценарий выполнится без публикации, изменения не увидят реальные пользователи.</p>
+
+      <h2>5. Опубликуйте</h2>
+      <p>Кнопка <b>Опубликовать</b> сохраняет текущий сценарий отдельной версией и выкатывает его на живого бота. Если что-то пойдёт не так — вернуться к предыдущей версии можно в один клик на вкладке <b>Версии</b>.</p>
+
+      <div class="docs-pager">
+        <a href="docs.html"><span class="lbl">Назад</span>Обзор документации</a>
+        <a href="docs-nodes.html" class="next"><span class="lbl">Далее</span>Справочник нод →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script>const CURRENT_PAGE='quickstart';</script>
+<script src="script.js"></script>
+</body>
+</html>

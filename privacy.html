@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Политика конфиденциальности — Flowgram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="nav-footer.js"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<section class="legal-shell">
+  <div class="wrap legal-article">
+    <h1 style="font-size:32px;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;">Политика конфиденциальности</h1>
+    <div class="legal-meta">Редакция от 7 сентября 2026</div>
+
+    <div class="legal-disclaimer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>
+      Как и договор оферты, это структурный черновик под проверку юриста — состав данных и формулировки нужно сверить с фактической реализацией перед публикацией.
+    </div>
+
+    <div class="docs-article" style="max-width:100%;">
+      <h2>1. Какие данные мы обрабатываем</h2>
+      <table class="docs-table">
+        <tr><th>Данные</th><th>Зачем нужны</th></tr>
+        <tr><td>Email и имя владельца аккаунта</td><td>Регистрация, вход, коммуникация по аккаунту</td></tr>
+        <tr><td>Токен Telegram-бота</td><td>Приём и отправка сообщений от имени бота (хранится зашифрованным)</td></tr>
+        <tr><td>chat_id пользователей бота</td><td>Доставка сообщений и рассылок конечным пользователям бота</td></tr>
+        <tr><td>Переменные сценария</td><td>То, что вы сами решили сохранять — например, имя клиента или выбор в диалоге</td></tr>
+        <tr><td>Платёжные данные</td><td>Обрабатываются платёжным провайдером (ЮKassa), мы не храним номера карт</td></tr>
+      </table>
+
+      <h2>2. Кто получает доступ к данным</h2>
+      <p>Доступ к данным имеют только сотрудники Flowgram, которым это необходимо для поддержки и разработки. Мы не продаём и не передаём данные третьим лицам для рекламных целей.</p>
+
+      <h2>3. Сроки хранения</h2>
+      <ul>
+        <li>Данные аккаунта — пока аккаунт активен, плюс срок, установленный законодательством после удаления</li>
+        <li>Лог сообщений бота — 30 дней с момента отправки</li>
+        <li>Резервные копии базы данных — 30 дней</li>
+      </ul>
+
+      <h2>4. Права пользователя</h2>
+      <p>Вы можете запросить выгрузку своих данных, их исправление или удаление, написав на <a href="mailto:privacy@flowgram.dev">privacy@flowgram.dev</a>. Удаление аккаунта в настройках кабинета запускает удаление данных автоматически, за исключением случаев, когда хранение требуется по закону.</p>
+
+      <h2>5. Cookie и аналогичные технологии</h2>
+      <p>Сайт использует необходимые cookie для входа в аккаунт и cookie аналитики для понимания, какие страницы полезны посетителям. Аналитические cookie можно отключить в баннере при первом визите.</p>
+
+      <h2>6. Правовые основания обработки</h2>
+      <p>Обработка персональных данных осуществляется в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» на основании согласия пользователя и в целях исполнения договора оферты.</p>
+
+      <h2>7. Контакты по вопросам данных</h2>
+      <p>По любым вопросам обработки персональных данных пишите на <a href="mailto:privacy@flowgram.dev">privacy@flowgram.dev</a>.</p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script src="script.js"></script>
+</body>
+</html>

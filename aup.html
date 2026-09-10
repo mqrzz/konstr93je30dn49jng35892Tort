@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Правила использования — Flowgram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="nav-footer.js"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<section class="legal-shell">
+  <div class="wrap legal-article">
+    <h1 style="font-size:32px;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;">Правила использования</h1>
+    <div class="legal-meta">Редакция от 7 сентября 2026</div>
+
+    <div class="legal-disclaimer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>
+      Черновик под проверку юриста — как и остальные юридические документы на сайте.
+    </div>
+
+    <div class="docs-article" style="max-width:100%;">
+      <h2>1. Зачем эти правила</h2>
+      <p>Flowgram работает на общей инфраструктуре: движок, очередь и IP-адреса для отправки сообщений разделяются между всеми ботами платформы. Один бот, нарушающий правила Telegram, может испортить репутацию для всех остальных. Поэтому правила обязательны, а не рекомендательны.</p>
+
+      <h2>2. Что запрещено</h2>
+      <ul>
+        <li>Массовая рассылка пользователям, которые не давали согласия на переписку с ботом (спам)</li>
+        <li>Мошенничество, фишинг, имитация официальных сервисов или государственных органов</li>
+        <li>Распространение вредоносного ПО или ссылок на него</li>
+        <li>Продажа товаров и услуг, запрещённых законодательством РФ, включая оружие, наркотики и поддельные документы</li>
+        <li>Сбор персональных данных пользователей бота без указанной цели и согласия</li>
+        <li>Попытки обойти лимиты тарифа техническими средствами (множественные аккаунты для одного проекта и подобное)</li>
+      </ul>
+
+      <h2>3. Как это отслеживается</h2>
+      <p>Автоматический мониторинг отмечает аномальные паттерны — резкий рост жалоб от Telegram, массовые блокировки бота пользователями, подозрительный всплеск исходящих сообщений. Подозрительные боты могут быть временно ограничены до выяснения обстоятельств.</p>
+
+      <h2>4. Последствия нарушения</h2>
+      <ol>
+        <li>Первое нарушение — предупреждение и требование устранить проблему в течение 48 часов</li>
+        <li>Повторное или грубое нарушение — приостановка бота без возврата средств за оплаченный период</li>
+        <li>Мошенничество или незаконная деятельность — немедленная блокировка аккаунта и, при необходимости, передача данных в компетентные органы по официальному запросу</li>
+      </ol>
+
+      <h2>5. Апелляция</h2>
+      <p>Если бот заблокирован по ошибке, напишите на <a href="mailto:abuse@flowgram.dev">abuse@flowgram.dev</a> — рассмотрим обращение в течение 2 рабочих дней.</p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Документация — Flowgram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="nav-footer.js"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<header class="page-hero wrap">
+  <h1>Документация</h1>
+  <p>От первого бота до продвинутых сценариев с кодом — всё, что нужно для работы с Flowgram.</p>
+  <div class="docs-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input type="text" placeholder="Искать в документации…">
+    <kbd>⌘K</kbd>
+  </div>
+  <div class="docs-popular">
+    <span>Популярное:</span>
+    <a href="docs-quickstart.html">Быстрый старт</a>
+    <a href="docs-api.html#messages">Messages API</a>
+    <a href="docs-nodes.html">Справочник нод</a>
+    <a href="docs-webhooks.html">Вебхуки</a>
+  </div>
+</header>
+
+<section style="border-top:none;padding-top:20px;">
+  <div class="wrap">
+    <div class="docs-grid">
+      <div class="docs-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Быстрый старт</h3>
+        <p>Подключите токен, соберите первый сценарий и опубликуйте бота за 10 минут.</p>
+        <div class="links">
+          <a href="docs-quickstart.html">Создание бота через BotFather →</a>
+          <a href="docs-quickstart.html">Первая публикация сценария →</a>
+        </div>
+      </div>
+      <div class="docs-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></div>
+        <h3>Конструктор</h3>
+        <p>Справочник по всем блокам сценария и правилам ветвления диалога.</p>
+        <div class="links">
+          <a href="docs-nodes.html">Справочник нод →</a>
+          <a href="docs-nodes.html#variables">Переменные и условия →</a>
+          <a href="docs-nodes.html#versions">Версии и публикация →</a>
+        </div>
+      </div>
+      <div class="docs-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M8 3L4 7l4 4M16 3l4 4-4 4M14 3l-4 18"/></svg></div>
+        <h3>API</h3>
+        <p>Отправка сообщений, чтение аудитории и работа с ботом из своего кода.</p>
+        <div class="links">
+          <a href="docs-api.html">Аутентификация →</a>
+          <a href="docs-api.html#messages">Messages API →</a>
+          <a href="docs-api.html#limits">Rate limits →</a>
+        </div>
+      </div>
+      <div class="docs-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/></svg></div>
+        <h3>Вебхуки</h3>
+        <p>Подписка на события бота и обработка их на своём сервере.</p>
+        <div class="links">
+          <a href="docs-webhooks.html">Регистрация вебхука →</a>
+          <a href="docs-webhooks.html#events">Типы событий →</a>
+          <a href="docs-webhooks.html#signature">Проверка подписи →</a>
+        </div>
+      </div>
+      <div class="docs-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Код внутри сценария</h3>
+        <p>HTTP-нода и произвольный JavaScript-обработчик для нестандартной логики.</p>
+        <div class="links">
+          <a href="docs-nodes.html">Синтаксис HTTP-ноды →</a>
+          <a href="docs-nodes.html#variables">Доступные переменные →</a>
+        </div>
+      </div>
+      <div class="docs-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+        <h3>Тарифы и лимиты</h3>
+        <p>Как считаются лимиты, что происходит при их достижении и как перейти на другой план.</p>
+        <div class="links">
+          <a href="pricing.html">Все тарифы →</a>
+          <a href="pricing.html">Как считается usage →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Отправить первое сообщение</h2>
+      <p>После публикации бота можно управлять им и из своего кода — например, слать уведомления о заказе в обход конструктора.</p>
+    </div>
+    <div class="code-shell" style="max-width:640px;margin-left:auto;margin-right:auto;">
+      <div class="lang-tabs">
+        <div class="lang-tab active">quickstart.js</div>
+      </div>
+      <div class="code-body"><span class="tok-kw">import</span> { Flowgram } <span class="tok-kw">from</span> <span class="tok-str">'flowgram'</span>;
+
+<span class="tok-kw">const</span> <span class="tok-var">flowgram</span> = <span class="tok-fn">new Flowgram</span>(<span class="tok-str">'fg_xxxxxxxxx'</span>);
+
+<span class="tok-kw">await</span> flowgram.messages.<span class="tok-fn">send</span>({
+  bot_id: <span class="tok-str">'847291'</span>,
+  chat_id: <span class="tok-str">'193004521'</span>,
+  text: <span class="tok-str">'Заказ №1042 передан курьеру 🚚'</span>
+});</div>
+      <div class="code-footer">
+        <a href="docs-api.html">Ключ API →</a>
+        <a href="docs-api.html#messages">Полный референс Messages API →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Справочник блоков сценария</h2>
+      <p>Основные типы нод, доступные в конструкторе прямо сейчас.</p>
+    </div>
+    <div class="node-ref">
+      <div class="node-ref-item"><span class="tag">message</span><div><b>Сообщение</b><p>Отправляет текст, фото или файл. Поддерживает переменные вида {{name}}.</p></div></div>
+      <div class="node-ref-item"><span class="tag">buttons</span><div><b>Кнопки</b><p>Показывает inline- или reply-кнопки и ведёт к следующей ноде по выбору.</p></div></div>
+      <div class="node-ref-item"><span class="tag">condition</span><div><b>Условие</b><p>Ветвит сценарий по значению переменной, времени или сегменту пользователя.</p></div></div>
+      <div class="node-ref-item"><span class="tag">payment</span><div><b>Оплата</b><p>Выставляет счёт через ЮKassa и ждёт подтверждения перед следующим шагом.</p></div></div>
+      <div class="node-ref-item"><span class="tag">delay</span><div><b>Задержка</b><p>Приостанавливает сценарий на заданное время перед следующим действием.</p></div></div>
+      <div class="node-ref-item"><span class="tag">http</span><div><b>HTTP-запрос</b><p>Вызывает внешний API или свой JS-обработчик, результат кладёт в переменную.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Не нашли ответ в документации?</h2>
+    <a class="btn btn-primary" href="contact.html">Написать в поддержку</a>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script src="script.js"></script>
+</body>
+</html>

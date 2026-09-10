@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тарифы — Flowgram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="nav-footer.js"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<!-- PAGE HERO -->
+<header class="page-hero wrap">
+  <h1>Платите за возможности, не за серверы</h1>
+  <p>Лимиты растут вместе с ботом. Переходите между тарифами в любой момент — сценарии, аудитория и история версий остаются на месте.</p>
+  <div class="billing-toggle">
+    <button class="active" id="btn-month" onclick="setBilling('month')">Помесячно</button>
+    <button id="btn-year" onclick="setBilling('year')">Ежегодно <span class="save-badge">−20%</span></button>
+  </div>
+</header>
+
+<!-- PRICING CARDS -->
+<section style="border-top:none;padding-top:20px;">
+  <div class="wrap">
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-num">0 ₽</div>
+        <div class="price-desc">Попробовать конструктор без риска</div>
+        <div class="price-list">
+          <div><b>1</b> бот</div>
+          <div><b>500</b> пользователей</div>
+          <div><b>10</b> нод сценария</div>
+          <div><b>3</b> версии сценария</div>
+          <div>Автоответы</div>
+          <div style="color:var(--text-faint)">— Рассылки</div>
+          <div style="color:var(--text-faint)">— API-доступ</div>
+        </div>
+        <a href="login.html?mode=signup" class="price-btn">Начать</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Start</div>
+        <div class="price-num" data-month="690" data-year="552">690 ₽<span class="per"> /мес</span></div>
+        <div class="price-desc">Для первого бота, который уже работает на клиентах</div>
+        <div class="price-list">
+          <div><b>3</b> бота</div>
+          <div><b>5 000</b> пользователей</div>
+          <div><b>50</b> нод сценария</div>
+          <div><b>10</b> версий сценария</div>
+          <div>Рассылки</div>
+          <div><b>5</b> интеграций</div>
+          <div style="color:var(--text-faint)">— API-доступ</div>
+        </div>
+        <a href="login.html?mode=signup" class="price-btn">Выбрать</a>
+      </div>
+
+      <div class="price-card pro">
+        <div class="badge">Популярный</div>
+        <div class="price-name">Pro</div>
+        <div class="price-num" data-month="1990" data-year="1592">1 990 ₽<span class="per"> /мес</span></div>
+        <div class="price-desc">Для растущего бизнеса с несколькими ботами</div>
+        <div class="price-list">
+          <div><b>10</b> ботов</div>
+          <div><b>25 000</b> пользователей</div>
+          <div><b>200</b> нод сценария</div>
+          <div><b>∞</b> версий сценария</div>
+          <div>Расширенная аналитика</div>
+          <div><b>15</b> интеграций</div>
+          <div>API-доступ</div>
+        </div>
+        <a href="login.html?mode=signup" class="price-btn">Выбрать</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Business</div>
+        <div class="price-num" data-month="4990" data-year="3992">4 990 ₽<span class="per"> /мес</span></div>
+        <div class="price-desc">Высокая нагрузка и приоритетная поддержка</div>
+        <div class="price-list">
+          <div><b>30</b> ботов</div>
+          <div><b>100 000</b> пользователей</div>
+          <div><b>∞</b> нод сценария</div>
+          <div><b>∞</b> версий сценария</div>
+          <div>Выделенные воркеры</div>
+          <div><b>∞</b> интеграций</div>
+          <div>Без брендинга Flowgram</div>
+        </div>
+        <a href="login.html?mode=signup" class="price-btn">Выбрать</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Enterprise</div>
+        <div class="price-num" style="font-size:22px;">По запросу</div>
+        <div class="price-desc">Изолированный рантайм и SLA под ваши объёмы</div>
+        <div class="price-list">
+          <div><b>∞</b> ботов</div>
+          <div><b>∞</b> пользователей</div>
+          <div>Отдельный воркер</div>
+          <div>Персональный менеджер</div>
+          <div>SLA и приоритетная поддержка</div>
+          <div>Договор и закрывающие документы</div>
+        </div>
+        <a href="contact.html" class="price-btn">Связаться с нами</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Сравнение тарифов подробно</h2>
+      <p>Все лимиты и возможности в одной таблице — если не уверены, с чего начать.</p>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th>Возможность</th><th>Free</th><th>Start</th><th>Pro</th><th>Business</th><th>Enterprise</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Боты</td><td>1</td><td>3</td><td>10</td><td>30</td><td>∞</td></tr>
+          <tr><td>Пользователи бота</td><td>500</td><td>5 000</td><td>25 000</td><td>100 000</td><td>∞</td></tr>
+          <tr><td>Нод в сценарии</td><td>10</td><td>50</td><td>200</td><td>∞</td><td>∞</td></tr>
+          <tr><td>Версии сценария</td><td>3</td><td>10</td><td>∞</td><td>∞</td><td>∞</td></tr>
+          <tr><td>Рассылки</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Интеграции</td><td>1</td><td>5</td><td>15</td><td>∞</td><td>∞</td></tr>
+          <tr><td>Расширенная аналитика</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>API-доступ</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Webhook-события</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Выделенные воркеры</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Брендинг Flowgram в боте</td><td>есть</td><td>есть</td><td class="no">убран</td><td class="no">убран</td><td class="no">убран</td></tr>
+          <tr><td>Приоритетная поддержка</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">★ SLA</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap" style="max-width:760px;">
+    <div class="section-head" style="text-align:left;margin-bottom:20px;">
+      <h2 style="font-size:32px;">Частые вопросы</h2>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Можно ли сменить тариф позже?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div class="faq-a"><p>Да, в любой момент — вверх или вниз. Сценарии, аудитория и история версий сохраняются, меняются только лимиты.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Что будет, если превысить лимит пользователей?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div class="faq-a"><p>Бот продолжит отвечать существующим пользователям — ограничение касается только добавления новых, пока не смените тариф.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Токен бота передаётся вам в открытом виде?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div class="faq-a"><p>Нет, токен шифруется перед сохранением в базе и не хранится в открытую ни на одном из этапов.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Данные бота хранятся в России?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div class="faq-a"><p>Да, инфраструктура размещена на серверах в российской юрисдикции — соответствие 152-ФЗ.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Есть скидка при оплате за год?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div class="faq-a"><p>Да, годовая оплата даёт скидку 20% по сравнению с помесячной — переключите тумблер вверху страницы, чтобы увидеть цены.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Начните с Free — обновитесь, когда понадобится больше</h2>
+    <a class="btn btn-primary" href="login.html?mode=signup">Создать бота бесплатно</a>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script src="script.js"></script>
+</body>
+</html>

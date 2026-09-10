@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Справочник нод — Flowgram Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="nav-footer.js"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<section class="docs-shell">
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docsSidebar">
+  <div class="grp">
+    <div class="grp-title">Начало работы</div>
+    <a href="docs.html" data-page="overview">Обзор</a>
+    <a href="docs-quickstart.html" data-page="quickstart">Быстрый старт</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Конструктор</div>
+    <a href="docs-nodes.html" data-page="nodes">Справочник нод</a>
+    <a href="docs-nodes.html#variables" data-page="nodes">Переменные и условия</a>
+    <a href="docs-nodes.html#versions" data-page="nodes">Версии и публикация</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">API</div>
+    <a href="docs-api.html" data-page="api">Аутентификация</a>
+    <a href="docs-api.html#messages" data-page="api">Messages API</a>
+    <a href="docs-api.html#limits" data-page="api">Rate limits</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Вебхуки</div>
+    <a href="docs-webhooks.html" data-page="webhooks">Регистрация вебхука</a>
+    <a href="docs-webhooks.html#events" data-page="webhooks">Типы событий</a>
+    <a href="docs-webhooks.html#signature" data-page="webhooks">Проверка подписи</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Ещё</div>
+    <a href="pricing.html">Тарифы и лимиты</a>
+    <a href="security.html">Безопасность</a>
+  </div>
+</aside>
+
+    <article class="docs-article">
+      <div class="docs-crumb"><a href="docs.html">Документация</a> / Справочник нод</div>
+      <button class="docs-menu-btn" onclick="toggleDocsMenu()">Разделы документации <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+
+      <h1>Справочник нод</h1>
+      <p class="lead">Каждый блок сценария — это нода с типом, настройками и одним или несколькими выходами к следующим нодам.</p>
+
+      <h2>Типы нод</h2>
+      <table class="docs-table">
+        <tr><th>Тип</th><th>Назначение</th><th>Выходы</th></tr>
+        <tr><td><code>message</code></td><td>Отправляет текст, фото или файл</td><td>1</td></tr>
+        <tr><td><code>buttons</code></td><td>Показывает кнопки, ждёт выбора</td><td>по числу кнопок</td></tr>
+        <tr><td><code>condition</code></td><td>Ветвит по переменной или сегменту</td><td>2 (да/нет)</td></tr>
+        <tr><td><code>payment</code></td><td>Выставляет счёт через ЮKassa</td><td>2 (оплачено/нет)</td></tr>
+        <tr><td><code>delay</code></td><td>Пауза перед следующим шагом</td><td>1</td></tr>
+        <tr><td><code>http</code></td><td>Внешний запрос или свой JS-код</td><td>именованные (return-значение)</td></tr>
+      </table>
+
+      <h2 id="variables">Переменные и условия</h2>
+      <p>Любая нода может записать значение в переменную сценария — например, ответ пользователя или результат HTTP-ноды. Переменные доступны везде ниже по сценарию через синтаксис <code class="inline">{{имя_переменной}}</code>.</p>
+      <p>Нода <b>Условие</b> сравнивает переменную с заданным значением и ведёт по одному из двух путей. Можно проверять текст, число или наличие значения вообще.</p>
+      <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>Переменные живут в рамках одного пользователя бота и сохраняются между сессиями — это не временное состояние.</div>
+
+      <h2 id="versions">Версии и публикация</h2>
+      <p>Каждый клик на <b>Опубликовать</b> создаёт новую версию сценария. Предыдущие версии не удаляются и доступны на вкладке бота <b>Версии</b>:</p>
+      <ul>
+        <li>Free и Start — хранится 3–10 последних версий</li>
+        <li>Pro и выше — версии хранятся без ограничения</li>
+        <li>Откат к любой версии применяется мгновенно, без повторной публикации</li>
+      </ul>
+
+      <div class="docs-pager">
+        <a href="docs-quickstart.html"><span class="lbl">Назад</span>← Быстрый старт</a>
+        <a href="docs-api.html" class="next"><span class="lbl">Далее</span>API →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script>const CURRENT_PAGE='nodes';</script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Список изменений — Flowgram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="nav-footer.js"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<header class="page-hero wrap">
+  <h1>Список изменений</h1>
+  <p>Что нового в конструкторе, движке и API — по мере выкатки, без раз в квартал.</p>
+</header>
+
+<section style="border-top:none;padding-top:0;">
+  <div class="wrap">
+    <div class="cl-list">
+
+      <div class="cl-entry">
+        <div class="cl-date">7 сентября 2026</div>
+        <div>
+          <span class="cl-tag new">Новое</span>
+          <h3>HTTP-нода с произвольным JS-обработчиком</h3>
+          <p>Теперь можно вызывать внешний API или писать свою логику на JavaScript прямо внутри ноды сценария — с доступом к переменным и данным пользователя.</p>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <div class="cl-date">2 сентября 2026</div>
+        <div>
+          <span class="cl-tag improve">Улучшение</span>
+          <h3>Очередь рассылок стала быстрее</h3>
+          <p>Переехали на отдельный воркер для рассылок — среднее время доставки сообщения при массовой рассылке снизилось примерно втрое.</p>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <div class="cl-date">27 августа 2026</div>
+        <div>
+          <span class="cl-tag new">Новое</span>
+          <h3>Версии сценария и откат</h3>
+          <p>Каждая публикация теперь сохраняется отдельной версией — можно посмотреть историю и вернуться к любой из них в один клик.</p>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <div class="cl-date">19 августа 2026</div>
+        <div>
+          <span class="cl-tag fix">Исправление</span>
+          <h3>Кнопки с длинным текстом</h3>
+          <p>Исправлена обрезка текста на кнопках с эмодзи на некоторых версиях Telegram для Android.</p>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <div class="cl-date">12 августа 2026</div>
+        <div>
+          <span class="cl-tag new">Новое</span>
+          <h3>Шаблоны сценариев</h3>
+          <p>Добавили галерею готовых сценариев — магазин, запись на приём, поддержка, опрос. Донастраиваете тексты и публикуете.</p>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <div class="cl-date">30 июля 2026</div>
+        <div>
+          <span class="cl-tag improve">Улучшение</span>
+          <h3>Rate-limit теперь автоматический</h3>
+          <p>Движок сам держит лимит Telegram в 30 сообщений в секунду на бота — раньше это приводило к редким сбоям при больших рассылках.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Следите за обновлениями</h2>
+    <a class="btn btn-primary" href="login.html?mode=signup">Создать бота бесплатно</a>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script src="script.js"></script>
+</body>
+</html>
