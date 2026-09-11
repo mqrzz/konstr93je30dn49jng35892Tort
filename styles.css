@@ -129,6 +129,10 @@
     from{transform:rotateX(-22deg) rotateY(0deg);}
     to{transform:rotateX(-22deg) rotateY(360deg);}
   }
+  @media(max-width:900px){
+    .cube{animation:none;transform:rotateX(-22deg) rotateY(28deg);}
+    .cube-face{backdrop-filter:none;}
+  }
 
   .trust-line{font-size:13px;color:var(--text-faint);margin-bottom:22px;}
   .trust-logos{
