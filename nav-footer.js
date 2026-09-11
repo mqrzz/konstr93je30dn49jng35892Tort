@@ -5,22 +5,26 @@ const SITE_NAV_HTML = `<nav class="nav">
     Открытая бета Flowgram — <strong>первые 3 месяца Pro в подарок</strong>
   </div>
   <div class="nav-inner">
-    <a class="logo" href="index.html">
+    <a class="logo" href="index">
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8 7l2.5 8.5M16 7l-2.5 8.5"/></svg>
       Flowgram
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="index.html#features">Возможности <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-      <a href="templates.html">Шаблоны</a>
-      <a href="index.html#company">Компания <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-      <a href="enterprise.html">Для бизнеса</a>
-      <a href="docs.html">Документация</a>
-      <a href="pricing.html">Тарифы</a>
-      <a href="login.html" class="link-login nav-link-mobile-only" style="border-bottom:none;">Войти</a>
+      <div class="nav-links-close" onclick="toggleNavMenu()">
+        <span>Меню</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </div>
+      <a href="index#features">Возможности</a>
+      <a href="templates">Шаблоны</a>
+      <a href="index#company">Компания</a>
+      <a href="enterprise">Для бизнеса</a>
+      <a href="docs">Документация</a>
+      <a href="pricing">Тарифы</a>
+      <a href="login" class="link-login nav-link-mobile-only" style="border-bottom:none;">Войти</a>
     </div>
     <div class="nav-right">
-      <a class="link-login" href="login.html">Войти</a>
-      <a class="nav-cta" href="login.html?mode=signup">Начать</a>
+      <a class="link-login" href="login">Войти</a>
+      <a class="nav-cta" href="login?mode=signup">Начать</a>
       <button class="nav-burger" id="navBurger" aria-label="Меню" onclick="toggleNavMenu()"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -30,7 +34,7 @@ const SITE_FOOTER_HTML = `<footer>
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a class="logo" href="index.html">
+        <a class="logo" href="index">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8 7l2.5 8.5M16 7l-2.5 8.5"/></svg>
           Flowgram
         </a>
@@ -42,41 +46,45 @@ const SITE_FOOTER_HTML = `<footer>
           <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l6 3-6 3z"/></svg></a>
         </div>
       </div>
-      <div class="footer-cols">
+      <div class="footer-cols footer-cols-5">
         <div class="footer-col">
           <h4>Возможности</h4>
-          <a href="index.html#features">Конструктор</a>
-          <a href="index.html#features">Аудитории</a>
-          <a href="index.html#features">Рассылки</a>
-          <a href="index.html#features">Входящие</a>
-          <a href="templates.html">Шаблоны</a>
-          <a href="docs-webhooks.html">Вебхуки</a>
+          <a href="index#features">Конструктор</a>
+          <a href="index#features">Аудитории</a>
+          <a href="index#features">Рассылки</a>
+          <a href="index#features">Входящие</a>
+          <a href="templates">Шаблоны</a>
+          <a href="docs-webhooks">Вебхуки</a>
+          <a href="integrations">Интеграции</a>
         </div>
         <div class="footer-col">
           <h4>Ресурсы</h4>
-          <a href="changelog.html">Список изменений</a>
-          <a href="pricing.html">Тарифы</a>
-          <a href="enterprise.html">Для бизнеса</a>
-          <a href="security.html">Безопасность</a>
-          <a href="security.html">152-ФЗ</a>
-          <a href="oferta.html">Договор оферты</a>
-          <a href="privacy.html">Конфиденциальность</a>
+          <a href="changelog">Список изменений</a>
+          <a href="pricing">Тарифы</a>
+          <a href="enterprise">Для бизнеса</a>
+          <a href="security">Безопасность и 152-ФЗ</a>
         </div>
         <div class="footer-col">
           <h4>Компания</h4>
-          <a href="about.html">О нас</a>
-          <a href="blog.html">Блог</a>
-          <a href="careers.html">Вакансии</a>
-          <a href="index.html#enterprise">Клиенты</a>
-          <a href="about.html#philosophy">Философия</a>
+          <a href="about">О нас</a>
+          <a href="blog">Блог</a>
+          <a href="careers">Вакансии</a>
+          <a href="index#enterprise">Клиенты</a>
+          <a href="about#philosophy">Философия</a>
         </div>
         <div class="footer-col">
           <h4>Помощь</h4>
-          <a href="contact.html">Поддержка</a>
-          <a href="status.html">Статус</a>
-          <a href="docs.html">Миграция</a>
-          <a href="docs.html">База знаний</a>
-          <a href="legal.html">Юридическая информация</a>
+          <a href="contact">Поддержка</a>
+          <a href="status">Статус</a>
+          <a href="docs">База знаний</a>
+        </div>
+        <div class="footer-col">
+          <h4>Юридическое</h4>
+          <a href="legal">Все документы</a>
+          <a href="oferta">Договор оферты</a>
+          <a href="privacy">Конфиденциальность</a>
+          <a href="aup">Правила использования</a>
+          <a href="refund">Возврат средств</a>
         </div>
       </div>
     </div>
@@ -101,7 +109,7 @@ function renderCookieBanner() {
   const div = document.createElement('div');
   div.className = 'cookie-banner';
   div.id = 'cookieBanner';
-  div.innerHTML = `<p>Мы используем cookie для входа в аккаунт и аналитики посещений. Подробности — в <a href="privacy.html">политике конфиденциальности</a>.</p>
+  div.innerHTML = `<p>Мы используем cookie для входа в аккаунт и аналитики посещений. Подробности — в <a href="privacy">политике конфиденциальности</a>.</p>
     <div class="cookie-actions">
       <button class="cookie-accept" onclick="setCookieChoice('accepted')">Принять</button>
       <button class="cookie-decline" onclick="setCookieChoice('declined')">Только необходимые</button>

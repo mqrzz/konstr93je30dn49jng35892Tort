@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script src="nav-footer.js"></script>
+<link rel="stylesheet" href="styles.css?v=3">
+<script src="nav-footer.js?v=3"></script>
 </head>
 <body>
 <div id="site-nav"></div><script>renderNav();</script>
@@ -17,36 +17,34 @@
     <aside class="docs-sidebar" id="docsSidebar">
   <div class="grp">
     <div class="grp-title">Начало работы</div>
-    <a href="docs.html" data-page="overview">Обзор</a>
-    <a href="docs-quickstart.html" data-page="quickstart">Быстрый старт</a>
+    <a href="docs" data-page="overview">Обзор</a>
+    <a href="docs-quickstart" data-page="quickstart">Быстрый старт</a>
+    <a href="docs-builder-guide" data-page="builder-guide">Руководство по конструктору</a>
   </div>
   <div class="grp">
-    <div class="grp-title">Конструктор</div>
-    <a href="docs-nodes.html" data-page="nodes">Справочник нод</a>
-    <a href="docs-nodes.html#variables" data-page="nodes">Переменные и условия</a>
-    <a href="docs-nodes.html#versions" data-page="nodes">Версии и публикация</a>
+    <div class="grp-title">Справочник нод</div>
+    <a href="docs-nodes" data-page="nodes">Все блоки сценария</a>
+    <a href="docs-nodes#variables" data-page="nodes">Переменные и условия</a>
+    <a href="docs-nodes#versions" data-page="nodes">Версии и публикация</a>
   </div>
   <div class="grp">
-    <div class="grp-title">API</div>
-    <a href="docs-api.html" data-page="api">Аутентификация</a>
-    <a href="docs-api.html#messages" data-page="api">Messages API</a>
-    <a href="docs-api.html#limits" data-page="api">Rate limits</a>
-  </div>
-  <div class="grp">
-    <div class="grp-title">Вебхуки</div>
-    <a href="docs-webhooks.html" data-page="webhooks">Регистрация вебхука</a>
-    <a href="docs-webhooks.html#events" data-page="webhooks">Типы событий</a>
-    <a href="docs-webhooks.html#signature" data-page="webhooks">Проверка подписи</a>
+    <div class="grp-title">Для разработчиков</div>
+    <a href="docs-api" data-page="api">Аутентификация</a>
+    <a href="docs-api#messages" data-page="api">Messages API</a>
+    <a href="docs-api#limits" data-page="api">Rate limits</a>
+    <a href="docs-webhooks" data-page="webhooks">Вебхуки</a>
   </div>
   <div class="grp">
     <div class="grp-title">Ещё</div>
-    <a href="pricing.html">Тарифы и лимиты</a>
-    <a href="security.html">Безопасность</a>
+    <a href="integrations" data-page="integrations">Интеграции</a>
+    <a href="docs-faq" data-page="faq">FAQ и решение проблем</a>
+    <a href="pricing">Тарифы и лимиты</a>
+    <a href="security">Безопасность</a>
   </div>
 </aside>
 
     <article class="docs-article">
-      <div class="docs-crumb"><a href="docs.html">Документация</a> / Вебхуки</div>
+      <div class="docs-crumb"><a href="docs">Документация</a> / Вебхуки</div>
       <button class="docs-menu-btn" onclick="toggleDocsMenu()">Разделы документации <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
 
       <h1>Вебхуки</h1>
@@ -73,9 +71,29 @@
       <p>Каждый запрос вебхука подписывается HMAC-SHA256 в заголовке <code class="inline">X-Flowgram-Signature</code>. Сверяйте подпись на своей стороне, чтобы убедиться, что запрос действительно пришёл от Flowgram, а не от третьей стороны.</p>
       <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>Если ваш сервер не отвечает 200 OK в течение 5 секунд, Flowgram повторит доставку ещё дважды с интервалом в минуту.</div>
 
+      <h2>Пример обработчика на Express</h2>
+      <div class="docs-table"><table style="width:100%;"><tr><td style="padding:14px;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:8px;font-family:var(--mono);font-size:12.5px;color:#e0e0e0;white-space:pre;">app.post('/hooks/flowgram', (req, res) =&gt; {
+  const valid = verifySignature(req);
+  if (!valid) return res.sendStatus(401);
+
+  if (req.body.type === 'payment.completed') {
+    markOrderPaid(req.body.data.chat_id);
+  }
+  res.sendStatus(200); // отвечайте сразу, обработку делайте асинхронно
+});</td></tr></table></div>
+
+      <h2>Политика повторов</h2>
+      <table class="docs-table">
+        <tr><th>Попытка</th><th>Когда</th></tr>
+        <tr><td>1-я</td><td>Сразу при наступлении события</td></tr>
+        <tr><td>2-я</td><td>Через 1 минуту, если сервер не ответил 200 OK</td></tr>
+        <tr><td>3-я</td><td>Через 5 минут после второй попытки</td></tr>
+      </table>
+      <p>После трёх неудачных попыток событие помечается как недоставленное и видно в логе вебхука в кабинете бота.</p>
+
       <div class="docs-pager">
-        <a href="docs-api.html"><span class="lbl">Назад</span>← API</a>
-        <a href="docs.html" class="next"><span class="lbl">Далее</span>К обзору →</a>
+        <a href="docs-api"><span class="lbl">Назад</span>← API</a>
+        <a href="docs" class="next"><span class="lbl">Далее</span>К обзору →</a>
       </div>
     </article>
   </div>
@@ -83,6 +101,6 @@
 
 <div id="site-footer"></div><script>renderFooter();</script>
 <script>const CURRENT_PAGE='webhooks';</script>
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script src="nav-footer.js"></script>
+<link rel="stylesheet" href="styles.css?v=3">
+<script src="nav-footer.js?v=3"></script>
 </head>
 <body>
 <div id="site-nav"></div><script>renderNav();</script>
@@ -17,36 +17,34 @@
     <aside class="docs-sidebar" id="docsSidebar">
   <div class="grp">
     <div class="grp-title">Начало работы</div>
-    <a href="docs.html" data-page="overview">Обзор</a>
-    <a href="docs-quickstart.html" data-page="quickstart">Быстрый старт</a>
+    <a href="docs" data-page="overview">Обзор</a>
+    <a href="docs-quickstart" data-page="quickstart">Быстрый старт</a>
+    <a href="docs-builder-guide" data-page="builder-guide">Руководство по конструктору</a>
   </div>
   <div class="grp">
-    <div class="grp-title">Конструктор</div>
-    <a href="docs-nodes.html" data-page="nodes">Справочник нод</a>
-    <a href="docs-nodes.html#variables" data-page="nodes">Переменные и условия</a>
-    <a href="docs-nodes.html#versions" data-page="nodes">Версии и публикация</a>
+    <div class="grp-title">Справочник нод</div>
+    <a href="docs-nodes" data-page="nodes">Все блоки сценария</a>
+    <a href="docs-nodes#variables" data-page="nodes">Переменные и условия</a>
+    <a href="docs-nodes#versions" data-page="nodes">Версии и публикация</a>
   </div>
   <div class="grp">
-    <div class="grp-title">API</div>
-    <a href="docs-api.html" data-page="api">Аутентификация</a>
-    <a href="docs-api.html#messages" data-page="api">Messages API</a>
-    <a href="docs-api.html#limits" data-page="api">Rate limits</a>
-  </div>
-  <div class="grp">
-    <div class="grp-title">Вебхуки</div>
-    <a href="docs-webhooks.html" data-page="webhooks">Регистрация вебхука</a>
-    <a href="docs-webhooks.html#events" data-page="webhooks">Типы событий</a>
-    <a href="docs-webhooks.html#signature" data-page="webhooks">Проверка подписи</a>
+    <div class="grp-title">Для разработчиков</div>
+    <a href="docs-api" data-page="api">Аутентификация</a>
+    <a href="docs-api#messages" data-page="api">Messages API</a>
+    <a href="docs-api#limits" data-page="api">Rate limits</a>
+    <a href="docs-webhooks" data-page="webhooks">Вебхуки</a>
   </div>
   <div class="grp">
     <div class="grp-title">Ещё</div>
-    <a href="pricing.html">Тарифы и лимиты</a>
-    <a href="security.html">Безопасность</a>
+    <a href="integrations" data-page="integrations">Интеграции</a>
+    <a href="docs-faq" data-page="faq">FAQ и решение проблем</a>
+    <a href="pricing">Тарифы и лимиты</a>
+    <a href="security">Безопасность</a>
   </div>
 </aside>
 
     <article class="docs-article">
-      <div class="docs-crumb"><a href="docs.html">Документация</a> / Справочник нод</div>
+      <div class="docs-crumb"><a href="docs">Документация</a> / Справочник нод</div>
       <button class="docs-menu-btn" onclick="toggleDocsMenu()">Разделы документации <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
 
       <h1>Справочник нод</h1>
@@ -58,7 +56,7 @@
         <tr><td><code>message</code></td><td>Отправляет текст, фото или файл</td><td>1</td></tr>
         <tr><td><code>buttons</code></td><td>Показывает кнопки, ждёт выбора</td><td>по числу кнопок</td></tr>
         <tr><td><code>condition</code></td><td>Ветвит по переменной или сегменту</td><td>2 (да/нет)</td></tr>
-        <tr><td><code>payment</code></td><td>Выставляет счёт через ЮKassa</td><td>2 (оплачено/нет)</td></tr>
+        <tr><td><code>payment</code></td><td>Выставляет счёт через ЮKassa или Robokassa</td><td>2 (оплачено/нет)</td></tr>
         <tr><td><code>delay</code></td><td>Пауза перед следующим шагом</td><td>1</td></tr>
         <tr><td><code>http</code></td><td>Внешний запрос или свой JS-код</td><td>именованные (return-значение)</td></tr>
       </table>
@@ -76,9 +74,29 @@
         <li>Откат к любой версии применяется мгновенно, без повторной публикации</li>
       </ul>
 
+      <h2>Пример полного сценария</h2>
+      <p>Так выглядит небольшой сценарий записи на услугу в терминах нод и связей между ними:</p>
+      <table class="docs-table">
+        <tr><th>Нода</th><th>Тип</th><th>Ведёт в</th></tr>
+        <tr><td>/start</td><td><code>trigger</code></td><td>Приветствие</td></tr>
+        <tr><td>Приветствие</td><td><code>message</code></td><td>Выбор услуги</td></tr>
+        <tr><td>Выбор услуги</td><td><code>buttons</code></td><td>по кнопке → Свободное время (для каждой услуги)</td></tr>
+        <tr><td>Свободное время</td><td><code>buttons</code></td><td>по кнопке → Оплата</td></tr>
+        <tr><td>Оплата</td><td><code>payment</code></td><td>Оплачено → Подтверждение / Не оплачено → Напоминание</td></tr>
+      </table>
+
+      <h2>Как работает валидация перед публикацией</h2>
+      <p>Перед выкаткой движок проверяет сценарий и не даст опубликовать, если:</p>
+      <ul>
+        <li>Есть нода без исходящей связи, которая не является тупиковой намеренно</li>
+        <li>Условие или оплата ссылается на переменную, которая нигде не устанавливается</li>
+        <li>HTTP-нода не возвращает ни одного из объявленных имён следующих нод</li>
+      </ul>
+      <p>Ошибки валидации показываются прямо на канвасе — конкретная нода подсвечивается красным с описанием проблемы.</p>
+
       <div class="docs-pager">
-        <a href="docs-quickstart.html"><span class="lbl">Назад</span>← Быстрый старт</a>
-        <a href="docs-api.html" class="next"><span class="lbl">Далее</span>API →</a>
+        <a href="docs-quickstart"><span class="lbl">Назад</span>← Быстрый старт</a>
+        <a href="docs-api" class="next"><span class="lbl">Далее</span>API →</a>
       </div>
     </article>
   </div>
@@ -86,6 +104,6 @@
 
 <div id="site-footer"></div><script>renderFooter();</script>
 <script>const CURRENT_PAGE='nodes';</script>
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

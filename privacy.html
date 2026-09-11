@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script src="nav-footer.js"></script>
+<link rel="stylesheet" href="styles.css?v=3">
+<script src="nav-footer.js?v=3"></script>
 </head>
 <body>
 <div id="site-nav"></div><script>renderNav();</script>
@@ -30,7 +30,7 @@
         <tr><td>Токен Telegram-бота</td><td>Приём и отправка сообщений от имени бота (хранится зашифрованным)</td></tr>
         <tr><td>chat_id пользователей бота</td><td>Доставка сообщений и рассылок конечным пользователям бота</td></tr>
         <tr><td>Переменные сценария</td><td>То, что вы сами решили сохранять — например, имя клиента или выбор в диалоге</td></tr>
-        <tr><td>Платёжные данные</td><td>Обрабатываются платёжным провайдером (ЮKassa), мы не храним номера карт</td></tr>
+        <tr><td>Платёжные данные</td><td>Обрабатываются подключённым платёжным провайдером (ЮKassa, Robokassa или CloudPayments — на выбор в настройках бота), мы не храним номера карт</td></tr>
       </table>
 
       <h2>2. Кто получает доступ к данным</h2>
@@ -59,6 +59,6 @@
 </section>
 
 <div id="site-footer"></div><script>renderFooter();</script>
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

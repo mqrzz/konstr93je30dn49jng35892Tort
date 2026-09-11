@@ -7,14 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script src="nav-footer.js"></script>
+<link rel="stylesheet" href="styles.css?v=3">
+<script src="nav-footer.js?v=3"></script>
 </head>
 <body>
 <div id="site-nav"></div><script>renderNav();</script>
 <section class="post-shell">
   <div class="wrap post-wrap">
-    <div class="post-tag"><a href="blog.html" style="color:var(--text-faint);">Блог</a> / Архитектура</div>
+    <div class="post-tag"><a href="blog" style="color:var(--text-faint);">Блог</a> / Архитектура</div>
     <h1 class="post-h1">Как мы обрабатываем 4,6 млн сообщений в месяц одним движком</h1>
     <div class="post-meta">
       <div class="avatar"></div>
@@ -38,7 +38,7 @@
         <li>Масштабирование — это добавление ещё одного воркера, а не сотен деплоев</li>
       </ul>
 
-      <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>Подробный разбор архитектуры — в разделе <a href="docs-webhooks.html">документации о вебхуках</a>.</div>
+      <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>Подробный разбор архитектуры — в разделе <a href="docs-webhooks">документации о вебхуках</a>.</div>
 
       <h2>Что дальше</h2>
       <p>Сейчас мы тестируем шардирование очереди по регионам, чтобы боты с аудиторией в разных часовых поясах получали рассылки быстрее. Расскажем, когда это доедет до прода.</p>
@@ -54,11 +54,11 @@
 <section class="final-cta">
   <div class="wrap">
     <h2>Хотите собрать своего бота?</h2>
-    <a class="btn btn-primary" href="login.html?mode=signup">Создать бота бесплатно</a>
+    <a class="btn btn-primary" href="login?mode=signup">Создать бота бесплатно</a>
   </div>
 </section>
 
 <div id="site-footer"></div><script>renderFooter();</script>
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

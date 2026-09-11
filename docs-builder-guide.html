@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Руководство по конструктору — Flowgram Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=3">
+<script src="nav-footer.js?v=3"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<section class="docs-shell">
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docsSidebar">
+  <div class="grp">
+    <div class="grp-title">Начало работы</div>
+    <a href="docs" data-page="overview">Обзор</a>
+    <a href="docs-quickstart" data-page="quickstart">Быстрый старт</a>
+    <a href="docs-builder-guide" data-page="builder-guide">Руководство по конструктору</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Справочник нод</div>
+    <a href="docs-nodes" data-page="nodes">Все блоки сценария</a>
+    <a href="docs-nodes#variables" data-page="nodes">Переменные и условия</a>
+    <a href="docs-nodes#versions" data-page="nodes">Версии и публикация</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Для разработчиков</div>
+    <a href="docs-api" data-page="api">Аутентификация</a>
+    <a href="docs-api#messages" data-page="api">Messages API</a>
+    <a href="docs-api#limits" data-page="api">Rate limits</a>
+    <a href="docs-webhooks" data-page="webhooks">Вебхуки</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Ещё</div>
+    <a href="integrations" data-page="integrations">Интеграции</a>
+    <a href="docs-faq" data-page="faq">FAQ и решение проблем</a>
+    <a href="pricing">Тарифы и лимиты</a>
+    <a href="security">Безопасность</a>
+  </div>
+</aside>
+
+    <article class="docs-article">
+      <div class="docs-crumb"><a href="docs">Документация</a> / Руководство по конструктору</div>
+      <button class="docs-menu-btn" onclick="toggleDocsMenu()">Разделы документации <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+
+      <h1>Как пользоваться конструктором</h1>
+      <p class="lead">Без кода, без терминов — как оно выглядит и что где нажимать. Если вы не программист, начните отсюда, а не с раздела API.</p>
+
+      <h2>Что вы видите на экране</h2>
+      <ul>
+        <li><b>Слева</b> — список блоков, которые можно добавить в сценарий</li>
+        <li><b>В центре</b> — рабочее поле (канвас), где блоки соединяются в диалог</li>
+        <li><b>Справа</b> — настройки блока, который сейчас выбран</li>
+        <li><b>Внизу</b> — техническая деталь сценария, её можно не открывать вообще, если не интересно</li>
+      </ul>
+
+      <h2>Как добавить блок</h2>
+      <p>Наведите на нужный блок в списке слева и перетащите его на рабочее поле — как файл в проводнике. Блок появится там, куда его отпустили. Можно и просто кликнуть по блоку — он добавится по центру экрана.</p>
+
+      <h2>Как соединить два блока</h2>
+      <p>У каждого блока справа есть маленькая точка — это «выход». Нажмите на неё мышкой, не отпуская, и потяните к следующему блоку. Отпустите кнопку мыши прямо над ним — появится линия, соединяющая их. Это и означает «после этого шага бот перейдёт к следующему».</p>
+      <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>У блока «Кнопки» точек-выходов несколько — по одной на каждую кнопку. Так вы задаёте, куда вести пользователя в зависимости от того, что он нажал.</div>
+
+      <h2>Как отредактировать блок</h2>
+      <p>Кликните по блоку один раз — справа откроется панель с его настройками. Для сообщения это будет текст, для кнопок — список вариантов, для оплаты — сумма. Меняете значение — блок на канвасе сразу обновляется.</p>
+
+      <h2>Как удалить блок или связь</h2>
+      <p>Наведите на блок — в углу появится крестик, нажмите его. Для связи — кликните по самой линии (она подсветится) и нажмите Delete на клавиатуре, либо просто кликните по линии ещё раз, чтобы выделить, и удалите тем же способом.</p>
+
+      <h2>Как проверить, что всё работает</h2>
+      <p>Нажмите кнопку <b>Тест</b> в верхней панели — откроется окно, где бот «отвечает» вам прямо по вашему сценарию, как в настоящем Telegram. Если на развилке есть кнопки — можно кликать по ним и смотреть, куда ведёт каждая.</p>
+
+      <h2>Как опубликовать</h2>
+      <p>Когда всё проверено — жмите <b>Опубликовать</b> в правом верхнем углу. С этого момента реальные пользователи бота увидят именно эту версию сценария. Предыдущую версию всегда можно вернуть на вкладке «Версии», если что-то пошло не так.</p>
+
+      <h2>Частые вопросы новичков</h2>
+      <table class="docs-table">
+        <tr><th>Вопрос</th><th>Ответ</th></tr>
+        <tr><td>Можно ли отменить действие?</td><td>Да, пока не опубликовали — просто удалите блок или связь и создайте заново</td></tr>
+        <tr><td>Что будет, если забыть соединить блок?</td><td>Сценарий на нём и остановится — движок предупредит об этом перед публикацией</td></tr>
+        <tr><td>Нужно ли что-то сохранять вручную?</td><td>Нет, черновик сохраняется автоматически, отдельная кнопка нужна только для публикации</td></tr>
+      </table>
+
+      <div class="docs-pager">
+        <a href="docs-quickstart"><span class="lbl">Назад</span>← Быстрый старт</a>
+        <a href="docs-nodes" class="next"><span class="lbl">Далее</span>Справочник нод →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script>const CURRENT_PAGE='builder-guide';</script>
+<script src="script.js?v=3"></script>
+</body>
+</html>
