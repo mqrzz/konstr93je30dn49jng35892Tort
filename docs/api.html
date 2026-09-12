@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API — Flowgram Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=5">
+<script src="/nav-footer.js?v=5"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<section class="docs-shell">
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docsSidebar">
+  <div class="grp">
+    <div class="grp-title">Начало работы</div>
+    <a href="/docs" data-page="overview">Обзор</a>
+    <a href="/docs/quickstart" data-page="quickstart">Быстрый старт</a>
+    <a href="/docs/builder-guide" data-page="builder-guide">Руководство по конструктору</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Справочник нод</div>
+    <a href="/docs/nodes" data-page="nodes">Все блоки сценария</a>
+    <a href="/docs/nodes#variables" data-page="nodes">Переменные и условия</a>
+    <a href="/docs/nodes#versions" data-page="nodes">Версии и публикация</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Для разработчиков</div>
+    <a href="/docs/api" data-page="api">Аутентификация</a>
+    <a href="/docs/api#messages" data-page="api">Messages API</a>
+    <a href="/docs/api#limits" data-page="api">Rate limits</a>
+    <a href="/docs/webhooks" data-page="webhooks">Вебхуки</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Ещё</div>
+    <a href="/integrations" data-page="integrations">Интеграции</a>
+    <a href="/docs/faq" data-page="faq">FAQ и решение проблем</a>
+    <a href="/pricing">Тарифы и лимиты</a>
+    <a href="/security">Безопасность</a>
+  </div>
+</aside>
+
+    <article class="docs-article">
+      <div class="docs-crumb"><a href="/docs">Документация</a> / API</div>
+      <button class="docs-menu-btn" onclick="toggleDocsMenu()">Разделы документации <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+
+      <h1>API</h1>
+      <p class="lead">Управляйте ботом из своего кода там, где визуального конструктора недостаточно.</p>
+
+      <h2>Аутентификация</h2>
+      <p>Все запросы подписываются ключом API из настроек бота, который передаётся в заголовке:</p>
+      <div class="docs-table"><table style="width:100%;"><tr><td style="padding:12px 14px;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:8px;font-family:var(--mono);font-size:13px;color:#e0e0e0;">Authorization: Bearer fg_xxxxxxxxx</td></tr></table></div>
+      <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>Ключ доступен только на тарифах Pro и выше — на Free и Start API-доступ выключен.</div>
+
+      <h2 id="messages">Messages API</h2>
+      <p>Отправка сообщения от имени бота напрямую, в обход сценария — например, для уведомления о статусе заказа из вашей CRM:</p>
+      <div class="docs-table"><table style="width:100%;"><tr><td style="padding:14px;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:8px;font-family:var(--mono);font-size:12.5px;color:#e0e0e0;white-space:pre;">POST /messages
+{
+  "bot_id": "847291",
+  "chat_id": "193004521",
+  "text": "Заказ №1042 передан курьеру"
+}</td></tr></table></div>
+
+      <h2 id="limits">Rate limits</h2>
+      <p>Ограничения зависят от тарифа бота, а не от аккаунта в целом:</p>
+      <table class="docs-table">
+        <tr><th>Тариф</th><th>Запросов в минуту</th></tr>
+        <tr><td>Pro</td><td>60</td></tr>
+        <tr><td>Business</td><td>300</td></tr>
+        <tr><td>Enterprise</td><td>по договорённости</td></tr>
+      </table>
+      <p>При превышении лимита API возвращает <code class="inline">429 Too Many Requests</code> с заголовком <code class="inline">Retry-After</code>.</p>
+
+      <h2>Коды ошибок</h2>
+      <table class="docs-table">
+        <tr><th>Код</th><th>Значение</th></tr>
+        <tr><td><code>400</code></td><td>Некорректное тело запроса — проверьте обязательные поля</td></tr>
+        <tr><td><code>401</code></td><td>Неверный или отозванный ключ API</td></tr>
+        <tr><td><code>403</code></td><td>Действие недоступно на текущем тарифе бота</td></tr>
+        <tr><td><code>404</code></td><td>Бот или chat_id не найден</td></tr>
+        <tr><td><code>422</code></td><td>chat_id существует, но пользователь заблокировал бота</td></tr>
+        <tr><td><code>429</code></td><td>Превышен rate limit — см. выше</td></tr>
+        <tr><td><code>500</code></td><td>Внутренняя ошибка — повторите запрос позже</td></tr>
+      </table>
+
+      <h2>Официальные SDK</h2>
+      <p>Помимо REST, есть готовые клиенты — обёртки над тем же API, показанным в примерах на главной странице: Node.js, Python, Ruby, PHP, Go, Rust, Java, .NET. Все они покрывают Messages API и регистрацию вебхуков.</p>
+
+      <div class="docs-pager">
+        <a href="/docs/nodes"><span class="lbl">Назад</span>← Справочник нод</a>
+        <a href="/docs/webhooks" class="next"><span class="lbl">Далее</span>Вебхуки →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script>const CURRENT_PAGE='api';</script>
+<script src="/script.js?v=5"></script>
+</body>
+</html>
