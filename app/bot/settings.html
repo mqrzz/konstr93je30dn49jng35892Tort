@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Магазин одежды / Настройки — Flowgram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=5">
+<style>
+html,body{height:100%;}
+body.app-body{background:var(--bg);}
+.app-shell{min-height:100vh;display:flex;flex-direction:column;}
+
+.app-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:1px solid var(--stroke);flex:none;}
+.app-bar-left{display:flex;align-items:center;gap:28px;}
+.app-logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;letter-spacing:-0.01em;}
+.app-nav{display:flex;gap:4px;}
+.app-nav a{font-size:13.5px;color:var(--text-dim);padding:8px 12px;border-radius:8px;}
+.app-nav a.active{color:#fff;background:var(--bg-elevated);}
+.app-nav a:hover{color:#fff;}
+.app-bar-right{display:flex;align-items:center;gap:14px;}
+.usage-chip{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-dim);background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:100px;padding:6px 14px;}
+.usage-chip b{color:var(--text);font-weight:600;}
+.app-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#3a3a3a,#141414);border:1px solid var(--stroke);cursor:pointer;}
+
+.app-main{flex:1;padding:40px 28px 80px;max-width:1080px;margin:0 auto;width:100%;}
+.app-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;flex-wrap:wrap;gap:16px;}
+.app-head h1{font-size:26px;font-weight:800;letter-spacing:-0.02em;}
+.app-head p{font-size:13.5px;color:var(--text-dim);margin-top:4px;}
+
+.bots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.bot-card{background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:var(--radius-lg);padding:22px;transition:border-color .15s;display:flex;flex-direction:column;}
+.bot-card:hover{border-color:var(--stroke-strong);}
+.bot-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.bot-icon{width:40px;height:40px;border-radius:10px;background:#161616;border:1px solid var(--stroke);display:flex;align-items:center;justify-content:center;font-size:16px;}
+.bot-menu{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--text-faint);cursor:pointer;}
+.bot-menu:hover{color:#fff;background:rgba(255,255,255,.06);}
+.bot-name{font-size:15px;font-weight:600;margin-bottom:2px;}
+.bot-handle{font-size:12.5px;color:var(--text-faint);margin-bottom:14px;}
+.bot-status{display:flex;align-items:center;gap:6px;font-size:12px;margin-bottom:16px;}
+.bot-status .d{width:6px;height:6px;border-radius:50%;}
+.bot-status.on{color:#7fd4a8;} .bot-status.on .d{background:#7fd4a8;}
+.bot-status.off{color:var(--text-faint);} .bot-status.off .d{background:var(--text-faint);}
+.bot-stats{display:flex;gap:18px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--stroke);}
+.bot-stat .num{font-size:16px;font-weight:700;}
+.bot-stat .lbl{font-size:11px;color:var(--text-faint);margin-top:1px;}
+.bot-open{margin-top:auto;text-align:center;font-size:13px;font-weight:600;padding:9px;border-radius:8px;border:1px solid var(--stroke);color:var(--text);}
+.bot-open:hover{border-color:var(--stroke-strong);background:rgba(255,255,255,.03);}
+
+.bot-card.draft{opacity:.7;border-style:dashed;}
+.bot-card.new-card{align-items:center;justify-content:center;text-align:center;cursor:pointer;border-style:dashed;color:var(--text-dim);min-height:220px;}
+.bot-card.new-card:hover{border-color:var(--stroke-strong);color:#fff;}
+.bot-card.new-card svg{width:26px;height:26px;margin-bottom:10px;}
+
+.app-empty{text-align:center;padding:100px 20px;}
+.app-empty svg{width:44px;height:44px;color:var(--text-faint);margin:0 auto 20px;display:block;}
+.app-empty h2{font-size:19px;font-weight:700;margin-bottom:8px;}
+.app-empty p{font-size:13.5px;color:var(--text-dim);margin-bottom:26px;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal-box{width:100%;max-width:420px;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:var(--radius-lg);padding:28px;}
+.modal-box h3{font-size:17px;font-weight:700;margin-bottom:8px;}
+.modal-box .sub{font-size:13px;color:var(--text-dim);margin-bottom:22px;line-height:1.5;}
+.modal-field{margin-bottom:16px;}
+.modal-field label{display:block;font-size:12.5px;color:var(--text-dim);margin-bottom:7px;}
+.modal-field input{width:100%;background:#0d0d0d;border:1px solid var(--stroke);border-radius:9px;padding:11px 14px;color:var(--text);font-size:13.5px;font-family:inherit;}
+.modal-field input:focus{outline:none;border-color:rgba(255,255,255,.4);}
+.modal-actions{display:flex;gap:10px;margin-top:22px;}
+.modal-actions button{flex:1;padding:11px;border-radius:9px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid var(--stroke);}
+.modal-cancel{background:none;color:var(--text-dim);}
+.modal-confirm{background:#fff;color:#000;border-color:#fff;}
+
+@media(max-width:900px){
+  .bots-grid{grid-template-columns:1fr 1fr;}
+  .app-nav{display:none;}
+}
+@media(max-width:600px){
+  .bots-grid{grid-template-columns:1fr;}
+  .usage-chip{display:none;}
+}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#fff;color:#000;
+  padding:12px 20px;border-radius:100px;font-size:13.5px;font-weight:600;opacity:0;transition:opacity .25s,transform .25s;z-index:100;pointer-events:none;
+  display:flex;align-items:center;gap:8px;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast svg{width:14px;height:14px;}
+
+/* ===== BOT HEADER + TABS ===== */
+.bot-header{padding:20px 28px 0;max-width:1080px;margin:0 auto;width:100%;}
+.bot-header-top{margin-bottom:18px;}
+.bot-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-dim);}
+.bot-back:hover{color:#fff;}
+.bot-back svg{width:14px;height:14px;}
+.bot-header-main{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.bot-header-icon{width:48px;height:48px;border-radius:12px;background:#161616;border:1px solid var(--stroke);display:flex;align-items:center;justify-content:center;font-size:20px;flex:none;}
+.bot-header-main h1{font-size:20px;font-weight:700;}
+.bot-header-sub{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-dim);margin-top:2px;}
+.bot-header-sub .d{width:6px;height:6px;border-radius:50%;background:#7fd4a8;}
+.bot-header-builder{margin-left:auto;padding:9px 16px;font-size:13px;}
+.bot-tabs{display:flex;gap:4px;border-bottom:1px solid var(--stroke);overflow-x:auto;}
+.bot-tabs a{font-size:13.5px;color:var(--text-dim);padding:12px 14px;border-bottom:2px solid transparent;white-space:nowrap;}
+.bot-tabs a.active{color:#fff;border-color:#fff;}
+.bot-tabs a:hover{color:#fff;}
+
+@media(max-width:700px){
+  .bot-header-main{flex-wrap:wrap;}
+  .bot-header-builder{margin-left:0;width:100%;text-align:center;}
+}
+
+/* ===== USAGE PAGE ===== */
+.usage-list{max-width:720px;}
+.usage-row{margin-bottom:20px;}
+.usage-row-top{display:flex;justify-content:space-between;font-size:13.5px;color:var(--text-dim);margin-bottom:8px;}
+.usage-row-top b{color:var(--text);font-weight:600;}
+.usage-bar{height:8px;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:100px;overflow:hidden;}
+.usage-bar span{display:block;height:100%;background:linear-gradient(90deg,#fff,#ccc);border-radius:100px;}
+.usage-note{display:flex;gap:10px;font-size:13px;color:var(--text-dim);background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:10px;padding:14px 16px;margin-top:28px;max-width:720px;}
+.usage-note svg{width:15px;height:15px;flex:none;margin-top:1px;}
+.usage-table-wrap{overflow-x:auto;}
+.usage-table{width:100%;border-collapse:collapse;max-width:720px;font-size:13.5px;}
+.usage-table th,.usage-table td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--stroke);color:var(--text-dim);}
+.usage-table th{color:var(--text);font-weight:600;font-size:12.5px;}
+
+/* ===== BILLING PAGE ===== */
+.billing-current{display:flex;justify-content:space-between;align-items:center;background:var(--bg-elevated);border:1px solid var(--stroke-strong);border-radius:var(--radius-lg);padding:24px 26px;max-width:720px;flex-wrap:wrap;gap:16px;}
+.billing-plan-name{font-size:19px;font-weight:700;display:flex;align-items:center;gap:10px;}
+.billing-plan-sub{font-size:13px;color:var(--text-dim);margin-top:4px;}
+.billing-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.btn-text-danger{background:none;border:none;color:#e88;font-size:12.5px;cursor:pointer;font-family:inherit;}
+.btn-text-danger:hover{text-decoration:underline;}
+.payment-method{display:flex;align-items:center;gap:16px;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:var(--radius-md);padding:16px 20px;max-width:720px;}
+.pm-card-icon{font-size:22px;}
+.pay-ok{color:#7fd4a8;font-size:12.5px;}
+
+/* ===== ACCOUNT PAGE ===== */
+.account-section{max-width:720px;margin-bottom:44px;padding-bottom:36px;border-bottom:1px solid var(--stroke);}
+.account-section:last-child{border-bottom:none;}
+.account-section h3{font-size:16px;font-weight:700;margin-bottom:18px;}
+.acc-field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.acc-field label{display:block;font-size:12.5px;color:var(--text-dim);margin-bottom:7px;}
+.acc-field input{width:100%;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:9px;padding:10px 13px;color:var(--text);font-size:13.5px;font-family:inherit;}
+.acc-field input:focus{outline:none;border-color:rgba(255,255,255,.4);}
+.sec-item{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid var(--stroke);}
+.sec-item:first-of-type{border-top:none;}
+.sec-item-title{font-size:14px;font-weight:500;}
+.sec-item-sub{font-size:12.5px;color:var(--text-faint);margin-top:2px;}
+.tag-on{font-size:11.5px;color:#7fd4a8;background:rgba(127,212,168,.12);border-radius:100px;padding:4px 10px;}
+.tag-off{font-size:11.5px;color:var(--text-faint);background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:100px;padding:4px 10px;}
+.btn-link{background:none;border:none;color:var(--text-dim);font-size:13px;cursor:pointer;font-family:inherit;border-bottom:1px solid var(--stroke-strong);}
+.btn-link:hover{color:#fff;}
+.account-section.danger h3{color:#e88;}
+.btn-danger{background:none;border:1px solid rgba(230,136,136,.4);color:#e88;font-size:13px;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit;}
+.btn-danger:hover{background:rgba(230,136,136,.08);}
+
+/* ===== BOT OVERVIEW ===== */
+.overview-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;}
+.overview-card{background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:var(--radius-lg);padding:22px;}
+.overview-card h3{font-size:14.5px;font-weight:600;margin-bottom:14px;}
+.overview-action{display:block;padding:11px 14px;border:1px solid var(--stroke);border-radius:9px;font-size:13.5px;margin-bottom:8px;color:var(--text);}
+.overview-action:hover{border-color:var(--stroke-strong);background:rgba(255,255,255,.03);}
+@media(max-width:800px){.overview-grid{grid-template-columns:1fr;}}
+
+/* ===== BOT VERSIONS ===== */
+.version-list{max-width:720px;}
+.version-item{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px solid var(--stroke);position:relative;}
+.version-item:last-child{border-bottom:none;}
+.version-dot{width:9px;height:9px;border-radius:50%;background:var(--text-faint);margin-top:5px;flex:none;}
+.version-item.current .version-dot{background:#7fd4a8;box-shadow:0 0 0 3px rgba(127,212,168,.15);}
+.version-body{flex:1;}
+.version-top{display:flex;align-items:center;gap:10px;font-size:14px;}
+.version-sub{font-size:12.5px;color:var(--text-faint);margin-top:2px;}
+
+/* ===== BOT AUDIENCE ===== */
+.audience-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;}
+.audience-search{flex:1;min-width:220px;max-width:360px;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:9px;padding:10px 14px;color:var(--text);font-size:13.5px;font-family:inherit;}
+.audience-search:focus{outline:none;border-color:rgba(255,255,255,.4);}
+
+/* ===== BOT BROADCASTS ===== */
+.broadcast-new{max-width:640px;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:var(--radius-lg);padding:22px;margin-bottom:8px;}
+.broadcast-new h3{font-size:15px;font-weight:600;margin-bottom:16px;}
+.broadcast-row{display:flex;gap:12px;align-items:flex-end;}
+
+/* ===== BOT INTEGRATIONS ===== */
+.int-connected-list{max-width:760px;}
+.int-connected{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--stroke);}
+.int-connected:last-child{border-bottom:none;}
+
+/* ===== TOGGLE SWITCH ===== */
+.switch{position:relative;display:inline-block;width:40px;height:23px;flex:none;}
+.switch input{opacity:0;width:0;height:0;}
+.switch span{position:absolute;cursor:pointer;inset:0;background:var(--bg-elevated);border:1px solid var(--stroke);border-radius:100px;transition:.2s;}
+.switch span:before{content:"";position:absolute;height:15px;width:15px;left:3px;top:50%;transform:translateY(-50%);background:var(--text-faint);border-radius:50%;transition:.2s;}
+.switch input:checked + span{background:#fff;border-color:#fff;}
+.switch input:checked + span:before{transform:translate(17px,-50%);background:#000;}
+
+</style>
+<script>
+/* ============ APP BAR (shared across all /app pages) ============ */
+const APP_BAR_HTML = `
+<div class="app-bar">
+  <div class="app-bar-left">
+    <a class="app-logo" href="/">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8 7l2.5 8.5M16 7l-2.5 8.5"/></svg>
+      Flowgram
+    </a>
+    <div class="app-nav" id="appNav">
+      <a href="/app" data-nav="bots">Мои боты</a>
+      <a href="/app/usage" data-nav="usage">Использование</a>
+      <a href="/app/billing" data-nav="billing">Тариф</a>
+      <a href="/app/account" data-nav="account">Аккаунт</a>
+    </div>
+  </div>
+  <div class="app-bar-right">
+    <div class="usage-chip"><b>3</b> / 10 ботов · тариф <b>Pro</b></div>
+    <div class="app-avatar" onclick="location.href='/app/account'"></div>
+  </div>
+</div>`;
+
+function renderAppBar() {
+  const el = document.getElementById('app-bar-slot');
+  if (!el) return;
+  el.outerHTML = APP_BAR_HTML;
+  if (typeof CURRENT_NAV !== 'undefined') {
+    document.querySelectorAll('#appNav a').forEach(a => {
+      if (a.dataset.nav === CURRENT_NAV) a.classList.add('active');
+    });
+  }
+}
+
+/* ============ BOT HEADER + TABS (shared across /app/bot/* pages) ============ */
+const BOT_TABS = [
+  ['overview', 'Обзор', '/app/bot/overview'],
+  ['versions', 'Версии', '/app/bot/versions'],
+  ['audience', 'Аудитория', '/app/bot/audience'],
+  ['broadcasts', 'Рассылки', '/app/bot/broadcasts'],
+  ['integrations', 'Интеграции', '/app/bot/integrations'],
+  ['settings', 'Настройки', '/app/bot/settings'],
+];
+
+function renderBotHeader() {
+  const el = document.getElementById('bot-header-slot');
+  if (!el) return;
+  const tabsHtml = BOT_TABS.map(([key, label, href]) =>
+    `<a href="${href}" data-tab="${key}"${key === (typeof CURRENT_TAB !== 'undefined' ? CURRENT_TAB : '') ? ' class="active"' : ''}>${label}</a>`
+  ).join('');
+  el.outerHTML = `
+  <div class="bot-header">
+    <div class="bot-header-top">
+      <a class="bot-back" href="/app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>Все боты</a>
+    </div>
+    <div class="bot-header-main">
+      <div class="bot-header-icon">👗</div>
+      <div>
+        <h1>Магазин одежды</h1>
+        <div class="bot-header-sub"><span class="d"></span>@my_shop_bot · работает</div>
+      </div>
+      <a class="btn btn-secondary bot-header-builder" href="/builder">Открыть конструктор →</a>
+    </div>
+    <div class="bot-tabs">${tabsHtml}</div>
+  </div>`;
+}
+
+function openCreateModal() {
+  document.getElementById('createModal').classList.add('open');
+}
+function closeCreateModal() {
+  document.getElementById('createModal').classList.remove('open');
+}
+function confirmCreateBot() {
+  const inputs = document.querySelectorAll('#createModal input');
+  if (!inputs[0].value.trim()) {
+    inputs[0].focus();
+    return;
+  }
+  closeCreateModal();
+  showToast('Бот подключён — откройте конструктор, чтобы собрать сценарий');
+}
+function toggleBotMenu(e) {
+  e.stopPropagation();
+  // placeholder for a future dropdown (переименовать / удалить / версии)
+  showToast('Меню бота — в разработке');
+}
+function showToast(text) {
+  let t = document.getElementById('appToast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'appToast';
+    t.className = 'toast';
+    t.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg><span></span>';
+    document.body.appendChild(t);
+  }
+  t.querySelector('span').textContent = text;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+/* ============ REUSABLE MOCK DATA WIDGETS (bot overview/analytics) ============ */
+function populateBars(id, count) {
+  const el = document.getElementById(id);
+  if (!el || el.children.length) return;
+  for (let i = 0; i < count; i++) {
+    const bar = document.createElement('i');
+    bar.style.height = (20 + Math.random() * 80) + '%';
+    el.appendChild(bar);
+  }
+}
+function populateLog(id, events) {
+  const el = document.getElementById(id);
+  if (!el || el.children.length) return;
+  events.forEach((ev, i) => {
+    const row = document.createElement('div');
+    row.className = 'log-row';
+    row.style.animationDelay = (i * 0.1) + 's';
+    row.innerHTML = `<span class="status">${ev[0]}</span><span>${ev[1]}</span><span>${ev[2]}</span>`;
+    el.appendChild(row);
+  });
+}
+document.getElementById('createModal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'createModal') closeCreateModal();
+});
+
+</script>
+</head>
+<body class="app-body">
+<div class="app-shell">
+  <div id="app-bar-slot"></div>
+  <script>const CURRENT_NAV=''; renderAppBar();</script>
+  <div id="bot-header-slot"></div>
+  <script>const CURRENT_TAB='settings'; renderBotHeader();</script>
+
+  <div class="app-main">
+    <div class="account-section">
+      <h3>Основное</h3>
+      <div class="acc-field-row">
+        <div class="acc-field"><label>Название бота (для себя)</label><input type="text" value="Магазин одежды"></div>
+        <div class="acc-field"><label>Username в Telegram</label><input type="text" value="@my_shop_bot" disabled style="opacity:.6;"></div>
+      </div>
+      <button class="btn btn-secondary" style="padding:9px 18px;font-size:13px;" onclick="showToast('Сохранено')">Сохранить</button>
+    </div>
+
+    <div class="account-section">
+      <h3>Токен</h3>
+      <div class="sec-item">
+        <div><div class="sec-item-title">Токен BotFather</div><div class="sec-item-sub">847291:AA••••••••••••••••••••••••</div></div>
+        <button class="btn-link" onclick="showToast('Переподключение токена (заглушка)')">Переподключить</button>
+      </div>
+    </div>
+
+    <div class="account-section">
+      <h3>Брендинг</h3>
+      <div class="sec-item">
+        <div><div class="sec-item-title">Убрать «Собрано на Flowgram»</div><div class="sec-item-sub">Доступно на тарифах Pro и выше</div></div>
+        <label class="switch"><input type="checkbox" checked onchange="showToast('Изменено')"><span></span></label>
+      </div>
+    </div>
+
+    <div class="account-section danger">
+      <h3>Опасная зона</h3>
+      <div class="sec-item">
+        <div><div class="sec-item-title">Остановить бота</div><div class="sec-item-sub">Бот перестанет отвечать пользователям, данные сохранятся</div></div>
+        <button class="btn-danger" onclick="showToast('Бот остановлен (заглушка)')">Остановить</button>
+      </div>
+      <div class="sec-item">
+        <div><div class="sec-item-title">Удалить бота</div><div class="sec-item-sub">Удалит сценарий, аудиторию и историю без возможности восстановления</div></div>
+        <button class="btn-danger" onclick="showToast('Требуется подтверждение (заглушка)')">Удалить бота</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
