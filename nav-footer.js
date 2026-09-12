@@ -5,7 +5,7 @@ const SITE_NAV_HTML = `<nav class="nav">
     Открытая бета Flowgram — <strong>первые 3 месяца Pro в подарок</strong>
   </div>
   <div class="nav-inner">
-    <a class="logo" href="index">
+    <a class="logo" href="/">
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8 7l2.5 8.5M16 7l-2.5 8.5"/></svg>
       Flowgram
     </a>
@@ -14,17 +14,17 @@ const SITE_NAV_HTML = `<nav class="nav">
         <span>Меню</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </div>
-      <a href="index#features">Возможности</a>
-      <a href="templates">Шаблоны</a>
-      <a href="index#company">Компания</a>
-      <a href="enterprise">Для бизнеса</a>
-      <a href="docs">Документация</a>
-      <a href="pricing">Тарифы</a>
-      <a href="login" class="link-login nav-link-mobile-only" style="border-bottom:none;">Войти</a>
+      <a href="/#features">Возможности</a>
+      <a href="/templates">Шаблоны</a>
+      <a href="/#company">Компания</a>
+      <a href="/enterprise">Для бизнеса</a>
+      <a href="/docs">Документация</a>
+      <a href="/pricing">Тарифы</a>
+      <a href="/login" class="link-login nav-link-mobile-only" style="border-bottom:none;">Войти</a>
     </div>
     <div class="nav-right">
-      <a class="link-login" href="login">Войти</a>
-      <a class="nav-cta" href="login?mode=signup">Начать</a>
+      <a class="link-login" href="/login">Войти</a>
+      <a class="nav-cta" href="/login?mode=signup">Начать</a>
       <button class="nav-burger" id="navBurger" aria-label="Меню" onclick="toggleNavMenu()"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -34,7 +34,7 @@ const SITE_FOOTER_HTML = `<footer>
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a class="logo" href="index">
+        <a class="logo" href="/">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8 7l2.5 8.5M16 7l-2.5 8.5"/></svg>
           Flowgram
         </a>
@@ -49,42 +49,42 @@ const SITE_FOOTER_HTML = `<footer>
       <div class="footer-cols footer-cols-5">
         <div class="footer-col">
           <h4>Возможности</h4>
-          <a href="index#features">Конструктор</a>
-          <a href="index#features">Аудитории</a>
-          <a href="index#features">Рассылки</a>
-          <a href="index#features">Входящие</a>
-          <a href="templates">Шаблоны</a>
-          <a href="docs-webhooks">Вебхуки</a>
-          <a href="integrations">Интеграции</a>
+          <a href="/#features">Конструктор</a>
+          <a href="/#features">Аудитории</a>
+          <a href="/#features">Рассылки</a>
+          <a href="/#features">Входящие</a>
+          <a href="/templates">Шаблоны</a>
+          <a href="/docs/webhooks">Вебхуки</a>
+          <a href="/integrations">Интеграции</a>
         </div>
         <div class="footer-col">
           <h4>Ресурсы</h4>
-          <a href="changelog">Список изменений</a>
-          <a href="pricing">Тарифы</a>
-          <a href="enterprise">Для бизнеса</a>
-          <a href="security">Безопасность и 152-ФЗ</a>
+          <a href="/changelog">Список изменений</a>
+          <a href="/pricing">Тарифы</a>
+          <a href="/enterprise">Для бизнеса</a>
+          <a href="/security">Безопасность и 152-ФЗ</a>
         </div>
         <div class="footer-col">
           <h4>Компания</h4>
-          <a href="about">О нас</a>
-          <a href="blog">Блог</a>
-          <a href="careers">Вакансии</a>
-          <a href="index#enterprise">Клиенты</a>
-          <a href="about#philosophy">Философия</a>
+          <a href="/about">О нас</a>
+          <a href="/blog">Блог</a>
+          <a href="/careers">Вакансии</a>
+          <a href="/#enterprise">Клиенты</a>
+          <a href="/about#philosophy">Философия</a>
         </div>
         <div class="footer-col">
           <h4>Помощь</h4>
-          <a href="contact">Поддержка</a>
-          <a href="status">Статус</a>
-          <a href="docs">База знаний</a>
+          <a href="/contact">Поддержка</a>
+          <a href="/status">Статус</a>
+          <a href="/docs">База знаний</a>
         </div>
         <div class="footer-col">
           <h4>Юридическое</h4>
-          <a href="legal">Все документы</a>
-          <a href="oferta">Договор оферты</a>
-          <a href="privacy">Конфиденциальность</a>
-          <a href="aup">Правила использования</a>
-          <a href="refund">Возврат средств</a>
+          <a href="/legal">Все документы</a>
+          <a href="/legal/oferta">Договор оферты</a>
+          <a href="/legal/privacy">Конфиденциальность</a>
+          <a href="/legal/aup">Правила использования</a>
+          <a href="/legal/refund">Возврат средств</a>
         </div>
       </div>
     </div>

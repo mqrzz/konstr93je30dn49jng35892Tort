@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Flowgram Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=5">
+<script src="/nav-footer.js?v=5"></script>
+</head>
+<body>
+<div id="site-nav"></div><script>renderNav();</script>
+<section class="docs-shell">
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docsSidebar">
+  <div class="grp">
+    <div class="grp-title">Начало работы</div>
+    <a href="/docs" data-page="overview">Обзор</a>
+    <a href="/docs/quickstart" data-page="quickstart">Быстрый старт</a>
+    <a href="/docs/builder-guide" data-page="builder-guide">Руководство по конструктору</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Справочник нод</div>
+    <a href="/docs/nodes" data-page="nodes">Все блоки сценария</a>
+    <a href="/docs/nodes#variables" data-page="nodes">Переменные и условия</a>
+    <a href="/docs/nodes#versions" data-page="nodes">Версии и публикация</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Для разработчиков</div>
+    <a href="/docs/api" data-page="api">Аутентификация</a>
+    <a href="/docs/api#messages" data-page="api">Messages API</a>
+    <a href="/docs/api#limits" data-page="api">Rate limits</a>
+    <a href="/docs/webhooks" data-page="webhooks">Вебхуки</a>
+  </div>
+  <div class="grp">
+    <div class="grp-title">Ещё</div>
+    <a href="/integrations" data-page="integrations">Интеграции</a>
+    <a href="/docs/faq" data-page="faq">FAQ и решение проблем</a>
+    <a href="/pricing">Тарифы и лимиты</a>
+    <a href="/security">Безопасность</a>
+  </div>
+</aside>
+
+    <article class="docs-article">
+      <div class="docs-crumb"><a href="/docs">Документация</a> / FAQ и решение проблем</div>
+      <button class="docs-menu-btn" onclick="toggleDocsMenu()">Разделы документации <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+
+      <h1>FAQ и решение проблем</h1>
+      <p class="lead">Собрали то, что чаще всего спрашивают в поддержку — от настройки до тарифов.</p>
+
+      <h2>Бот и сценарий</h2>
+      <table class="docs-table">
+        <tr><th>Вопрос</th><th>Ответ</th></tr>
+        <tr><td>Бот перестал отвечать</td><td>Проверьте вкладку «Версии» — возможно, опубликован черновик с обрывом сценария. Также проверьте, не заблокировали ли вы бота сами при тестировании в Telegram</td></tr>
+        <tr><td>Можно ли одному человеку вести несколько ботов</td><td>Да, лимит по количеству ботов зависит только от тарифа, не от аккаунта</td></tr>
+        <tr><td>Можно ли передать бота другому аккаунту</td><td>Да, в настройках бота есть передача владения — новый владелец должен принять приглашение</td></tr>
+        <tr><td>Что будет с ботом при удалении аккаунта</td><td>Бот перестанет отвечать, токен аннулируется, сценарий и аудитория удаляются по срокам из <a href="/legal/privacy">политики конфиденциальности</a></td></tr>
+      </table>
+
+      <h2>Тарифы и оплата</h2>
+      <table class="docs-table">
+        <tr><th>Вопрос</th><th>Ответ</th></tr>
+        <tr><td>Что если превышу лимит пользователей бота</td><td>Существующие пользователи продолжат получать ответы, новые не будут добавляться, пока не смените тариф</td></tr>
+        <tr><td>Можно ли оплатить сразу на год</td><td>Да, при годовой оплате скидка 20% — переключатель есть на странице <a href="/pricing">тарифов</a></td></tr>
+        <tr><td>Как отменить подписку</td><td>В настройках аккаунта → «Тариф» → «Отменить автопродление». Доступ сохранится до конца оплаченного периода</td></tr>
+        <tr><td>Возвращаете ли деньги</td><td>В части случаев да — подробности в <a href="/legal/refund">политике возврата</a></td></tr>
+      </table>
+
+      <h2>Технические вопросы</h2>
+      <table class="docs-table">
+        <tr><th>Вопрос</th><th>Ответ</th></tr>
+        <tr><td>Где хранятся данные</td><td>На серверах в российской юрисдикции — подробнее на странице <a href="/security">безопасности</a></td></tr>
+        <tr><td>Есть ли ограничение на размер файлов, которые шлёт бот</td><td>До 20 МБ на файл — ограничение самого Telegram Bot API, не Flowgram</td></tr>
+        <tr><td>Поддерживаются ли группы и каналы, а не только личные чаты</td><td>В текущей версии — только личные диалоги с ботом, поддержка групп в разработке</td></tr>
+        <tr><td>Можно ли перенести бота с другого конструктора</td><td>Токен можно переподключить в любой момент, но сценарий придётся собрать заново — автоматического импорта из других платформ нет</td></tr>
+      </table>
+
+      <h2>Не нашли ответ?</h2>
+      <p>Напишите в <a href="/contact">поддержку</a> — отвечаем в течение рабочего дня.</p>
+
+      <div class="docs-pager">
+        <a href="/docs/webhooks"><span class="lbl">Назад</span>← Вебхуки</a>
+        <a href="/docs" class="next"><span class="lbl">Далее</span>К обзору →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div id="site-footer"></div><script>renderFooter();</script>
+<script>const CURRENT_PAGE='faq';</script>
+<script src="/script.js?v=5"></script>
+</body>
+</html>
