@@ -6,38 +6,49 @@
 <title>Flowgram — конструктор Telegram-ботов</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css?v=5">
-<script src="/nav-footer.js?v=5"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=9">
+<script src="/nav-footer.js?v=9"></script>
 </head>
 <body>
 <div id="site-nav"></div><script>renderNav();</script>
 
 <!-- HERO -->
 <header class="hero wrap">
-  <h1>Конструктор Telegram-ботов без кода</h1>
-  <p>Соберите сценарий из блоков, подключите токен и опубликуйте бота за вечер. Хостинг, вебхуки и масштабирование — уже готовы.</p>
-  <div class="hero-actions">
-    <a class="btn btn-primary" href="/login?mode=signup">Создать бота бесплатно</a>
-    <a class="btn btn-secondary" href="/docs">Документация</a>
-  </div>
-
-  <div class="cube-stage">
-    <div class="cube">
-      <div class="cube-face"></div>
-      <div class="cube-face"></div>
-      <div class="cube-face"></div>
-      <div class="cube-face"></div>
-      <div class="cube-face"></div>
-      <div class="cube-face"></div>
+  <div class="hero-cols">
+    <div class="hero-left">
+      <a class="pill-outline" href="/pricing" style="margin-bottom:30px;">Открытая бета — 3 месяца Pro в подарок <span class="chev"></span></a>
+      <h1>Конструктор Telegram-ботов без кода</h1>
+      <p>Соберите сценарий из блоков, подключите токен и опубликуйте бота за вечер. Хостинг, вебхуки и масштабирование — уже готовы.</p>
+      <div class="hero-actions" style="justify-content:flex-start;margin-bottom:56px;">
+        <a class="btn btn-primary" href="/login?mode=signup">Создать бота бесплатно</a>
+        <a class="btn btn-secondary" href="/docs">Документация</a>
+      </div>
+      <p class="trust-line">Боты на Flowgram уже работают для магазинов, школ и сервисов записи</p>
+      <div class="trust-logos" style="justify-content:flex-start;">
+        <span>Uzory</span><span>Северный лофт</span><span>Kaira School</span><span>Fluxo</span><span>ZapisPro</span><span>Amberly</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="webgl-cube-wrap" id="cubeWrap">
+        <div class="canvas-container" id="canvasContainer"></div>
+        <div class="god-rays-wrapper"><div class="god-rays"></div></div>
+      </div>
     </div>
   </div>
-
-  <p class="trust-line">Боты на Flowgram уже работают для магазинов, школ и сервисов записи</p>
-  <div class="trust-logos">
-    <span>Uzory</span><span>Северный лофт</span><span>Kaira School</span><span>Fluxo</span><span>ZapisPro</span><span>Amberly</span>
-  </div>
 </header>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.module.js",
+    "tween": "https://cdn.jsdelivr.net/npm/@tweenjs/tween.js@18.5.0/dist/tween.esm.js",
+    "RectAreaLightUniformsLib": "https://cdn.jsdelivr.net/npm/three@0.154.0/examples/jsm/lights/RectAreaLightUniformsLib.js",
+    "postprocessing": "https://cdn.jsdelivr.net/npm/postprocessing@6.32.2/+esm"
+  }
+}
+</script>
+<script type="module" src="/hero-cube.js"></script>
 
 <!-- HOW IT WORKS -->
 <section>
@@ -399,6 +410,6 @@
 
 
 <div id="site-footer"></div><script>renderFooter();</script>
-<script src="/script.js?v=5"></script>
+<script src="/script.js?v=9"></script>
 </body>
 </html>
