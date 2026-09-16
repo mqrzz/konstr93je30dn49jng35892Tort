@@ -1,9 +1,5 @@
 /* ============ SITE NAV & FOOTER (single source of truth) ============ */
 const SITE_NAV_HTML = `<nav class="nav">
-  <div class="nav-banner">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
-    Открытая бета Flowgram — <strong>первые 3 месяца Pro в подарок</strong>
-  </div>
   <div class="nav-inner">
     <a class="logo" href="/">
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8 7l2.5 8.5M16 7l-2.5 8.5"/></svg>
