@@ -3,413 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flowgram — конструктор Telegram-ботов</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css?v=9">
-<script src="/nav-footer.js?v=9"></script>
+<title>Flowgram — скоро</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    min-height: 100vh;
+    background: #0a0a0a;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    overflow: hidden;
+    cursor: not-allowed;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(80, 80, 80, 0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10 10 L 90 10 M10 30 L 90 30 M10 50 L 90 50 M10 70 L 90 70 M10 90 L 90 90" stroke="rgba(255,255,255,0.02)" stroke-width="1"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .construction-card {
+    position: relative;
+    z-index: 10;
+    max-width: 720px;
+    width: 100%;
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    padding: 3.5rem 3rem;
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    text-align: center;
+    cursor: default;
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  h1 {
+    font-family: 'Outfit', 'Inter', sans-serif;
+    font-size: clamp(2.4rem, 8vw, 3.8rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .subtext {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    line-height: 1.6;
+    color: #a0a0a0;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 600px) {
+    .construction-card {
+      padding: 2.5rem 1.8rem;
+      border-radius: 28px;
+    }
+  }
+</style>
 </head>
 <body>
-<div id="site-nav"></div><script>renderNav();</script>
-
-<!-- HERO -->
-<header class="hero wrap">
-  <div class="hero-cols">
-    <div class="hero-left">
-      <a class="pill-outline" href="/pricing" style="margin-bottom:30px;">Открытая бета — 3 месяца Pro в подарок <span class="chev"></span></a>
-      <h1>Конструктор Telegram-ботов без кода</h1>
-      <p>Соберите сценарий из блоков, подключите токен и опубликуйте бота за вечер. Хостинг, вебхуки и масштабирование — уже готовы.</p>
-      <div class="hero-actions" style="justify-content:flex-start;margin-bottom:56px;">
-        <a class="btn btn-primary" href="/login?mode=signup">Создать бота бесплатно</a>
-        <a class="btn btn-secondary" href="/docs">Документация</a>
-      </div>
-      <p class="trust-line">Боты на Flowgram уже работают для магазинов, школ и сервисов записи</p>
-      <div class="trust-logos" style="justify-content:flex-start;">
-        <span>Uzory</span><span>Северный лофт</span><span>Kaira School</span><span>Fluxo</span><span>ZapisPro</span><span>Amberly</span>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="webgl-cube-wrap" id="cubeWrap">
-        <div class="canvas-container" id="canvasContainer"></div>
-        <div class="god-rays-wrapper"><div class="god-rays"></div></div>
-      </div>
-    </div>
+  <div class="construction-card">
+    <h1>Сайт ещё не готов</h1>
+    <p class="subtext">
+      Мы активно работаем над новой версией Flowgram. 
+      Совсем скоро здесь появится полноценный конструктор Telegram-ботов.
+    </p>
   </div>
-</header>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.module.js",
-    "tween": "https://cdn.jsdelivr.net/npm/@tweenjs/tween.js@18.5.0/dist/tween.esm.js",
-    "RectAreaLightUniformsLib": "https://cdn.jsdelivr.net/npm/three@0.154.0/examples/jsm/lights/RectAreaLightUniformsLib.js",
-    "postprocessing": "https://cdn.jsdelivr.net/npm/postprocessing@6.32.2/+esm"
-  }
-}
-</script>
-<script type="module" src="/hero-cube.js"></script>
+  <script>
+    (function() {
+      const blockAll = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      };
 
-<!-- HOW IT WORKS -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>От токена до живого бота — три шага</h2>
-      <p>Никакого деплоя и настройки сервера — всё уже готово на нашей стороне.</p>
-    </div>
-    <div class="feature-grid fgrid-3">
-      <div class="feature-card">
-        <div class="icon" style="font-style:normal;font-weight:700;font-size:18px;color:#fff;">01</div>
-        <h3>Подключите токен</h3>
-        <p>Создайте бота через @BotFather, вставьте токен в Flowgram — мы сами зарегистрируем вебхук и проверим доступ.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon" style="font-style:normal;font-weight:700;font-size:18px;color:#fff;">02</div>
-        <h3>Соберите сценарий</h3>
-        <p>Перетащите блоки сообщений, кнопок, условий и оплаты на канвас — или начните с готового шаблона.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon" style="font-style:normal;font-weight:700;font-size:18px;color:#fff;">03</div>
-        <h3>Опубликуйте</h3>
-        <p>Нажмите «Опубликовать» — движок провалидирует сценарий и бот начнёт отвечать пользователям сразу.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      const eventsToBlock = [
+        'click', 'mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout',
+        'contextmenu', 'dblclick', 'keydown', 'keypress', 'keyup',
+        'touchstart', 'touchmove', 'touchend', 'touchcancel',
+        'pointerdown', 'pointerup', 'pointermove', 'pointerover', 'pointerout',
+        'drag', 'dragstart', 'dragend', 'dragenter', 'dragleave', 'dragover', 'drop',
+        'scroll', 'wheel', 'focus', 'blur', 'input', 'change', 'submit', 'reset'
+      ];
 
-<!-- TEMPLATES -->
-<section id="templates">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Начните с готового шаблона</h2>
-      <p>Базовый сценарий под вашу задачу — останется донастроить тексты и подключить оплату.</p>
-    </div>
-    <div class="feature-grid fgrid-4">
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 2l1.5 5h9L18 2M3 7h18l-1.5 13h-15L3 7z"/></svg></div><h3>Магазин</h3><p>Каталог, корзина, приём оплаты и уведомления о статусе заказа.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div><h3>Запись на приём</h3><p>Выбор услуги, свободного времени и напоминание за час до визита.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 01-8.9 8.4 8.5 8.5 0 01-4-1L3 20l1.3-4a8.4 8.4 0 01-1-4A8.4 8.4 0 0112 3a8.5 8.5 0 019 8.5z"/></svg></div><h3>Поддержка</h3><p>FAQ-дерево, приём заявок и передача сложных вопросов оператору.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><h3>Опрос</h3><p>Последовательные вопросы, ветвление по ответам и выгрузка результатов.</p></div>
-    </div>
-  </div>
-</section>
+      eventsToBlock.forEach(eventType => {
+        document.addEventListener(eventType, blockAll, { capture: true, passive: false });
+      });
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Платите за возможности, не за серверы</h2>
-      <p>Лимиты растут вместе с ботом. Переходите между тарифами в любой момент — сценарии и аудитория остаются на месте.</p>
-    </div>
-    <div class="feature-grid fgrid-4" style="align-items:start;">
-      <div class="feature-card">
-        <h3 style="margin-bottom:4px;">Free</h3>
-        <div style="font-size:28px;font-weight:700;letter-spacing:-0.02em;margin:10px 0 16px;">0 ₽</div>
-        <p>1 бот · 500 пользователей<br>10 нод сценария<br>Автоответы</p>
-      </div>
-      <div class="feature-card">
-        <h3 style="margin-bottom:4px;">Start</h3>
-        <div style="font-size:28px;font-weight:700;letter-spacing:-0.02em;margin:10px 0 16px;">690 ₽<span style="font-size:14px;color:var(--text-dim);font-weight:400;"> /мес</span></div>
-        <p>3 бота · 5 000 пользователей<br>Рассылки<br>5 интеграций</p>
-      </div>
-      <div class="feature-card" style="border-color:rgba(255,255,255,.35);">
-        <h3 style="margin-bottom:4px;">Pro</h3>
-        <div style="font-size:28px;font-weight:700;letter-spacing:-0.02em;margin:10px 0 16px;">1 990 ₽<span style="font-size:14px;color:var(--text-dim);font-weight:400;"> /мес</span></div>
-        <p>10 ботов · 25 000 пользователей<br>Расширенная аналитика<br>API-доступ</p>
-      </div>
-      <div class="feature-card">
-        <h3 style="margin-bottom:4px;">Business</h3>
-        <div style="font-size:28px;font-weight:700;letter-spacing:-0.02em;margin:10px 0 16px;">4 990 ₽<span style="font-size:14px;color:var(--text-dim);font-weight:400;"> /мес</span></div>
-        <p>30 ботов · 100 000 пользователей<br>Выделенные воркеры<br>Без брендинга</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- INTEGRATE -->
-<section id="docs">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>API для тех, кому мало конструктора</h2>
-      <p>Управляйте ботом кодом там, где это удобнее визуального редактора — отправляйте сообщения и читайте события через API на любом языке.</p>
-    </div>
-    <div class="code-shell">
-      <div class="lang-tabs" id="langTabs">
-        <div class="lang-tab active" data-lang="node">Node.js</div>
-        <div class="lang-tab" data-lang="python">Python</div>
-        <div class="lang-tab" data-lang="ruby">Ruby</div>
-        <div class="lang-tab" data-lang="php">PHP</div>
-        <div class="lang-tab" data-lang="go">Go</div>
-        <div class="lang-tab" data-lang="rust">Rust</div>
-        <div class="lang-tab" data-lang="java">Java</div>
-        <div class="lang-tab" data-lang="dotnet">.NET</div>
-        <div class="lang-tab" data-lang="rest">REST</div>
-        <div class="lang-tab" data-lang="smtp">Webhook</div>
-      </div>
-      <div class="code-body" id="codeBody"></div>
-      <div class="code-footer">
-        <a href="/docs/api">Смотреть в документации →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DEV EXPERIENCE -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Видно всё, что происходит с ботом</h2>
-      <p>Тестируйте сценарий прямо в браузере — без публикации и без риска сломать бота, который уже работает на живых клиентах.</p>
-    </div>
-    <div class="panel">
-      <div class="panel-toolbar">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="panel-title">Тестовый запуск · Магазин одежды</span>
-      </div>
-      <div class="send-row">
-        <div class="send-input">/start</div>
-        <button class="send-btn">Запустить</button>
-      </div>
-      <div class="log-list" id="logList"></div>
-    </div>
-  </div>
-</section>
-
-<!-- TEST MODE -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Песочница</h2>
-      <p>Симулируйте сообщения и кнопки без риска случайно разослать что-то реальным пользователям бота.</p>
-    </div>
-    <div class="feature-grid fgrid-4">
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></div><h3>Выполнено</h3><p>Нода сценария отработала успешно, событие зафиксировано в логе.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><h3>Ожидание</h3><p>Бот ждёт ответа пользователя — таймаут настраивается в ноде.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div><h3>Переход</h3><p>Пользователь нажал кнопку — переход к следующей ноде сценария.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg></div><h3>Ошибка</h3><p>Внешний HTTP-запрос не ответил — с указанием причины и статус-кода.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- WEBHOOKS -->
-<section>
-  <div class="wrap" style="display:flex;gap:64px;align-items:center;flex-wrap:wrap;">
-    <div style="flex:1;min-width:280px;">
-      <h2 style="font-size:32px;font-weight:700;letter-spacing:-0.03em;margin-bottom:16px;">Модульные вебхуки</h2>
-      <p style="color:var(--text-dim);font-size:16px;line-height:1.6;margin-bottom:20px;">Получайте уведомления в реальном времени прямо на свой сервер каждый раз, когда пользователь пишет боту, нажимает кнопку или оплачивает заказ.</p>
-      <a class="btn btn-secondary" href="/docs/webhooks">Подробнее</a>
-    </div>
-    <div style="flex:1;min-width:280px;">
-      <div class="code-shell" style="margin:0;">
-        <div class="code-body" style="font-size:12.5px;">{
-  <span class="tok-var">"type"</span>: <span class="tok-str">"payment.completed"</span>,
-  <span class="tok-var">"created_at"</span>: <span class="tok-str">"2026-09-07T09:14:00Z"</span>,
-  <span class="tok-var">"data"</span>: {
-    <span class="tok-var">"bot_id"</span>: <span class="tok-str">"847291"</span>,
-    <span class="tok-var">"chat_id"</span>: <span class="tok-str">"193004521"</span>,
-    <span class="tok-var">"amount"</span>: <span class="tok-str">"2 490 ₽"</span>
-  }
-}</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EDITOR -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Собирайте сценарий визуально</h2>
-      <p>Перетаскивайте блоки, соединяйте их линиями, публикуйте новую версию одной кнопкой — движок сам провалидирует сценарий перед выкаткой.</p>
-    </div>
-    <div class="panel" style="max-width:900px;">
-      <div class="panel-toolbar" style="justify-content:space-between;">
-        <div style="display:flex;align-items:center;gap:14px;">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="panel-title">Магазин одежды / builder</span>
-        </div>
-        <div style="display:flex;gap:8px;">
-          <span style="font-size:12px;color:var(--text-faint);border:1px solid var(--stroke);border-radius:6px;padding:5px 10px;">Тест</span>
-          <span style="font-size:12px;color:#000;background:#fff;border-radius:6px;padding:5px 10px;font-weight:600;">Опубликовать</span>
-        </div>
-      </div>
-      <div style="padding:40px 30px;display:flex;justify-content:center;">
-        <svg viewBox="0 0 460 300" width="100%" style="max-width:440px">
-          <g font-family="Inter, sans-serif" font-size="12" fill="#f5f5f5">
-            <line x1="230" y1="30" x2="230" y2="66" stroke="rgba(255,255,255,0.18)" stroke-width="1.4"/>
-            <rect x="180" y="4" width="100" height="26" rx="7" fill="#0f0f0f" stroke="var(--stroke)"/>
-            <text x="196" y="21">/start</text>
-
-            <rect x="150" y="66" width="160" height="30" rx="7" fill="#0f0f0f" stroke="var(--stroke)"/>
-            <text x="164" y="86">Приветствие</text>
-
-            <path d="M230 96 L230 116 L120 116 L120 140" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.4"/>
-            <path d="M230 96 L230 116 L340 116 L340 140" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.4"/>
-
-            <rect x="55" y="140" width="130" height="30" rx="7" fill="#0f0f0f" stroke="var(--stroke)"/>
-            <text x="81" y="160">Каталог</text>
-
-            <rect x="278" y="140" width="130" height="30" rx="7" fill="#0f0f0f" stroke="var(--stroke)"/>
-            <text x="300" y="160">Поддержка</text>
-
-            <line x1="120" y1="170" x2="120" y2="204" stroke="rgba(255,255,255,0.18)" stroke-width="1.4"/>
-            <rect x="55" y="204" width="130" height="30" rx="7" fill="#141414" stroke="rgba(255,255,255,.35)"/>
-            <text x="70" y="224">Товары бота</text>
-          </g>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AUDIENCE MANAGEMENT -->
-<section>
-  <div class="wrap" style="display:flex;gap:64px;align-items:center;flex-wrap:wrap;">
-    <div style="flex:1;min-width:280px;">
-      <h2 style="font-size:32px;font-weight:700;letter-spacing:-0.03em;margin-bottom:16px;">Аудитория бота</h2>
-      <p style="color:var(--text-dim);font-size:16px;line-height:1.6;margin-bottom:20px;">Сегментируйте пользователей по действиям в сценарии и переменным. Выгружайте или импортируйте список за минуты — независимо от размера аудитории.</p>
-      <a class="btn btn-secondary" href="/docs">Подробнее</a>
-    </div>
-    <div style="flex:1;min-width:280px;">
-      <div class="panel" style="margin:0;">
-        <div class="panel-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="panel-title">Пользователи</span></div>
-        <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px;">
-          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-faint);padding:0 4px;"><span>Пользователь</span><span>Статус</span></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;background:#0f0f0f;border:1px solid var(--stroke);border-radius:8px;padding:10px 14px;font-size:13px;"><span>@a_orlova</span><span style="color:#4ade80;">активен</span></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;background:#0f0f0f;border:1px solid var(--stroke);border-radius:8px;padding:10px 14px;font-size:13px;"><span>@d_smirnov</span><span style="color:#4ade80;">активен</span></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;background:#0f0f0f;border:1px solid var(--stroke);border-radius:8px;padding:10px 14px;font-size:13px;"><span>@k_ivanov</span><span style="color:var(--text-faint);">заблокировал бота</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BROADCAST ANALYTICS -->
-<section>
-  <div class="wrap" style="display:flex;gap:64px;align-items:center;flex-wrap:wrap-reverse;">
-    <div style="flex:1;min-width:280px;">
-      <div class="mock-panel" style="margin:0;">
-        <div class="mock-stat-row" style="grid-template-columns:repeat(2,1fr);">
-          <div class="mock-stat"><div class="num">61.4%</div><div class="lbl">Открытий рассылки</div></div>
-          <div class="mock-stat"><div class="num">14.8%</div><div class="lbl">Перешли по кнопке</div></div>
-        </div>
-        <div class="mock-bars" id="mockBars2"></div>
-      </div>
-    </div>
-    <div style="flex:1;min-width:280px;">
-      <h2 style="font-size:32px;font-weight:700;letter-spacing:-0.03em;margin-bottom:16px;">Аналитика рассылок</h2>
-      <p style="color:var(--text-dim);font-size:16px;line-height:1.6;margin-bottom:20px;">Раскройте инсайты и точно понимайте, как аудитория взаимодействует с рассылками бота.</p>
-      <a class="btn btn-secondary" href="/docs">Подробнее</a>
-    </div>
-  </div>
-</section>
-
-<!-- CUSTOM CODE NODE -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Пишите ноды кодом, когда блоков мало</h2>
-      <p>HTTP-нода вызывает любую функцию на JavaScript — доступ к переменным сценария, ответу внешнего API и данным пользователя.</p>
-    </div>
-    <div class="code-shell">
-      <div class="lang-tabs">
-        <div class="lang-tab active">discount-check.js</div>
-        <div class="lang-tab">crm-sync.js</div>
-        <div class="lang-tab">order-status.js</div>
-        <div class="lang-tab">scenario.json</div>
-      </div>
-      <div class="code-body"><span class="tok-kw">export default</span> <span class="tok-kw">async function</span> <span class="tok-fn">handler</span>({ vars, chat_id }) {
-  <span class="tok-kw">const</span> <span class="tok-var">res</span> = <span class="tok-kw">await</span> <span class="tok-fn">fetch</span>(<span class="tok-str">`https://crm.example.ru/client/${chat_id}`</span>);
-  <span class="tok-kw">const</span> <span class="tok-var">client</span> = <span class="tok-kw">await</span> res.<span class="tok-fn">json</span>();
-
-  <span class="tok-kw">if</span> (client.orders &gt; 3) {
-    vars.<span class="tok-var">discount</span> = <span class="tok-str">'15%'</span>;
-    <span class="tok-kw">return</span> <span class="tok-str">'vip'</span>; <span class="tok-com">// имя следующей ноды</span>
-  }
-
-  <span class="tok-kw">return</span> <span class="tok-str">'default'</span>;
-}</div>
-      <div class="code-footer">
-        <a href="/login?mode=signup">Начать</a>
-        <a href="/docs/api">Смотреть документацию</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- REACH HUMANS -->
-<section id="features">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Инфраструктура, которая не подведёт под нагрузкой</h2>
-      <p>Всё, что нужно, чтобы бот работал стабильно даже при резком росте аудитории или рассылке на десятки тысяч человек.</p>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/></svg></div><h3>Очередь событий</h3><p>Сообщения от Telegram сначала попадают в очередь — всплеск нагрузки не роняет обработку других ботов.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h3>Rate-limit по боту</h3><p>Держим лимит Telegram в 30 сообщений/сек на бота автоматически — рассылка не блокирует бота целиком.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12h8M8 16h5"/></svg></div><h3>Версии сценария</h3><p>Каждая публикация сохраняется отдельно — откат к рабочей версии за один клик.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3v4M8 3v4M2 11h20"/></svg></div><h3>Изолированные ноды</h3><p>HTTP-запросы и внешний код выполняются с таймаутом в песочнице — сценарий одного клиента не влияет на остальных.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div><h3>Автообработка блокировок</h3><p>Пользователь заблокировал бота — Flowgram сам исключает его из следующих рассылок.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.2 4.2l4.2 4.2m7.2 7.2l4.2 4.2M1 12h6m10 0h6M4.2 19.8l4.2-4.2m7.2-7.2l4.2-4.2"/></svg></div><h3>Мониторинг вебхуков</h3><p>Следим за откликом Telegram API на бота и предупреждаем, если что-то пошло не так.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 12l2 2 4-4M7.8 3.5a1 1 0 011.4 0l1 1a1 1 0 001.4 0l1-1a1 1 0 011.4 0l1 1a1 1 0 001.4 0l1-1a1 1 0 011.4 1.4l-1 1a1 1 0 000 1.4l1 1a1 1 0 010 1.4l-1 1a1 1 0 000 1.4l1 1a1 1 0 01-1.4 1.4l-1-1a1 1 0 00-1.4 0l-1 1a1 1 0 01-1.4 0l-1-1a1 1 0 00-1.4 0l-1 1a1 1 0 01-1.4-1.4l1-1a1 1 0 000-1.4l-1-1a1 1 0 010-1.4l1-1a1 1 0 000-1.4l-1-1a1 1 0 010-1.4z"/></svg></div><h3>Проверка токена бота</h3><p>Токен шифруется в хранилище, а не хранится в открытую — доступ к боту защищён на уровне БД.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3>Выделенные воркеры</h3><p>На тарифе Business рассылки и тяжёлые сценарии обрабатываются на отдельных ресурсах.</p></div>
-      <div class="feature-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg></div><h3>Хранение данных в РФ</h3><p>Данные бота и его пользователей размещаются на серверах в российской юрисдикции — соответствие 152-ФЗ.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- QUOTE -->
-<section>
-  <div class="wrap quote-block">
-    <p>«Собрали бота для записи клиентов за один вечер, без единой строчки кода. Когда понадобилась интеграция с CRM — просто добавили HTTP-ноду.»</p>
-    <div class="quote-attr">
-      <div class="avatar"></div>
-      Марк Ольсен, основатель сети барбершопов Northline
-    </div>
-  </div>
-</section>
-
-<!-- CONTROL -->
-<section id="company">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Всё под контролем</h2>
-      <p>Управляйте рассылками, разбирайтесь с детальными логами и следите за состоянием бота — без лишнего трения.</p>
-    </div>
-    <div class="mock-panel">
-      <div class="mock-stat-row">
-        <div class="mock-stat"><div class="num">128 402</div><div class="lbl">Сообщений обработано</div></div>
-        <div class="mock-stat"><div class="num">99.2%</div><div class="lbl">Успешных ответов</div></div>
-        <div class="mock-stat"><div class="num">340мс</div><div class="lbl">Среднее время ответа</div></div>
-        <div class="mock-stat"><div class="num">1 248</div><div class="lbl">Активных пользователей</div></div>
-      </div>
-      <div class="mock-bars" id="mockBars"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ENTERPRISE / TESTIMONIALS -->
-<section id="enterprise">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Больше, чем ожидания</h2>
-      <p>Flowgram помогает командам расти, автоматизировать общение с клиентами и уверенно масштабировать ботов.</p>
-    </div>
-  </div>
-  <div class="marquee-outer">
-    <div class="marquee-track" id="marqueeTrack"></div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <div class="wrap">
-    <h2>Telegram-боты заново придуманы. Доступны уже сегодня.</h2>
-    <a class="btn btn-primary" href="/login?mode=signup">Создать бота бесплатно</a>
-  </div>
-</section>
-
-
-<div id="site-footer"></div><script>renderFooter();</script>
-<script src="/script.js?v=9"></script>
+      document.addEventListener('selectstart', blockAll, { capture: true });
+      document.addEventListener('contextmenu', blockAll, { capture: true });
+      document.body.onclick = blockAll;
+      document.body.onmousedown = blockAll;
+      document.body.onmouseup = blockAll;
+      document.body.onkeydown = blockAll;
+      document.body.ontouchstart = blockAll;
+    })();
+  </script>
 </body>
 </html>
