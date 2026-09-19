@@ -90,16 +90,18 @@
     }).join('');
 
     el.innerHTML = `
-      ${LOGO_SVG}
-      <nav>
-        <ul class="nav-menu">${items}</ul>
-      </nav>
-      <div class="header-actions">
-        <a href="/login/" class="btn btn-ghost">Войти</a>
-        <a href="/signup/" class="btn btn-primary glass">Начать</a>
-        <button class="nav-mobile-toggle" aria-label="Открыть меню" id="mobileMenuToggle">
-          <svg class="icon"><use href="/assets/icons.svg#icon-menu"></use></svg>
-        </button>
+      <div class="container">
+        ${LOGO_SVG}
+        <nav>
+          <ul class="nav-menu">${items}</ul>
+        </nav>
+        <div class="header-actions">
+          <a href="/login/" class="btn btn-ghost">Войти</a>
+          <a href="/signup/" class="btn btn-primary glass">Начать</a>
+          <button class="nav-mobile-toggle" aria-label="Открыть меню" id="mobileMenuToggle">
+            <svg class="icon"><use href="/assets/icons.svg#icon-menu"></use></svg>
+          </button>
+        </div>
       </div>
     `;
 
