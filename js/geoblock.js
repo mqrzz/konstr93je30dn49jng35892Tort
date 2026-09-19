@@ -1,23 +1,21 @@
 /* ==========================================================================
    ovyrn — geoblock.js
-   Редиректит посетителей из заблокированных стран на страницу geo.antviz.ru.
-   Логика взята из рабочего скрипта пользователя, добавлено только
-   кэширование результата в sessionStorage, чтобы не дёргать API на
-   каждой странице сайта заново.
+   Редиректит посетителей из заблокированных стран на /unavailable/.
+   Логика взята из рабочего скрипта пользователя. По его просьбе проверка
+   идёт на КАЖДОЙ странице при заходе, без кэширования — так geo-смена
+   (например, отключение VPN) посреди сессии тоже отловится. Это чуть
+   больше запросов к API геолокации, но так надёжнее для блокировки.
    ========================================================================== */
 (async function geoRedirect() {
-  const REDIRECT_URL = 'https://geo.antviz.ru';
-  const CACHE_KEY = 'ovyrn_geo_check';
+  // Сама страница блокировки не должна проверять сама себя (иначе цикл).
+  if (location.pathname.startsWith('/unavailable')) return;
+
+  const REDIRECT_URL = '/unavailable/';
   const blockedCountries = ['IR','AF','IQ','UA','NG','NE','MX','SA','JO','PK','IN','MM','BD','NP','BT','OM','YE','QA','KW','BH','CD','CG','DZ'];
 
   function redirect() {
     window.location.replace(REDIRECT_URL);
   }
-
-  // Уже проверяли в этой вкладке — не бьём лишний раз по API на каждой странице.
-  const cached = sessionStorage.getItem(CACHE_KEY);
-  if (cached === 'blocked') { redirect(); return; }
-  if (cached === 'ok') return;
 
   async function checkCountryIs() {
     const res = await fetch('https://api.country.is/', { signal: AbortSignal.timeout(4000) });
@@ -40,16 +38,13 @@
     try {
       country = await checkIpWhoIs();
     } catch (_) {
-      // Обе проверки не удались — не блокируем по умолчанию (fail-open),
-      // чтобы сбой стороннего API не клал доступ на весь сайт.
+      // Обе проверки не удались — не блокируем (fail-open): сбой стороннего
+      // API не должен класть доступ на весь сайт.
       return;
     }
   }
 
   if (country && blockedCountries.includes(country)) {
-    sessionStorage.setItem(CACHE_KEY, 'blocked');
     redirect();
-  } else {
-    sessionStorage.setItem(CACHE_KEY, 'ok');
   }
 })();
