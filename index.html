@@ -8,20 +8,17 @@
 <link rel="stylesheet" href="/css/core.css">
 </head>
 <body>
+<script src="/js/geoblock.js"></script>
 
 <header id="site-header" class="site-header"></header>
 
 <main>
   <section class="hero container">
-    <div>
-      <span class="hero-badge">
-        <svg class="icon" style="width:14px;height:14px"><use href="/assets/icons.svg#icon-pulse"></use></svg>
-        Сейчас в раннем доступе
-      </span>
-      <h1>Панель для ботов,<br>которые <span class="rainbow-text">уже работают</span></h1>
+    <div class="hero-content">
+      <h1>Панель для ботов,<br>которые уже работают</h1>
       <p class="lead">Подключите существующего Telegram-бота, следите за аптаймом и вебхуком, храните файлы прямо в Telegram — без своих серверов под хранилище.</p>
       <div class="hero-ctas">
-        <a href="/signup.html" class="btn btn-primary glass">Начать бесплатно</a>
+        <a href="/signup/" class="btn btn-primary glass">Начать бесплатно</a>
         <a href="/docs/" class="btn btn-ghost">Документация</a>
       </div>
     </div>
@@ -37,36 +34,65 @@
     </div>
   </section>
 
+  <!-- ============================== TRUST STRIP ============================= -->
+  <section class="trust-strip container reveal">
+    <p>Строится в открытую — прогресс и технические решения в <a href="/blog/">блоге</a></p>
+  </section>
+
+  <!-- =============================== HOW IT WORKS ============================ -->
+  <section class="steps-section container">
+    <h2 class="section-title reveal" style="margin-inline:auto;text-align:center">Три шага до первого отчёта</h2>
+    <p class="section-sub reveal" style="margin-inline:auto;text-align:center">Никакого нового кода в вашем боте — панель работает поверх уже готового.</p>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <h3>Вставьте токен</h3>
+        <p>Токен от @BotFather — как для любой другой интеграции. Ключи шифруются, доступ только у вас.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:.08s">
+        <div class="step-num">02</div>
+        <h3>Выберите интервал проверки</h3>
+        <p>От раза в 10 минут на бесплатном тарифе до раза в 30 секунд на Pro — сами решаете, как быстро узнавать о падении.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:.16s">
+        <div class="step-num">03</div>
+        <h3>Получайте алерты</h3>
+        <p>Email или сообщение в Telegram, как только бот перестаёт отвечать или вебхук возвращает ошибку.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FEATURE GRID =============================== -->
   <section class="features container" id="bots">
-    <h2 class="section-title">Всё нужное для управления ботом</h2>
-    <p class="section-sub">Без похода в BotFather каждый раз, когда нужно поправить имя или меню команд.</p>
+    <h2 class="rainbow-heading reveal">Подключите бота <span class="rainbow-text">за 10 минут</span></h2>
+    <p class="section-sub reveal" style="margin-inline:auto;text-align:center">Без похода в BotFather каждый раз, когда нужно поправить имя или меню команд.</p>
     <div class="feature-grid">
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="icon-wrap"><svg class="icon"><use href="/assets/icons.svg#icon-bot"></use></svg></div>
         <h3>Управление ботом</h3>
         <p>Имя, описание, фото и меню команд — прямо из панели, с живым превью чата.</p>
       </div>
-      <div class="feature-card" id="monitoring">
+      <div class="feature-card reveal" id="monitoring" style="transition-delay:.05s">
         <div class="icon-wrap"><svg class="icon"><use href="/assets/icons.svg#icon-pulse"></use></svg></div>
         <h3>Мониторинг 24/7</h3>
         <p>Проверка аптайма, скорость ответа и диагностика вебхука — узнаете о падении раньше пользователей.</p>
       </div>
-      <div class="feature-card" id="storage">
+      <div class="feature-card reveal" id="storage" style="transition-delay:.1s">
         <div class="icon-wrap"><svg class="icon"><use href="/assets/icons.svg#icon-storage"></use></svg></div>
         <h3>Хранилище в Telegram</h3>
         <p>Файлы летят в служебный чат и хранятся бесплатно на стороне Telegram — щедрые лимиты без своих серверов.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="icon-wrap"><svg class="icon"><use href="/assets/icons.svg#icon-bell"></use></svg></div>
         <h3>Уведомления</h3>
         <p>Письмо или сообщение в Telegram, как только бот перестаёт отвечать.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card reveal" style="transition-delay:.05s">
         <div class="icon-wrap"><svg class="icon"><use href="/assets/icons.svg#icon-webhook"></use></svg></div>
         <h3>Диагностика вебхука</h3>
         <p>Видно зависший сертификат и ошибки доставки getWebhookInfo без ручных запросов.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card reveal" style="transition-delay:.1s">
         <div class="icon-wrap"><svg class="icon"><use href="/assets/icons.svg#icon-telegram"></use></svg></div>
         <h3>Любой бот</h3>
         <p>Не важно, на чём написан бот и кто его собирал — достаточно токена от BotFather.</p>
@@ -74,15 +100,56 @@
     </div>
   </section>
 
+  <!-- ========================== DASHBOARD MOCKUP ============================= -->
+  <section class="mockup-section container">
+    <div class="mockup-text reveal">
+      <h2 class="section-title">Один взгляд — и всё понятно</h2>
+      <p class="section-sub" style="margin-bottom:0">Список ботов, статус и аптайм каждого — на одном экране, без переключения между чатами BotFather.</p>
+    </div>
+    <div class="mockup-panel reveal">
+      <div class="mockup-row">
+        <span class="mockup-dot ok"></span>
+        <span class="mockup-name">support_bot</span>
+        <span class="mockup-meta">99.98% · 214 мс</span>
+      </div>
+      <div class="mockup-row">
+        <span class="mockup-dot ok"></span>
+        <span class="mockup-name">orders_bot</span>
+        <span class="mockup-meta">99.91% · 340 мс</span>
+      </div>
+      <div class="mockup-row">
+        <span class="mockup-dot warn"></span>
+        <span class="mockup-name">newsletter_bot</span>
+        <span class="mockup-meta">97.20% · 1 280 мс</span>
+      </div>
+      <div class="mockup-row">
+        <span class="mockup-dot down"></span>
+        <span class="mockup-name">legacy_bot</span>
+        <span class="mockup-meta">не отвечает 4 мин</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== ORDER TEASER =============================== -->
+  <section class="order-teaser container reveal">
+    <div>
+      <h2 class="section-title" style="margin:0 0 8px">Нет своего бота? <span class="rainbow-text">Соберём</span> за вас</h2>
+      <p class="section-sub" style="margin:0">От простого бота-визитки до сложной логики с оплатами и интеграциями.</p>
+    </div>
+    <a href="/order/" class="btn btn-primary glass">Оставить заявку</a>
+  </section>
+
   <section class="pricing-cta container">
-    <h2 class="section-title" style="margin-inline:auto">Начните бесплатно, растите по мере нужды</h2>
-    <p class="section-sub" style="margin-inline:auto;text-align:center">Free — 1 бот навсегда. Платные тарифы — по числу ботов и объёму хранилища.</p>
-    <a href="/pricing.html" class="btn btn-primary glass">Смотреть тарифы</a>
+    <h2 class="section-title reveal" style="margin-inline:auto">Начните бесплатно, растите по мере нужды</h2>
+    <p class="section-sub reveal" style="margin-inline:auto;text-align:center">Free — 1 бот навсегда. Платные тарифы — по числу ботов и объёму хранилища.</p>
+    <a href="/pricing/" class="btn btn-primary glass reveal">Смотреть тарифы</a>
   </section>
 </main>
 
 <footer id="site-footer" class="site-footer"></footer>
 
 <script src="/js/nav-footer.js"></script>
+<script src="/js/analytics.js"></script>
+<script src="/js/site.js"></script>
 </body>
 </html>
