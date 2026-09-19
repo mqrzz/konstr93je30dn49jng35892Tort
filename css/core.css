@@ -490,6 +490,95 @@ body { padding-top: var(--header-h); }
 .order-form .btn { align-self: flex-start; margin-top: 4px; }
 .order-error { color: #ff8080; font-size: 13px; margin: 4px 0 0; min-height: 16px; }
 .order-page-section { padding: 40px 0 120px; }
+
+/* ============================ STATUS / SYSTEM PAGES ========================= */
+.status-page {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 120px 24px 80px;
+}
+.status-icon {
+  width: 96px; height: 96px; border-radius: 26px;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; margin-bottom: 36px;
+}
+.status-icon svg { width: 44px; height: 44px; }
+.status-icon .badge {
+  position: absolute; right: -6px; bottom: -6px;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--bg-soft); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+}
+.status-icon .badge svg { width: 15px; height: 15px; stroke: #ff6b6b; }
+.status-page h1 {
+  font-family: var(--font-heading); font-weight: 600;
+  font-size: clamp(1.9rem, 4.5vw, 2.6rem); letter-spacing: -0.02em;
+  max-width: 560px; margin: 0;
+}
+.status-page p.lead { color: var(--text-dim); max-width: 440px; margin: 18px 0 0; font-size: 15.5px; line-height: 1.6; }
+.status-cta {
+  margin-top: 32px; display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 6px 6px 22px; border-radius: 999px;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  color: var(--text); font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: background .15s ease;
+}
+.status-cta:hover { background: #1c1c19; }
+.status-cta .chev {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--text); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.status-cta .chev svg { width: 14px; height: 14px; stroke: #000; }
+.status-secondary { margin-top: 22px; font-size: 13.5px; color: var(--text-faint); border-bottom: 1px solid transparent; }
+.status-secondary:hover { color: var(--text-dim); border-color: var(--text-faint); }
+.status-logo { position: fixed; top: 24px; left: 24px; font-family: var(--font-heading); font-weight: 700; font-size: 15px; z-index: 5; }
+
+/* Bottom sheet (notify-me) */
+.sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 70; }
+.sheet-overlay.active { opacity: 1; pointer-events: auto; }
+.sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 71;
+  background: var(--bg-soft); border: 1px solid var(--border); border-bottom: none;
+  border-radius: 22px 22px 0 0; padding: 10px 24px 34px;
+  transform: translateY(100%); transition: transform .32s cubic-bezier(.32,.72,0,1);
+  max-width: 480px; margin: 0 auto;
+}
+.sheet.active { transform: translateY(0); }
+.sheet .grabber { width: 36px; height: 4px; border-radius: 2px; background: var(--border); margin: 0 auto 22px; }
+.sheet h2 { font-family: var(--font-heading); font-size: 1.15rem; text-align: left; margin: 0 0 6px; }
+.sheet p.hint { text-align: left; font-size: 13.5px; color: var(--text-dim); margin: 0 0 20px; }
+.sheet-field { display: flex; align-items: center; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 999px; padding: 4px 4px 4px 20px; margin-bottom: 14px; }
+.sheet-field input { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-size: 15px; padding: 13px 8px 13px 0; font-family: inherit; }
+.sheet-submit { width: 100%; padding: 14px; background: var(--text); color: #000; border: none; border-radius: 999px; font-weight: 600; font-size: 15px; cursor: pointer; }
+.sheet .confirm { display: none; align-items: center; gap: 10px; padding: 16px 0 4px; text-align: left; font-size: 14.5px; }
+.sheet.sent .sheet-field, .sheet.sent .sheet-submit, .sheet.sent p.hint { display: none; }
+.sheet.sent .confirm { display: flex; }
+
+/* Country availability page */
+.countries-page { padding: 100px 24px 80px; max-width: 620px; margin: 0 auto; }
+.countries-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; }
+.countries-back { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--text-faint); }
+.countries-back:hover { color: var(--text-dim); }
+.countries-back svg { width: 13px; height: 13px; }
+.countries-page h1 { font-family: var(--font-heading); font-size: clamp(1.5rem, 5vw, 1.9rem); font-weight: 600; margin: 0 0 8px; }
+.countries-page > p { color: var(--text-dim); font-size: 14.5px; margin: 0 0 28px; }
+.country-search {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 999px;
+  padding: 12px 18px; margin-bottom: 32px;
+}
+.country-search svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--text-faint); }
+.country-search input { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-size: 14.5px; font-family: inherit; }
+.country-section { margin-bottom: 32px; }
+.country-section-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.country-section-head h2 { font-family: var(--font-heading); font-size: 14px; font-weight: 600; }
+.country-section-head span { font-size: 12.5px; color: var(--text-faint); }
+.country-grid { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 20px; }
+.country-grid .c { padding: 7px 0; font-size: 13.5px; border-bottom: 1px solid var(--border); }
+.country-section.restricted .c { color: var(--text-faint); }
+.country-grid .c.hidden { display: none; }
+.country-empty { display: none; text-align: center; color: var(--text-faint); font-size: 14px; padding: 20px 0; }
 .order-success { display: none; text-align: center; padding: 40px 0; }
 .order-success.show { display: block; }
 .order-success .icon { width: 40px; height: 40px; margin: 0 auto 16px; color: #3ddc73; }
