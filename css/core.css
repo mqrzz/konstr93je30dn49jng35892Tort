@@ -211,6 +211,15 @@ body { padding-top: var(--header-h); }
 
 .header-actions { display: flex; align-items: center; gap: 8px; }
 
+.lang-switch { display: flex; align-items: center; gap: 2px; margin-right: 6px; }
+.lang-switch-item {
+  font-size: 12px; font-weight: 600; color: var(--text-faint);
+  padding: 6px 7px; border-radius: 8px;
+}
+.lang-switch-item:hover { color: var(--text-dim); background: rgba(255,255,255,0.05); }
+.lang-switch-item.is-active { color: var(--text); }
+@media (max-width: 980px) { .lang-switch { display: none; } }
+
 /* Mobile toggle + full-screen drawer */
 .nav-mobile-toggle {
   display: none; background: none; border: none; color: var(--text); cursor: pointer;
@@ -291,8 +300,11 @@ body { padding-top: var(--header-h); }
   animation: cube-spin 16s linear infinite;
 }
 @keyframes cube-spin {
-  from { transform: rotateX(-18deg) rotateY(0deg); }
-  to   { transform: rotateX(-18deg) rotateY(360deg); }
+  0%   { transform: rotateX(-18deg) rotateY(0deg); }
+  25%  { transform: rotateX(15deg) rotateY(90deg); }
+  50%  { transform: rotateX(-8deg) rotateY(180deg); }
+  75%  { transform: rotateX(20deg) rotateY(270deg); }
+  100% { transform: rotateX(-18deg) rotateY(360deg); }
 }
 .cube-face {
   position: absolute; inset: 0;
@@ -328,6 +340,7 @@ body { padding-top: var(--header-h); }
 
 /* ================================= HERO =================================== */
 .hero {
+  position: relative;
   min-height: calc(100vh - var(--header-h));
   max-height: 900px;
   display: grid;
@@ -335,7 +348,19 @@ body { padding-top: var(--header-h); }
   align-items: center;
   gap: 40px;
   padding: 40px 0;
+  overflow: hidden;
 }
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%; right: 8%;
+  width: 640px; height: 640px;
+  transform: translateY(-50%);
+  background: radial-gradient(circle, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.02) 45%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-content, .hero .cube-stage { position: relative; z-index: 1; }
 .hero-content { animation: fade-up .7s ease .1s both; }
 .hero h1 {
   font-family: var(--font-hero);
@@ -493,9 +518,9 @@ body { padding-top: var(--header-h); }
 
 /* ============================ STATUS / SYSTEM PAGES ========================= */
 .status-page {
-  min-height: 100vh;
+  min-height: calc(100vh - var(--header-h));
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 120px 24px 80px;
+  text-align: center; padding: 60px 24px;
 }
 .status-icon {
   width: 96px; height: 96px; border-radius: 26px;
@@ -512,8 +537,8 @@ body { padding-top: var(--header-h); }
 }
 .status-icon .badge svg { width: 15px; height: 15px; stroke: #ff6b6b; }
 .status-page h1 {
-  font-family: var(--font-heading); font-weight: 600;
-  font-size: clamp(1.9rem, 4.5vw, 2.6rem); letter-spacing: -0.02em;
+  font-family: var(--font-hero); font-weight: 400;
+  font-size: clamp(2.1rem, 5vw, 3rem); letter-spacing: -0.01em; line-height: 1.08;
   max-width: 560px; margin: 0;
 }
 .status-page p.lead { color: var(--text-dim); max-width: 440px; margin: 18px 0 0; font-size: 15.5px; line-height: 1.6; }
@@ -556,7 +581,7 @@ body { padding-top: var(--header-h); }
 .sheet.sent .confirm { display: flex; }
 
 /* Country availability page */
-.countries-page { padding: 100px 24px 80px; max-width: 620px; margin: 0 auto; }
+.countries-page { padding: 40px 24px 80px; max-width: 620px; margin: 0 auto; }
 .countries-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; }
 .countries-back { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--text-faint); }
 .countries-back:hover { color: var(--text-dim); }
