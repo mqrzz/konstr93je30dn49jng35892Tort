@@ -8,7 +8,7 @@
 (function () {
   const NAV = [
     {
-      label: 'Продукт',
+      label: 'Продукт', key: 'nav.product',
       panel: [
         { href: '/#bots', title: 'Управление ботами', desc: 'Имя, фото, меню команд — без BotFather' },
         { href: '/#monitoring', title: 'Мониторинг', desc: 'Аптайм, скорость ответа, диагностика вебхука' },
@@ -16,16 +16,16 @@
       ],
     },
     {
-      label: 'Компания',
+      label: 'Компания', key: 'nav.company',
       panel: [
         { href: '/about/', title: 'О нас' },
         { href: '/blog/', title: 'Блог' },
         { href: '/careers/', title: 'Карьера' },
       ],
     },
-    { label: 'Заказать бота', href: '/order/' },
-    { label: 'Документация', href: '/docs/' },
-    { label: 'Тарифы', href: '/pricing/' },
+    { label: 'Заказать бота', key: 'nav.order_bot', href: '/order/' },
+    { label: 'Документация', key: 'nav.docs', href: '/docs/' },
+    { label: 'Тарифы', key: 'nav.pricing', href: '/pricing/' },
   ];
 
   const FOOTER = {
@@ -67,7 +67,7 @@
     ],
   };
 
-  const LOGO_SVG = `<a href="/" class="logo-link" aria-label="ovyrn"><svg viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="34" font-family="Outfit, sans-serif" font-size="30" font-weight="600" fill="#f4f2ec">ovyrn</text></svg></a>`;
+  const LOGO_SVG = `<a href="/" class="logo-link" aria-label="ovyrn"><img src="/assets/logo.svg" alt="ovyrn" style="height:22px;width:auto;display:block"></a>`;
 
   function renderHeader() {
     const el = document.getElementById('site-header');
@@ -78,7 +78,7 @@
         return `
         <li class="nav-item">
           <button class="nav-trigger" aria-expanded="false" aria-controls="nav-panel-${i}" data-nav-trigger="${i}">
-            ${item.label}
+            <span data-i18n="${item.key}">${item.label}</span>
             <svg class="chev icon" style="width:12px;height:12px"><use href="/assets/icons.svg#icon-chevron-down"></use></svg>
           </button>
           <div class="nav-panel glass" id="nav-panel-${i}" role="menu">
@@ -86,7 +86,7 @@
           </div>
         </li>`;
       }
-      return `<li class="nav-item"><a class="nav-link" href="${item.href}">${item.label}</a></li>`;
+      return `<li class="nav-item"><a class="nav-link" href="${item.href}" data-i18n="${item.key}">${item.label}</a></li>`;
     }).join('');
 
     el.innerHTML = `
@@ -96,8 +96,9 @@
           <ul class="nav-menu">${items}</ul>
         </nav>
         <div class="header-actions">
-          <a href="/login/" class="btn btn-ghost">Войти</a>
-          <a href="/signup/" class="btn btn-primary glass">Начать</a>
+          ${renderLangSwitch()}
+          <a href="/login/" class="btn btn-ghost" data-i18n="nav.login">Войти</a>
+          <a href="/signup/" class="btn btn-primary glass" data-i18n="nav.signup">Начать</a>
           <button class="nav-mobile-toggle" aria-label="Открыть меню" id="mobileMenuToggle">
             <svg class="icon"><use href="/assets/icons.svg#icon-menu"></use></svg>
           </button>
@@ -218,10 +219,20 @@
     els.forEach(el => io.observe(el));
   }
 
+  function renderLangSwitch() {
+    const langs = [['', 'RU'], ['/en/', 'EN'], ['/fr/', 'FR'], ['/de/', 'DE']];
+    const current = window.ovyrnI18n ? window.ovyrnI18n.lang : 'ru';
+    return `<div class="lang-switch">${langs.map(([prefix, code]) => {
+      const active = (code.toLowerCase() === current) ? ' is-active' : '';
+      return `<a href="${prefix || '/'}" class="lang-switch-item${active}">${code}</a>`;
+    }).join('')}</div>`;
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     renderHeader();
     renderFooter();
     renderMobileDrawer();
     initReveal();
+    document.dispatchEvent(new CustomEvent('ovyrn:chrome-rendered'));
   });
 })();
