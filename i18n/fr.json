@@ -1,0 +1,55 @@
+{
+  "meta.title": "ovyrn — tableau de bord et supervision pour bots Telegram",
+  "meta.description": "Gérez vos bots Telegram existants, surveillez leur disponibilité et stockez des fichiers directement dans Telegram — sans serveur à vous.",
+
+  "hero.title": "Un tableau de bord pour des bots<br>qui fonctionnent déjà",
+  "hero.lead": "Connectez un bot Telegram existant, surveillez sa disponibilité et son webhook, et stockez des fichiers directement dans Telegram — sans serveur de stockage.",
+  "hero.cta_primary": "Commencer gratuitement",
+  "hero.cta_secondary": "Documentation",
+
+  "trust.text": "Construit en public — avancement et choix techniques sur le <a href=\"/blog/\">blog</a>",
+
+  "steps.title": "Trois étapes avant votre premier rapport",
+  "steps.sub": "Aucun nouveau code dans votre bot — le panneau fonctionne au-dessus de l'existant.",
+  "steps.1.title": "Collez le token",
+  "steps.1.text": "Le token de @BotFather — comme pour toute autre intégration. Les clés sont chiffrées, vous seul y avez accès.",
+  "steps.2.title": "Choisissez un intervalle de vérification",
+  "steps.2.text": "De toutes les 10 minutes sur le plan gratuit à toutes les 30 secondes sur Pro — vous décidez de la rapidité d'alerte.",
+  "steps.3.title": "Recevez des alertes",
+  "steps.3.text": "Email ou message Telegram dès que votre bot cesse de répondre ou que le webhook renvoie une erreur.",
+
+  "features.title": "Connectez un bot <span class=\"rainbow-text\">en 10 minutes</span>",
+  "features.sub": "Plus besoin de passer par BotFather à chaque changement de nom ou de menu de commandes.",
+  "features.1.title": "Gestion du bot",
+  "features.1.text": "Nom, description, photo et menu de commandes — directement depuis le panneau, avec aperçu du chat en direct.",
+  "features.2.title": "Supervision 24/7",
+  "features.2.text": "Vérification de disponibilité, temps de réponse et diagnostic du webhook — soyez informé avant vos utilisateurs.",
+  "features.3.title": "Stockage dans Telegram",
+  "features.3.text": "Les fichiers arrivent dans un chat de service et restent stockés côté Telegram gratuitement — des limites généreuses sans serveur à vous.",
+  "features.4.title": "Notifications",
+  "features.4.text": "Un email ou un message Telegram dès que votre bot cesse de répondre.",
+  "features.5.title": "Diagnostic du webhook",
+  "features.5.text": "Voyez un certificat bloqué ou des erreurs de livraison via getWebhookInfo sans requête manuelle.",
+  "features.6.title": "N'importe quel bot",
+  "features.6.text": "Peu importe le langage ou qui l'a créé — un token BotFather suffit.",
+
+  "mockup.title": "Un coup d'œil, et tout est clair",
+  "mockup.sub": "Vos bots, leur statut et leur disponibilité — sur un seul écran, sans changer de conversation BotFather.",
+  "mockup.down_meta": "ne répond plus depuis 4 min",
+
+  "order_teaser.title": "Pas encore de bot ? <span class=\"rainbow-text\">On le crée</span> pour vous",
+  "order_teaser.sub": "D'un simple bot vitrine à une logique complexe avec paiements et intégrations.",
+  "order_teaser.cta": "Envoyer une demande",
+
+  "pricing_cta.title": "Commencez gratuitement, évoluez selon vos besoins",
+  "pricing_cta.sub": "Free — 1 bot pour toujours. Les plans payants évoluent avec le nombre de bots et le stockage.",
+  "pricing_cta.cta": "Voir les tarifs",
+
+  "nav.product": "Produit",
+  "nav.company": "Entreprise",
+  "nav.order_bot": "Commander un bot",
+  "nav.docs": "Documentation",
+  "nav.pricing": "Tarifs",
+  "nav.login": "Connexion",
+  "nav.signup": "Commencer"
+}
