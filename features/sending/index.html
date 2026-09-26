@@ -15,7 +15,7 @@
 <div id="site-header"></div>
 <main>
 <section class="pg" style="padding-bottom:60px"><div class="wrap"><h1 class="grad" data-i18n="sen.h1">Send email that <span class="rainbow">lands</span></h1><p data-i18n="sen.lead">Transactional email from your own domain through one API call. Signed, queued, retried and fully logged, so you always know what happened to every message.</p><div class="acts" style="justify-content:center"><a class="btn" href="/signup/" data-i18n="cta.start">Get started</a><a class="btn ghost" href="/docs/" data-i18n="cta.docs">Documentation</a></div></div></section><section class="sec"><div class="wrap split"><div class="rv"><span class="eyebrow" data-i18n="sen.a.tag">Send</span><h2 class="grad" data-i18n="sen.a.h">One request. Signed and queued.</h2><p class="sub" data-i18n="sen.a.p">Send a message with a single HTTP call and your API key. geserd checks that the sender domain is verified, signs the message with DKIM and places it in the queue, so your application never waits for the receiving server to answer. The response contains an id that you can use to look up the message and its events at any time.</p><ul class="bl"><li data-i18n="sen.a.b1">Plain JSON with HTML and text bodies</li><li data-i18n="sen.a.b2">Reply-To, custom headers and attachments</li><li data-i18n="sen.a.b3">An id you can look up later</li></ul></div><div class="rv"><div class="mock"><div class="mh"><i></i><i></i><i></i><span>POST /api/emails</span></div><pre><span class="k">curl</span> -X POST /api/emails \
-  -H <span class="s">"Authorization: Bearer ov_xxxxxxxx"</span> \
+  -H <span class="s">"Authorization: Bearer gs_xxxxxxxx"</span> \
   -d <span class="s">'{"from":"hi@yourdomain.com",
        "to":"user@example.com",
        "subject":"Welcome",

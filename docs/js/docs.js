@@ -106,16 +106,22 @@ function renderActions(){
  });
 }
 
-function renderMobile(){
+function renderTopbar(){
+ var top=document.getElementById("docTop");
  var dside=document.getElementById("dside");
- var docsRoot=document.querySelector(".docs");
- if(!dside||!docsRoot||document.getElementById("dToolbar"))return;
- var bar=document.createElement("div");
- bar.className="dtoolbar";
- bar.id="dToolbar";
- bar.innerHTML='<button id="dHamburger" type="button" aria-label="'+t("doc.menu","Docs menu")+'">'+ICON_MENU+'</button>'+
-   '<div class="dsearch" role="button" tabindex="0">'+ICON_SEARCH+"<span>"+t("doc.search","Search docs")+"</span></div>";
- docsRoot.parentNode.insertBefore(bar,docsRoot);
+ if(!top||!dside)return;
+ var onApi=p.indexOf("/docs/api/")===0;
+ top.innerHTML=
+   '<a class="dlogo" href="/"><img src="/assets/logo.svg" alt="geserd"></a>'+
+   '<nav class="dtabs">'+
+     '<a href="/docs/"'+(onApi?"":' class="on"')+'>'+t("doc.tab.docs","Documentation")+'</a>'+
+     '<a href="/docs/api/"'+(onApi?' class="on"':"")+'>'+t("doc.tab.api","API Reference")+'</a>'+
+   '</nav>'+
+   '<button class="dhamburger" id="dHamburger" type="button" aria-label="'+t("doc.menu","Docs menu")+'">'+ICON_MENU+'</button>'+
+   '<div class="dside-actions">'+
+     '<a class="dsignin" href="/login/">'+t("nav.login","Log in")+'</a>'+
+     '<a class="dget" href="/signup/">'+t("nav.start","Get started")+'</a>'+
+   '</div>';
  var backdrop=document.createElement("div");
  backdrop.className="dbackdrop";
  backdrop.id="dBackdrop";
@@ -128,7 +134,7 @@ function renderMobile(){
  document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
 }
 
-function m(){renderSidebar();renderToc();renderActions();renderMobile()}
+function m(){renderSidebar();renderToc();renderActions();renderTopbar()}
 var go=function(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",m):m()};
 (window.GESERD&&GESERD.ready?GESERD.ready:Promise.resolve()).then(go);
 })();

@@ -1,4 +1,5 @@
 /* geserd.css — single stylesheet for the whole site */
+html:not(.i18n-ready) body{visibility:hidden}
 :root{--bg:#000;--fg:#eee;--fg2:#b0b4ba;--fg3:#7b7f86;--line:#26292d;--card:#0b0b0c;--acc:#9281f7;
 --font-d:'Fraunces',Georgia,serif;--font-b:'Inter',system-ui,sans-serif;--font-m:'Geist Mono',ui-monospace,monospace;
 --glass:linear-gradient(104deg,rgba(253,253,253,.05) 5%,rgba(240,240,228,.1) 100%);--hh:58px}
@@ -44,13 +45,9 @@ a{color:inherit;text-decoration:none}img,svg{display:block;max-width:100%}
 h1{font:400 clamp(3rem,7vw,6rem)/1 var(--font-d);letter-spacing:-.02em;padding-bottom:12px}
 .lead{max-width:30rem;margin:12px 0 32px;color:var(--fg2);font-size:1.125rem}
 .acts{display:flex;gap:16px;flex-wrap:wrap}
-.cube-s{width:340px;height:340px;perspective:1100px;display:grid;place-items:center;flex:none}
-.cube{position:relative;width:150px;height:150px;transform-style:preserve-3d;animation:spin 18s linear infinite}
-.cube div{position:absolute;inset:0;border:1px solid rgba(255,255,255,.35);border-radius:14px;background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.02) 60%,rgba(146,129,247,.16));backdrop-filter:blur(2px);display:grid;place-items:center;font:600 34px var(--font-d);color:rgba(255,255,255,.75)}
-.cube div:nth-child(1){transform:translateZ(75px)}.cube div:nth-child(2){transform:rotateY(180deg) translateZ(75px)}
-.cube div:nth-child(3){transform:rotateY(90deg) translateZ(75px)}.cube div:nth-child(4){transform:rotateY(-90deg) translateZ(75px)}
-.cube div:nth-child(5){transform:rotateX(90deg) translateZ(75px)}.cube div:nth-child(6){transform:rotateX(-90deg) translateZ(75px)}
-.cube:after{content:"";position:absolute;inset:38px;transform-style:preserve-3d;border:1px solid rgba(146,129,247,.7);border-radius:8px;animation:spin2 11s linear infinite;background:rgba(146,129,247,.15)}
+.cube-s{width:340px;height:340px;display:grid;place-items:center;flex:none}
+.cube-s svg{animation:cube-float 6s ease-in-out infinite}
+@keyframes cube-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes spin{0%{transform:rotateX(-20deg) rotateY(0)}50%{transform:rotateX(160deg) rotateY(180deg)}100%{transform:rotateX(340deg) rotateY(360deg)}}
 @keyframes spin2{to{transform:rotateX(-360deg) rotateY(-360deg) rotateZ(180deg)}}
 @media(max-width:860px){.hero{max-height:none;padding:40px 0}.hero .wrap{flex-direction:column-reverse;text-align:center}.acts{justify-content:center}.cube-s{width:240px;height:240px}h1,.lead{margin-inline:auto}}
@@ -192,3 +189,31 @@ body.auth-body{display:flex;flex-direction:column;min-height:100vh;position:rela
 .auth-region{text-align:center;font-size:12px;color:var(--fg3);margin-top:16px;line-height:1.5}
 .auth-err{text-align:center;font-size:13px;color:#ff6b6b;margin-top:12px}
 @media(max-width:480px){.auth-wrap{padding:40px 16px}}
+
+/* === docs light theme (matches Anton's Resend reference — docs run on their own light shell,
+   independent of the site's dark theme, exactly like on the real Resend site) === */
+.doclight{--bg:#fff;--fg:#141414;--fg2:#55565b;--fg3:#8b8c90;--line:#e7e7ea;--card:#f6f6f7;background:#fff;color:#141414;min-height:100vh}
+.doctop{display:flex;align-items:center;gap:20px;padding:14px 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:40}
+.doctop .dlogo{display:flex;align-items:center;gap:8px;flex:none}
+.doctop .dlogo img{height:18px;filter:invert(1) brightness(0)}
+.doctop .dtabs{display:flex;gap:4px;flex:1}
+.doctop .dtabs a{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:8px;font:500 13.5px var(--font-b);color:var(--fg2)}
+.doctop .dtabs a:hover{background:#f4f4f5;color:#141414}
+.doctop .dtabs a.on{background:#f1f1f2;color:#141414}
+.doctop .dside-actions{display:flex;align-items:center;gap:10px;flex:none}
+.doctop .dsignin{font:500 13.5px var(--font-b);color:var(--fg2);padding:7px 12px;border-radius:8px}
+.doctop .dsignin:hover{background:#f4f4f5;color:#141414}
+.doctop .dget{font:600 13.5px var(--font-b);background:#141414;color:#fff;padding:8px 14px;border-radius:100px}
+.doctop .dhamburger{display:none;width:34px;height:34px;flex:none;border:1px solid var(--line);border-radius:8px;background:#fff;color:#141414;align-items:center;justify-content:center}
+@media(max-width:1000px){.doctop .dtabs{display:none}.doctop .dhamburger{display:flex}}
+.doclight .dgroup>.dhead{color:var(--fg2)}
+.doclight .dgroup>.dhead:hover{background:#f2f2f3;color:#141414}
+.doclight .dtoc a.on{color:#141414;font-weight:500}
+.doclight .dactions button,.doclight .dactions a{background:#fff;color:var(--fg2);border-color:var(--line)}
+.doclight .dactions button:hover,.doclight .dactions a:hover{color:#141414;border-color:#cbcbce}
+.doclight .dactions button.copied{color:#1a8f4c;border-color:#bfe6cf}
+.doclight .dlink{color:#141414;text-decoration:underline;text-underline-offset:2px}
+.doclight .dbackdrop{background:rgba(20,20,20,.35)}
+.doclight .dside{background:#fff}
+.doclight .dside.open{background:#fff;color:#141414}
+.doclight .dtoolbar{display:none !important}

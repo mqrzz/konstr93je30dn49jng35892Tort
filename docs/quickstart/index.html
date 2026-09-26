@@ -12,12 +12,12 @@
 <link rel="stylesheet" href="/css/geserd.css">
 </head>
 <body>
-<div id="site-header"></div>
+<div class="doclight" id="docLight"><div class="doctop" id="docTop"></div>
 <div class="docs"><aside class="dside" id="dside"></aside><article class="dbody"><h1 class="grad" data-i18n="doc.qs.h1">Quickstart</h1><p data-i18n="doc.qs.lead">Add a domain and send your first email in a few minutes.</p><h2 data-i18n="doc.qs.h1a">1. Add a domain</h2><p data-i18n="doc.qs.p1a">In the dashboard, go to Domains and add the domain or subdomain you want to send and receive from. We recommend a subdomain such as mail.yourdomain.com to keep transactional reputation separate from your main domain.</p><h2 data-i18n="doc.qs.h1b">2. Add the DNS records</h2><p data-i18n="doc.qs.p1b">The dashboard shows the exact DKIM, SPF and MX records for your domain. Add them at your DNS provider, then click verify. Most providers propagate changes within minutes, though it can occasionally take longer.</p><h2 data-i18n="doc.qs.h1c">3. Create an API key</h2><p data-i18n="doc.qs.p1c">In API keys, create a new key and store it somewhere safe. It is shown once, in full, at creation time, and never again after that.</p><h2 data-i18n="doc.qs.h1d">4. Send an email</h2><div class="mock"><div class="mh"><i></i><i></i><i></i><span>POST /api/emails</span></div><pre><span class="k">curl</span> -X POST https://&lt;your-host&gt;/api/emails \
-  -H <span class="s">"Authorization: Bearer ov_xxxxxxxx"</span> \
+  -H <span class="s">"Authorization: Bearer gs_xxxxxxxx"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
   -d <span class="s">'{"from":"hi@yourdomain.com","to":"user@example.com",
-       "subject":"Hello","html":"&lt;strong&gt;it works&lt;/strong&gt;"}'</span></pre></div><p data-i18n="doc.qs.p1d">Until your domain is verified, new accounts can only send to their own account email, as a sandbox. Once verification succeeds, you can send to any address.</p><h2 data-i18n="doc.qs.h1e">5. Receive email</h2><p data-i18n="doc.qs.p1e">Point the MX record of your domain at your geserd host and add a webhook endpoint in the dashboard. Incoming mail arrives at your endpoint as an email.received event, described in the API reference.</p></article><aside class="dtoc" id="dtoc"></aside></div>
+       "subject":"Hello","html":"&lt;strong&gt;it works&lt;/strong&gt;"}'</span></pre></div><p data-i18n="doc.qs.p1d">Until your domain is verified, new accounts can only send to their own account email, as a sandbox. Once verification succeeds, you can send to any address.</p><h2 data-i18n="doc.qs.h1e">5. Receive email</h2><p data-i18n="doc.qs.p1e">Point the MX record of your domain at your geserd host and add a webhook endpoint in the dashboard. Incoming mail arrives at your endpoint as an email.received event, described in the API reference.</p></article><aside class="dtoc" id="dtoc"></aside></div></div>
 <div id="site-footer"></div>
 <script src="/js/boot.js"></script>
 <script src="/docs/js/docs.js"></script>

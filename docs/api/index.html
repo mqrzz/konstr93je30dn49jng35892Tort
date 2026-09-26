@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="/css/geserd.css">
 </head>
 <body>
-<div id="site-header"></div>
+<div class="doclight" id="docLight"><div class="doctop" id="docTop"></div>
 <div class="docs"><aside class="dside" id="dside"></aside><article class="dbody"><h1 class="grad" data-i18n="doc.api.h1">API reference</h1><p data-i18n="doc.api.lead">Every endpoint, its fields, and the shape of its response.</p><h2 id="send" data-i18n="doc.api.h2send">Send email</h2><p data-i18n="doc.api.psend"><code>POST /api/emails</code>. Requires a from address on a verified domain, one or more recipients, a subject, and an html or text body.</p><div class="mock"><div class="mh"><i></i><i></i><i></i><span>Fields</span></div><pre><span class="k">from</span>          string, required
 <span class="k">to</span>            string or array, required
 <span class="k">subject</span>       string, required
@@ -21,7 +21,7 @@
 <span class="k">reply_to</span>      string
 <span class="k">in_reply_to</span>   string (id of a received message)</pre></div><div class="mock"><div class="mh"><i></i><i></i><i></i><span>Response</span></div><pre>202 { "id": "8f2c1e0a-4b7d", "status": "queued" }</pre></div><h2 id="domains" data-i18n="doc.api.h2dom">Domains</h2><p data-i18n="doc.api.pdom"><code>POST /api/domains</code> adds a domain and generates its DKIM key pair. <code>GET /api/domains/:id</code> returns its status and DNS records. <code>POST /api/domains/:id/verify</code> checks DNS and updates the status.</p><h2 id="receiving" data-i18n="doc.api.h2rec">Receiving</h2><p data-i18n="doc.api.prec">Mail sent to a verified domain is delivered to your webhook as an email.received event. Reply by sending a new email with in_reply_to set to the received message's id.</p><div class="mock"><div class="mh"><i></i><i></i><i></i><span>email.received</span></div><pre>{ "type": "email.received",
   "data": { "id": "...", "from": "a@b.com", "to": ["hi@yourdomain.com"],
-            "subject": "Re: Hello", "text": "...", "html": "..." } }</pre></div></article><aside class="dtoc" id="dtoc"></aside></div>
+            "subject": "Re: Hello", "text": "...", "html": "..." } }</pre></div></article><aside class="dtoc" id="dtoc"></aside></div></div>
 <div id="site-footer"></div>
 <script src="/js/boot.js"></script>
 <script src="/docs/js/docs.js"></script>

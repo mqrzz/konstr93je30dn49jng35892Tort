@@ -16,12 +16,28 @@
 <main>
 <section class="hero"><div class="wrap">
   <div>
-    <a class="badge" href="/signup/"><span><span data-i18n="badge">Sending and receiving, one API </span><svg width="12" height="12" viewBox="0 0 24 24"><path fill="currentColor" d="M10.7 6.3a1 1 0 1 0-1.4 1.4l3.6 3.6a1 1 0 0 1 0 1.4l-3.6 3.6a1 1 0 0 0 1.4 1.4l5-5a1 1 0 0 0 0-1.4z"/></svg></span></a>
     <h1 class="grad" data-i18n="hero.title">Send and <span class="rainbow">receive</span><br>email, simply</h1>
     <p class="lead" data-i18n="hero.lead">Deliver transactional email from your own domain and handle inbound mail you can reply to, over one clean API.</p>
     <div class="acts"><a class="btn" href="/signup/" data-i18n="cta.start">Get started</a><a class="btn ghost" href="/docs/" data-i18n="cta.docs">Documentation</a></div>
   </div>
-  <div class="cube-s" aria-hidden="true"><div class="cube"><div>o</div><div>v</div><div>y</div><div>r</div><div>n</div><div>@</div></div></div>
+  <div class="cube-s" aria-hidden="true">
+    <svg viewBox="0 0 320 320" width="100%" height="100%">
+      <defs>
+        <linearGradient id="cubeTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3a3a3d"/><stop offset="100%" stop-color="#232326"/></linearGradient>
+        <linearGradient id="cubeLeft" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c1c1e"/><stop offset="100%" stop-color="#0a0a0b"/></linearGradient>
+        <linearGradient id="cubeRight" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#141416"/><stop offset="100%" stop-color="#050506"/></linearGradient>
+      </defs>
+      <g stroke="rgba(255,255,255,.07)" stroke-width="1">
+        <polygon points="160,30 260,85 160,140 60,85" fill="url(#cubeTop)"/>
+        <polygon points="60,85 160,140 160,270 60,215" fill="url(#cubeLeft)"/>
+        <polygon points="260,85 260,215 160,270 160,140" fill="url(#cubeRight)"/>
+      </g>
+      <g stroke="rgba(255,255,255,.05)" stroke-width="1" fill="none">
+        <line x1="110" y1="57" x2="110" y2="242"/><line x1="210" y1="57" x2="210" y2="242"/>
+        <line x1="60" y1="150" x2="160" y2="205"/><line x1="160" y1="205" x2="260" y2="150"/>
+      </g>
+    </svg>
+  </div>
 </div></section>
 
 <section class="sec"><div class="wrap"><div class="strip rv">
@@ -40,10 +56,10 @@
 </div></section>
 
 <section class="sec"><div class="wrap">
-  <h2 class="grad rv" data-i18n="s2.title">Integrate <span class="rainbow">tonight</span></h2>
+  <h2 class="grad rv" data-i18n="s2.title">Integrate tonight</h2>
   <p class="sub rv" data-i18n="s2.sub">A plain HTTP API. No SDK required to get the first message out.</p>
   <pre class="code rv"><span class="k">curl</span> -X POST https://<span id="apihost">geserd.antviz.ru</span>/api/emails \
-  -H <span class="s">"Authorization: Bearer ov_xxxxxxxx"</span> \
+  -H <span class="s">"Authorization: Bearer gs_xxxxxxxx"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
   -d <span class="s">'{"from":"hi@yourdomain.com","to":"user@example.com","subject":"Hello","html":"&lt;strong&gt;it works&lt;/strong&gt;"}'</span></pre>
 </div></section>
@@ -54,7 +70,7 @@
 </div></section>
 </main>
 <div id="site-footer"></div>
-<script>document.getElementById("apihost").textContent=location.host||"geserd.antviz.ru"</script>
 <script src="/js/boot.js"></script>
+<script>document.getElementById("apihost").textContent=location.host||"geserd.antviz.ru"</script>
 </body>
 </html>

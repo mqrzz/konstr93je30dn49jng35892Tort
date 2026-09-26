@@ -20,7 +20,7 @@
 <section class="pg"><div class="wrap"><h1 class="grad" data-i18n="co.t">Availability by country</h1><p data-i18n="co.p">geserd is currently not available in these countries:</p></div></section><div class="wrap" style="padding-bottom:100px"><div class="chips" id="chips"></div></div>
 </main>
 <div id="site-footer"></div>
-<script>(window.GESERD.ready||Promise.resolve()).then(function(){var O=GESERD,n;try{n=new Intl.DisplayNames([O.lang||"en"],{type:"region"})}catch(e){n={of:function(c){return c}}}document.getElementById("chips").innerHTML=O.blocked.map(function(c){return"<span>"+n.of(c)+"</span>"}).sort().join("")})</script>
 <script src="/js/boot.js"></script>
+<script>(window.GESERD.ready||Promise.resolve()).then(function(){var O=GESERD,n;try{n=new Intl.DisplayNames([O.lang||"en"],{type:"region"})}catch(e){n={of:function(c){return c}}}document.getElementById("chips").innerHTML=O.blocked.map(function(c){return"<span>"+n.of(c)+"</span>"}).sort().join("")})</script>
 </body>
 </html>
