@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Errors — Docs — geserd</title>
+<meta name="description" content="How geserd reports problems, and what each error means.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css">
+</head>
+<body>
+<div id="site-header"></div>
+<div class="docs"><aside class="dside" id="dside"></aside><article class="dbody"><h1 class="grad" data-i18n="doc.err.h1">Errors</h1><p data-i18n="doc.err.lead">How geserd reports problems, and what each error means.</p><h2 data-i18n="doc.err.h2a">Error format</h2><p data-i18n="doc.err.p2a">Every error response is JSON with an error field identifying the problem, and the HTTP status code reflects the category of failure: 4xx for something wrong with the request, 5xx for a problem on our side.</p><div class="mock"><div class="mh"><i></i><i></i><i></i><span>Error response</span></div><pre>{ "error": "invalid_domain" }</pre></div><h2 data-i18n="doc.err.h2b">Common codes</h2><div class="mock" style="overflow:auto"><table class="tb"><tr><th>HTTP</th><th>error</th><th data-i18n="doc.err.colmeaning">Meaning</th></tr><tr><td>401</td><td><code>unauthorized</code></td><td data-i18n="doc.err.row0">Missing or invalid API key</td></tr><tr><td>403</td><td><code>plan_limit</code></td><td data-i18n="doc.err.row1">The action would exceed your plan's limit, for example the number of domains</td></tr><tr><td>404</td><td><code>not_found</code></td><td data-i18n="doc.err.row2">The resource does not exist or does not belong to your account</td></tr><tr><td>409</td><td><code>exists</code></td><td data-i18n="doc.err.row3">A resource with this value already exists, for example a duplicate domain</td></tr><tr><td>422</td><td><code>invalid_domain</code></td><td data-i18n="doc.err.row4">The domain name is not a valid, syntactically correct domain</td></tr><tr><td>429</td><td><code>rate_limited</code></td><td data-i18n="doc.err.row5">Too many requests in a short time; slow down and retry</td></tr><tr><td>500</td><td><code>server_error</code></td><td data-i18n="doc.err.row6">Something failed on our side; safe to retry</td></tr></table></div><h2 data-i18n="doc.err.h2c">Retrying</h2><p data-i18n="doc.err.p2c">For 429 and 5xx responses, wait and retry with backoff. For 4xx responses other than 429, fix the request before retrying, since repeating the same invalid request will just fail again.</p></article><aside class="dtoc" id="dtoc"></aside></div>
+<div id="site-footer"></div>
+<script src="/js/boot.js"></script>
+<script src="/docs/js/docs.js"></script>
+</body>
+</html>

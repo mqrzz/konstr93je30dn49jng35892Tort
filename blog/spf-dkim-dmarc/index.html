@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SPF, DKIM and DMARC, explained without the acronyms — geserd</title>
+<meta name="description" content="Three records stand between your email and the spam folder. Here is what each one actually does, in plain language.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="pg" style="padding-bottom:20px;text-align:left"><div class="wrap"><span class="eyebrow">Sending . 2026-09-24</span><h1 class="grad" data-i18n="bl.spf-dkim-dmarc.title">SPF, DKIM and DMARC, explained without the acronyms</h1><p data-i18n="bl.spf-dkim-dmarc.lead">Three records stand between your email and the spam folder. Here is what each one actually does, in plain language.</p></div></section><section><div class="prose"><h2 data-i18n="bp_spf-dkim-dmarc.spf.h">SPF: who is allowed to send</h2><p data-i18n="bp_spf-dkim-dmarc.spf.p0">SPF, or Sender Policy Framework, is a DNS record that lists which servers are allowed to send email for your domain. When a receiving server gets a message claiming to be from yourdomain.com, it checks the SPF record for that domain and compares it against the server that actually sent the message. If the sending server is not on the list, the message looks suspicious, even if nothing else is wrong with it.</p><p data-i18n="bp_spf-dkim-dmarc.spf.p1">An SPF record for geserd looks like <code>v=spf1 ip4:203.0.113.10 ~all</code>, meaning mail can come from that one IP address, and anything else should be treated with a soft fail rather than rejected outright. You only need one SPF record per domain, and if you already send mail from another provider, geserd's IP needs to be added to the existing record rather than replacing it.</p><h2 data-i18n="bp_spf-dkim-dmarc.dkim.h">DKIM: proof the message was not altered</h2><p data-i18n="bp_spf-dkim-dmarc.dkim.p0">DKIM, or DomainKeys Identified Mail, adds a digital signature to every message using a private key that only the sending server holds. The receiving server looks up the matching public key in your DNS and checks that the signature still matches the message. If even a single character changed in transit, the signature breaks and the check fails.</p><p data-i18n="bp_spf-dkim-dmarc.dkim.p1">This is why geserd generates a separate 2048-bit key pair for every domain you verify: the private key signs your outgoing mail, and the public key is published as a TXT record so any receiving server can verify it. You never handle the private key yourself, and it is encrypted at rest on our side, so a signature can only ever be produced by geserd sending on your behalf.</p><h2 data-i18n="bp_spf-dkim-dmarc.dmarc.h">DMARC: what to do when a check fails</h2><p data-i18n="bp_spf-dkim-dmarc.dmarc.p0">SPF and DKIM can each fail independently without anyone being told. DMARC ties them together: it tells receiving servers what to do when a message claiming to be from your domain fails SPF, DKIM, or both, and it gives you an address to receive reports about it. A DMARC record with <code>p=none</code> asks servers to do nothing special yet, just report; <code>p=quarantine</code> asks them to send failing mail to spam; <code>p=reject</code> asks them to refuse it outright.</p><p data-i18n="bp_spf-dkim-dmarc.dmarc.p1">We recommend starting with <code>p=none</code> so you can watch the reports for a few weeks and confirm every legitimate sending source, including geserd, passes cleanly, before moving to quarantine and eventually reject. Tightening DMARC too early, before your setup is fully correct, is the most common way real customer email quietly disappears.</p><p><a href="/blog/" style="color:#fff" data-i18n="bp_spf-dkim-dmarc.back">Back to blog</a></p></div></section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/boot.js"></script>
+</body>
+</html>

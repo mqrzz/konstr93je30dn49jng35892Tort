@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 258 90" role="img" aria-label="geserd">
+  <defs>
+    <linearGradient id="geserdMetal" x1="10%" y1="90%" x2="85%" y2="5%">
+      <stop offset="0%" stop-color="#9a9a9a"/>
+      <stop offset="35%" stop-color="#e2e2e2"/>
+      <stop offset="55%" stop-color="#ffffff"/>
+      <stop offset="75%" stop-color="#d4d4d4"/>
+      <stop offset="100%" stop-color="#a8a8a8"/>
+    </linearGradient>
+  </defs>
+  <text x="4" y="66" font-family="Fraunces, Georgia, serif" font-weight="600" font-size="68" letter-spacing="-1.5" fill="url(#geserdMetal)">Geserd</text>
+</svg>

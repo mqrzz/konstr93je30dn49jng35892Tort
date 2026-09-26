@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bounces, complaints and suppression lists, and why they matter — geserd</title>
+<meta name="description" content="A high bounce rate is the fastest way to make every mailbox provider distrust your domain. Here is how geserd tracks it and what you should do about it.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+<section class="pg" style="padding-bottom:20px;text-align:left"><div class="wrap"><span class="eyebrow">Deliverability . 2026-09-24</span><h1 class="grad" data-i18n="bl.bounces-and-suppression.title">Bounces, complaints and suppression lists, and why they matter</h1><p data-i18n="bl.bounces-and-suppression.lead">A high bounce rate is the fastest way to make every mailbox provider distrust your domain. Here is how geserd tracks it and what you should do about it.</p></div></section><section><div class="prose"><h2 data-i18n="bp_bounces-and-suppression.hard.h">Hard bounces mean stop immediately</h2><p data-i18n="bp_bounces-and-suppression.hard.p0">A hard bounce means the receiving server permanently rejected the message, most often because the address does not exist. Continuing to send to an address like that after the first bounce does real damage: mailbox providers watch how often a sender keeps hitting invalid addresses, and treat it as a sign of a low-quality or purchased list, even if the rest of your sending is perfectly legitimate.</p><p data-i18n="bp_bounces-and-suppression.hard.p1">This is why every hard bounce on geserd adds the address to your suppression list automatically. The next time you try to send to it, the request still succeeds at the API level, but the message is not actually attempted, and the event log shows it was suppressed rather than sent.</p><h2 data-i18n="bp_bounces-and-suppression.soft.h">Soft bounces get a second chance</h2><p data-i18n="bp_bounces-and-suppression.soft.p0">A soft bounce is temporary: a full mailbox, a server that is briefly down, or greylisting, where a receiving server intentionally delays first-time senders to filter out spam software that never retries. None of these mean the address is bad, so geserd treats them differently from hard bounces and retries delivery with growing delays before giving up.</p><p data-i18n="bp_bounces-and-suppression.soft.p1">Only after retries are exhausted does a soft bounce turn into a final failure in your logs, and even then the address is not suppressed, since the problem was very likely temporary rather than something wrong with the address itself.</p><h2 data-i18n="bp_bounces-and-suppression.complaints.h">Complaints hurt more than bounces</h2><p data-i18n="bp_bounces-and-suppression.complaints.p0">A complaint happens when a recipient clicks "report spam" instead of unsubscribing or ignoring your message. Mailbox providers weigh complaints far more heavily than bounces, because a complaint means the mail was delivered successfully and a real person still did not want it. A complaint rate that creeps up, even from a small fraction of recipients, is often the first sign that a sending domain is about to lose trust.</p><p data-i18n="bp_bounces-and-suppression.complaints.p1">Complaints are suppressed automatically on geserd just like hard bounces, and they show up in your logs with the reason attached, so you can look at what was sent and to whom, and adjust your sending before the pattern repeats at a larger scale.</p><p><a href="/blog/" style="color:#fff" data-i18n="bp_bounces-and-suppression.back">Back to blog</a></p></div></section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/boot.js"></script>
+</body>
+</html>

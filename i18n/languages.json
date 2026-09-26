@@ -1,0 +1,6 @@
+[
+ {"code":"en","name":"English","countries":[]},
+ {"code":"ru","name":"Русский","countries":["RU","BY","KZ","KG","AM","UZ","MD"]},
+ {"code":"fr","name":"Français","countries":["FR","BE","LU","MC"]},
+ {"code":"de","name":"Deutsch","countries":["DE","AT","LI","CH"]}
+]

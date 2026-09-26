@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Introduction — Docs — geserd</title>
+<meta name="description" content="geserd is an email API for sending and receiving. Send transactional email from your own verified domain, accept inbound mail sent to it, and reply from the same address, all through one HTTP API.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css">
+</head>
+<body>
+<div id="site-header"></div>
+<div class="docs"><aside class="dside" id="dside"></aside><article class="dbody"><h1 class="grad" data-i18n="doc.intro.h1">Introduction</h1><p data-i18n="doc.intro.lead">geserd is an email API for sending and receiving. Send transactional email from your own verified domain, accept inbound mail sent to it, and reply from the same address, all through one HTTP API.</p><div class="callout" data-i18n="doc.intro.cal">geserd is in active development. This documentation describes the API as designed and some endpoints may not be live yet. The status page and changelog track what has actually shipped.</div><h2 data-i18n="doc.intro.h2a">What you can do</h2><p data-i18n="doc.intro.p2a">Verify a domain you own, then send email from any address on it, receive mail sent to that domain, get real-time events on a webhook for deliveries and inbound messages, and inspect every message and every API request in the dashboard.</p><h2 data-i18n="doc.intro.h2b">Base URL</h2><div class="mock"><div class="mh"><i></i><i></i><i></i><span>Base URL</span></div><pre>https://&lt;your-host&gt;/api</pre></div><p data-i18n="doc.intro.p2b">Replace &lt;your-host&gt; with the domain of your geserd deployment. Every path in this documentation is relative to this base URL.</p><h2 data-i18n="doc.intro.h2c">Authentication</h2><p data-i18n="doc.intro.p2c">Create an API key in the dashboard and send it as a bearer token on every request. Keys are shown once at creation and stored on our side only as a hash, so keep a copy somewhere safe.</p><div class="mock"><div class="mh"><i></i><i></i><i></i><span>Header</span></div><pre>Authorization: Bearer ov_xxxxxxxx</pre></div><h2 data-i18n="doc.intro.h2d">Errors</h2><p data-i18n="doc.intro.p2d">Errors are returned as JSON with an error field and a matching HTTP status code. See the Errors page for the full list of codes and what causes each one.</p><h2 data-i18n="doc.intro.h2e">Next steps</h2><p data-i18n="doc.intro.p2e">Follow the <a href="/docs/quickstart/" style="color:#fff;text-decoration:underline">Quickstart</a> to add a domain and send your first email in a few minutes.</p></article><aside class="dtoc" id="dtoc"></aside></div>
+<div id="site-footer"></div>
+<script src="/js/boot.js"></script>
+<script src="/docs/js/docs.js"></script>
+</body>
+</html>
