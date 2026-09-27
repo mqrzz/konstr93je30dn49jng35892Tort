@@ -1,0 +1,1 @@
+(window.GESERD.ready||Promise.resolve()).then(function(){var O=GESERD,n;try{n=new Intl.DisplayNames([O.lang||"en"],{type:"region"})}catch(e){n={of:function(c){return c}}}document.getElementById("chips").innerHTML=O.blocked.map(function(c){return"<span>"+n.of(c)+"</span>"}).sort().join("")})

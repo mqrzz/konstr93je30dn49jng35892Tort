@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Security — geserd</title>
+<title>Security — Geserd</title>
 <meta name="description" content="How we protect your keys, your domains and your mail, what you are responsible for, and what we are still building.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/logo.svg">
@@ -14,7 +14,7 @@
 <body>
 <div id="site-header"></div>
 <main>
-<section class="pg" style="padding-bottom:60px"><div class="wrap"><h1 class="grad" data-i18n="sec.h1">Security at <span class="rainbow">geserd</span></h1><p data-i18n="sec.lead">How we protect your keys, your domains and your mail, what you are responsible for, and what we are still building.</p></div></section><section class="sec"><div class="wrap split"><div class="rv"><span class="eyebrow" data-i18n="sec.a.tag">Secrets</span><h2 class="grad" data-i18n="sec.a.h">Secrets are never stored in the clear</h2><p class="sub" data-i18n="sec.a.p">API keys are shown to you once, at the moment you create them, and stored only as a one-way hash. Even we cannot read a key back: if you lose it, you create a new one and revoke the old one. The DKIM private key of every domain is encrypted at rest with AES-256-GCM, using a master key that is kept outside the database.</p><ul class="bl"><li data-i18n="sec.a.b1">Revoke any key instantly</li><li data-i18n="sec.a.b2">Keys carry a prefix, so they are easy to spot in logs</li><li data-i18n="sec.a.b3">Every request is logged with the key that made it</li></ul></div><div class="rv"><div class="mock"><div class="mh"><i></i><i></i><i></i><span>API key</span></div><pre><span class="k">Your new API key (shown once)</span>
+<section class="pg" style="padding-bottom:60px"><div class="wrap"><h1 class="grad" data-i18n="sec.h1">Security at Geserd</h1><p data-i18n="sec.lead">How we protect your keys, your domains and your mail, what you are responsible for, and what we are still building.</p></div></section><section class="sec"><div class="wrap split"><div class="rv"><span class="eyebrow" data-i18n="sec.a.tag">Secrets</span><h2 class="grad" data-i18n="sec.a.h">Secrets are never stored in the clear</h2><p class="sub" data-i18n="sec.a.p">API keys are shown to you once, at the moment you create them, and stored only as a one-way hash. Even we cannot read a key back: if you lose it, you create a new one and revoke the old one. The DKIM private key of every domain is encrypted at rest with AES-256-GCM, using a master key that is kept outside the database.</p><ul class="bl"><li data-i18n="sec.a.b1">Revoke any key instantly</li><li data-i18n="sec.a.b2">Keys carry a prefix, so they are easy to spot in logs</li><li data-i18n="sec.a.b3">Every request is logged with the key that made it</li></ul></div><div class="rv"><div class="mock"><div class="mh"><i></i><i></i><i></i><span>API key</span></div><pre><span class="k">Your new API key (shown once)</span>
 <span class="s">ov_9Xk2mQpL0aVt7sYw3nRb</span>
 
 <span class="k">stored as</span> sha256 hash only
