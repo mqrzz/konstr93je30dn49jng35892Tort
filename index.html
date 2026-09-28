@@ -1,85 +1,94 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Geserd — send and receive email with an API</title>
-<meta name="description" content="Transactional email from your own domain, and inbound mail you can reply to, over one simple API.">
-<meta name="theme-color" content="#000000">
-<link rel="icon" href="/assets/logo.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/geserd.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geserd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: inherit; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: #000;
+    color: #fff;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    padding: 32px;
+    position: relative;
+    overflow-x: hidden;
+    text-align: center;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(253,253,253,0.09), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 50% 100%, rgba(240,240,228,0.05), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 62rem;
+  }
+
+  h1 {
+    font-family: 'Fraunces', ui-sans-serif, system-ui, serif;
+    font-weight: 500;
+    font-size: clamp(3rem, 7vw, 6rem);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    padding-bottom: 0.15em;
+    margin: 0 0 1.5rem;
+    background: linear-gradient(to right bottom, #fff 30%, rgba(255,255,255,0.5));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.55);
+    margin: 0 auto;
+    max-width: 34rem;
+  }
+
+  .brand {
+    position: fixed;
+    bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.28);
+    z-index: 1;
+  }
+</style>
 </head>
 <body>
-<div id="site-header"></div>
-<main>
-<section class="hero"><div class="wrap">
-  <div>
-    <a class="badge" href="/changelog/"><span><span data-i18n="hero.pill">Now in beta</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-    <h1 class="grad" data-i18n="hero.title">Send and receive<br>email, simply</h1>
-    <p class="lead" data-i18n="hero.lead">Deliver transactional email from your own domain and handle inbound mail you can reply to, over one clean API.</p>
-    <div class="acts"><a class="btn" href="/signup/" data-i18n="cta.start">Get started</a><a class="btn ghost" href="/docs/" data-i18n="cta.docs">Documentation</a></div>
+  <div class="content">
+    <h1>Geserd is not available in your region</h1>
+    <p>Access to Geserd is currently restricted in your region due to local regulatory and licensing requirements. Availability may change depending on your country's laws and our provider agreements.</p>
   </div>
-  <div class="cube-s" aria-hidden="true">
-    <svg viewBox="0 0 320 320" width="100%" height="100%">
-      <defs>
-        <linearGradient id="cubeTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3a3a3d"/><stop offset="100%" stop-color="#232326"/></linearGradient>
-        <linearGradient id="cubeLeft" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c1c1e"/><stop offset="100%" stop-color="#0a0a0b"/></linearGradient>
-        <linearGradient id="cubeRight" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#141416"/><stop offset="100%" stop-color="#050506"/></linearGradient>
-      </defs>
-      <g stroke="rgba(255,255,255,.07)" stroke-width="1">
-        <polygon points="160,30 260,85 160,140 60,85" fill="url(#cubeTop)"/>
-        <polygon points="60,85 160,140 160,270 60,215" fill="url(#cubeLeft)"/>
-        <polygon points="260,85 260,215 160,270 160,140" fill="url(#cubeRight)"/>
-      </g>
-      <g stroke="rgba(255,255,255,.05)" stroke-width="1" fill="none">
-        <line x1="110" y1="57" x2="110" y2="242"/><line x1="210" y1="57" x2="210" y2="242"/>
-        <line x1="60" y1="150" x2="160" y2="205"/><line x1="160" y1="205" x2="260" y2="150"/>
-      </g>
-    </svg>
-  </div>
-</div></section>
-
-<section class="sec"><div class="wrap"><div class="strip rv">
-  <span><i>✓</i><b>SPF</b> aligned</span><span><i>✓</i><b>DKIM</b> signed</span><span><i>✓</i><b>DMARC</b> ready</span><span><i>✓</i><b>TLS</b> in transit</span><span><i>✓</i><b>rDNS</b> verified</span>
-</div></div></section>
-
-<section class="sec"><div class="wrap">
-  <h2 class="grad rv" data-i18n="s1.title">Both directions,<br>one place</h2>
-  <p class="sub rv" data-i18n="s1.sub">Add your domain, verify DNS, and start sending. Replies and incoming mail land in the same inbox and webhook stream.</p>
-  <div class="grid">
-    <div class="card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg><h3 data-i18n="c1.t">Send from your domain</h3><p data-i18n="c1.p">One request with your API key. We sign every message with DKIM for your domain.</p></div>
-    <div class="card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><h3 data-i18n="c2.t">Receive and reply</h3><p data-i18n="c2.p">Point MX at us. Incoming mail is parsed, stored and delivered to your webhook, and you answer with the same API.</p></div>
-    <div class="card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><h3 data-i18n="c3.t">Events and logs</h3><p data-i18n="c3.p">Delivered, bounced, complained, received. Every event is logged and can be pushed to your server.</p></div>
-    <div class="card rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg><h3 data-i18n="c4.t">Protected by default</h3><p data-i18n="c4.p">Suppression lists, rate limits and a sandbox for new accounts keep your reputation clean.</p></div>
-  </div>
-</div></section>
-
-<section class="sec"><div class="wrap">
-  <h2 class="grad rv" data-i18n="s2.title">Integrate tonight</h2>
-  <p class="sub rv" data-i18n="s2.sub">A plain HTTP API. No SDK required to get the first message out.</p>
-  <div class="ide rv"><div class="idt"><div class="idtabs" id="idTabs" role="tablist"></div><button class="idcopy" id="idCopy" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span data-i18n="home.copy">Copy</span></button></div><pre class="code idpre" id="idCode"></pre></div>
-</div></section>
-
-<section class="sec"><div class="wrap split">
-  <div class="rv"><h2 class="grad" data-i18n="s3.title">Every event, sent to your server</h2><p class="sub" style="margin-inline:0;text-align:left" data-i18n="s3.sub">Delivered, bounced, complained, received. Get a signed webhook the moment something happens, and see the same events in your logs.</p><a class="lnk" href="/features/webhooks/" data-i18n="home.more">Learn more</a></div>
-  <div class="feed rv" aria-hidden="true">
-    <div><span class="pill2 p-ok">delivered</span><span>to <b>liam@example.com</b> · Welcome</span><time>10:56:07</time></div>
-    <div><span class="pill2 p-mut">received</span><span>from <b>anna@example.org</b> · Re: Invoice</span><time>10:56:04</time></div>
-    <div><span class="pill2 p-bad">bounced</span><span>to <b>noah@example.net</b> · Hello</span><time>10:55:51</time></div>
-    <div><span class="pill2 p-warn">complained</span><span>to <b>lucas@example.com</b> · Offer</span><time>10:55:12</time></div>
-    <div><span class="pill2 p-ok">delivered</span><span>to <b>mia@example.com</b> · Receipt</span><time>10:54:40</time></div>
-  </div>
-</div></section>
-
-<section class="sec cta"><div class="wrap">
-  <h2 class="grad rv" data-i18n="cta.title">Email, sorted.<br>Start today.</h2>
-  <div class="acts rv"><a class="btn" href="/signup/" data-i18n="cta.start">Get started</a><a class="btn ghost" href="/pricing/" data-i18n="cta.pricing">See pricing</a></div>
-</div></section>
-</main>
-<div id="site-footer"></div>
-<script src="/js/boot.js"></script>
-<script src="/js/pages/home.js"></script>
+  <div class="brand">GESERD</div>
 </body>
 </html>
