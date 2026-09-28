@@ -14,9 +14,16 @@
 <body>
 <div id="site-header"></div>
 <main>
-<section class="pg" style="padding-bottom:50px"><div class="wrap"><h1 class="grad" data-i18n="bl.h1">Blog</h1><p data-i18n="bl.lead">Notes on deliverability, the API and how Geserd is built.</p></div></section><section class="sec"><div class="wrap"><div class="grid"><a class="card rv" href="/blog/spf-dkim-dmarc/"><span class="eyebrow">Sending · 2026-09-24</span><h3 data-i18n="bl.spf-dkim-dmarc.title">SPF, DKIM and DMARC, explained without the acronyms</h3><p data-i18n="bl.spf-dkim-dmarc.lead">Three records stand between your email and the spam folder. Here is what each one actually does, in plain language.</p></a><a class="card rv" href="/blog/bounces-and-suppression/"><span class="eyebrow">Deliverability · 2026-09-24</span><h3 data-i18n="bl.bounces-and-suppression.title">Bounces, complaints and suppression lists, and why they matter</h3><p data-i18n="bl.bounces-and-suppression.lead">A high bounce rate is the fastest way to make every mailbox provider distrust your domain. Here is how Geserd tracks it and what you should do about it.</p></a></div></div></section>
+<section class="blogp"><div class="wrap">
+  <div class="bh"><h1 class="grad" data-i18n="bl.h1">Blog</h1><label class="bsearch"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="bq" type="search" autocomplete="off" placeholder="Search…" data-i18n-ph="bl.search"><kbd>Ctrl</kbd><kbd>K</kbd></label></div>
+  <div class="btabs" id="btabs" role="tablist"></div>
+  <h2 class="bl-h" data-i18n="bl.latest">Latest posts</h2>
+  <div class="blist" id="blist"></div>
+  <p class="bnone" id="bnone" hidden data-i18n="bl.none">No posts found.</p>
+</div></section>
 </main>
 <div id="site-footer"></div>
 <script src="/js/boot.js"></script>
+<script src="/js/pages/blog.js"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@ function M(){return [
 var ch='<svg width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.7 10.7a1 1 0 1 0-1.4-1.4l-3.6 3.6a1 1 0 0 1-1.4 0L7.7 9.3a1 1 0 0 0-1.4 1.4l5 5a1 1 0 0 0 1.4 0z"/></svg>';
 function build(){
 var Mm=M();
-var h='<header class="hdr"><div class="wrap"><a class="logo" href="/" aria-label="Geserd"><img src="/assets/logo.svg" alt="geserd"></a><ul>';
+var h='<header class="hdr"><div class="wrap"><a class="logo" href="/" aria-label="Geserd"><img src="/assets/logo.svg" alt="Geserd"></a><ul>';
 Mm.forEach(function(m){h+='<li><button class="tr" type="button" aria-expanded="false" data-m="'+m.k+'">'+m.l+ch+'</button><div class="pop" id="pop-'+m.k+'"><div class="ls">'+m.links.map(function(x){return '<a href="'+x[1]+'">'+x[0]+'</a>'}).join('')+'</div><div class="cs">'+m.cards.map(function(c){return '<a class="pc" href="'+c[2]+'"><i>'+c[3]+'</i><div><b>'+c[0]+'</b><span>'+c[1]+'</span></div></a>'}).join('')+'</div></div></li>'});
 h+='<li><a href="/pricing/">'+t('nav.pricing','Pricing')+'</a></li></ul><div class="side"><select class="lang" aria-label="Language"></select><a class="btn ghost sm" href="/login/">'+t('nav.login','Log in')+'</a><a class="btn sm" href="/signup/">'+t('nav.start','Get started')+'</a></div>'+
 '<button class="burger" aria-label="menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M21 18a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm0-7a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2zm0-7a1 1 0 1 1 0 2H3a1 1 0 0 1 0-2z"/></svg></button></div></header>'+

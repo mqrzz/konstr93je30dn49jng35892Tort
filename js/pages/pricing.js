@@ -3,5 +3,6 @@ var P=[["free","₽0",[300,10,100,1,1],"/signup/"],["pro","₽790",[10000,500,50
 var L=["emails per month","emails per day","inbound per month","domains","days of logs"];
 (O.ready||Promise.resolve()).then(function(){var lg=O.lang||"en";document.getElementById("plans").innerHTML=P.map(function(p){var e=p[0]=="ent";
 var CK='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
-var rows=L.map(function(l,i){return"<li>"+CK+"<span><b>"+(e?t("pr.custom","Custom"):p[2][i].toLocaleString(lg))+"</b> "+t("pr.l"+(i+1),l)+"</span></li>"}).join("");
-return'<div class="plan'+(p[0]=="pro"?" hot":"")+'">'+(p[0]=="pro"?'<span class="tag">'+t("pr.pop","Popular")+"</span>":"")+"<h3>"+t("pr."+p[0],p[0])+'</h3><div class="price">'+(e?t("pr.custom","Custom"):p[1]+"<small>"+t("pr.mo","/mo")+"</small>")+"</div><ul>"+rows+'</ul><a class="btn" href="'+p[3]+'">'+(e?t("pr.contact","Contact us"):t("cta.start","Get started"))+"</a></div>"}).join("")})})()
+var rows=L.slice(1).map(function(l,i){return"<li>"+CK+"<span>"+(e?t("pr.custom","Custom"):p[2][i+1].toLocaleString(lg)+" "+t("pr.l"+(i+2),l))+"</span></li>"}).join("");
+var top=e?t("pr.custom","Custom"):p[2][0].toLocaleString(lg)+" "+t("pr.l1",L[0]);
+return'<div class="plan'+(p[0]=="pro"?" hot":"")+'"><h3>'+t("pr."+p[0],p[0])+(p[0]=="pro"?'<span class="rec">'+t("pr.rec","Recommended")+"</span>":"")+'</h3><div class="price">'+(e?t("pr.ent","Enterprise"):p[1]+"<small> "+t("pr.mo","/mo")+"</small>")+'</div><div class="q">'+top+"</div><ul>"+rows+'</ul><a class="btn'+(p[0]=="pro"?"":" ghost")+'" href="'+p[3]+'">'+(e?t("pr.contact","Contact us"):t("cta.start","Get started"))+"</a></div>"}).join("")})})()

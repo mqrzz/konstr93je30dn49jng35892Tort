@@ -1,0 +1,90 @@
+/* app.css — dashboard shell + Settings/Usage, modelled on Resend's dashboard. Loaded after geserd.css on /app/* pages.
+   Colors are tokens so the Appearance switch (system / light / dark) works. */
+:root{--a-bg:#000;--a-bg2:#0b0b0c;--a-bd:rgba(255,255,255,.1);--a-tx:#ededed;--a-tx2:#a1a1a6;--a-tx3:#6e6e73;--a-hv:rgba(255,255,255,.06);--a-on:rgba(255,255,255,.09);--a-btn:#111113;--a-btnbd:rgba(255,255,255,.16);--a-pri:#ededed;--a-pritx:#000;color-scheme:dark}
+:root[data-theme=light]{--a-bg:#fff;--a-bg2:#f7f7f8;--a-bd:rgba(0,0,0,.09);--a-tx:#171717;--a-tx2:#62626a;--a-tx3:#8b8b93;--a-hv:rgba(0,0,0,.05);--a-on:rgba(0,0,0,.07);--a-btn:#fff;--a-btnbd:rgba(0,0,0,.16);--a-pri:#171717;--a-pritx:#fff;color-scheme:light}
+body.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh;background:var(--a-bg);color:var(--a-tx)}
+.snav{position:sticky;top:0;height:100vh;width:250px;padding:16px;border-right:1px solid var(--a-bd);background:var(--a-bg);display:flex;flex-direction:column;gap:0}
+.snav .wsb{position:relative}
+.snav .wsb>button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;height:40px;padding:8px;border:0;border-radius:12px;background:none;color:var(--a-tx);font:600 14px var(--font-b);cursor:pointer;letter-spacing:-.01em}
+.snav .wsb>button:hover{background:var(--a-hv)}
+.snav .wsb .who{display:flex;align-items:center;gap:10px;min-width:0}
+.snav .wsb .av{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,#e4e4e7,#6b6b70);display:grid;place-items:center;font:700 12px var(--font-b);color:#000;flex:none}
+.snav .wsb .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.snav .nv{margin-top:16px;flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.snav .nv a{display:flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:12px;font-size:14px;color:var(--a-tx2)}
+.snav .nv a:hover{background:var(--a-hv);color:var(--a-tx)}
+.snav .nv a.on{background:var(--a-on);color:var(--a-tx)}
+.snav .nv a svg{flex:none}
+.snav .bt{padding-top:16px;position:relative}
+.app-ico{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;border-radius:12px;background:none;color:var(--a-tx2);cursor:pointer}
+.app-ico:hover{background:var(--a-hv);color:var(--a-tx)}
+.apop{position:absolute;z-index:60;min-width:210px;padding:6px;border:1px solid var(--a-bd);border-radius:14px;background:var(--a-bg2);box-shadow:0 12px 40px rgba(0,0,0,.35);display:none}
+.apop.on{display:block}
+.apop a,.apop button.it{display:flex;align-items:center;gap:8px;width:100%;height:32px;padding:0 10px;border:0;border-radius:9px;background:none;color:var(--a-tx);font:400 13.5px var(--font-b);text-align:left;cursor:pointer}
+.apop a:hover,.apop button.it:hover{background:var(--a-hv)}
+.apop hr{border:0;border-top:1px solid var(--a-bd);margin:6px 0}
+.apop .lbl{padding:6px 10px;font-size:12px;color:var(--a-tx3)}
+.snav .wsb .apop{top:44px;left:0;right:0}
+.snav .bt .apop{bottom:56px;left:0}
+.seg{display:flex;gap:4px;padding:4px}
+.seg button{flex:1;height:30px;border:0;border-radius:9px;background:none;color:var(--a-tx2);font:500 12.5px var(--font-b);cursor:pointer}
+.seg button.on{background:var(--a-on);color:var(--a-tx)}
+.app-main{padding:0;max-width:none;width:100%;min-width:0}
+.app-top{position:sticky;top:0;z-index:30;height:60px;display:flex;align-items:center;justify-content:flex-end;gap:24px;padding:0 24px;border-bottom:1px solid var(--a-bd);background:var(--a-bg)}
+.app-top>a{font-size:14px;color:var(--a-tx)}
+.app-top .nh{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:1px solid var(--a-btnbd);border-radius:12px;background:var(--a-btn);color:var(--a-tx);font:500 14px var(--font-b);cursor:pointer}
+.app-top .nh:hover{background:var(--a-hv)}
+.app-top kbd,.kb{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 4px;border-radius:6px;background:var(--a-hv);color:var(--a-tx);font:500 12px var(--font-b)}
+.app-content{max-width:72rem;margin:0 auto;padding:32px 24px 80px}
+.ph h1{font:500 28px/34px var(--font-d);letter-spacing:-.045rem;color:var(--a-tx)}
+.ph{margin-bottom:24px}
+.stabs{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;margin:0 0 24px -4px;padding:4px}
+.stabs a{display:inline-flex;align-items:center;flex:none;height:32px;padding:0 12px;border-radius:12px;font:600 14px var(--font-b);color:var(--a-tx2);white-space:nowrap}
+.stabs a:hover{background:var(--a-hv);color:var(--a-tx)}
+.stabs a.on{background:var(--a-on);color:var(--a-tx)}
+.sh1{font:500 28px/34px var(--font-d);letter-spacing:-.045rem;color:var(--a-tx);margin:32px 0 0}
+.ssec{display:flex;flex-direction:column;gap:16px;padding:16px 0;border-bottom:1px solid var(--a-bd)}
+.ssec:last-child{border-bottom:0}
+@media(min-width:768px){.ssec{flex-direction:row;padding:32px 0 64px}.ssec>.sl,.ssec>.sr{width:50%}}
+.sl h2{font:700 20px var(--font-b);letter-spacing:-.01em;color:var(--a-tx);margin-bottom:4px}
+.sl p{font-size:14px;color:var(--a-tx2);margin:0 0 16px;max-width:28rem;text-wrap:balance}
+.abtn{display:inline-flex;align-items:center;justify-content:center;gap:4px;height:32px;padding:0 12px;border:1px solid var(--a-btnbd);border-radius:12px;background:var(--a-btn);color:var(--a-tx);font:500 14px var(--font-b);cursor:pointer;white-space:nowrap}
+.abtn:hover{background:var(--a-hv)}
+.abtn.pri{background:var(--a-pri);border-color:var(--a-pri);color:var(--a-pritx)}
+.abtn.pri:hover{opacity:.88;background:var(--a-pri)}
+.sr h3{font:500 16px var(--font-b);color:var(--a-tx);margin-bottom:8px;text-transform:capitalize}
+.stbl{width:100%;border-collapse:separate;border-spacing:0;text-align:left;margin-bottom:8px}
+.stbl td{height:40px;padding:14px 12px;border-bottom:1px solid var(--a-bd);font-size:14px;white-space:nowrap;color:var(--a-tx2)}
+.stbl tr:last-child td{border-bottom:0}
+.stbl td:first-child{width:32px;padding:14px 0;text-align:center;color:var(--a-tx3)}
+.stbl td:nth-child(2){width:60%;padding-left:0}
+.stbl td:last-child{text-align:right;color:var(--a-tx);font-variant-numeric:tabular-nums}
+.stbl td.sub{color:var(--a-tx2)}
+.swrow{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px}
+.swrow h3{margin-bottom:4px}
+.swrow p{font-size:14px;color:var(--a-tx2);max-width:30rem;margin:0}
+.tg{position:relative;flex:none;width:40px;height:24px;border:1px solid var(--a-btnbd);border-radius:99px;background:var(--a-btn);cursor:pointer;padding:0}
+.tg i{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--a-tx3);transition:transform .2s}
+.tg.on{background:var(--a-pri)}
+.tg.on i{transform:translateX(16px);background:var(--a-pritx)}
+.tg[disabled]{opacity:.5;cursor:not-allowed}
+.emptyb{padding:28px 16px;border:1px dashed var(--a-bd);border-radius:16px;text-align:center;color:var(--a-tx2);font-size:14px}
+.snav-ov{position:fixed;inset:0;z-index:45;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .25s}
+.snav-ov.on{opacity:1;pointer-events:auto}
+.mbar{display:none}
+@media(max-width:860px){
+ body.app{grid-template-columns:1fr}
+ .snav{position:fixed;left:0;top:0;bottom:0;height:auto;width:270px;transform:translateX(-100%);transition:transform .25s;z-index:50}
+ .snav.open{transform:none}
+ .mbar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px;padding:0 16px;border-bottom:1px solid var(--a-bd);position:sticky;top:0;background:var(--a-bg);z-index:35}
+ .mbar button{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:0;border-radius:10px;background:none;color:var(--a-tx)}
+ .mbar img{height:18px;filter:none}
+ :root[data-theme=light] .mbar img{filter:invert(1)}
+ .app-top{display:none}
+ .app-content{padding:24px 16px 60px}
+}
+/* old pages (emails/metrics/…) keep their markup but follow the new tokens */
+body.app .tabs{border-color:var(--a-bd)}body.app .tabs a{color:var(--a-tx2)}body.app .tabs a.on,body.app .tabs a:hover{color:var(--a-tx)}body.app .tabs a.on{border-color:var(--a-tx)}
+body.app .flt{background:var(--a-btn);border-color:var(--a-btnbd);color:var(--a-tx2)}body.app .flt:hover{color:var(--a-tx)}
+body.app .empty{border-color:var(--a-bd)}body.app .empty h3{color:var(--a-tx)}
+body.app .ucard{background:var(--a-bg2);border-color:var(--a-bd)}
