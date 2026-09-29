@@ -4,17 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Rate limits — Docs — Geserd</title>
-<meta name="description" content="How sending and receiving limits work, and what happens when you hit one.">
+<meta name="description" content="How Geserd's plan limits and API request rate limits work, and what happens when you hit one.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/geserd.css">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/docs/js/theme.js"></script>
+<link rel="stylesheet" href="/docs/css/docs.css">
 </head>
 <body>
-<div class="doclight" id="docLight"><div class="doctop" id="docTop"></div>
-<div class="docs"><aside class="dside" id="dside"></aside><article class="dbody"><h1 class="grad" data-i18n="doc.rl.h1">Rate limits</h1><p data-i18n="doc.rl.lead">How sending and receiving limits work, and what happens when you hit one.</p><h2 data-i18n="doc.rl.h2a">Two limits per plan</h2><p data-i18n="doc.rl.p2a">Every plan has a monthly send limit and a daily send limit, plus a separate monthly inbound limit. Hitting the daily limit only blocks sending until the next day; hitting the monthly limit blocks sending until the plan resets or you upgrade. See the pricing page for the exact numbers per plan.</p><h2 data-i18n="doc.rl.h2b">Response when limited</h2><div class="mock"><div class="mh"><i></i><i></i><i></i><span>429</span></div><pre>{ "error": "plan_limit" }</pre></div><p data-i18n="doc.rl.p2b">A send request that would exceed a limit is rejected before it is queued, so it never appears in your logs as attempted. Check the Usage page in Settings to see how close you are to each limit.</p><h2 data-i18n="doc.rl.h2c">API request rate</h2><p data-i18n="doc.rl.p2c">Independently of send limits, the API also limits how many requests per second a single API key can make, to protect the platform from accidental request loops. This limit is generous for normal use and only matters if a bug in your integration is retrying in a tight loop.</p></article><aside class="dtoc" id="dtoc"></aside></div></div>
-<div id="site-footer"></div>
+<div id="dh"></div>
+<div id="dm"></div>
+<div id="bd"></div>
+<aside id="ds"></aside>
+<main id="dc"><div class="wrap">
+<article class="pg">
+<div class="crumb" data-i18n="doc.nav.more">Reference</div>
+<div class="hd">
+<h1 data-i18n="doc.rl.h1">Rate limits</h1>
+<div class="pa">
+<button type="button" class="c" aria-label="Copy page"><svg class="s" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+<button type="button" class="d" aria-label="More"><svg class="s" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
+</div>
+</div>
+<p class="sub" data-i18n="doc.rl.lead">How sending and receiving limits work, and what happens when you hit one.</p>
+<div class="body">
+
+<h2 data-i18n="doc.rl.h2a">Two limits per plan</h2>
+<p data-i18n="doc.rl.p2a">Every plan has a monthly send limit and a daily send limit, plus a separate monthly inbound limit. Hitting the daily limit only blocks sending until the next day; hitting the monthly limit blocks sending until the plan resets or you upgrade. See the <a href="/pricing/">pricing page</a> for the exact numbers per plan.</p>
+
+<h2 data-i18n="doc.rl.h2b">Response when limited</h2>
+<div class="cb"><div class="ch"><b>429</b><button type="button" class="cp" data-i18n="doc.copy">Copy</button></div><pre>{ "error": "plan_limit" }</pre></div>
+<p data-i18n="doc.rl.p2b">A send request that would exceed a limit is rejected before it is queued, so it never appears in your logs as attempted. Check the Usage page in Settings to see how close you are to each limit.</p>
+
+<h2 data-i18n="doc.rl.h2c">API request rate</h2>
+<p data-i18n="doc.rl.p2c">Independently of send limits, the API also limits how many requests per second a single API key can make, to protect the platform from accidental request loops. This limit is generous for normal use and only matters if a bug in your integration is retrying in a tight loop.</p>
+
+<div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
+<div class="pn2"></div>
+</div>
+</article>
+<aside class="toc" id="toc"></aside>
+</div></main>
+<div id="sm"><div class="box"><div class="in"><svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" placeholder="Search docs..." data-i18n-ph="doc.search"><kbd>ESC</kbd><button type="button" class="x" aria-label="Close"><svg class="s" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="rs"></div></div></div>
 <script src="/js/boot.js"></script>
 <script src="/docs/js/docs.js"></script>
 </body>

@@ -2,8 +2,9 @@
    Tabs switch between the two modes (with URL history so /login/ and /signup/ both work
    directly). OAuth buttons are shown per region: RU gets Yandex + email only, everyone
    else gets GitHub + Google + email. The email flow is a real two-step request-code /
-   verify-code call against the API — the backend routes ship in the next phase, so until
-   then this correctly shows a "not available yet" error instead of pretending to succeed. */
+   verify-code call against the live API (backend/src/routes/auth.js) — errors are read
+   from the JSON body the backend sends ({error:"..."}) and mapped to a message per code,
+   instead of one blanket "not available yet" text. */
 (function(){
 function t(k,d){return (window.GESERD&&GESERD.t)?GESERD.t(k,d):d}
 var email="";
@@ -60,6 +61,24 @@ function showErr(id,msg){
   el.style.display=msg?"block":"none";
 }
 
+/* Reads {error:"code"} from a failed API response (falling back to a network-level message
+   when the response has no body/JSON, e.g. the request never reached the server) and returns
+   the right localized string for it. */
+function apiErrMsg(err){
+  var code=err&&err.code;
+  var MAP={
+    invalid_email:["auth.error.email","Enter a valid email address"],
+    rate_limited:["auth.error.rate","Too many attempts — wait a minute and try again"],
+    mail_failed:["auth.error.mail","We couldn't send the email right now — try again shortly"],
+    expired_or_missing:["auth.error.expired","This code expired — request a new one"],
+    too_many_attempts:["auth.error.attempts","Too many wrong attempts — request a new code"],
+    wrong_code:["auth.error.code","Enter the code from your email"],
+    network:["auth.error.network","Couldn't reach the server — check your connection and try again"]
+  };
+  var m=MAP[code]||MAP.network;
+  return t(m[0],m[1]);
+}
+
 function requestCode(btn){
   if(btn.classList.contains("loading"))return;
   var isSignup=document.getElementById("authTabs").classList.contains("mode-signup");
@@ -77,17 +96,19 @@ function requestCode(btn){
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(isSignup?{email:email,name:nameInput,mode:"signup"}:{email:email,mode:"login"})
   }).then(function(r){
-    if(!r.ok)throw new Error("http "+r.status);
-    return r.json().catch(function(){return{}});
+    return r.json().catch(function(){return{}}).then(function(body){
+      if(!r.ok)throw{code:body.error||"network"};
+      return body;
+    });
   }).then(function(){
     btn.classList.remove("loading");btn.disabled=false;
     document.getElementById("authCodeSub").textContent=t("auth.code.sub","We sent a 6-digit code to")+" "+email;
     document.getElementById("authStep1").style.display="none";
     document.getElementById("authStep2").style.display="block";
     document.getElementById("authCode").focus();
-  }).catch(function(){
+  }).catch(function(err){
     btn.classList.remove("loading");btn.disabled=false;
-    showErr("authErr",t("auth.error.backend","Email sign-in isn't live yet — this part of the backend ships next."));
+    showErr("authErr",apiErrMsg(err));
   });
 }
 
@@ -104,13 +125,15 @@ function verifyCode(btn){
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({email:email,code:code})
   }).then(function(r){
-    if(!r.ok)throw new Error("http "+r.status);
-    return r.json().catch(function(){return{}});
+    return r.json().catch(function(){return{}}).then(function(body){
+      if(!r.ok)throw{code:body.error||"network"};
+      return body;
+    });
   }).then(function(){
     location.href="/app/";
-  }).catch(function(){
+  }).catch(function(err){
     btn.classList.remove("loading");btn.disabled=false;
-    showErr("authErr2",t("auth.error.backend","Email sign-in isn't live yet — this part of the backend ships next."));
+    showErr("authErr2",apiErrMsg(err));
   });
 }
 

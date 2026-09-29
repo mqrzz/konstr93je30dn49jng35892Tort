@@ -4,17 +4,62 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Errors — Docs — Geserd</title>
-<meta name="description" content="How Geserd reports problems, and what each error means.">
+<meta name="description" content="How Geserd reports problems: the error response format, the full list of codes, and how to retry safely.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/geserd.css">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/docs/js/theme.js"></script>
+<link rel="stylesheet" href="/docs/css/docs.css">
 </head>
 <body>
-<div class="doclight" id="docLight"><div class="doctop" id="docTop"></div>
-<div class="docs"><aside class="dside" id="dside"></aside><article class="dbody"><h1 class="grad" data-i18n="doc.err.h1">Errors</h1><p data-i18n="doc.err.lead">How Geserd reports problems, and what each error means.</p><h2 data-i18n="doc.err.h2a">Error format</h2><p data-i18n="doc.err.p2a">Every error response is JSON with an error field identifying the problem, and the HTTP status code reflects the category of failure: 4xx for something wrong with the request, 5xx for a problem on our side.</p><div class="mock"><div class="mh"><i></i><i></i><i></i><span>Error response</span></div><pre>{ "error": "invalid_domain" }</pre></div><h2 data-i18n="doc.err.h2b">Common codes</h2><div class="mock" style="overflow:auto"><table class="tb"><tr><th>HTTP</th><th>error</th><th data-i18n="doc.err.colmeaning">Meaning</th></tr><tr><td>401</td><td><code>unauthorized</code></td><td data-i18n="doc.err.row0">Missing or invalid API key</td></tr><tr><td>403</td><td><code>plan_limit</code></td><td data-i18n="doc.err.row1">The action would exceed your plan's limit, for example the number of domains</td></tr><tr><td>404</td><td><code>not_found</code></td><td data-i18n="doc.err.row2">The resource does not exist or does not belong to your account</td></tr><tr><td>409</td><td><code>exists</code></td><td data-i18n="doc.err.row3">A resource with this value already exists, for example a duplicate domain</td></tr><tr><td>422</td><td><code>invalid_domain</code></td><td data-i18n="doc.err.row4">The domain name is not a valid, syntactically correct domain</td></tr><tr><td>429</td><td><code>rate_limited</code></td><td data-i18n="doc.err.row5">Too many requests in a short time; slow down and retry</td></tr><tr><td>500</td><td><code>server_error</code></td><td data-i18n="doc.err.row6">Something failed on our side; safe to retry</td></tr></table></div><h2 data-i18n="doc.err.h2c">Retrying</h2><p data-i18n="doc.err.p2c">For 429 and 5xx responses, wait and retry with backoff. For 4xx responses other than 429, fix the request before retrying, since repeating the same invalid request will just fail again.</p></article><aside class="dtoc" id="dtoc"></aside></div></div>
-<div id="site-footer"></div>
+<div id="dh"></div>
+<div id="dm"></div>
+<div id="bd"></div>
+<aside id="ds"></aside>
+<main id="dc"><div class="wrap">
+<article class="pg">
+<div class="crumb" data-i18n="doc.nav.more">Reference</div>
+<div class="hd">
+<h1 data-i18n="doc.err.h1">Errors</h1>
+<div class="pa">
+<button type="button" class="c" aria-label="Copy page"><svg class="s" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+<button type="button" class="d" aria-label="More"><svg class="s" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
+</div>
+</div>
+<p class="sub" data-i18n="doc.err.lead">How Geserd reports problems, and what each error means.</p>
+<div class="body">
+
+<h2 data-i18n="doc.err.h2a">Error format</h2>
+<p data-i18n="doc.err.p2a">Every error response is JSON with an error field identifying the problem, and the HTTP status code reflects the category of failure: 4xx for something wrong with the request, 5xx for a problem on our side.</p>
+<div class="cb"><div class="ch"><b>Error response</b><button type="button" class="cp" data-i18n="doc.copy">Copy</button></div><pre>{ "error": "invalid_domain" }</pre></div>
+
+<h2 data-i18n="doc.err.h2b">Common codes</h2>
+<div class="tw"><table>
+<thead><tr><th>HTTP</th><th>error</th><th data-i18n="doc.err.colmeaning">Meaning</th></tr></thead>
+<tbody>
+<tr><td>401</td><td><code>unauthorized</code></td><td data-i18n="doc.err.row0">Missing or invalid API key</td></tr>
+<tr><td>403</td><td><code>plan_limit</code></td><td data-i18n="doc.err.row1">The action would exceed your plan's limit, for example the number of domains</td></tr>
+<tr><td>403</td><td><code>session_required</code></td><td data-i18n="doc.err.row1b">This action needs a dashboard session and cannot be done with an API key</td></tr>
+<tr><td>404</td><td><code>not_found</code></td><td data-i18n="doc.err.row2">The resource does not exist or does not belong to your account</td></tr>
+<tr><td>409</td><td><code>exists</code></td><td data-i18n="doc.err.row3">A resource with this value already exists, for example a duplicate domain</td></tr>
+<tr><td>422</td><td><code>invalid_domain</code></td><td data-i18n="doc.err.row4">The domain name is not a valid, syntactically correct domain</td></tr>
+<tr><td>429</td><td><code>rate_limited</code></td><td data-i18n="doc.err.row5">Too many requests in a short time; slow down and retry</td></tr>
+<tr><td>500</td><td><code>server_error</code></td><td data-i18n="doc.err.row6">Something failed on our side; safe to retry</td></tr>
+</tbody>
+</table></div>
+
+<h2 data-i18n="doc.err.h2c">Retrying</h2>
+<p data-i18n="doc.err.p2c">For 429 and 5xx responses, wait and retry with backoff. For 4xx responses other than 429, fix the request before retrying, since repeating the same invalid request will just fail again.</p>
+
+<div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
+<div class="pn2"></div>
+</div>
+</article>
+<aside class="toc" id="toc"></aside>
+</div></main>
+<div id="sm"><div class="box"><div class="in"><svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" placeholder="Search docs..." data-i18n-ph="doc.search"><kbd>ESC</kbd><button type="button" class="x" aria-label="Close"><svg class="s" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="rs"></div></div></div>
 <script src="/js/boot.js"></script>
 <script src="/docs/js/docs.js"></script>
 </body>

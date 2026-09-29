@@ -4,17 +4,65 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Introduction — Docs — Geserd</title>
-<meta name="description" content="Geserd is an email API for sending and receiving. Send transactional email from your own verified domain, accept inbound mail sent to it, and reply from the same address, all through one HTTP API.">
+<meta name="description" content="Geserd is an email API for developers: send transactional email from your own verified domain and receive replies on the same address.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/geserd.css">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/docs/js/theme.js"></script>
+<link rel="stylesheet" href="/docs/css/docs.css">
 </head>
 <body>
-<div class="doclight" id="docLight"><div class="doctop" id="docTop"></div>
-<div class="docs"><aside class="dside" id="dside"></aside><article class="dbody"><h1 class="grad" data-i18n="doc.intro.h1">Introduction</h1><p data-i18n="doc.intro.lead">Geserd is an email API for sending and receiving. Send transactional email from your own verified domain, accept inbound mail sent to it, and reply from the same address, all through one HTTP API.</p><div class="callout" data-i18n="doc.intro.cal">Geserd is in active development. This documentation describes the API as designed and some endpoints may not be live yet. The status page and changelog track what has actually shipped.</div><h2 data-i18n="doc.intro.h2a">What you can do</h2><p data-i18n="doc.intro.p2a">Verify a domain you own, then send email from any address on it, receive mail sent to that domain, get real-time events on a webhook for deliveries and inbound messages, and inspect every message and every API request in the dashboard.</p><h2 data-i18n="doc.intro.h2b">Base URL</h2><div class="mock"><div class="mh"><i></i><i></i><i></i><span>Base URL</span></div><pre>https://&lt;your-host&gt;/api</pre></div><p data-i18n="doc.intro.p2b">Replace &lt;your-host&gt; with the domain of your Geserd deployment. Every path in this documentation is relative to this base URL.</p><h2 data-i18n="doc.intro.h2c">Authentication</h2><p data-i18n="doc.intro.p2c">Create an API key in the dashboard and send it as a bearer token on every request. Keys are shown once at creation and stored on our side only as a hash, so keep a copy somewhere safe.</p><div class="mock"><div class="mh"><i></i><i></i><i></i><span>Header</span></div><pre>Authorization: Bearer gs_xxxxxxxx</pre></div><h2 data-i18n="doc.intro.h2d">Errors</h2><p data-i18n="doc.intro.p2d">Errors are returned as JSON with an error field and a matching HTTP status code. See the Errors page for the full list of codes and what causes each one.</p><h2 data-i18n="doc.intro.h2e">Next steps</h2><p data-i18n="doc.intro.p2e">Follow the <a href="/docs/quickstart/" class="dlink">Quickstart</a> to add a domain and send your first email in a few minutes.</p></article><aside class="dtoc" id="dtoc"></aside></div></div>
-<div id="site-footer"></div>
+<div id="dh"></div>
+<div id="dm"></div>
+<div id="bd"></div>
+<aside id="ds"></aside>
+<main id="dc"><div class="wrap">
+<article class="pg">
+<div class="crumb" data-i18n="doc.nav.start">Get started</div>
+<div class="hd">
+<h1 data-i18n="doc.intro.h1">Introduction</h1>
+<div class="pa">
+<button type="button" class="c" aria-label="Copy page"><svg class="s" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+<button type="button" class="d" aria-label="More"><svg class="s" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
+</div>
+</div>
+<p class="sub" data-i18n="doc.intro.lead">Geserd is an email API for developers.</p>
+<div class="body">
+<p data-i18n="doc.intro.need">To get started with Geserd, you'll need:</p>
+<ol>
+<li data-i18n="doc.intro.need1">Your own domain, <a href="/docs/quickstart/#domain">verified with Geserd</a></li>
+<li data-i18n="doc.intro.need2"><a href="/docs/quickstart/#api-key">A Geserd API key</a></li>
+</ol>
+<p data-i18n="doc.intro.ready">Then, you'll be ready to send and receive email through the API:</p>
+<ul>
+<li><b data-i18n="doc.intro.b1t">Sending:</b> <span data-i18n="doc.intro.b1d">personalized, event-driven transactional email from your verified domain</span></li>
+<li><b data-i18n="doc.intro.b2t">Receiving:</b> <span data-i18n="doc.intro.b2d">inbound mail delivered to your webhook, with replies sent from the same address</span></li>
+</ul>
+
+<h2 data-i18n="doc.nav.qs">Quickstart</h2>
+<p data-i18n="doc.intro.qslead">Learn how to get Geserd set up in your project.</p>
+<div class="cards two">
+<a class="card" href="/docs/quickstart/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg><b data-i18n="doc.nav.qs">Quickstart</b><span data-i18n="doc.qs.lead">Add a domain and send your first email in a few minutes.</span></a>
+<a class="card" href="/docs/api/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9l2 2-2 2M12 13h5"/></svg><b data-i18n="doc.nav.ref">API reference</b><span data-i18n="doc.api.lead">Every endpoint, its fields, and the shape of its response.</span></a>
+</div>
+
+<h2 data-i18n="doc.intro.h2explore">Explore</h2>
+<p data-i18n="doc.intro.pexplore">Discover the full range of features and capabilities.</p>
+<div class="cards">
+<a class="card" href="/features/sending/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg><b data-i18n="nav.sub.sending">Sending</b><span data-i18n="doc.explore.send">Track every message you send and its delivery status.</span></a>
+<a class="card" href="/features/domains/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9Z"/></svg><b data-i18n="nav.sub.domains">Domains</b><span data-i18n="doc.explore.domains">Verify a domain and manage its DNS records.</span></a>
+<a class="card" href="/features/webhooks/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18a4 4 0 1 1 1-7.9A5 5 0 0 1 19 12a3.5 3.5 0 0 1 0 7H9Z"/></svg><b data-i18n="nav.sub.webhooks">Webhooks</b><span data-i18n="doc.explore.webhooks">Get notified about every send, delivery and inbound event.</span></a>
+</div>
+
+<div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
+<div class="pn2"></div>
+</div>
+</article>
+<aside class="toc" id="toc"></aside>
+</div></main>
+<div id="sm"><div class="box"><div class="in"><svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" placeholder="Search docs..." data-i18n-ph="doc.search"><kbd>ESC</kbd><button type="button" class="x" aria-label="Close"><svg class="s" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="rs"></div></div></div>
 <script src="/js/boot.js"></script>
 <script src="/docs/js/docs.js"></script>
 </body>

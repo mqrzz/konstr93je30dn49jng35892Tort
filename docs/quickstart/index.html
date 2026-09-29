@@ -4,21 +4,61 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Quickstart — Docs — Geserd</title>
-<meta name="description" content="Add a domain and send your first email in a few minutes.">
+<meta name="description" content="Add a domain, create an API key and send your first email with Geserd in a few minutes.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/geserd.css">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/docs/js/theme.js"></script>
+<link rel="stylesheet" href="/docs/css/docs.css">
 </head>
 <body>
-<div class="doclight" id="docLight"><div class="doctop" id="docTop"></div>
-<div class="docs"><aside class="dside" id="dside"></aside><article class="dbody"><h1 class="grad" data-i18n="doc.qs.h1">Quickstart</h1><p data-i18n="doc.qs.lead">Add a domain and send your first email in a few minutes.</p><h2 data-i18n="doc.qs.h1a">1. Add a domain</h2><p data-i18n="doc.qs.p1a">In the dashboard, go to Domains and add the domain or subdomain you want to send and receive from. We recommend a subdomain such as mail.yourdomain.com to keep transactional reputation separate from your main domain.</p><h2 data-i18n="doc.qs.h1b">2. Add the DNS records</h2><p data-i18n="doc.qs.p1b">The dashboard shows the exact DKIM, SPF and MX records for your domain. Add them at your DNS provider, then click verify. Most providers propagate changes within minutes, though it can occasionally take longer.</p><h2 data-i18n="doc.qs.h1c">3. Create an API key</h2><p data-i18n="doc.qs.p1c">In API keys, create a new key and store it somewhere safe. It is shown once, in full, at creation time, and never again after that.</p><h2 data-i18n="doc.qs.h1d">4. Send an email</h2><div class="mock"><div class="mh"><i></i><i></i><i></i><span>POST /api/emails</span></div><pre><span class="k">curl</span> -X POST https://&lt;your-host&gt;/api/emails \
-  -H <span class="s">"Authorization: Bearer gs_xxxxxxxx"</span> \
-  -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{"from":"hi@yourdomain.com","to":"user@example.com",
-       "subject":"Hello","html":"&lt;strong&gt;it works&lt;/strong&gt;"}'</span></pre></div><p data-i18n="doc.qs.p1d">Until your domain is verified, new accounts can only send to their own account email, as a sandbox. Once verification succeeds, you can send to any address.</p><h2 data-i18n="doc.qs.h1e">5. Receive email</h2><p data-i18n="doc.qs.p1e">Point the MX record of your domain at your Geserd host and add a webhook endpoint in the dashboard. Incoming mail arrives at your endpoint as an email.received event, described in the API reference.</p></article><aside class="dtoc" id="dtoc"></aside></div></div>
-<div id="site-footer"></div>
+<div id="dh"></div>
+<div id="dm"></div>
+<div id="bd"></div>
+<aside id="ds"></aside>
+<main id="dc"><div class="wrap">
+<article class="pg">
+<div class="crumb" data-i18n="doc.nav.start">Get started</div>
+<div class="hd">
+<h1 data-i18n="doc.qs.h1">Quickstart</h1>
+<div class="pa">
+<button type="button" class="c" aria-label="Copy page"><svg class="s" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+<button type="button" class="d" aria-label="More"><svg class="s" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
+</div>
+</div>
+<p class="sub" data-i18n="doc.qs.lead">Add a domain and send your first email in a few minutes.</p>
+<div class="body">
+
+<h2 id="domain" data-i18n="doc.qs.h1a">1. Add a domain</h2>
+<p data-i18n="doc.qs.p1a">In the dashboard, go to Domains and add the domain or subdomain you want to send and receive from. We recommend a subdomain such as mail.yourdomain.com to keep transactional reputation separate from your main domain.</p>
+
+<h2 data-i18n="doc.qs.h1b">2. Add the DNS records</h2>
+<p data-i18n="doc.qs.p1b">The dashboard shows the exact DKIM, SPF and MX records for your domain. Add them at your DNS provider, then click verify.</p>
+<div class="note"><svg class="s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><div><p data-i18n="doc.qs.dnsnote">Most providers propagate DNS changes within minutes, though it can occasionally take longer.</p></div></div>
+
+<h2 id="api-key" data-i18n="doc.qs.h1c">3. Create an API key</h2>
+<p data-i18n="doc.qs.p1c">In API keys, create a new key and store it somewhere safe. It is shown once, in full, at creation time, and never again after that.</p>
+
+<h2 data-i18n="doc.qs.h1d">4. Send an email</h2>
+<div class="cb"><div class="ch"><b>cURL</b><button type="button" class="cp" data-i18n="doc.copy">Copy</button></div><pre>curl -X POST https://&lt;your-host&gt;/api/emails \
+  -H "Authorization: Bearer gs_xxxxxxxx" \
+  -H "Content-Type: application/json" \
+  -d '{"from":"hi@yourdomain.com","to":"user@example.com",
+       "subject":"Hello","html":"&lt;strong&gt;it works&lt;/strong&gt;"}'</pre></div>
+<p data-i18n="doc.qs.p1d">Until your domain is verified, new accounts can only send to their own account email, as a sandbox. Once verification succeeds, you can send to any address.</p>
+
+<h2 data-i18n="doc.qs.h1e">5. Receive email</h2>
+<p data-i18n="doc.qs.p1e">Point the MX record of your domain at your Geserd host and add a webhook endpoint in the dashboard. Incoming mail arrives at your endpoint as an email.received event, described in the API reference.</p>
+
+<div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
+<div class="pn2"></div>
+</div>
+</article>
+<aside class="toc" id="toc"></aside>
+</div></main>
+<div id="sm"><div class="box"><div class="in"><svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" placeholder="Search docs..." data-i18n-ph="doc.search"><kbd>ESC</kbd><button type="button" class="x" aria-label="Close"><svg class="s" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="rs"></div></div></div>
 <script src="/js/boot.js"></script>
 <script src="/docs/js/docs.js"></script>
 </body>
