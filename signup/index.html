@@ -4,103 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Sign up — Geserd</title>
-<meta name="description" content="Create an Geserd account to verify a domain and start sending and receiving email through the API.">
+<meta name="description" content="Create a Geserd account to verify a domain and start sending and receiving email through the API.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/geserd.css">
 </head>
-<body class="auth-body">
-<div class="auth-bg">
-  <div class="auth-glow"></div>
-  <svg viewBox="0 0 800 800" fill="none">
-    <g stroke="rgba(255,255,255,.10)" stroke-width="1.2">
-      <line x1="120" y1="180" x2="320" y2="280"/>
-      <line x1="320" y1="280" x2="320" y2="480"/>
-      <line x1="320" y1="480" x2="150" y2="600"/>
-      <line x1="320" y1="480" x2="520" y2="560"/>
-      <line x1="320" y1="280" x2="560" y2="220"/>
-      <line x1="560" y1="220" x2="700" y2="320"/>
-      <line x1="560" y1="220" x2="640" y2="80"/>
-    </g>
-    <g fill="rgba(255,255,255,.098)">
-      <circle cx="120" cy="180" r="5"/>
-      <circle cx="320" cy="280" r="6"/>
-      <circle cx="320" cy="480" r="6"/>
-      <circle cx="150" cy="600" r="5"/>
-      <circle cx="520" cy="560" r="5"/>
-      <circle cx="560" cy="220" r="6"/>
-      <circle cx="700" cy="320" r="5"/>
-      <circle cx="640" cy="80" r="5"/>
-    </g>
-  </svg>
-</div>
-
-<header class="auth-hdr"><a href="/" aria-label="Geserd"><img src="/assets/logo.svg" alt="Geserd"></a></header>
-
-<div class="auth-wrap">
-  <div class="auth-card">
-    <div class="auth-tabs mode-signup" id="authTabs">
-      <div class="auth-tabs-thumb"></div>
-      <button id="tab-login" onclick="AUTH.setMode('login')" data-i18n="auth.tab.login">Log in</button>
-      <button class="active" id="tab-signup" onclick="AUTH.setMode('signup')" data-i18n="auth.tab.signup">Sign up</button>
-    </div>
-
+<body class="auth-body" data-mode="signup">
+<div class="auth-shell">
+  <div class="auth-bgimg"><img src="/assets/auth-bg.webp" alt=""></div>
+  <a class="auth-home" href="/"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n="auth.home">Home</span></a>
+  <main class="auth-main">
     <div id="authStep1">
-      <h1 id="auth-title" data-i18n="auth.signup.title">Create your account</h1>
-      <p class="sub" id="auth-sub" data-i18n="auth.signup.sub">Set up sending and receiving in a few minutes</p>
-
-      <button class="oauth-btn" id="oauthGithub" onclick="AUTH.oauth('github')" hidden>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.53 10.53 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5z"/></svg>
-        <span data-i18n="auth.oauth.github">Continue with GitHub</span>
-      </button>
-      <button class="oauth-btn" id="oauthGoogle" onclick="AUTH.oauth('google')" hidden>
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.27c0-.85-.08-1.67-.22-2.45H12v4.63h6.46c-.28 1.5-1.13 2.77-2.4 3.62v3h3.88c2.27-2.09 3.56-5.17 3.56-8.8z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.94-2.9l-3.88-3c-1.08.72-2.45 1.15-4.06 1.15-3.12 0-5.77-2.11-6.71-4.94H1.28v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.29 14.31A7.2 7.2 0 0 1 4.9 12c0-.8.14-1.58.39-2.31v-3.1H1.28A12 12 0 0 0 0 12c0 1.94.46 3.77 1.28 5.4z"/><path fill="#EA4335" d="M12 4.75c1.76 0 3.34.61 4.58 1.8l3.43-3.43C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.28 6.6l4.01 3.1C6.23 6.86 8.88 4.75 12 4.75z"/></svg>
-        <span data-i18n="auth.oauth.google">Continue with Google</span>
-      </button>
-      <button class="oauth-btn" id="oauthYandex" onclick="AUTH.oauth('yandex')" hidden>
-        <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#FC3F1D"/><text x="12" y="16.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#fff">Я</text></svg>
-        <span data-i18n="auth.oauth.yandex">Continue with Yandex ID</span>
-      </button>
-
-      <div class="auth-divider" data-i18n="auth.divider">or by email</div>
-
-      <div class="field">
-        <label data-i18n="auth.email.label">Email</label>
-        <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email">
+      <div class="auth-top">
+        <img class="mark" src="/assets/logo-mark.svg" alt="Geserd">
+        <h1 data-i18n="auth.signup.h1">Create a Geserd account</h1>
+        <p><span data-i18n="auth.foot.tologin">Already have an account?</span> <a href="/login/" data-i18n="auth.foot.loginlink">Log in</a>.</p>
       </div>
-      <div class="field" id="field-name">
-        <label data-i18n="auth.name.label">Name</label>
-        <input type="text" id="authName" placeholder="What should we call you" autocomplete="name">
+      <div class="auth-oauth" id="oauthRow" data-ready="0">
+        <button type="button" class="gbtn" id="o-google" data-provider="google" hidden><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4285F4" d="M20 12.2c0-.6-.05-1.2-.15-1.7H12v3.2h4.5a3.9 3.9 0 0 1-1.7 2.5v2.1h2.7c1.6-1.5 2.5-3.6 2.5-6.1z"/><path fill="#34A853" d="M12 20.4c2.3 0 4.2-.8 5.5-2.1l-2.7-2.1c-.7.5-1.7.8-2.8.8-2.2 0-4-1.5-4.7-3.4H4.5v2.1a8.4 8.4 0 0 0 7.5 4.7z"/><path fill="#FBBC05" d="M7.3 13.6a5 5 0 0 1 0-3.2V8.3H4.5a8.4 8.4 0 0 0 0 7.4z"/><path fill="#EA4335" d="M12 6.9c1.2 0 2.3.4 3.2 1.2l2.4-2.4A8.4 8.4 0 0 0 4.5 8.3l2.8 2.1C8 8.4 9.8 6.9 12 6.9z"/></svg><span class="lbl" data-i18n="auth.o.google.signup">x</span><span class="dots"><i></i><i></i><i></i></span></button>
+        <button type="button" class="gbtn" id="o-github" data-provider="github" hidden><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.88 3.75-3.66 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 12 4z"/></svg><span class="lbl" data-i18n="auth.o.github.signup">x</span><span class="dots"><i></i><i></i><i></i></span></button>
+        <button type="button" class="gbtn" id="o-yandex" data-provider="yandex" hidden><svg width="24" height="24" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="8" fill="#FC3F1D"/><path d="M13.1 17.5h1.6V6.5h-2.3c-2.3 0-3.5 1.2-3.5 2.9 0 1.4.7 2.3 1.9 3.1l-2.1 5h1.7l1.9-4.5-.6-.4c-.9-.6-1.4-1.1-1.4-2.1 0-1 .7-1.7 2-1.7h.8z" fill="#fff"/></svg><span class="lbl" data-i18n="auth.o.yandex.signup">x</span><span class="dots"><i></i><i></i><i></i></span></button>
       </div>
-      <button class="auth-submit" id="submit-btn" onclick="AUTH.requestCode(this)">
-        <span class="spinner"></span>
-        <span class="btn-label" id="submit-label" data-i18n="auth.submit.signup">Create account</span>
-      </button>
-      <p class="auth-err" id="authErr" style="display:none"></p>
-
-      <p class="auth-foot" id="auth-foot"><span data-i18n="auth.foot.tologin">Already have an account?</span> <a href="#" data-switch="login" data-i18n="auth.foot.loginlink">Log in</a></p>
-      <p class="auth-region" data-i18n="auth.region.note">Available sign-in methods depend on your region: GitHub, Google or email everywhere, Yandex ID or email in Russia.</p>
+      <div class="auth-or"><hr><span data-i18n="auth.or">or</span><hr></div>
+      <form id="emailForm" novalidate>
+        <div class="af"><label for="authEmail"><span data-i18n="auth.email.label">Email</span><span class="lu2" id="luEmail" data-i18n="auth.last" hidden>Last used</span></label>
+        <input id="authEmail" name="email" type="email" autocomplete="email" placeholder="alan.turing@example.com" inputmode="email"></div>
+        <p class="auth-err" id="authErr" hidden></p>
+        <button class="gbtn auth-submit" id="submitBtn" type="submit" disabled><span class="lbl" data-i18n="auth.submit.signup">Create account</span><span class="dots"><i></i><i></i><i></i></span></button>
+      </form>
+      <p class="auth-terms"><span data-i18n="auth.terms.pre.signup">By signing up, you agree to our</span> <a target="_blank" href="/legal/terms/" data-i18n="auth.terms.terms">Terms</a>, <a target="_blank" href="/legal/aup/" data-i18n="auth.terms.aup">Acceptable Use</a>, <span data-i18n="auth.terms.and">and</span> <a target="_blank" href="/legal/privacy/" data-i18n="auth.terms.privacy">Privacy Policy</a>.</p>
+      <p class="auth-region" data-i18n="auth.region.note">Available sign-in methods depend on your region.</p>
     </div>
-
-    <div id="authStep2" style="display:none">
-      <h1 data-i18n="auth.code.h1">Check your email</h1>
-      <p class="sub" id="authCodeSub"></p>
-      <div class="field">
-        <label data-i18n="auth.code.label">Code</label>
-        <input type="text" id="authCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="000000">
+    <div id="authStep2" hidden>
+      <div class="auth-top">
+        <img class="mark" src="/assets/logo-mark.svg" alt="Geserd">
+        <h1 data-i18n="auth.code.h1">Check your email</h1>
+        <p id="authCodeSub"></p>
       </div>
-      <button class="auth-submit" id="verify-btn" onclick="AUTH.verifyCode(this)">
-        <span class="spinner"></span>
-        <span class="btn-label" data-i18n="auth.code.verify">Verify and continue</span>
-      </button>
-      <p class="auth-err" id="authErr2" style="display:none"></p>
-      <p class="auth-foot"><a href="#" onclick="AUTH.backToStep1();return false;" data-i18n="auth.code.back">Use a different email</a></p>
+      <form id="codeForm" novalidate>
+        <div class="af code"><label for="authCode"><span data-i18n="auth.code.label">Code</span></label>
+        <input id="authCode" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000"></div>
+        <p class="auth-err" id="authErr2" hidden></p>
+        <button class="gbtn auth-submit" id="verifyBtn" type="submit" disabled><span class="lbl" data-i18n="auth.code.verify">Verify and continue</span><span class="dots"><i></i><i></i><i></i></span></button>
+      </form>
+      <p class="auth-sub2"><button type="button" id="resendBtn" data-i18n="auth.code.resend">Resend code</button><span class="sep"></span><button type="button" id="backBtn" data-i18n="auth.code.back">Use a different email</button></p>
     </div>
-  </div>
+  </main>
 </div>
-
 <script src="/js/boot.js"></script>
 <script src="/js/auth.js"></script>
 </body>

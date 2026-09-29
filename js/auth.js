@@ -1,158 +1,96 @@
-/* js/auth.js — login/signup page logic. Only loaded on /login/ and /signup/.
-   Tabs switch between the two modes (with URL history so /login/ and /signup/ both work
-   directly). OAuth buttons are shown per region: RU gets Yandex + email only, everyone
-   else gets GitHub + Google + email. The email flow is a real two-step request-code /
-   verify-code call against the live API (backend/src/routes/auth.js) — errors are read
-   from the JSON body the backend sends ({error:"..."}) and mapped to a message per code,
-   instead of one blanket "not available yet" text. */
+/* js/auth.js — /login/ and /signup/. Layout follows the Resend sign-up reference (see css/geserd.css "auth pages").
+   - Region: RU sees only Yandex ID + email; everyone else GitHub + Google + email. The backend enforces the same rule.
+   - "Last used": the method of the last successful sign-in / OAuth click is kept in localStorage (geserd_last_method)
+     and marked with a "Last used" pill on that button (or next to the Email label).
+   - Email flow: POST /api/auth/request-code -> code screen -> POST /api/auth/verify-code. Backend errors are mapped per code. */
 (function(){
-function t(k,d){return (window.GESERD&&GESERD.t)?GESERD.t(k,d):d}
-var email="";
+var LS="geserd_last_method",email="",cool=null;
+function $(i){return document.getElementById(i)}
+function t(k,d){return(window.GESERD&&GESERD.t)?GESERD.t(k,d):d}
+function api(){return(window.GESERD&&GESERD.api)||"/api"}
+function getLast(){try{return localStorage.getItem(LS)}catch(e){return null}}
+function setLast(m){try{localStorage.setItem(LS,m)}catch(e){}}
+function show(el,on){if(el)el.hidden=!on}
+function err(id,msg){var e=$(id);if(!e)return;e.textContent=msg||"";e.hidden=!msg}
 
-function setMode(mode,skipPush){
-  var tabs=document.getElementById("authTabs");
-  if(!tabs)return;
-  var isSignup=mode==="signup";
-  tabs.classList.toggle("mode-signup",isSignup);
-  document.getElementById("tab-login").classList.toggle("active",!isSignup);
-  document.getElementById("tab-signup").classList.toggle("active",isSignup);
-
-  var title=document.getElementById("auth-title"),sub=document.getElementById("auth-sub");
-  title.style.opacity=0;sub.style.opacity=0;
-  setTimeout(function(){
-    title.textContent=isSignup?t("auth.signup.title","Create your account"):t("auth.login.title","Welcome back");
-    sub.textContent=isSignup?t("auth.signup.sub","Set up sending and receiving in a few minutes"):t("auth.login.sub","Log in to keep managing your domains and sending");
-    title.style.opacity=1;sub.style.opacity=1;
-  },150);
-
-  document.getElementById("field-name").classList.toggle("collapsed",!isSignup);
-  document.getElementById("submit-label").textContent=isSignup?t("auth.submit.signup","Create account"):t("auth.submit.login","Get a code by email");
-  var foot=document.getElementById("auth-foot");
-  foot.innerHTML=isSignup
-    ? t("auth.foot.tologin","Already have an account?")+' <a href="#" data-switch="login">'+t("auth.foot.loginlink","Log in")+"</a>"
-    : t("auth.foot.tosignup","Don't have an account?")+' <a href="#" data-switch="signup">'+t("auth.foot.signuplink","Sign up")+"</a>";
-  foot.querySelector("a").addEventListener("click",function(e){e.preventDefault();setMode(this.dataset.switch)});
-
-  if(!skipPush){
-    var path=isSignup?"/signup/":"/login/";
-    if(location.pathname!==path) history.pushState({mode:mode},"",path+location.search);
-  }
+/* ---------- region + last used ---------- */
+function paint(cc){
+  var ru=cc==="RU",order=ru?["yandex"]:["google","github"];
+  ["google","github","yandex"].forEach(function(p){var b=$("o-"+p);if(b){show(b,order.indexOf(p)>-1);var old=b.querySelector(".lu");if(old)old.remove()}});
+  var last=getLast(),avail=order.concat(["email"]);
+  if(avail.indexOf(last)<0)last=null;
+  show($("luEmail"),last==="email");
+  if(last&&last!=="email"){var b=$("o-"+last),s=document.createElement("span");s.className="lu";s.textContent=t("auth.last","Last used");b.appendChild(s)}
+  $("oauthRow").setAttribute("data-ready","1");
+}
+function region(){
+  var g=(window.GESERD&&GESERD.geo)?GESERD.geo:Promise.resolve(null);
+  paint((window.GESERD&&GESERD.country)||null);           /* immediate paint from cached country, then confirm */
+  g.then(paint);
+}
+function oauth(p,btn){
+  btn.classList.add("loading");setLast(p);
+  location.href=api()+"/auth/oauth/"+p+"?next="+encodeURIComponent(location.pathname);
 }
 
-function applyRegion(){
-  (window.GESERD&&GESERD.geo?GESERD.geo:Promise.resolve(null)).then(function(cc){
-    var ru=cc==="RU";
-    var gh=document.getElementById("oauthGithub"),go=document.getElementById("oauthGoogle"),ya=document.getElementById("oauthYandex");
-    if(gh)gh.hidden=ru;
-    if(go)go.hidden=ru;
-    if(ya)ya.hidden=!ru;
-  });
+/* ---------- API ---------- */
+function msg(code){
+  var M={invalid_email:["auth.error.email","Enter a valid email address"],rate_limited:["auth.error.rate","Too many attempts — wait a minute and try again"],
+   mail_failed:["auth.error.mail","We couldn't send the email right now — try again shortly"],expired_or_missing:["auth.error.expired","This code expired — request a new one"],
+   too_many_attempts:["auth.error.attempts","Too many wrong attempts — request a new code"],wrong_code:["auth.error.code","Wrong code — check the email and try again"],
+   network:["auth.error.network","Couldn't reach the server — check your connection and try again"]};
+  var m=M[code]||M.network;return t(m[0],m[1]);
 }
-
-function oauth(provider){
-  var api=(window.GESERD&&GESERD.api)||"/api";
-  location.href=api+"/auth/oauth/"+provider+"?next="+encodeURIComponent(location.pathname);
+function post(path,body){
+  return fetch(api()+path,{method:"POST",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify(body)})
+   .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok)throw{code:j.error||"network"};return j})},
+         function(){throw{code:"network"}});
 }
+function busy(b,on){b.classList.toggle("loading",on);b.disabled=on}
 
-function showErr(id,msg){
-  var el=document.getElementById(id);
-  if(!el)return;
-  el.textContent=msg;
-  el.style.display=msg?"block":"none";
+/* ---------- email step ---------- */
+function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)}
+function sendCode(btn,resend){
+  var v=$("authEmail").value.trim().toLowerCase();
+  err("authErr","");$("authEmail").removeAttribute("aria-invalid");
+  if(!validEmail(v)){$("authEmail").setAttribute("aria-invalid","true");err("authErr",t("auth.error.email","Enter a valid email address"));return}
+  email=v;busy(btn,true);
+  post("/auth/request-code",{email:email,mode:document.body.dataset.mode}).then(function(){
+    busy(btn,false);
+    $("authCodeSub").textContent=t("auth.code.sub","We sent a 6-digit code to")+" "+email;
+    show($("authStep1"),false);show($("authStep2"),true);$("authCode").value="";$("verifyBtn").disabled=true;$("authCode").focus();
+    startCool();
+  }).catch(function(e){busy(btn,false);if(!resend)err("authErr",msg(e.code));else err("authErr2",msg(e.code))});
 }
-
-/* Reads {error:"code"} from a failed API response (falling back to a network-level message
-   when the response has no body/JSON, e.g. the request never reached the server) and returns
-   the right localized string for it. */
-function apiErrMsg(err){
-  var code=err&&err.code;
-  var MAP={
-    invalid_email:["auth.error.email","Enter a valid email address"],
-    rate_limited:["auth.error.rate","Too many attempts — wait a minute and try again"],
-    mail_failed:["auth.error.mail","We couldn't send the email right now — try again shortly"],
-    expired_or_missing:["auth.error.expired","This code expired — request a new one"],
-    too_many_attempts:["auth.error.attempts","Too many wrong attempts — request a new code"],
-    wrong_code:["auth.error.code","Enter the code from your email"],
-    network:["auth.error.network","Couldn't reach the server — check your connection and try again"]
-  };
-  var m=MAP[code]||MAP.network;
-  return t(m[0],m[1]);
+function startCool(){
+  var rb=$("resendBtn"),s=60;clearInterval(cool);rb.disabled=true;
+  function tick(){if(s<=0){clearInterval(cool);rb.disabled=false;rb.textContent=t("auth.code.resend","Resend code");return}
+    rb.textContent=t("auth.code.wait","Resend in {s}s").replace("{s}",s);s--}
+  tick();cool=setInterval(tick,1000);
 }
-
-function requestCode(btn){
-  if(btn.classList.contains("loading"))return;
-  var isSignup=document.getElementById("authTabs").classList.contains("mode-signup");
-  var emailInput=document.getElementById("authEmail").value.trim();
-  var nameInput=document.getElementById("authName").value.trim();
-  showErr("authErr","");
-  if(!emailInput||emailInput.indexOf("@")<1){showErr("authErr",t("auth.error.email","Enter a valid email address"));return}
-  if(isSignup&&!nameInput){showErr("authErr",t("auth.error.name","Enter your name"));return}
-  email=emailInput;
-  btn.classList.add("loading");
-  btn.disabled=true;
-  var api=(window.GESERD&&GESERD.api)||"/api";
-  fetch(api+"/auth/request-code",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(isSignup?{email:email,name:nameInput,mode:"signup"}:{email:email,mode:"login"})
-  }).then(function(r){
-    return r.json().catch(function(){return{}}).then(function(body){
-      if(!r.ok)throw{code:body.error||"network"};
-      return body;
-    });
-  }).then(function(){
-    btn.classList.remove("loading");btn.disabled=false;
-    document.getElementById("authCodeSub").textContent=t("auth.code.sub","We sent a 6-digit code to")+" "+email;
-    document.getElementById("authStep1").style.display="none";
-    document.getElementById("authStep2").style.display="block";
-    document.getElementById("authCode").focus();
-  }).catch(function(err){
-    btn.classList.remove("loading");btn.disabled=false;
-    showErr("authErr",apiErrMsg(err));
-  });
+function verify(btn){
+  var c=$("authCode").value.trim();err("authErr2","");
+  if(!/^\d{6}$/.test(c)){err("authErr2",t("auth.error.code","Enter the code from your email"));return}
+  busy(btn,true);
+  post("/auth/verify-code",{email:email,code:c}).then(function(){setLast("email");location.href="/app/"})
+   .catch(function(e){busy(btn,false);err("authErr2",msg(e.code));if(e.code==="expired_or_missing"||e.code==="too_many_attempts")$("resendBtn").disabled=false});
 }
-
-function verifyCode(btn){
-  if(btn.classList.contains("loading"))return;
-  var code=document.getElementById("authCode").value.trim();
-  showErr("authErr2","");
-  if(!/^\d{4,8}$/.test(code)){showErr("authErr2",t("auth.error.code","Enter the code from your email"));return}
-  btn.classList.add("loading");
-  btn.disabled=true;
-  var api=(window.GESERD&&GESERD.api)||"/api";
-  fetch(api+"/auth/verify-code",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({email:email,code:code})
-  }).then(function(r){
-    return r.json().catch(function(){return{}}).then(function(body){
-      if(!r.ok)throw{code:body.error||"network"};
-      return body;
-    });
-  }).then(function(){
-    location.href="/app/";
-  }).catch(function(err){
-    btn.classList.remove("loading");btn.disabled=false;
-    showErr("authErr2",apiErrMsg(err));
-  });
-}
-
-function backToStep1(){
-  document.getElementById("authStep2").style.display="none";
-  document.getElementById("authStep1").style.display="block";
-  showErr("authErr2","");
-}
-
-window.AUTH={setMode:setMode,oauth:oauth,requestCode:requestCode,verifyCode:verifyCode,backToStep1:backToStep1};
 
 function init(){
-  var initial=location.pathname.indexOf("/signup")===0?"signup":"login";
-  var q=new URLSearchParams(location.search).get("mode");
-  if(q==="signup"||q==="login")initial=q;
-  setMode(initial,true);
-  applyRegion();
-  window.addEventListener("popstate",function(e){setMode((e.state&&e.state.mode)||(location.pathname.indexOf("/signup")===0?"signup":"login"),true)});
+  region();
+  ["google","github","yandex"].forEach(function(p){var b=$("o-"+p);if(b)b.addEventListener("click",function(){oauth(p,b)})});
+  var em=$("authEmail"),sb=$("submitBtn");
+  em.addEventListener("input",function(){sb.disabled=!validEmail(em.value.trim());em.removeAttribute("aria-invalid");err("authErr","")});
+  $("emailForm").addEventListener("submit",function(e){e.preventDefault();if(!sb.disabled)sendCode(sb,false)});
+  var ci=$("authCode"),vb=$("verifyBtn");
+  ci.addEventListener("input",function(){ci.value=ci.value.replace(/\D/g,"").slice(0,6);vb.disabled=ci.value.length!==6;err("authErr2","");if(ci.value.length===6)verify(vb)});
+  $("codeForm").addEventListener("submit",function(e){e.preventDefault();if(!vb.disabled)verify(vb)});
+  $("resendBtn").addEventListener("click",function(){var b=$("resendBtn");if(b.disabled)return;sendCode(sb,true)});
+  $("backBtn").addEventListener("click",function(){clearInterval(cool);show($("authStep2"),false);show($("authStep1"),true);err("authErr2","");em.focus()});
+  var p=new URLSearchParams(location.search).get("email");if(p){em.value=p;sb.disabled=!validEmail(p)}
 }
-var go=function(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",init):init()};
-(window.GESERD&&GESERD.ready?GESERD.ready:Promise.resolve()).then(go);
+/* boot.js appends the site scripts asynchronously, so GESERD may not exist yet when this file runs */
+function whenReady(n){if(window.GESERD&&GESERD.ready&&GESERD.geo)return GESERD.ready.then(start);if(n>200)return start();setTimeout(function(){whenReady(n+1)},25)}
+function start(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",init):init()}
+whenReady(0);
 })();
