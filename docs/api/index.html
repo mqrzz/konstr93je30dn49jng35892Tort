@@ -61,8 +61,8 @@
 </div>
 </article>
 <aside class="side">
-<div class="cb"><div class="ch"><b>POST /api/domains</b><button type="button" class="cp" data-i18n="doc.copy">Copy</button></div><pre>{ "name": "mail.yourdomain.com" }</pre></div>
-<div class="cb"><div class="ch"><b>Response · 201</b><button type="button" class="cp" data-i18n="doc.copy">Copy</button></div><pre>{
+<div class="cb"><div class="ch"><b>POST /api/domains</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>{ "name": "mail.yourdomain.com" }</pre></div>
+<div class="cb"><div class="ch"><b>Response · 201</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>{
   "id": "5f2e...",
   "name": "mail.yourdomain.com",
   "status": "pending",
@@ -75,14 +75,14 @@
     { "purpose": "dmarc", "type": "TXT", "name": "_dmarc", "value": "v=DMARC1; p=none" }
   ]
 }</pre></div>
-<div class="cb"><div class="ch"><b>POST /api/domains/:id/verify · 200</b><button type="button" class="cp" data-i18n="doc.copy">Copy</button></div><pre>{
+<div class="cb"><div class="ch"><b>POST /api/domains/:id/verify · 200</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>{
   "status": "verified",
   "sending_ok": true,
   "receiving_ok": true,
   "checks": { "dkim": true, "spf": true, "mx": true }
 }</pre></div>
-<div class="cb"><div class="ch"><b>POST /api/emails · 202</b><button type="button" class="cp" data-i18n="doc.copy">Copy</button></div><pre>{ "id": "8f2c1e0a-4b7d", "status": "queued" }</pre></div>
-<div class="cb"><div class="ch"><b>email.received</b><button type="button" class="cp" data-i18n="doc.copy">Copy</button></div><pre>{
+<div class="cb"><div class="ch"><b>POST /api/emails · 202</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>{ "id": "8f2c1e0a-4b7d", "status": "queued" }</pre></div>
+<div class="cb"><div class="ch"><b>email.received</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>{
   "type": "email.received",
   "data": {
     "id": "...",

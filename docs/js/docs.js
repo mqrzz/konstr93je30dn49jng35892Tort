@@ -47,7 +47,7 @@ function buildHeader(){
   '<a href="/docs/api/" class="'+(onApi?"on":"")+'">'+svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9l2 2-2 2M12 13h5"/>')+t("doc.tab.api","API Reference")+'</a>'+
  '</div>'+
  '<div class="end">'+
-  '<button type="button" class="hb o" id="dSearchBtn">'+I_SEARCH+'<span class="sr">'+t("doc.search","Search docs")+'</span></button>'+
+  '<span class="hlg">'+(window.GESERD&&GESERD.langMenu?GESERD.langMenu():'')+'</span>'+
   '<a class="hb o si" href="/login/">'+t("nav.login","Log in")+'</a>'+
   '<a class="hb k" href="/signup/">'+t("nav.start","Get started")+'</a>'+
   '<button type="button" class="hb o m" id="dMenuBtn" aria-label="'+t("doc.menu","Docs menu")+'">'+I_MENU+'</button>'+
@@ -72,11 +72,11 @@ function buildSidebar(){
   '<a href="/docs/api/" class="'+(here()==="/docs/api/"?"on":"")+'">'+svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9l2 2-2 2M12 13h5"/>')+t("doc.tab.api","API Reference")+'</a>'+
  '</div>'+
  '<nav class="nav">'+sideNav()+'</nav>'+
- '<div class="foot"><div class="tg" id="dTheme">'+
-   '<button type="button" data-m="system" title="'+t("app.theme.system","System")+'">'+I_MON+'</button>'+
-   '<button type="button" data-m="light" title="'+t("app.theme.light","Light")+'">'+I_SUN+'</button>'+
-   '<button type="button" data-m="dark" title="'+t("app.theme.dark","Dark")+'">'+I_MOON+'</button>'+
- '</div></div>'+
+ '<div class="foot"><div class="tl">'+t("doc.theme","Theme")+'</div><div class="tg" id="dTheme">'+
+   '<button type="button" data-m="system">'+t("app.theme.system","System")+'</button>'+
+   '<button type="button" data-m="light">'+t("app.theme.light","Light")+'</button>'+
+   '<button type="button" data-m="dark">'+t("app.theme.dark","Dark")+'</button>'+
+ '</div>'+(window.GESERD&&GESERD.langMenu?'<div class="tl">'+t("doc.language","Language")+'</div><div class="slg">'+GESERD.langMenu()+'</div>':'')+'</div>'+
  '<div class="mb"><a class="hb o" href="/login/" style="flex:1;justify-content:center">'+t("nav.login","Log in")+'</a><a class="hb k" href="/signup/" style="flex:1;justify-content:center">'+t("nav.start","Get started")+'</a></div>';
 }
 
@@ -232,8 +232,7 @@ function mountSearch(){
   if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openSearch()}
   else if(e.key==="Escape")closeSearch();
  });
- document.getElementById("dSearchBtn").addEventListener("click",openSearch);
- document.getElementById("dSearchBtn2").addEventListener("click",openSearch);
+  document.getElementById("dSearchBtn2").addEventListener("click",openSearch);
 }
 
 /* ================= mobile drawer ================= */
@@ -244,8 +243,23 @@ function mountMobile(){
  bd.addEventListener("click",function(){open(false)});
  ds.addEventListener("click",function(e){if(e.target.closest(".nav a, .mt a"))open(false)});
  var dm=document.getElementById("dm"),crumb=document.querySelector(".crumb"),h1=document.querySelector(".pg h1");
- if(dm)dm.innerHTML='<button type="button" id="dMenuBtn2" aria-label="'+t("doc.menu","Docs menu")+'">'+I_MENU+'</button><span>'+(crumb?crumb.textContent:"")+'</span><span class="sep">'+I_CHEV+'</span><b>'+(h1?h1.textContent:"")+'</b>';
- var b2=document.getElementById("dMenuBtn2");if(b2)b2.addEventListener("click",function(){open(!ds.classList.contains("open"))});
+ if(dm)dm.innerHTML='<span>'+(crumb?crumb.textContent:"")+'</span><span class="sep">'+I_CHEV+'</span><b>'+(h1?h1.textContent:"")+'</b>';
+ 
+}
+
+/* ================= code blocks: copy ================= */
+function codeCopy(){
+ document.querySelectorAll(".cb .cp").forEach(function(b){
+  var lbl=b.textContent;
+  b.innerHTML=I_COPY+'<span>'+lbl+'</span>';
+  b.addEventListener("click",function(){
+   var pre=b.closest(".cb").querySelector("pre");if(!pre)return;
+   copyText(pre.innerText.replace(/\s+$/,"")).then(function(){
+    b.classList.add("ok");b.innerHTML=I_CHECK+'<span>'+t("doc.copied","Copied")+'</span>';
+    setTimeout(function(){b.classList.remove("ok");b.innerHTML=I_COPY+'<span>'+lbl+'</span>'},1600);
+   });
+  });
+ });
 }
 
 /* ================= mount ================= */
@@ -261,7 +275,11 @@ function mount(){
  themeCtl(ds);
  mountMobile();
  mountSearch();
+ codeCopy();
+ if(window.GESERD&&GESERD.bindLang)GESERD.bindLang(document);
 }
 var go=function(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",mount):mount()};
-(window.GESERD&&GESERD.ready?GESERD.ready:Promise.resolve()).then(go);
+/* boot.js appends the site scripts (config/i18n/nav) AFTER this file runs: wait for them, otherwise the whole docs shell renders untranslated */
+function wait(n){if(window.GESERD&&GESERD.ready&&GESERD.langMenu)return GESERD.ready.then(go);if(n>200)return go();setTimeout(function(){wait(n+1)},25)}
+wait(0);
 })();

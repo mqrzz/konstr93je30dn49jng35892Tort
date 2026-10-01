@@ -31,7 +31,7 @@ svg.i{width:16px;height:16px;fill:currentColor;flex:none}svg.s{width:16px;height
 #ds .grp{margin:0 0 24px}#ds .grp h5{margin:0 0 8px;padding:0 8px 0 16px;font-size:14px;line-height:20px;font-weight:700;color:var(--t1)}
 #ds .grp a{display:block;margin:0 0 1px;padding:6px 12px 6px 16px;border-radius:12px;color:var(--t2)}#ds .grp a:hover{background:var(--hov)}#ds .grp a.on{background:var(--act);color:var(--t1)}
 #ds .foot{padding:8px 0 8px 16px;border-top:1px solid var(--bd)}
-.tg{display:inline-flex;padding:4px;border:1px solid var(--bd);border-radius:9999px;gap:2px}.tg button{width:18px;height:18px;border-radius:9999px;display:flex;align-items:center;justify-content:center;color:var(--t4)}.tg button svg{width:12px;height:12px}.tg button.on{background:var(--act);color:var(--t1)}
+.tg{display:flex;width:100%;padding:3px;border:1px solid var(--bd);border-radius:12px;gap:2px}.tg button{flex:1;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--t4);font-size:13px;font-weight:500}.tg button.on{background:var(--act);color:var(--t1)}
 /* card */
 #dc{position:fixed;top:56px;left:264px;right:8px;bottom:8px;overflow:auto;background:var(--card);border:1px solid var(--bd);border-radius:16px;scroll-behavior:smooth}
 .wrap{max-width:928px;margin:0 auto;padding:48px 0 0 48px;display:grid;grid-template-columns:576px 264px;column-gap:88px;align-items:start}
@@ -104,3 +104,32 @@ body.api .wrap{max-width:1040px;grid-template-columns:minmax(0,520px) 400px;colu
  #bd{position:fixed;inset:0;z-index:40;background:var(--ovl);display:none}#bd.open{display:block}
 }
 @media(min-width:1024px){#ds .mt,#ds .mb{display:none}}
+
+/* --- docs: theme buttons readable, language dropdown, code copy, full-bleed card on phones --- */
+#ds .foot{display:flex;flex-direction:column;gap:8px;padding:12px 16px}
+#ds .foot .tl{font-size:12px;color:var(--t5);margin-top:4px}
+#ds .foot .slg .lg{width:100%}#ds .foot .slg .lgb{width:100%;justify-content:flex-start;background:transparent;border-color:var(--bd);color:var(--t3)}#ds .foot .slg .lgb svg:last-child{margin-left:auto}
+#ds .foot .slg .lgp{top:auto;bottom:calc(100% + 8px);left:0;right:0;background:var(--bg);border-color:var(--bd)}#ds .foot .slg .lgi{color:var(--t3)}#ds .foot .slg .lgi:hover,#ds .foot .slg .lgi.on{color:var(--t1);background:var(--hov)}
+#dh .hlg .lgb{height:32px;padding:0 10px;font-size:13px;background:transparent;border-color:var(--bd);color:var(--t3)}#dh .hlg .lgp{background:var(--bg);border-color:var(--bd)}#dh .hlg .lgi{color:var(--t3)}#dh .hlg .lgi:hover,#dh .hlg .lgi.on{color:var(--t1);background:var(--hov)}
+.cb .cp svg{width:14px;height:14px}.cb .cp.ok{color:var(--t1)}
+@media(max-width:1023px){
+ #dh .hlg{display:none}
+ #dm{position:fixed;top:56px;height:44px;padding:0 16px;gap:8px;border-bottom:1px solid var(--bd)}
+ #dc{top:100px;left:0;right:0;bottom:0;border:0;border-radius:0}
+ .wrap{padding:24px 16px 0;max-width:100%}.cb pre{font-size:12.5px}
+ .pg,.pg .body{overflow-wrap:anywhere}
+}
+/* the wordmark is a light metallic gradient: darken it on the light theme so it stays readable */
+html[data-theme="light"] #dh .logo img{filter:invert(1) brightness(.3)}
+@media (prefers-color-scheme:light){html:not([data-theme]) #dh .logo img{filter:invert(1) brightness(.3)}}
+
+/* --- language dropdown (docs does not load geserd.css, so the component's base rules live here too) --- */
+.lg{position:relative;display:inline-block}
+.lgb{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--bd);border-radius:10px;background:transparent;color:var(--t3);font:500 13.5px inherit;font-family:inherit;cursor:pointer;white-space:nowrap}
+.lgb:hover,.lg.open .lgb{color:var(--t1);background:var(--hov)}.lgb svg{flex:none}.lgb svg:last-child{opacity:.7;transition:transform .2s}.lg.open .lgb svg:last-child{transform:rotate(180deg)}
+.lgp{position:absolute;right:0;top:calc(100% + 8px);z-index:80;min-width:180px;max-height:320px;overflow-y:auto;padding:6px;border:1px solid var(--bd);border-radius:14px;background:var(--bg);box-shadow:0 20px 40px rgba(0,0,0,.35);display:none}
+.lg.open .lgp{display:block}
+.lgi{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;height:36px;padding:0 10px;border:0;border-radius:9px;background:none;color:var(--t3);font:500 13.5px inherit;font-family:inherit;text-align:left;cursor:pointer}
+.lgi:hover{background:var(--hov);color:var(--t1)}.lgi.on{color:var(--t1)}
+#dh .hlg{display:flex;align-items:center}
+.sb .sbtn{gap:8px}.sb .sbtn .l{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sb .sbtn kbd{flex:none;white-space:nowrap}

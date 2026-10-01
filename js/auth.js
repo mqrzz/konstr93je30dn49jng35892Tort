@@ -14,19 +14,21 @@ function show(el,on){if(el)el.hidden=!on}
 function err(id,msg){var e=$(id);if(!e)return;e.textContent=msg||"";e.hidden=!msg}
 
 /* ---------- region + last used ---------- */
-function paint(cc){
-  var ru=cc==="RU",order=ru?["yandex"]:["google","github"];
+function paint(providers){
+  var order=providers&&providers.length?providers:[];
   ["google","github","yandex"].forEach(function(p){var b=$("o-"+p);if(b){show(b,order.indexOf(p)>-1);var old=b.querySelector(".lu");if(old)old.remove()}});
   var last=getLast(),avail=order.concat(["email"]);
   if(avail.indexOf(last)<0)last=null;
   show($("luEmail"),last==="email");
   if(last&&last!=="email"){var b=$("o-"+last),s=document.createElement("span");s.className="lu";s.textContent=t("auth.last","Last used");b.appendChild(s)}
   $("oauthRow").setAttribute("data-ready","1");
+  if(!order.length)$("oauthRow").style.display="none",document.querySelector(".auth-or").style.display="none";
 }
+/* Buttons are drawn from /api/auth/geo: the SAME function the server uses to allow/deny an OAuth start, so the UI can never offer a
+   provider the server will refuse. If the API is unreachable we offer nothing but email (safe default). */
 function region(){
-  var g=(window.GESERD&&GESERD.geo)?GESERD.geo:Promise.resolve(null);
-  paint((window.GESERD&&GESERD.country)||null);           /* immediate paint from cached country, then confirm */
-  g.then(paint);
+  fetch(api()+"/auth/geo",{credentials:"same-origin",cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()})
+   .then(function(j){paint(j.providers||[])}).catch(function(){paint([])});
 }
 function oauth(p,btn){
   btn.classList.add("loading");setLast(p);
@@ -78,6 +80,7 @@ function verify(btn){
 
 function init(){
   region();
+  var al=$("authLang");if(al&&window.GESERD&&GESERD.langMenu){al.innerHTML=GESERD.langMenu();GESERD.bindLang(al)}
   ["google","github","yandex"].forEach(function(p){var b=$("o-"+p);if(b)b.addEventListener("click",function(){oauth(p,b)})});
   var em=$("authEmail"),sb=$("submitBtn");
   em.addEventListener("input",function(){sb.disabled=!validEmail(em.value.trim());em.removeAttribute("aria-invalid");err("authErr","")});
@@ -90,7 +93,7 @@ function init(){
   var p=new URLSearchParams(location.search).get("email");if(p){em.value=p;sb.disabled=!validEmail(p)}
 }
 /* boot.js appends the site scripts asynchronously, so GESERD may not exist yet when this file runs */
-function whenReady(n){if(window.GESERD&&GESERD.ready&&GESERD.geo)return GESERD.ready.then(start);if(n>200)return start();setTimeout(function(){whenReady(n+1)},25)}
+function whenReady(n){if(window.GESERD&&GESERD.ready&&GESERD.langMenu)return GESERD.ready.then(start);if(n>200)return start();setTimeout(function(){whenReady(n+1)},25)}
 function start(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",init):init()}
 whenReady(0);
 })();

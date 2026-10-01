@@ -1,9 +1,9 @@
 /* docs/js/theme.js — must load in <head>, before docs.css paints, so there is no flash.
    Independent of the dashboard's app-theme.js: the dashboard defaults to dark by design,
-   the docs default to "system" (like the Resend reference) unless the visitor picks one. */
+   the docs default to dark like the rest of the site unless the visitor picks another mode. */
 (function(){
 var K="geserd_doctheme";
-function get(){try{return localStorage.getItem(K)||"system"}catch(e){return "system"}}
+function get(){try{return localStorage.getItem(K)||"dark"}catch(e){return "dark"}}
 function apply(m){if(m==="system")document.documentElement.removeAttribute("data-theme");else document.documentElement.setAttribute("data-theme",m)}
 function set(m){try{localStorage.setItem(K,m)}catch(e){}apply(m)}
 apply(get());

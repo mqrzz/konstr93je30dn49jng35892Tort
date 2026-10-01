@@ -35,7 +35,7 @@
 <p data-i18n="doc.rl.p2a">Every plan has a monthly send limit and a daily send limit, plus a separate monthly inbound limit. Hitting the daily limit only blocks sending until the next day; hitting the monthly limit blocks sending until the plan resets or you upgrade. See the <a href="/pricing/">pricing page</a> for the exact numbers per plan.</p>
 
 <h2 data-i18n="doc.rl.h2b">Response when limited</h2>
-<div class="cb"><div class="ch"><b>429</b><button type="button" class="cp" data-i18n="doc.copy">Copy</button></div><pre>{ "error": "plan_limit" }</pre></div>
+<div class="cb"><div class="ch"><b>429</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>{ "error": "plan_limit" }</pre></div>
 <p data-i18n="doc.rl.p2b">A send request that would exceed a limit is rejected before it is queued, so it never appears in your logs as attempted. Check the Usage page in Settings to see how close you are to each limit.</p>
 
 <h2 data-i18n="doc.rl.h2c">API request rate</h2>

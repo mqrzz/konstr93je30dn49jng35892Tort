@@ -19,5 +19,5 @@ O.ready=get("/i18n/languages.json").catch(function(){return[{code:O.defaultLang,
    if(!l)(navigator.languages||[navigator.language||""]).some(function(n){n=n.slice(0,2).toLowerCase();if(codes.indexOf(n)>-1){l=n;return true}});
    l=l||O.defaultLang}
   O.lang=l;document.documentElement.lang=l;var i=L.filter(function(x){return x.code===l})[0]||{};document.documentElement.dir=i.dir||"ltr";
-  if(l===O.defaultLang){reveal();return}
+  /* English is loaded too: pages and scripts call GESERD.t(key) and need the dictionary in every language (before, English fell back to raw keys/slugs) */
   return get("/i18n/"+l+".json").then(apply).catch(reveal)})})})();
