@@ -20,6 +20,9 @@ function bindLang(root){(root||document).querySelectorAll('.lg').forEach(functio
  p.addEventListener('click',function(e){var i=e.target.closest('.lgi');if(i&&!i.classList.contains('on'))GESERD.setLang(i.dataset.l)})})}
 document.addEventListener('click',function(e){if(!e.target.closest('.lg'))document.querySelectorAll('.lg.open').forEach(function(x){x.classList.remove('open');x.querySelector('.lgb').setAttribute('aria-expanded','false')})});
 window.GESERD&&(GESERD.langMenu=langMenu,GESERD.bindLang=bindLang);
+/* signed-in visitors see one "Dashboard" button instead of Log in / Get started */
+function signedIn(r){fetch(((window.GESERD&&GESERD.api)||'/api')+'/auth/me',{credentials:'same-origin',cache:'no-store'}).then(function(x){return x.ok?x.json():Promise.reject()}).then(function(){
+ [].forEach.call(r.querySelectorAll('.side,.mob-cta'),function(box){var a=box.querySelectorAll('a.btn');if(!a.length)return;a[0].href='/app/';a[0].className='btn pri'+(box.classList.contains('side')?' sm':'');a[0].textContent=t('nav.dashboard','Dashboard');for(var i=1;i<a.length;i++)a[i].remove();if(box.classList.contains('mob-cta'))box.style.gridTemplateColumns='1fr'})}).catch(function(){})}
 function build(){
 var Mm=M();
 var h='<header class="hdr"><div class="wrap"><a class="logo" href="/" aria-label="Geserd"><img src="/assets/logo.svg" alt="Geserd"></a><ul>';
@@ -30,7 +33,7 @@ h+='<li><a href="/pricing/">'+t('nav.pricing','Pricing')+'</a></li></ul><div cla
 '<a class="ml" href="/pricing/">'+t('nav.pricing','Pricing')+'</a>'+langMenu()+'</div><div class="mob-cta"><a class="btn" href="/login/">'+t('nav.login','Log in')+'</a><a class="btn pri" href="/signup/">'+t('nav.start','Get started')+'</a></div></nav>';
 return h;
 }
-function mount(){var r=document.getElementById('site-header');if(!r)return;r.innerHTML=build();bindLang(r);var H=r.querySelector('.hdr');function sc(){H.classList.toggle('sc',(window.scrollY||0)>8)}sc();window.addEventListener('scroll',sc,{passive:true});var open=null,tm;
+function mount(){var r=document.getElementById('site-header');if(!r)return;r.innerHTML=build();bindLang(r);signedIn(r);var H=r.querySelector('.hdr');function sc(){H.classList.toggle('sc',(window.scrollY||0)>8)}sc();window.addEventListener('scroll',sc,{passive:true});var open=null,tm;
 function close(){if(!open)return;open.b.setAttribute('aria-expanded','false');open.p.classList.remove('on');open=null}
 function show(b){var p=document.getElementById('pop-'+b.dataset.m);if(open&&open.b===b)return;close();b.setAttribute('aria-expanded','true');p.classList.add('on');open={b:b,p:p}}
 r.querySelectorAll('.tr').forEach(function(b){b.addEventListener('click',function(){open&&open.b===b?close():show(b)});

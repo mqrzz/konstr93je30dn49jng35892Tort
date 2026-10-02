@@ -4,7 +4,7 @@
    visitors never see a flash of the English fallback text baked into the HTML. A timeout guarantees the page still
    shows up even if the i18n fetch fails or is slow. */
 (function(){var O=window.GESERD,K="geserd_lang";
-function get(u){return fetch(u,{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()})}
+function get(u){u+=(window.GESERD_BUILD&&window.GESERD_BUILD!=="dev"?"?v="+window.GESERD_BUILD:"");return fetch(u,{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()})}
 O.setLang=function(l){try{localStorage.setItem(K,l)}catch(e){}document.cookie=K+"="+l+";path=/;max-age=31536000;samesite=lax";location.reload()};
 function reveal(){document.documentElement.classList.add("i18n-ready")}
 setTimeout(reveal,1200);

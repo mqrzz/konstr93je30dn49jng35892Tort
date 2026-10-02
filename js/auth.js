@@ -79,6 +79,7 @@ function verify(btn){
 }
 
 function init(){
+  fetch(api()+"/auth/me",{credentials:"same-origin",cache:"no-store"}).then(function(r){if(r.ok)location.replace("/app/")}).catch(function(){});
   region();
   var al=$("authLang");if(al&&window.GESERD&&GESERD.langMenu){al.innerHTML=GESERD.langMenu();GESERD.bindLang(al)}
   ["google","github","yandex"].forEach(function(p){var b=$("o-"+p);if(b)b.addEventListener("click",function(){oauth(p,b)})});

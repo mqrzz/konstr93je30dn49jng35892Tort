@@ -76,7 +76,7 @@ function buildSidebar(){
    '<button type="button" data-m="system">'+t("app.theme.system","System")+'</button>'+
    '<button type="button" data-m="light">'+t("app.theme.light","Light")+'</button>'+
    '<button type="button" data-m="dark">'+t("app.theme.dark","Dark")+'</button>'+
- '</div>'+(window.GESERD&&GESERD.langMenu?'<div class="tl">'+t("doc.language","Language")+'</div><div class="slg">'+GESERD.langMenu()+'</div>':'')+'</div>'+
+ '</div>'+(window.GESERD&&GESERD.langMenu?'<div class="tl mlg">'+t("doc.language","Language")+'</div><div class="slg mlg">'+GESERD.langMenu()+'</div>':'')+'</div>'+
  '<div class="mb"><a class="hb o" href="/login/" style="flex:1;justify-content:center">'+t("nav.login","Log in")+'</a><a class="hb k" href="/signup/" style="flex:1;justify-content:center">'+t("nav.start","Get started")+'</a></div>';
 }
 
@@ -94,14 +94,24 @@ function buildToc(){
 function scrollspy(toc){
  var links=toc.querySelectorAll("a");if(!links.length)return;
  var hs=[].map.call(links,function(a){return document.getElementById(a.dataset.id)}).filter(Boolean);
- var card=document.getElementById("dc");
+ var card=document.getElementById("dc"),forced=null,until=0;
+ function top(h){return h.getBoundingClientRect().top-card.getBoundingClientRect().top+card.scrollTop}
+ function mark(id){links.forEach(function(a){a.classList.toggle("on",a.dataset.id===id)})}
  function onScroll(){
-  var top=card.scrollTop+80,cur=hs[0];
-  hs.forEach(function(h){if(h.offsetTop<=top)cur=h});
-  links.forEach(function(a){a.classList.toggle("on",a.dataset.id===cur.id)});
+  if(forced&&Date.now()<until){mark(forced);return}
+  forced=null;
+  var y=card.scrollTop+90,cur=hs[0];
+  hs.forEach(function(h){if(top(h)<=y)cur=h});
+  /* the last sections can never reach the top of a short page: at the bottom the last one is the current one */
+  if(card.scrollTop+card.clientHeight>=card.scrollHeight-6)cur=hs[hs.length-1];
+  mark(cur.id);
  }
- card.addEventListener("scroll",onScroll,{passive:true});onScroll();
- links.forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();var h=document.getElementById(a.dataset.id);card.scrollTo({top:h.offsetTop-24,behavior:"smooth"});history.replaceState(null,"","#"+a.dataset.id)})});
+ card.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",onScroll);onScroll();
+ links.forEach(function(a){a.addEventListener("click",function(e){
+  e.preventDefault();var h=document.getElementById(a.dataset.id);
+  forced=a.dataset.id;until=Date.now()+900;mark(forced);
+  card.scrollTo({top:Math.max(0,top(h)-24),behavior:"smooth"});history.replaceState(null,"",location.pathname+"#"+a.dataset.id);
+ })});
 }
 
 /* ================= page -> markdown (for copy / view as markdown) ================= */

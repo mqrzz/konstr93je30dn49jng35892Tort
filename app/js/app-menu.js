@@ -33,18 +33,29 @@ function build(){
   '<div class="apop" id="apPop"><div class="lbl">'+t("app.appearance","Appearance")+'</div>'+seg()+'</div>'+
   '<div class="ric"><a class="app-ico" href="/docs/" target="_blank" rel="noopener" aria-label="'+t("app.docs","Docs")+'">'+s(IC_DOC)+'</a><a class="app-ico'+(p.indexOf("/app/help/")===0?' on':'')+'" href="/app/help/" aria-label="'+t("app.nav.help","Help")+'">'+s(IC_HELP)+'</a></div></div></aside>';
  var mnav=N().map(function(a){return '<a class="ml" href="'+a[1]+'">'+a[0]+'</a>'}).join('');
- var bar='<div class="mbar"><div class="mtop">'+ws('wsPopM')+'<button type="button" id="sb" aria-label="'+t("app.menu","Menu")+'" aria-expanded="false" aria-controls="mpanel">'+s('<path d="M3 6h18M3 12h18M3 18h18"/>',22)+'</button></div>'+
-  '<div class="mpanel" id="mpanel" hidden>'+mnav+'<a class="ml top" href="/app/help/">'+t("app.nav.help","Help")+'</a>'+
+ var bar='<div class="mbar"><div class="mtop"><button type="button" id="sb" aria-label="'+t("app.menu","Menu")+'" aria-expanded="false" aria-controls="mpanel">'+s('<path d="M3 6h18M3 12h18M3 18h18"/>',22)+'</button><div class="mws"><span class="av">P</span><span class="nm">'+t("app.workspace","Personal")+'</span></div></div>'+
+  '<div class="mov" id="mov" hidden></div>'+
+  '<div class="mpanel" id="mpanel" hidden><div class="mph"><div class="mws"><span class="av">P</span><span class="nm">'+t("app.workspace","Personal")+'</span></div><button type="button" id="sbx" aria-label="'+t("app.close","Close")+'">'+s('<path d="m6 6 12 12M18 6 6 18"/>',20)+'</button></div>'+mnav+'<a class="ml top" href="/app/help/">'+t("app.nav.help","Help")+'</a>'+
   '<div class="ml row"><span>'+t("app.appearance","Appearance")+'</span>'+seg()+'</div><a class="ml" href="/">'+t("app.nav.home","Homepage")+'</a><a class="ml" href="#" data-logout>'+t("app.logout","Log out")+'</a></div></div>';
  return bar+side;
 }
+/* who is signed in: real name/initial in the workspace button; ask for a name once if the account has none */
+function me(){fetch((window.GESERD&&GESERD.api||"/api")+"/auth/me",{credentials:"same-origin",cache:"no-store"}).then(function(r){if(r.status===401){location.href="/login/";return null}return r.ok?r.json():null}).then(function(u){
+ if(!u)return;var nm=(u.name||"").trim()||u.email.split("@")[0];
+ document.querySelectorAll(".wsb .nm,.mws .nm").forEach(function(e){e.textContent=nm});document.querySelectorAll(".wsb .av,.mws .av").forEach(function(e){e.textContent=nm.charAt(0).toUpperCase()});
+ if(!(u.name||"").trim())askName()}).catch(function(){})}
+function askName(){
+ var m=document.createElement("div");m.className="nmodal";m.innerHTML='<form class="nbox"><h2>'+t("app.name.h","What should we call you?")+'</h2><p>'+t("app.name.p","")+'</p><input name="n" maxlength="60" autocomplete="name" placeholder="'+t("app.name.ph","Your name")+'" required><button class="abtn pri" type="submit">'+t("app.name.save","Continue")+'</button></form>';
+ document.body.appendChild(m);var f=m.querySelector("form"),i=f.n;i.focus();
+ f.onsubmit=function(e){e.preventDefault();var v=i.value.trim();if(!v)return;fetch((window.GESERD&&GESERD.api||"/api")+"/auth/me",{method:"PATCH",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:v})}).then(function(r){if(r.ok){m.remove();document.querySelectorAll(".wsb .nm,.mws .nm").forEach(function(e){e.textContent=v});document.querySelectorAll(".wsb .av,.mws .av").forEach(function(e){e.textContent=v.charAt(0).toUpperCase()})}})}}
 function closePops(){document.querySelectorAll(".apop.on").forEach(function(x){x.classList.remove("on")})}
 function mount(){
  var r=document.getElementById("app-nav");if(!r)return;
  r.innerHTML=build();
- var sb=document.getElementById("sb"),mp=document.getElementById("mpanel");
- function open(v){mp.hidden=!v;sb.setAttribute("aria-expanded",v);document.body.classList.toggle("mopen",v)}
- sb.onclick=function(){open(mp.hidden)};
+ var sb=document.getElementById("sb"),mp=document.getElementById("mpanel"),mov=document.getElementById("mov");
+ function open(v){mp.hidden=!v;mov.hidden=!v;sb.setAttribute("aria-expanded",v);document.body.classList.toggle("mopen",v);document.documentElement.classList.toggle("lock",v)}
+ sb.onclick=function(){open(mp.hidden)};mov.onclick=function(){open(false)};document.getElementById("sbx").onclick=function(){open(false)};
+ me();
  r.addEventListener("click",function(e){
   var b=e.target.closest("[data-pop]");
   if(b){e.stopPropagation();var pp=document.getElementById(b.getAttribute("data-pop")),was=pp.classList.contains("on");closePops();if(!was)pp.classList.add("on");return}
