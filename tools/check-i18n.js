@@ -1,4 +1,3 @@
-// Usage: node tools/check-i18n.js  — lists missing keys per language and data-i18n keys used in HTML but absent from en.json
 const fs=require('fs'),path=require('path'),root=path.join(__dirname,'..');
 const L=JSON.parse(fs.readFileSync(root+'/i18n/languages.json','utf8')),en=JSON.parse(fs.readFileSync(root+'/i18n/en.json','utf8'));
 let bad=0;for(const {code} of L){if(code==='en')continue;let d={};try{d=JSON.parse(fs.readFileSync(root+`/i18n/${code}.json`,'utf8'))}catch{console.log(code+': FILE MISSING');bad++;continue}

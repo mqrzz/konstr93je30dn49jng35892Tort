@@ -1,6 +1,3 @@
-/* js/pages/blog.js — blog index in the layout of the Resend blog: category pills, live search (Ctrl/Cmd+K), two featured cards,
-   then a 3-column "Latest posts" grid. Covers are generated (silk photo + the post title in the brand serif), so posts need no image files.
-   This script runs BEFORE boot.js adds the site scripts, so it waits for GESERD (before, titles rendered as raw slugs). */
 (function(){
 var P=[
 {slug:"spf-dkim-dmarc",cat:"sending",date:"2026-09-24"},

@@ -1,4 +1,3 @@
-/* app/js/app-theme.js — Appearance: system / light / dark for the dashboard. Loaded in <head> so there is no flash. */
 (function(){
 var K="geserd_theme";
 function get(){try{return localStorage.getItem(K)||"dark"}catch(e){return"dark"}}

@@ -1,4 +1,3 @@
-/* nav.js — site header + dropdown menus. Mounts into <div id="site-header"></div> */
 (function(){
 var t=function(k,d){return window.GESERD&&GESERD.t?GESERD.t(k,d):d};
 var ic=function(p){return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9c9d1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'};
@@ -9,7 +8,6 @@ function M(){return [
 {k:'docs',l:t('nav.docs','Docs'),links:[[t('nav.sub.intro','Introduction'),'/docs/'],[t('nav.sub.quickstart','Quickstart'),'/docs/quickstart/'],[t('nav.sub.apiref','API reference'),'/docs/api/'],[t('nav.sub.webhooks','Webhooks'),'/docs/api/#receiving']],cards:[[t('nav.card.quickstart.t','Quickstart'),t('nav.card.quickstart.d','Send in minutes'),'/docs/quickstart/',I.send],[t('nav.card.apiref.t','API reference'),t('nav.card.apiref.d','Every endpoint'),'/docs/api/',I.book]]}
 ]}
 var ch='<svg width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.7 10.7a1 1 0 1 0-1.4-1.4l-3.6 3.6a1 1 0 0 1-1.4 0L7.7 9.3a1 1 0 0 0-1.4 1.4l5 5a1 1 0 0 0 1.4 0z"/></svg>';
-/* ---- custom language dropdown (replaces the native <select>): GESERD.langMenu() returns the markup, GESERD.bindLang(root) wires it ---- */
 var GL='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>';
 var CK='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>';
 function langMenu(){var L=(window.GESERD&&GESERD.languages)||[{code:'en',name:'English'}],cur=(window.GESERD&&GESERD.lang)||'en',c=L.filter(function(x){return x.code===cur})[0]||L[0];
@@ -20,7 +18,6 @@ function bindLang(root){(root||document).querySelectorAll('.lg').forEach(functio
  p.addEventListener('click',function(e){var i=e.target.closest('.lgi');if(i&&!i.classList.contains('on'))GESERD.setLang(i.dataset.l)})})}
 document.addEventListener('click',function(e){if(!e.target.closest('.lg'))document.querySelectorAll('.lg.open').forEach(function(x){x.classList.remove('open');x.querySelector('.lgb').setAttribute('aria-expanded','false')})});
 window.GESERD&&(GESERD.langMenu=langMenu,GESERD.bindLang=bindLang);
-/* signed-in visitors see one "Dashboard" button instead of Log in / Get started */
 function signedIn(r){fetch(((window.GESERD&&GESERD.api)||'/api')+'/auth/me',{credentials:'same-origin',cache:'no-store'}).then(function(x){return x.ok?x.json():Promise.reject()}).then(function(){
  [].forEach.call(r.querySelectorAll('.side,.mob-cta'),function(box){var a=box.querySelectorAll('a.btn');if(!a.length)return;a[0].href='/app/';a[0].className='btn pri'+(box.classList.contains('side')?' sm':'');a[0].textContent=t('nav.dashboard','Dashboard');for(var i=1;i<a.length;i++)a[i].remove();if(box.classList.contains('mob-cta'))box.style.gridTemplateColumns='1fr'})}).catch(function(){})}
 function build(){

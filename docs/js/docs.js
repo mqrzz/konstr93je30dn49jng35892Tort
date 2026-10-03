@@ -1,9 +1,3 @@
-/* docs/js/docs.js — Geserd documentation shell, rebuilt 1:1 against the Resend docs reference
-   (Mintlify-style layout). Mounts the header (#dh), sidebar (#ds) with a mobile drawer, the
-   "On this page" TOC (#toc) with scroll-spy, page actions (copy / view as markdown), a real
-   cross-page search (Ctrl/Cmd+K, crawls the other doc pages the first time it opens), a
-   prev/next pager and a "was this helpful" widget. All labels come from i18n via GESERD.t.
-   Every page loads only this file (plus docs/js/theme.js in <head>) — no other site JS. */
 (function(){
 function t(k,d){return (window.GESERD&&GESERD.t)?GESERD.t(k,d):d}
 function esc(s){return String(s).replace(/[&<>]/g,function(c){return c==="&"?"&amp;":c==="<"?"&lt;":"&gt;"})}
@@ -20,7 +14,6 @@ var I_MON=svg('<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8
 var I_SUN=svg('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>');
 var I_MOON=svg('<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/>');
 
-/* ---- doc map: order drives the sidebar and the prev/next pager ---- */
 function PAGES(){return [
  {path:"/docs/",group:t("doc.nav.start","Get started"),title:t("doc.nav.intro","Introduction")},
  {path:"/docs/quickstart/",group:t("doc.nav.start","Get started"),title:t("doc.nav.qs","Quickstart")},
@@ -37,7 +30,6 @@ function navGroups(){
 }
 function here(){return location.pathname.replace(/index\.html$/,"").replace(/([^/])$/,"$1/")}
 
-/* ================= header ================= */
 function buildHeader(){
  var onApi=here()==="/docs/api/";
  return ''+
@@ -54,7 +46,6 @@ function buildHeader(){
  '</div>';
 }
 
-/* ================= sidebar ================= */
 function sideNav(){
  var h=here(),out="";
  navGroups().forEach(function(g){
@@ -80,7 +71,6 @@ function buildSidebar(){
  '<div class="mb"><a class="hb o" href="/login/" style="flex:1;justify-content:center">'+t("nav.login","Log in")+'</a><a class="hb k" href="/signup/" style="flex:1;justify-content:center">'+t("nav.start","Get started")+'</a></div>';
 }
 
-/* ================= toc (scroll-spy) ================= */
 function buildToc(){
  var body=document.querySelector(".pg .body");if(!body)return "";
  var hs=body.querySelectorAll("h2,h3");if(!hs.length)return "";
@@ -102,7 +92,6 @@ function scrollspy(toc){
   forced=null;
   var y=card.scrollTop+90,cur=hs[0];
   hs.forEach(function(h){if(top(h)<=y)cur=h});
-  /* the last sections can never reach the top of a short page: at the bottom the last one is the current one */
   if(card.scrollTop+card.clientHeight>=card.scrollHeight-6)cur=hs[hs.length-1];
   mark(cur.id);
  }
@@ -114,7 +103,6 @@ function scrollspy(toc){
  })});
 }
 
-/* ================= page -> markdown (for copy / view as markdown) ================= */
 function pageMarkdown(){
  var h1=document.querySelector(".pg h1"),body=document.querySelector(".pg .body");
  var out="# "+(h1?h1.textContent:"")+"\n\n";
@@ -146,7 +134,6 @@ function pageActions(){
  document.addEventListener("click",function(e){if(!el.contains(e.target))el.classList.remove("open")});
 }
 
-/* ================= pager ================= */
 function buildPager(){
  var pages=PAGES(),i=-1;
  pages.forEach(function(p,idx){if(p.path===here())i=idx});
@@ -157,7 +144,6 @@ function buildPager(){
  return out;
 }
 
-/* ================= helpful widget ================= */
 function helpful(){
  var el=document.querySelector(".hp");if(!el)return;
  var yes=el.querySelector('[data-v="y"]'),no=el.querySelector('[data-v="n"]'),lbl=el.querySelector(".hlbl");
@@ -165,7 +151,6 @@ function helpful(){
  yes.addEventListener("click",function(){pick(yes)});no.addEventListener("click",function(){pick(no)});
 }
 
-/* ================= theme segmented control ================= */
 function themeCtl(root){
  var seg=root.querySelector("#dTheme");if(!seg)return;
  function mark(){var m=(window.GSDocTheme?GSDocTheme.get():"system");seg.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b.dataset.m===m)})}
@@ -173,7 +158,6 @@ function themeCtl(root){
  mark();
 }
 
-/* ================= search ================= */
 var INDEX=null,indexing=null;
 function buildIndex(){
  if(INDEX)return Promise.resolve(INDEX);
@@ -245,7 +229,6 @@ function mountSearch(){
   document.getElementById("dSearchBtn2").addEventListener("click",openSearch);
 }
 
-/* ================= mobile drawer ================= */
 function mountMobile(){
  var ds=document.getElementById("ds"),bd=document.getElementById("bd"),btn=document.getElementById("dMenuBtn");
  function open(v){ds.classList.toggle("open",v);bd.classList.toggle("open",v)}
@@ -257,7 +240,6 @@ function mountMobile(){
  
 }
 
-/* ================= code blocks: copy ================= */
 function codeCopy(){
  document.querySelectorAll(".cb .cp").forEach(function(b){
   var lbl=b.textContent;
@@ -272,7 +254,6 @@ function codeCopy(){
  });
 }
 
-/* ================= mount ================= */
 function mount(){
  var dh=document.getElementById("dh"),ds=document.getElementById("ds"),toc=document.getElementById("toc");
  if(!dh||!ds)return;
@@ -289,7 +270,6 @@ function mount(){
  if(window.GESERD&&GESERD.bindLang)GESERD.bindLang(document);
 }
 var go=function(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",mount):mount()};
-/* boot.js appends the site scripts (config/i18n/nav) AFTER this file runs: wait for them, otherwise the whole docs shell renders untranslated */
 function wait(n){if(window.GESERD&&GESERD.ready&&GESERD.langMenu)return GESERD.ready.then(go);if(n>200)return go();setTimeout(function(){wait(n+1)},25)}
 wait(0);
 })();

@@ -1,9 +1,4 @@
 #!/usr/bin/env node
-// Cache-busting stamp. Usage:  node frontend/tools/stamp.js
-// Why: Cloudflare/browsers keep serving an OLD geserd.css or footer.js next to NEW html (home looks unstyled, footer missing, old login script runs).
-// This computes BUILD = hash of every css/js/json/svg/webp/png under frontend/ (ignoring the ?v= stamps themselves) and rewrites every local
-// reference in html + css to "...?v=BUILD". boot.js passes the same BUILD on to the scripts it loads and to the i18n json requests.
-// It is run automatically by geserd-deploy on the server, so every deploy gets fresh URLs; no manual cache purge is needed afterwards.
 const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const ROOT=path.resolve(__dirname,'..');
 const VRX=/\?v=[0-9a-f]{10}/g;

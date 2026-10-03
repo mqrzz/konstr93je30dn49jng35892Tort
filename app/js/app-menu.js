@@ -1,8 +1,3 @@
-/* app/js/app-menu.js — dashboard chrome, built from the Resend Usage page:
-   desktop: 250px sidebar = workspace button, text-only nav, bottom row (Appearance button left, Docs + Help icons right); no top bar.
-   mobile (<@3xl / 860px): top bar = workspace button + burger; the burger opens a full-width list under the bar
-   (nav links, Help, Appearance row, Homepage, Log out) — same pattern as the reference, not a slide-out drawer.
-   Mounts into <div id="app-nav"></div>. Menu labels live in i18n (app.nav.*). Page logic is NOT here (see app-settings.js etc.). */
 (function(){
 var t=function(k,d){return window.GESERD&&GESERD.t?GESERD.t(k,d):d};
 var s=function(d,n){n=n||16;return '<svg viewBox="0 0 24 24" width="'+n+'" height="'+n+'" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>'};
@@ -39,7 +34,6 @@ function build(){
   '<div class="ml row"><span>'+t("app.appearance","Appearance")+'</span>'+seg()+'</div><a class="ml" href="/">'+t("app.nav.home","Homepage")+'</a><a class="ml" href="#" data-logout>'+t("app.logout","Log out")+'</a></div></div>';
  return bar+side;
 }
-/* who is signed in: real name/initial in the workspace button; ask for a name once if the account has none */
 function me(){fetch((window.GESERD&&GESERD.api||"/api")+"/auth/me",{credentials:"same-origin",cache:"no-store"}).then(function(r){if(r.status===401){location.href="/login/";return null}return r.ok?r.json():null}).then(function(u){
  if(!u)return;var nm=(u.name||"").trim()||u.email.split("@")[0];
  document.querySelectorAll(".wsb .nm,.mws .nm").forEach(function(e){e.textContent=nm});document.querySelectorAll(".wsb .av,.mws .av").forEach(function(e){e.textContent=nm.charAt(0).toUpperCase()});
@@ -71,7 +65,6 @@ var main=document.querySelector("main.app-main");
  window.matchMedia("(min-width:861px)").addEventListener("change",function(q){if(q.matches)open(false)});
  document.addEventListener("keydown",function(e){if(e.key==="Escape"){open(false);closePops()}});
 }
-/* boot.js appends the site scripts (config/i18n…) after this file runs, so wait for GESERD before mounting, or labels stay English */
 function wait(n){if(window.GESERD&&GESERD.ready)return GESERD.ready.then(start);if(n>200)return start();setTimeout(function(){wait(n+1)},25)}
 function start(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",mount):mount()}
 wait(0);

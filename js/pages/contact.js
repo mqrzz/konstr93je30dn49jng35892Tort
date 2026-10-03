@@ -1,4 +1,3 @@
-/* js/pages/contact.js — contact form -> POST /api/contact. Waits for GESERD (this file runs before boot.js adds the site scripts). */
 (function(){
 var O;function t(k,d){return O&&O.t?O.t(k,d):d}
 function wait(n){O=window.GESERD;if(O&&O.ready)return O.ready.then(init);if(n>200)return;setTimeout(function(){wait(n+1)},25)}

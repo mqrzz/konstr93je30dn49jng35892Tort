@@ -1,9 +1,89 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Service unavailable in your region</title>
-<style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#0b0b0b}body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px;color:#f5f5f5;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}main{width:min(100%,760px);text-align:center}h1{margin:0;font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.055em;font-weight:500}p{max-width:560px;margin:24px auto 0;color:#8f8f8f;font-size:18px;line-height:1.5;letter-spacing:-.02em}@media(max-width:600px){body{padding:24px}h1{font-size:42px}p{font-size:16px;margin-top:18px}}
-</style></head>
-<body><main><h1>Service unavailable in your region</h1><p>Unfortunately, this service is currently unavailable for use from your region. Please try again later.</p></main></body></html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Geserd — send and receive email with an API</title>
+<meta name="description" content="Transactional email from your own domain, and inbound mail you can reply to, over one simple API.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=8f5dac2940">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css?v=8f5dac2940">
+</head>
+<body class="home">
+<div id="site-header"></div>
+<main>
+<section class="hero hm-hero"><div class="hm-silk" aria-hidden="true"></div><div class="wrap">
+  <div class="hm-copy">
+    <a class="badge" href="/changelog/"><span><span data-i18n="hm.pill">Now in beta</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <h1 class="grad" data-i18n="hm.h1">Email for<br>developers</h1>
+    <p class="lead" data-i18n="hm.lead">Send transactional email from your own domain and receive replies over one clean API. Delivered, logged, and yours.</p>
+    <div class="acts"><a class="btn" href="/signup/"><span data-i18n="hm.start">Get started</span></a><a class="btn ghost" href="/docs/"><span data-i18n="hm.docs">Documentation</span></a></div>
+  </div>
+  <div class="cube3" aria-hidden="true"><div class="cube-rig"><div class="cube-c"><div class="f f1"><span>G</span></div><div class="f f2"><span>G</span></div><div class="f f3"><span>G</span></div><div class="f f4"><span>G</span></div><div class="f f5"><span>G</span></div><div class="f f6"><span>G</span></div></div></div><div class="cube-glow"></div></div>
+</div></section>
+
+<section class="hm-stack"><div class="wrap"><div class="glowcard rv">
+  <p class="hm-cap"><span data-i18n="hm.stack.t">Works with the tools you already use</span></p>
+  <div class="sks" id="sks"><button type="button" class="sk on" data-s="curl"><i>>_</i><span>cURL</span></button><button type="button" class="sk" data-s="node"><i>JS</i><span>Node.js</span></button><button type="button" class="sk" data-s="python"><i>Py</i><span>Python</span></button><button type="button" class="sk" data-s="php"><i>php</i><span>PHP</span></button><button type="button" class="sk" data-s="go"><i>Go</i><span>Go</span></button><button type="button" class="sk" data-s="ruby"><i>Rb</i><span>Ruby</span></button><button type="button" class="sk" data-s="java"><i>Jv</i><span>Java</span></button><button type="button" class="sk" data-s="dotnet"><i>.NET</i><span>.NET</span></button><button type="button" class="sk" data-s="smtp"><i>SMTP</i><span>SMTP</span></button></div>
+  <p class="hm-cap s"><span data-i18n="hm.stack.l">A plain HTTP API and SMTP relay, so there is nothing new to learn</span></p>
+</div></div></section>
+
+<section class="hm-sec" id="integrate"><div class="wrap">
+  <h2 class="grad c rv" data-i18n="hm.int.h">Integrate <em>tonight</em></h2>
+  <p class="hm-sub c rv" data-i18n="hm.int.s">One request with an API key is all it takes. Pick your language and copy the snippet into your code.</p>
+  <div class="ide rv"><div class="idh"><div class="dots"><i></i><i></i><i></i></div><div class="idtabs" id="idTabs" role="tablist"></div><button type="button" class="cpy" id="idCopy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span data-i18n="hm.copy">Copy</span></button></div>
+  <pre class="idc" id="idCode"></pre>
+  <div class="idf"><a href="/docs/api/"><span data-i18n="hm.int.api">API reference</span></a><a href="/docs/"><span data-i18n="hm.int.docs">Read the guides</span></a></div></div>
+</div></section>
+
+<section class="hm-sec"><div class="wrap">
+  <h2 class="grad rv" data-i18n="hm.dx.h">First-class<br>developer experience</h2>
+  <p class="hm-sub rv" data-i18n="hm.dx.s">We build the tools we wished we had: predictable responses, honest errors, and events you can act on.</p>
+  <div class="g2">
+    <article class="gcard rv"><div class="vis logv"><div class="sendbar"><span class="pill g"><span data-i18n="hm.ev.d">Delivered</span></span><b>hi@yourdomain.com</b><em><span data-i18n="hm.send">Send</span></em></div><pre>HTTP 200  { "id": "9c2f7a10-5d3e-4b8a-a1f0-7e2b" }
+HTTP 200  { "id": "41be03d8-77c1-4e2a-9b6d-0c5a" }
+HTTP 200  { "id": "d08a95f2-1a4c-43e0-8f7b-66e1" }
+HTTP 200  { "id": "7f3c1b64-9e20-4d5a-b3c8-1a90" }</pre></div><div class="gt"><span class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg></span><h3 data-i18n="hm.dx1.t">Predictable API</h3><p data-i18n="hm.dx1.p">Every request returns an id you can look up in the logs. No surprises, no hidden queues.</p></div></article>
+    <article class="gcard rv"><div class="vis evv"><ul class="tl"><li class="ev b"><span class="evd"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span><div><span class="pill"><span data-i18n="hm.ev.b">Bounced</span></span><span class="evt">04:13:30</span><p><span data-i18n="hm.ev.to">to</span> <b>lucas@example.com</b></p></div></li><li class="ev c"><span class="evd"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span><div><span class="pill"><span data-i18n="hm.ev.c">Complained</span></span><span class="evt">04:13:30</span><p><span data-i18n="hm.ev.to">to</span> <b>mia@example.com</b></p></div></li><li class="ev d"><span class="evd"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.3 2.4 2.4 4.6-5"/></svg></span><div><span class="pill"><span data-i18n="hm.ev.d">Delivered</span></span><span class="evt">04:13:29</span><p><span data-i18n="hm.ev.to">to</span> <b>sam@example.com</b></p></div></li></ul></div><div class="gt"><span class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17a4 4 0 1 1 3-6.5M15 7a4 4 0 1 1 3 6.5M8 19h8"/></svg></span><h3 data-i18n="hm.dx2.t">Modular webhooks</h3><p data-i18n="hm.dx2.p">Get notified on your own server when a message is delivered, bounced, complained about, or received.</p></div></article>
+  </div>
+</div></section>
+
+<section class="hm-sec"><div class="wrap">
+  <h2 class="grad rv" data-i18n="hm.bd.h">Both directions,<br>one place</h2>
+  <p class="hm-sub rv" data-i18n="hm.bd.s">Send from your domain and receive mail on it. Replies land in the same inbox, API and webhook stream.</p>
+  <div class="g2">
+    <article class="gcard rv"><div class="vis compose"><div class="row"><span>From</span><b>team@yourdomain.com</b></div><div class="row"><span>To</span><b>ada@example.com</b></div><div class="row"><span>Subject</span><b>Welcome to Acme</b></div><div class="body"><i></i><i></i><i class="s"></i></div><div class="ft"><span class="pill g">DKIM</span><span class="pill g">TLS</span><em><span data-i18n="hm.send">Send</span></em></div></div><div class="gt"><span class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></span><h3 data-i18n="hm.bd1.t">Send from your domain</h3><p data-i18n="hm.bd1.p">Every message is signed with DKIM for your domain and sent over TLS.</p></div></article>
+    <article class="gcard rv"><div class="vis inbox"><div class="m"><span class="av">A</span><div><b>Ada Lovelace</b><p data-i18n="hm.in.sub">Re: Your invoice</p></div><em>09:41</em></div><div class="m"><span class="av">G</span><div><b>Grace Hopper</b><p data-i18n="hm.in.sub2">Question about pricing</p></div><em>09:12</em></div><div class="m"><span class="av">L</span><div><b>Linus T.</b><p data-i18n="hm.in.sub3">Welcome aboard</p></div><em>08:47</em></div></div><div class="gt"><span class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><h3 data-i18n="hm.bd2.t">Receive and reply</h3><p data-i18n="hm.bd2.p">Point your MX record at us. Incoming mail is parsed, stored and delivered to your webhook.</p></div></article>
+  </div>
+</div></section>
+
+<section class="hm-sec hm-auth"><div class="wrap">
+  <h2 class="grad rv" data-i18n="hm.sp.h">Reach humans,<br>not spam folders</h2>
+  <p class="hm-sub rv" data-i18n="hm.sp.s">Inbox providers trust mail that proves who sent it. Geserd gives you every proof, configured with your domain.</p>
+  <div class="aus"><div class="au rv"><div class="auh"><b>SPF</b><span class="pill g"><span data-i18n="hm.pass">Pass</span></span></div><code>v=spf1 ip4:203.0.113.25 ~all</code><p data-i18n="hm.spf.p">Authorises our servers to send for your domain.</p></div><div class="au rv"><div class="auh"><b>DKIM</b><span class="pill g"><span data-i18n="hm.pass">Pass</span></span></div><code>mail._domainkey  v=DKIM1; k=rsa; p=MIIB…</code><p data-i18n="hm.dkim.p">A cryptographic signature proves the message was not altered.</p></div><div class="au rv"><div class="auh"><b>DMARC</b><span class="pill g"><span data-i18n="hm.pass">Pass</span></span></div><code>v=DMARC1; p=none; adkim=r</code><p data-i18n="hm.dmarc.p">Tells receivers what to do with mail that fails the checks.</p></div><div class="au rv"><div class="auh"><b>TLS</b><span class="pill g"><span data-i18n="hm.pass">Pass</span></span></div><code>TLS 1.3 · STARTTLS</code><p data-i18n="hm.tls.p">Mail is encrypted in transit whenever the receiver supports it.</p></div><div class="au rv"><div class="auh"><b>rDNS</b><span class="pill g"><span data-i18n="hm.pass">Pass</span></span></div><code>mail.geserd.com</code><p data-i18n="hm.rdns.p">Our sending address resolves back to a named mail host.</p></div></div>
+</div></section>
+
+<section class="hm-sec"><div class="wrap">
+  <h2 class="grad c rv" data-i18n="hm.ct.h">Everything in<br>your control</h2>
+  <p class="hm-sub c rv" data-i18n="hm.ct.s">Manage sending and receiving, troubleshoot with detailed logs, and keep your domains healthy without the friction.</p>
+  <div class="cts rv" id="cts"><div class="ctr"><button type="button" class="ctb on" data-t="0"><span data-i18n="hm.tab1">Logs</span></button><button type="button" class="ctb" data-t="1"><span data-i18n="hm.tab2">Metrics</span></button><button type="button" class="ctb" data-t="2"><span data-i18n="hm.tab3">Domains</span></button></div><div class="ctp"><div class="pn on" data-t="0"><table class="mini"><tr><th>Status</th><th>Endpoint</th><th>Time</th></tr><tr><td><span class="pill g">200</span></td><td>POST /emails</td><td>09:41:07</td></tr><tr><td><span class="pill g">200</span></td><td>POST /emails</td><td>09:40:52</td></tr><tr><td><span class="pill r">422</span></td><td>POST /emails</td><td>09:38:19</td></tr><tr><td><span class="pill g">200</span></td><td>GET /emails/9c2f7a10</td><td>09:36:44</td></tr></table><p data-i18n="hm.tab1.p">Every API request and delivery event in one searchable stream.</p></div><div class="pn" data-t="1"><div class="bars"><i style="height:38%"></i><i style="height:52%"></i><i style="height:44%"></i><i style="height:61%"></i><i style="height:57%"></i><i style="height:70%"></i><i style="height:66%"></i><i style="height:82%"></i><i style="height:74%"></i><i style="height:90%"></i><i style="height:86%"></i><i style="height:96%"></i></div><div class="stats"><div><b>99.4%</b><span>Delivered</span></div><div><b>0.3%</b><span>Bounced</span></div><div><b>0.0%</b><span>Complained</span></div></div><p data-i18n="hm.tab2.p">Delivery, bounce and complaint rates at a glance.</p></div><div class="pn" data-t="2"><table class="mini"><tr><th>Type</th><th>Name</th><th>Status</th></tr><tr><td>TXT</td><td>@</td><td><span class="pill g">Verified</span></td></tr><tr><td>TXT</td><td>mail._domainkey</td><td><span class="pill g">Verified</span></td></tr><tr><td>MX</td><td>@</td><td><span class="pill g">Verified</span></td></tr><tr><td>TXT</td><td>_dmarc</td><td><span class="pill y">Pending</span></td></tr></table><p data-i18n="hm.tab3.p">Verify DNS once and watch the status of every record.</p></div></div></div>
+</div></section>
+
+<section class="hm-sec"><div class="wrap">
+  <h2 class="grad c rv" data-i18n="hm.why.h">Built to stay out of your way</h2>
+  <div class="g3"><div class="gc rv"><span class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><h3 data-i18n="hm.why1.t">Your domain, your reputation</h3><p data-i18n="hm.why1.p">Mail goes out under your own name, and what you earn in reputation stays with you.</p></div><div class="gc rv"><span class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span><h3 data-i18n="hm.why2.t">Clear, honest limits</h3><p data-i18n="hm.why2.p">You always see what your plan allows and what you have used. Nothing is hidden in fine print.</p></div><div class="gc rv"><span class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14M9 4v4m-2 12 5-12 5 12M8.5 16h7"/></svg></span><h3 data-i18n="hm.why3.t">Available in your language</h3><p data-i18n="hm.why3.p">The site, dashboard and docs are available in English, Russian, French and German.</p></div></div>
+</div></section>
+
+<section class="hm-cta"><div class="hm-silk flip" aria-hidden="true"></div><div class="wrap c">
+  <h2 class="grad rv" data-i18n="hm.cta.h">Email, reimagined.<br>Available today.</h2>
+  <p class="hm-sub c rv" data-i18n="hm.cta.p">Create a free account, verify a domain and send your first message in minutes.</p>
+  <div class="acts"><a class="btn pri" href="/signup/"><span data-i18n="hm.start">Get started</span></a><a class="btn ghost" href="/docs/"><span data-i18n="hm.docs">Documentation</span></a></div>
+</div></section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/boot.js?v=8f5dac2940"></script>
+<script src="/js/pages/home.js?v=8f5dac2940"></script>
+</body>
+</html>

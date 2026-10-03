@@ -1,5 +1,3 @@
-/* footer.js — site footer. Mounts into <div id="site-footer"></div>.
-   The markup is built INSIDE mount() (after translations are applied). Building it at script load made the footer stay English. */
 (function(){var t=function(k,d){return window.GESERD&&GESERD.t?GESERD.t(k,d):d};
 var C=[["Features",[["Sending|sending","/features/sending/"],["Receiving|receiving","/features/receiving/"],["Domains|domains","/features/domains/"],["Webhooks|webhooks","/features/webhooks/"]]],
 ["Resources",[["Documentation|docs","/docs/"],["Pricing|pricing","/pricing/"],["Changelog|changelog","/changelog/"],["Security|security","/security/"],["Status|status","/status/"]]],

@@ -1,8 +1,3 @@
-/* i18n.js — languages come from /i18n/languages.json. Order: saved choice > visitor country > browser language > default.
-   Add a language: create /i18n/<code>.json and add one line to languages.json. English text lives in the HTML (default).
-   The page stays hidden (see geserd.css: html:not(.i18n-ready) body) until translation is applied, so non-English
-   visitors never see a flash of the English fallback text baked into the HTML. A timeout guarantees the page still
-   shows up even if the i18n fetch fails or is slow. */
 (function(){var O=window.GESERD,K="geserd_lang";
 function get(u){u+=(window.GESERD_BUILD&&window.GESERD_BUILD!=="dev"?"?v="+window.GESERD_BUILD:"");return fetch(u,{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()})}
 O.setLang=function(l){try{localStorage.setItem(K,l)}catch(e){}document.cookie=K+"="+l+";path=/;max-age=31536000;samesite=lax";location.reload()};
@@ -19,5 +14,4 @@ O.ready=get("/i18n/languages.json").catch(function(){return[{code:O.defaultLang,
    if(!l)(navigator.languages||[navigator.language||""]).some(function(n){n=n.slice(0,2).toLowerCase();if(codes.indexOf(n)>-1){l=n;return true}});
    l=l||O.defaultLang}
   O.lang=l;document.documentElement.lang=l;var i=L.filter(function(x){return x.code===l})[0]||{};document.documentElement.dir=i.dir||"ltr";
-  /* English is loaded too: pages and scripts call GESERD.t(key) and need the dictionary in every language (before, English fell back to raw keys/slugs) */
   return get("/i18n/"+l+".json").then(apply).catch(reveal)})})})();

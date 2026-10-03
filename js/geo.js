@@ -1,4 +1,3 @@
-/* geo.js — detects visitor country (cached per session). Sets GESERD.country and GESERD.geo (promise). */
 (function(){var O=window.GESERD,K="geserd_cc",c=null;try{c=sessionStorage.getItem(K)}catch(e){}
 O.country=c||null;
 O.geo=c?Promise.resolve(c):new Promise(function(res){var d=setTimeout(function(){res(null)},1500);
