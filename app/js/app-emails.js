@@ -4,7 +4,7 @@ var KIND={queued:"wait",sent:"dim",delivered:"ok",failed:"bad",bounced:"bad",com
 var ST=["queued","sent","delivered","bounced","complained","failed"];
 function stName(s){return t("au.e.st."+s,s)}
 function pill(s){return A.pill(KIND[s]||"dim",stName(s))}
-function tabs(){var on=function(d){return dir===d?' class="on"':""};return'<nav class="stabs"><a href="/app/emails/"'+on("out")+">"+e(t("ap.tab.send","Sending"))+'</a><a href="/app/emails/receiving/"'+on("in")+">"+e(t("ap.tab.recv","Receiving"))+'</a><a href="/app/emails/suppressions/">'+e(t("ap.tab.supp","Suppressions"))+"</a></nav>"}
+function tabs(){var on=function(d){return dir===d?' class="on"':""};return'<nav class="stabs"><a href="/app/emails/"'+on("out")+">"+e(t("ap.tab.send","Sending"))+'</a><a href="/app/emails/receiving/"'+on("in")+">"+e(t("ap.tab.recv","Receiving"))+'</a><a href="/app/emails/suppressions/">'+e(t("ap.tab.supp","Suppressions"))+'</a><a href="/app/emails/smtp/">'+e(t("ap.tab.smtp","SMTP"))+"</a></nav>"}
 function shell(){root.innerHTML='<div class="ph"><h1>'+e(t("ap.emails","Emails"))+"</h1></div>"+tabs()+'<div class="tool" id="eTool"></div><div id="eBody"></div>';
  var tool=document.getElementById("eTool");
  tool.appendChild(A.dropdown([[""  ,t("ap.allst","All statuses")]].concat((dir==="in"?["received"]:ST).map(function(s){return[s,stName(s)]})),status,function(v){status=v;reload()}));

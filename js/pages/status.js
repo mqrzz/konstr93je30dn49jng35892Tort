@@ -23,5 +23,5 @@ function fail(){
  var top=document.getElementById("stTop");top.className="st-top bad";top.innerHTML="<i></i><span>"+esc(T("stt.unavail","Status is temporarily unavailable"))+"</span>"}
 function load(){fetch("/api/status",{cache:"no-store"}).then(function(r){return r.ok?r.json():Promise.reject()}).then(paint).catch(fail)}
 function go(){load();setInterval(load,30000)}
-if(window.GESERD&&GESERD.ready)GESERD.ready.then(go);else document.addEventListener("DOMContentLoaded",go)
+(function wait(n){if(window.GESERD&&GESERD.ready)return GESERD.ready.then(go,go);if(n>400)return go();setTimeout(function(){wait(n+1)},25)})(0)
 })();

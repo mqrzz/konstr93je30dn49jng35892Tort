@@ -66,4 +66,9 @@ A.empty=function(icon,h,p,btn){return'<div class="empty">'+A.icon(icon,30)+"<h3>
 A.loading=function(){return'<div class="gload"><i></i><i></i><i></i></div>'};
 A.failed=function(e,retryId){return'<div class="empty">'+A.icon(A.IC.refresh,30)+"<h3>"+A.esc(A.err(e))+'</h3><button type="button" class="abtn lg" id="'+retryId+'">'+A.esc(A.t("au.retry","Try again"))+"</button></div>"};
 A.pill=function(kind,text){return'<span class="st '+kind+'"><i></i>'+A.esc(text)+"</span>"};
+
+(function(){
+function fit(){document.querySelectorAll(".stabs").forEach(function(n){if(n.dataset.fit)return;n.dataset.fit="1";var on=n.querySelector("a.on");function edge(){var l=n.scrollLeft>4,r=n.scrollLeft+n.clientWidth<n.scrollWidth-4;n.classList.toggle("fl",l);n.classList.toggle("fr",r)}n.addEventListener("scroll",edge,{passive:true});window.addEventListener("resize",edge);if(on&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,on.offsetLeft-n.clientWidth/2+on.offsetWidth/2);edge()})}
+new MutationObserver(fit).observe(document.documentElement,{childList:true,subtree:true});
+document.addEventListener("DOMContentLoaded",fit);fit()})();
 })();
