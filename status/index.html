@@ -10,11 +10,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/geserd.css?v=519359ff5f">
+<link rel="stylesheet" href="/css/status.css?v=519359ff5f">
 </head>
 <body>
 <div id="site-header"></div>
 <main>
-<section class="pg" style="padding-bottom:50px"><div class="wrap"><h1 class="grad" data-i18n="st.h1">System status</h1><p data-i18n="st.lead">Live availability of the API, sending and receiving, and a history of incidents once we have any to show.</p></div></section><section class="sec"><div class="wrap"><h2 class="grad rv" data-i18n="st.now.h">Current status</h2><div class="acts" style="justify-content:flex-start;margin-bottom:20px"><a class="stat" id="liveStat" href="/status/"><i></i><span data-i18n="footer.check">Checking status…</span></a></div><div class="mock"><div class="mh"><i></i><i></i><i></i><span>Components</span></div><div class="tr2"><span class="pill2 p-ok">Operational</span>API</div><div class="tr2"><span class="pill2 p-ok">Operational</span>Sending</div><div class="tr2"><span class="pill2 p-ok">Operational</span>Receiving</div><div class="tr2"><span class="pill2 p-ok">Operational</span>Dashboard</div></div></div></section><section class="sec"><div class="wrap"><h2 class="grad rv" data-i18n="st.hist.h">Incident history</h2><p class="sub rv" data-i18n="st.hist.p">No incidents have been recorded yet. When something goes wrong, it will be listed here with what happened and when it was resolved.</p></div></section><section class="sec"><div class="wrap"><h2 class="grad rv" data-i18n="st.sub2">How we define “operational”</h2><p class="sub rv" data-i18n="st.sub2p">The API is operational when it accepts requests and returns a response within a reasonable time. Sending is operational when queued messages leave within a few minutes. Receiving is operational when mail sent to a verified domain is accepted and parsed.</p></div></section>
+<section class="pg" style="padding-bottom:60px"><div class="wrap"><h1 class="grad" data-i18n="st.h1">System status</h1><p data-i18n="st.lead">Live availability of the API, sending and receiving, with a 90-day history and every incident.</p></div></section>
+<section class="sec"><div class="wrap st-w"><div class="st-top" id="stTop" aria-live="polite"><i></i><span data-i18n="footer.check">Checking status…</span></div><div class="co-g st-g" id="stComp"></div></div></section>
+<section class="sec"><div class="wrap st-w"><h2 class="grad" data-i18n="st.hist.h">Incident history</h2><div class="co-g st-g" id="stInc"></div></div></section>
+<section class="sec"><div class="wrap st-w"><h2 class="grad" data-i18n="st.sub2">How we define “operational”</h2><div class="co-g st-g"><p class="st-p" data-i18n="st.sub2p">A component is operational when it answers its health check. Checks run every minute from the server itself.</p></div></div></section>
 </main>
 <div id="site-footer"></div>
 <script src="/js/boot.js?v=519359ff5f"></script>

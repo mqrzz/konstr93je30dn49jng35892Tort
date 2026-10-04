@@ -2,7 +2,7 @@
 var t=function(k,d){return window.GESERD&&GESERD.t?GESERD.t(k,d):d};
 var ic=function(d){return '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>'};
 var I={key:ic('<circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M16 7l3 3"/>'),hook:ic('<path d="M9 17a4 4 0 1 1 3-6.5M15 7a4 4 0 1 1 3 6.5M8 19h8"/>'),mail:ic('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'),cal:ic('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/>'),inb:ic('<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/>'),globe:ic('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'),clock:ic('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),bolt:ic('<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>'),user:ic('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),srv:ic('<rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/>'),plug:ic('<path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/>'),lock:ic('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>')};
-var TABS=[["usage","app.set.usage","Usage"],["billing","app.set.billing","Billing"],["team","app.set.team","Team"],["smtp","app.set.smtp","SMTP"]];
+var TABS=[["account","app.set.account","Account"],["usage","app.set.usage","Usage"],["billing","app.set.billing","Billing"],["team","app.set.team","Team"],["smtp","app.set.smtp","SMTP"]];
 function rows(a){return '<table class="stbl"><tbody>'+a.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('')+'</tbody></table>'}
 function sec(title,desc,btn,right){return '<section class="ssec"><div class="sl"><h2>'+title+'</h2><p>'+desc+'</p>'+(btn||'')+'</div><div class="sr">'+right+'</div></section>'}
 var up='<a class="abtn" href="/pricing/">'+"__UP__"+'</a>';
@@ -27,6 +27,7 @@ function mount(){
  var r=document.getElementById("settings-root");if(!r)return;
  var pg=r.dataset.page||"usage",A=window.GSApp;
  var top='<div class="ph"><h1>'+t("app.set.title","Settings")+'</h1></div><nav class="stabs">'+TABS.map(function(x){return '<a href="/app/settings/'+x[0]+'/"'+(x[0]===pg?' class="on"':'')+'>'+t(x[1],x[2])+'</a>'}).join('')+'</nav>';
+ if(pg==="account"){if(window.GSAccount)GSAccount.mount(r,top);return}
  if(pg==="smtp"){r.innerHTML=top+(A?A.loading():"");fetch("/api/smtp",{credentials:"same-origin"}).then(function(x){return x.ok?x.json():{}}).catch(function(){return{}}).then(function(S){r.innerHTML=top+P.smtp(S)});return}
  if(pg!=="usage"&&pg!=="billing"){r.innerHTML=top+(P[pg]||P.usage)();return}
  r.innerHTML=top+(A?A.loading():"");

@@ -23,8 +23,11 @@ A.ago=function(iso){var d=new Date(iso);if(isNaN(d))return"";var s=Math.round((d
 A.plural=function(n,prefix,def){var c="other";try{c=new Intl.PluralRules(A.lang()).select(n)}catch(e){}
  return A.t(prefix+"."+c,A.t(prefix+".other",def||"{n}"),{n:A.num(n)}).split("{n}").join(A.num(n))};
 
-var tt;A.toast=function(msg){var e=document.getElementById("gt");if(!e){e=document.createElement("div");e.id="gt";e.className="gt";e.setAttribute("role","status");document.body.appendChild(e)}
- e.textContent=msg;e.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){e.classList.remove("on")},2600)};
+A.toast=function(msg,kind){var box=document.getElementById("gts");if(!box){box=document.createElement("div");box.id="gts";box.className="gts";box.setAttribute("role","status");box.setAttribute("aria-live","polite");document.body.appendChild(box)}
+ var e=document.createElement("div");e.className="gt "+(kind||"");e.innerHTML="<i></i><span></span>";e.lastChild.textContent=msg;box.appendChild(e);
+ while(box.children.length>3)box.removeChild(box.firstChild);
+ requestAnimationFrame(function(){requestAnimationFrame(function(){e.classList.add("on")})});
+ setTimeout(function(){e.classList.remove("on");setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e)},320)},3200)};
 
 A.copy=function(text,btn){function ok(){if(btn){var o=btn.innerHTML;btn.classList.add("done");btn.innerHTML=A.icon(A.IC.check)+'<span>'+A.esc(A.t("au.copied","Copied"))+"</span>";setTimeout(function(){btn.classList.remove("done");btn.innerHTML=o},1400)}else A.toast(A.t("au.copied","Copied"))}
  function fb(){var t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","");t.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.appendChild(t);t.select();var r=false;try{r=document.execCommand("copy")}catch(e){}t.remove();r?ok():A.toast(A.t("au.copyfail","Couldn't copy — select the text and copy it manually."))}

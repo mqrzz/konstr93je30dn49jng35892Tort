@@ -1,0 +1,37 @@
+(function(){
+var A=window.GSApp;if(!A)return;
+var T=A.t,E=A.esc,IC=A.IC;
+var LANGS=[["en","English"],["ru","Русский"],["fr","Français"],["de","Deutsch"]];
+var NK=[["bounce","ac.n.bounce","Bounces","ac.n.bounce.d","An email could not be delivered."],["complaint","ac.n.complaint","Spam complaints","ac.n.complaint.d","A recipient marked your email as spam."],["quota","ac.n.quota","Plan limits","ac.n.quota.d","You are close to or over a monthly or daily limit."],["domain","ac.n.domain","Domains","ac.n.domain.d","A domain was verified."],["ticket","ac.n.ticket","Support replies","ac.n.ticket.d","Support answered one of your tickets."]];
+function sec(title,desc,body){return '<section class="ssec"><div class="sl"><h2>'+E(title)+'</h2><p>'+E(desc)+'</p></div><div class="sr">'+body+'</div></section>'}
+function tg(k,on){return '<button type="button" class="tg'+(on?' on':'')+'" data-k="'+k+'" role="switch" aria-checked="'+(on?'true':'false')+'"><i></i></button>'}
+function device(ua){ua=String(ua||"");var b=/Edg\//.test(ua)?"Edge":/OPR\//.test(ua)?"Opera":/Firefox\//.test(ua)?"Firefox":/Chrome\//.test(ua)?"Chrome":/Safari\//.test(ua)?"Safari":T("ac.s.unknown","Unknown browser");var o=/Windows/.test(ua)?"Windows":/Android/.test(ua)?"Android":/iPhone|iPad/.test(ua)?"iOS":/Mac OS/.test(ua)?"macOS":/Linux/.test(ua)?"Linux":"";return o?b+" · "+o:b}
+function render(root,top,me,sessions){
+ var lang=A.lang(),theme=(window.GSTheme&&GSTheme.get())||"dark",n=me.notify||{};
+ var prof=sec(T("ac.prof","Profile"),T("ac.prof.d","Your name is shown in the workspace menu."),
+  '<div class="pfld"><label for="acn">'+E(T("ac.name","Name"))+'</label><input id="acn" maxlength="60" autocomplete="name" value="'+E(me.name||"")+'"></div><div class="pfld"><label for="ace">'+E(T("ac.email","Email"))+'</label><input id="ace" readonly value="'+E(me.email)+'"></div><div class="prow"><button type="button" class="abtn pri lg" id="acs">'+E(T("ac.save","Save"))+'</button></div>');
+ var pref=sec(T("ac.pref","Preferences"),T("ac.pref.d","Language and appearance of the dashboard."),
+  '<div class="pfld"><label>'+E(T("ac.lang","Language"))+'</label><div class="lgs" id="lgs">'+LANGS.map(function(l){return '<button type="button" data-l="'+l[0]+'" class="'+(l[0]===lang?"on":"")+'">'+l[1]+'</button>'}).join("")+'</div></div><div class="pfld"><label>'+E(T("app.appearance","Appearance"))+'</label><div class="lgs" id="ths">'+[["system",T("app.theme.system","System")],["light",T("app.theme.light","Light")],["dark",T("app.theme.dark","Dark")]].map(function(x){return '<button type="button" data-m="'+x[0]+'" class="'+(x[0]===theme?"on":"")+'">'+x[1]+'</button>'}).join("")+'</div></div>');
+ var noti=sec(T("ac.notif","Email notifications"),T("ac.notif.d","Choose which events are also sent to your email. They always appear in the dashboard."),
+  NK.map(function(k){return '<div class="trow"><div><b>'+E(T(k[1],k[2]))+'</b><span>'+E(T(k[3],k[4]))+'</span></div>'+tg(k[0],n[k[0]]!==false)+'</div>'}).join(""));
+ var ses=sec(T("ac.sess","Sessions"),T("ac.sess.d","Devices where you are signed in."),
+  '<div id="sl">'+(sessions.length?sessions.map(function(s){return '<div class="srow"><div><b>'+E(device(s.ua))+(s.current?' <i class="tagc">'+E(T("ac.s.current","This device"))+'</i>':'')+'</b><span>'+E(s.ip||"")+' · '+E(A.ago(s.created_at))+'</span></div>'+(s.current?'':'<button type="button" class="abtn" data-rev="'+s.id+'">'+E(T("ac.s.end","Sign out"))+'</button>')+'</div>'}).join(""):'<div class="emptyb">'+E(T("ac.s.none","No active sessions."))+'</div>')+'</div>'+(sessions.length>1?'<div class="prow" style="margin-top:14px"><button type="button" class="abtn" id="revo">'+E(T("ac.s.others","Sign out all other devices"))+'</button></div>':''));
+ var dng='<section class="ssec2 danger"><div><h2>'+E(T("ac.del","Delete account"))+'</h2><p>'+E(T("ac.del.d","Permanently deletes your account, domains, API keys, emails and webhooks. This cannot be undone."))+'</p></div><button type="button" class="abtn dng lg" id="acd">'+E(T("ac.del.btn","Delete account"))+'</button></section>';
+ root.innerHTML=top+prof+pref+noti+ses+dng;
+ var $=function(i){return document.getElementById(i)};
+ $("acs").onclick=function(){var v=$("acn").value.trim();if(!v)return A.toast(T("ac.name.req","Enter a name."),"err");var b=this;b.disabled=true;
+  A.api("/auth/me",{method:"PATCH",body:{name:v}}).then(function(){A.toast(T("ac.saved","Saved"),"ok");document.querySelectorAll(".wsb .nm,.mws .nm").forEach(function(e){e.textContent=v});document.querySelectorAll(".wsb .av,.mws .av").forEach(function(e){e.textContent=v.charAt(0).toUpperCase()})},function(e){A.toast(A.err(e),"err")}).then(function(){b.disabled=false})};
+ $("lgs").onclick=function(e){var b=e.target.closest("button[data-l]");if(!b||b.dataset.l===lang)return;A.api("/account/preferences",{method:"PATCH",body:{lang:b.dataset.l}}).catch(function(){}).then(function(){if(window.GESERD&&GESERD.setLang)GESERD.setLang(b.dataset.l);else location.reload()})};
+ $("ths").onclick=function(e){var b=e.target.closest("button[data-m]");if(!b||!window.GSTheme)return;GSTheme.set(b.dataset.m);$("ths").querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)})};
+ root.querySelectorAll(".tg[data-k]").forEach(function(b){b.onclick=function(){var on=!b.classList.contains("on"),o={};o[b.dataset.k]=on;b.classList.toggle("on",on);b.setAttribute("aria-checked",on);A.api("/account/preferences",{method:"PATCH",body:{notify:o}}).then(function(){A.toast(T("ac.saved","Saved"),"ok")},function(e){b.classList.toggle("on",!on);b.setAttribute("aria-checked",!on);A.toast(A.err(e),"err")})}});
+ root.querySelectorAll("[data-rev]").forEach(function(b){b.onclick=function(){b.disabled=true;A.api("/account/sessions/"+b.dataset.rev,{method:"DELETE"}).then(function(){var r=b.closest(".srow");if(r)r.remove();A.toast(T("ac.s.ended","Device signed out"),"ok")},function(e){b.disabled=false;A.toast(A.err(e),"err")})}});
+ var ro=$("revo");if(ro)ro.onclick=function(){ro.disabled=true;A.api("/account/sessions/revoke-others",{method:"POST"}).then(function(){A.toast(T("ac.s.ended","Device signed out"),"ok");load(root,top)},function(e){ro.disabled=false;A.toast(A.err(e),"err")})};
+ $("acd").onclick=function(){
+  var body='<div class="pfld"><label for="dce">'+E(T("ac.del.type","Type your email to confirm"))+'</label><input id="dce" autocomplete="off" placeholder="'+E(me.email)+'"></div>';
+  A.modal({title:T("ac.del","Delete account"),desc:T("ac.del.d","Permanently deletes your account, domains, API keys, emails and webhooks. This cannot be undone."),body:body,actions:[{label:T("app.close","Close")},{label:T("ac.del.btn","Delete account"),cls:"dng",onClick:function(api,btn){var v=api.el.querySelector("#dce").value.trim();btn.disabled=true;A.api("/account/delete",{method:"POST",body:{email:v}}).then(function(){location.href="/"},function(e){btn.disabled=false;A.toast(e.code==="email_mismatch"?T("ac.del.mis","The email does not match."):A.err(e),"err")})}}]})}
+}
+function load(root,top){
+ root.innerHTML=top+A.loading();
+ Promise.all([A.api("/auth/me"),A.api("/account/sessions")]).then(function(r){render(root,top,r[0],r[1])},function(x){root.innerHTML=top+A.failed(x,"acRetry");var b=document.getElementById("acRetry");if(b)b.onclick=function(){load(root,top)}})}
+window.GSAccount={mount:load};
+})();
