@@ -44,7 +44,7 @@
 <div class="ep"><i class="g" data-i18n="doc.api.live">Live</i>DELETE /api/domains/:id</div>
 
 <h2 data-i18n="doc.api.h2send">Send email</h2>
-<div class="ep"><i data-i18n="doc.api.notlive">Designed — not live yet</i>POST /api/emails</div>
+<div class="ep"><i class="g" data-i18n="doc.api.live">Live</i>POST /api/emails</div>
 <p data-i18n="doc.api.psend"><code>POST /api/emails</code>. Requires a from address on a verified domain, one or more recipients, a subject, and an html or text body.</p>
 <div class="pf"><div class="pn"><code>from</code><i data-i18n="doc.api.required">required</i><span>string</span></div></div>
 <div class="pf"><div class="pn"><code>to</code><i data-i18n="doc.api.required">required</i><span>string | array</span></div></div>
@@ -53,9 +53,27 @@
 <div class="pf"><div class="pn"><code>text</code><i data-i18n="doc.api.optional">optional</i><span>string</span></div></div>
 <div class="pf"><div class="pn"><code>reply_to</code><i data-i18n="doc.api.optional">optional</i><span>string</span></div></div>
 <div class="pf"><div class="pn"><code>in_reply_to</code><i data-i18n="doc.api.optional">optional</i><span>string</span></div></div>
+<div class="pf"><div class="pn"><code>cc</code><i data-i18n="doc.api.optional">optional</i><span>string | array</span></div></div>
+<div class="pf"><div class="pn"><code>bcc</code><i data-i18n="doc.api.optional">optional</i><span>string | array</span></div></div>
+<div class="pf"><div class="pn"><code>attachments</code><i data-i18n="doc.api.optional">optional</i><span>array</span></div></div>
+<div class="pf"><div class="pn"><code>headers</code><i data-i18n="doc.api.optional">optional</i><span>object</span></div></div>
+<div class="pf"><div class="pn"><code>template_id</code><i data-i18n="doc.api.optional">optional</i><span>string</span></div></div>
+<div class="pf"><div class="pn"><code>variables</code><i data-i18n="doc.api.optional">optional</i><span>object</span></div></div>
 
+<p data-i18n="doc.api.pfields2">attachments is a list of objects with filename, content (base64) and content_type, up to 10 MB in total. headers accepts List-Unsubscribe and List-Unsubscribe-Post. With template_id, the subject and body come from your template and every {{variable}} must be present in variables.</p>
+<div class="mock"><div class="mh"><i></i><i></i><i></i><span data-i18n="doc.api.tplex">Send with a template</span></div><pre>POST /api/emails
+{ "from": "Acme &lt;hi@yourdomain.com&gt;",
+  "to": "user@example.com",
+  "template_id": "3f0c6c3e-...",
+  "variables": { "name": "Anna", "company": "Acme" } }</pre></div>
+<h2 id="check" data-i18n="doc.api.h2chk">Check before sending</h2>
+<p data-i18n="doc.api.pchk"><code>POST /api/emails/check</code> takes the same body as sending but sends nothing. It returns the sender domain state, a spam score with the rules that fired, and notes such as a missing List-Unsubscribe header.</p>
+<h2 id="templates" data-i18n="doc.api.h2tpl">Templates</h2>
+<p data-i18n="doc.api.ptpl"><code>GET /api/templates</code> lists your templates, <code>POST /api/templates</code> creates one with name, subject, html and text. <code>GET</code>, <code>PATCH</code> and <code>DELETE /api/templates/:id</code> read, change and remove it. Variables are written as {{name}} and are HTML-escaped in the body.</p>
+<h2 id="smtp" data-i18n="doc.api.h2smtp">SMTP</h2>
+<p data-i18n="doc.api.psmtp">Send over SMTP to smtp.geserd.com on port 465 (TLS) or 587 (STARTTLS). Use any username and your API key as the password. Limits and logs are the same as for the API.</p>
 <h2 data-i18n="doc.api.h2rec">Receiving</h2>
-<div class="ep"><i data-i18n="doc.api.notlive">Designed — not live yet</i>email.received</div>
+<div class="ep"><i class="g" data-i18n="doc.api.live">Live</i>email.received</div>
 <p data-i18n="doc.api.prec">Mail sent to a verified domain is delivered to your webhook as an email.received event. Reply by sending a new email with in_reply_to set to the received message's id.</p>
 
 <div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>

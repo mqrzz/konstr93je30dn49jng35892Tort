@@ -147,6 +147,8 @@ a.tk{text-decoration:none}
 .ic .i-bell{transform-origin:12px 3px}
 .ic .i-clap{transform-origin:12px 18px}
 .ic .i-gear{transform-origin:12px 12px}
+.ic .i-t1{transform-origin:12px 9px}
+.ic .i-t2{transform-origin:9px 14px}
 @keyframes kFlap{0%,100%{transform:scaleY(1)}35%{transform:scaleY(-.55)}70%{transform:scaleY(.2)}}
 @keyframes kBar{0%{transform:scaleY(.2)}60%{transform:scaleY(1.14)}100%{transform:scaleY(1)}}
 @keyframes kMer{0%{transform:scaleX(1)}50%{transform:scaleX(.05)}100%{transform:scaleX(1)}}
@@ -156,6 +158,8 @@ a.tk{text-decoration:none}
 @keyframes kH2{0%,100%{transform:translate(0,0)}45%{transform:translate(-2.2px,2.2px)}}
 @keyframes kBell{0%,100%{transform:rotate(0)}20%{transform:rotate(16deg)}40%{transform:rotate(-13deg)}60%{transform:rotate(8deg)}80%{transform:rotate(-4deg)}}
 @keyframes kClap{0%,100%{transform:translateX(0)}20%{transform:translateX(-1.4px)}40%{transform:translateX(1.2px)}60%{transform:translateX(-.8px)}}
+@keyframes kT1{0%,100%{transform:translateY(0)}45%{transform:translateY(4px)}}
+@keyframes kT2{0%,100%{transform:translateX(0)}45%{transform:translateX(5px)}}
 @keyframes kGear{from{transform:rotate(0)}to{transform:rotate(180deg)}}
 @keyframes kPop{0%{transform:scale(1)}40%{transform:scale(1.25) rotate(-8deg)}100%{transform:scale(1)}}
 a:hover>.ic-mail .i-flap,a:focus-visible>.ic-mail .i-flap,a:active>.ic-mail .i-flap{animation:kFlap .7s ease}
@@ -171,6 +175,8 @@ a:hover>.ic-hook .i-h1,a:focus-visible>.ic-hook .i-h1,a:active>.ic-hook .i-h1{an
 a:hover>.ic-hook .i-h2,a:focus-visible>.ic-hook .i-h2,a:active>.ic-hook .i-h2{animation:kH2 .7s ease-in-out}
 a:hover>.ic-bell .i-bell,a:focus-visible>.ic-bell .i-bell,a:active>.ic-bell .i-bell{animation:kBell .9s ease-in-out}
 a:hover>.ic-bell .i-clap,a:active>.ic-bell .i-clap{animation:kClap .9s ease-in-out}
+a:hover>.ic-tpl .i-t1,a:focus-visible>.ic-tpl .i-t1,a:active>.ic-tpl .i-t1{animation:kT1 .7s ease-in-out}
+a:hover>.ic-tpl .i-t2,a:focus-visible>.ic-tpl .i-t2,a:active>.ic-tpl .i-t2{animation:kT2 .7s ease-in-out .08s}
 a:hover>.ic-gear .i-gear,a:focus-visible>.ic-gear .i-gear,a:active>.ic-gear .i-gear{animation:kGear .8s cubic-bezier(.4,0,.2,1)}
 .app-ico.ic-docs:hover svg,.app-ico.ic-help:hover svg{transform:none;animation:kPop .45s ease}
 .app-ico.ic-sun:hover svg{transform:none;animation:kGear 1s linear}
