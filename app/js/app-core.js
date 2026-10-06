@@ -24,7 +24,7 @@ A.plural=function(n,prefix,def){var c="other";try{c=new Intl.PluralRules(A.lang(
  return A.t(prefix+"."+c,A.t(prefix+".other",def||"{n}"),{n:A.num(n)}).split("{n}").join(A.num(n))};
 
 A.toast=function(msg,kind){var box=document.getElementById("gts");if(!box){box=document.createElement("div");box.id="gts";box.className="gts";box.setAttribute("role","status");box.setAttribute("aria-live","polite");document.body.appendChild(box)}
- var e=document.createElement("div");e.className="gt "+(kind||"");e.innerHTML="<i></i><span></span>";e.lastChild.textContent=msg;box.appendChild(e);
+ var e=document.createElement("div");e.className="gt "+(kind||"");e.innerHTML=(kind==="err"?A.icon('<path d="M12 8v5M12 16.5h.01"/><path d="M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',18):kind==="ok"?A.icon('<path d="m5 12.5 4.5 4.5L19 7.5"/>',18):A.icon('<path d="M12 8h.01M11 12h1v5h1"/>',18))+"<span></span>";e.lastChild.textContent=msg;box.appendChild(e);
  while(box.children.length>3)box.removeChild(box.firstChild);
  requestAnimationFrame(function(){requestAnimationFrame(function(){e.classList.add("on")})});
  setTimeout(function(){e.classList.remove("on");setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e)},320)},3200)};

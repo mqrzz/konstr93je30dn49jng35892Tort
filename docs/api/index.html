@@ -70,6 +70,27 @@
 <p data-i18n="doc.api.pchk"><code>POST /api/emails/check</code> takes the same body as sending but sends nothing. It returns the sender domain state, a spam score with the rules that fired, and notes such as a missing List-Unsubscribe header.</p>
 <h2 id="templates" data-i18n="doc.api.h2tpl">Templates</h2>
 <p data-i18n="doc.api.ptpl"><code>GET /api/templates</code> lists your templates, <code>POST /api/templates</code> creates one with name, subject, html and text. <code>GET</code>, <code>PATCH</code> and <code>DELETE /api/templates/:id</code> read, change and remove it. Variables are written as {{name}} and are HTML-escaped in the body.</p>
+<h2 id="auth-kit" data-i18n="doc.api.h2ak">Authentication codes</h2>
+<p data-i18n="doc.api.pak">Send an email one-time code and check it later, without storing codes yourself. Codes are hashed, expire, and lock after 5 wrong tries. One address can get 5 codes per hour, and a new code only after 30 seconds. Codes count towards your email limits.</p>
+<div class="ep"><i class="g" data-i18n="doc.api.live">Live</i>POST /api/auth-kit/send</div>
+<div class="pf"><div class="pn"><code>from</code><i data-i18n="doc.api.required">required</i><span>string</span></div></div>
+<div class="pf"><div class="pn"><code>to</code><i data-i18n="doc.api.required">required</i><span>string</span></div></div>
+<div class="pf"><div class="pn"><code>length</code><i data-i18n="doc.api.optional">optional</i><span>number</span></div></div>
+<div class="pf"><div class="pn"><code>ttl</code><i data-i18n="doc.api.optional">optional</i><span>number</span></div></div>
+<div class="pf"><div class="pn"><code>lang</code><i data-i18n="doc.api.optional">optional</i><span>string</span></div></div>
+<div class="pf"><div class="pn"><code>app_name</code><i data-i18n="doc.api.optional">optional</i><span>string</span></div></div>
+<div class="pf"><div class="pn"><code>template_id</code><i data-i18n="doc.api.optional">optional</i><span>string</span></div></div>
+<p data-i18n="doc.api.pak2">length is 4 to 8 digits (default 6). ttl is the lifetime in seconds, 60 to 3600 (default 600). lang is en, ru, de or fr. With template_id your template gets the variables code, minutes and app.</p>
+<div class="ep"><i class="g" data-i18n="doc.api.live">Live</i>POST /api/auth-kit/verify</div>
+<div class="pf"><div class="pn"><code>to</code><i data-i18n="doc.api.required">required</i><span>string</span></div></div>
+<div class="pf"><div class="pn"><code>code</code><i data-i18n="doc.api.required">required</i><span>string</span></div></div>
+<p data-i18n="doc.api.pak3">Returns valid true, or valid false with a reason: wrong_code, expired, too_many_attempts, not_found or invalid.</p>
+<div class="mock"><div class="mh"><i></i><i></i><i></i><span data-i18n="doc.api.akex">Send and verify a code</span></div><pre>POST /api/auth-kit/send
+{ "from": "App &lt;hi@yourdomain.com&gt;", "to": "user@example.com" }
+
+POST /api/auth-kit/verify
+{ "to": "user@example.com", "code": "482913" }
+=&gt; { "valid": true }</pre></div>
 <h2 id="smtp" data-i18n="doc.api.h2smtp">SMTP</h2>
 <p data-i18n="doc.api.psmtp">Send over SMTP to smtp.geserd.com on port 465 (TLS) or 587 (STARTTLS). Use any username and your API key as the password. Limits and logs are the same as for the API.</p>
 <h2 data-i18n="doc.api.h2rec">Receiving</h2>
