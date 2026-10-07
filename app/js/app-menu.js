@@ -39,11 +39,7 @@ function badge(){fetch((window.GESERD&&GESERD.api||"/api")+"/notifications/unrea
 function me(){fetch((window.GESERD&&GESERD.api||"/api")+"/auth/me",{credentials:"same-origin",cache:"no-store"}).then(function(r){if(r.status===401){location.href="/login/";return null}return r.ok?r.json():null}).then(function(u){
  if(!u)return;var nm=(u.name||"").trim()||u.email.split("@")[0];
  document.querySelectorAll(".wsb .nm,.mws .nm").forEach(function(e){e.textContent=nm});document.querySelectorAll(".wsb .av,.mws .av").forEach(function(e){e.textContent=nm.charAt(0).toUpperCase()});
- if(!(u.name||"").trim())askName()}).catch(function(){})}
-function askName(){
- var m=document.createElement("div");m.className="nmodal";m.innerHTML='<form class="nbox"><h2>'+t("app.name.h","What should we call you?")+'</h2><p>'+t("app.name.p","")+'</p><input name="n" maxlength="60" autocomplete="name" placeholder="'+t("app.name.ph","Your name")+'" required><button class="abtn pri" type="submit">'+t("app.name.save","Continue")+'</button></form>';
- document.body.appendChild(m);var f=m.querySelector("form"),i=f.n;i.focus();
- f.onsubmit=function(e){e.preventDefault();var v=i.value.trim();if(!v)return;fetch((window.GESERD&&GESERD.api||"/api")+"/auth/me",{method:"PATCH",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:v})}).then(function(r){if(r.ok){m.remove();document.querySelectorAll(".wsb .nm,.mws .nm").forEach(function(e){e.textContent=v});document.querySelectorAll(".wsb .av,.mws .av").forEach(function(e){e.textContent=v.charAt(0).toUpperCase()})}})}}
+ if(!u.onboarded&&!/^\/app\/welcome\//.test(location.pathname))location.replace("/app/welcome/")}).catch(function(){})}
 function closePops(){document.querySelectorAll(".apop.on").forEach(function(x){x.classList.remove("on")})}
 function mount(){
  var r=document.getElementById("app-nav");if(!r)return;

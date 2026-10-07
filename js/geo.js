@@ -1,5 +1,11 @@
-(function(){var O=window.GESERD,K="geserd_cc",c=null;try{c=sessionStorage.getItem(K)}catch(e){}
-O.country=c||null;
-O.geo=c?Promise.resolve(c):new Promise(function(res){var d=setTimeout(function(){res(null)},1500);
-fetch("https://api.country.is/").then(function(r){return r.json()}).then(function(j){clearTimeout(d);O.country=j.country||null;try{sessionStorage.setItem(K,O.country)}catch(e){}res(O.country)}).catch(function(){clearTimeout(d);res(null)})})})();
-(function(O){O.geo.then(function(c){if(c&&O.blocked.indexOf(c)>-1&&!/^\/(unavailable|countries|assets|css|js|i18n)/.test(location.pathname))location.replace("/unavailable/")});})(window.GESERD);
+(function(){var O=window.GESERD;
+O.country=null;O.geoData=null;O.blocked=[];
+function ask(){return new Promise(function(res){var done=false,d=setTimeout(function(){if(!done){done=true;res(null)}},2500);
+fetch(O.api+"/geo",{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(done)return;done=true;clearTimeout(d);res(j)}).catch(function(){if(done)return;done=true;clearTimeout(d);res(null)})})}
+O.geoCheck=ask;
+O.geo=ask().then(function(j){
+ if(!j)return null;
+ O.geoData=j;O.country=j.country||null;O.blocked=j.blockedCountries||[];
+ if(j.blocked&&!/^\/(unavailable|countries|assets|css|js|i18n)(\/|$)/.test(location.pathname))location.replace("/unavailable/");
+ return O.country});
+})();

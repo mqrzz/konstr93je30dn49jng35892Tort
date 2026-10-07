@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Welcome — Geserd</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css?v=519359ff5f">
+</head>
+<body class="auth-body wl-body">
+<div class="auth-shell">
+<div class="auth-bgimg"><picture><source media="(max-width:760px)" srcset="/assets/bg-site-m.webp"><img src="/assets/bg-site.webp?v=519359ff5f" alt=""></picture></div>
+<div class="auth-lang" id="authLang"></div>
+<main class="auth-main wl-main">
+<div class="auth-top">
+<img class="mark" src="/assets/logo-mark.svg?v=519359ff5f" alt="Geserd">
+<h1 data-i18n="wl.h1">Finish setting up your account</h1>
+<p data-i18n="wl.p">Two quick things before you start. Your region decides sign-in methods, currency, payments and where your data is kept.</p>
+</div>
+<form id="wlForm" novalidate>
+<div class="af"><label for="wlName"><span data-i18n="wl.name">Your name</span></label>
+<input id="wlName" name="name" type="text" maxlength="60" autocomplete="name" data-i18n-ph="wl.name.ph" placeholder="Name"></div>
+<div class="af"><label id="wlCl"><span data-i18n="wl.country">Account region</span></label>
+<div class="wl-cb" id="wlCb">
+<button type="button" class="wl-cbb" id="wlCbb" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wlCl wlCbv"><span id="wlCbv" data-i18n="wl.country.ph">Select your country</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="wl-pop" id="wlPop" hidden>
+<label class="wl-find"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="wlQ" type="search" autocomplete="off" data-i18n-ph="co.search" placeholder="Search a country"></label>
+<ul id="wlList" role="listbox" tabindex="-1"></ul>
+<p class="wl-none" id="wlNone" hidden data-i18n="co.empty">No country matches your search.</p>
+</div>
+</div>
+</div>
+<div class="wl-card" id="wlCard" hidden>
+<div class="wl-r"><span data-i18n="wl.r.login">Sign-in methods</span><b id="wlLogin"></b></div>
+<div class="wl-r"><span data-i18n="wl.r.price">Prices shown in</span><b id="wlCur"></b></div>
+<div class="wl-r"><span data-i18n="wl.r.pay">Payments</span><b id="wlPay"></b></div>
+<div class="wl-r"><span data-i18n="wl.r.data">Data location</span><b id="wlData"></b></div>
+</div>
+<p class="auth-err" id="wlErr" hidden></p>
+<button class="gbtn auth-submit" id="wlGo" type="submit" disabled><span class="lbl" data-i18n="wl.go">Continue</span><span class="dots"><i></i><i></i><i></i></span></button>
+<p class="auth-region" data-i18n="wl.lock">The region cannot be changed later without contacting support.</p>
+</form>
+</main>
+</div>
+<script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/js/pages/welcome.js?v=519359ff5f"></script>
+</body>
+</html>

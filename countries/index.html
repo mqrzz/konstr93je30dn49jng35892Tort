@@ -22,8 +22,10 @@
 <header class="co-h">
 <img class="mark" src="/assets/logo-mark.svg?v=519359ff5f" alt="Geserd">
 <h1 data-i18n="co.t">Where Geserd is available</h1>
-<p data-i18n="co.p">Geserd works in the countries listed below.</p>
+<p id="coP" data-i18n="co.p">Geserd works in the countries listed below.</p>
+<div class="co-me" id="coMe" hidden><span data-i18n="co.me">Your country</span><b></b><em></em></div>
 </header>
+<div class="co-tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-co-tab="ok"><span data-i18n="co.tab.ok">Available</span><i id="coNa"></i></button><button type="button" role="tab" aria-selected="false" data-co-tab="no"><span data-i18n="co.tab.no">Not available</span><i id="coNb"></i></button></div>
 <div class="co-tool">
 <label class="co-s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="coQ" type="search" autocomplete="off" data-i18n-ph="co.search" placeholder="Search a country"></label>
 <span class="co-n" id="coN"></span>

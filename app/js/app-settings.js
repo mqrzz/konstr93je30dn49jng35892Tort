@@ -17,17 +17,15 @@ usage:function(D){var A=window.GSApp,L=D.limits,U=D.used,lim=function(n){return 
  '<h1 class="sh1">'+t("app.usage.extras","Extras")+'</h1>'+
  sec(t("app.usage.payg","Pay-as-you-go"),t("app.usage.payg.d","Continue using Geserd beyond your quota."),'','<div class="pgi"><h3>'+t("app.usage.payg.t","Transactional")+'</h3><p>'+t("app.usage.payg.p","When enabled, you keep sending and receiving beyond your quota. Geserd charges your plan's overage rate for each additional bucket of 1,000 emails. Available on paid plans.")+'</p>'+TG("app.usage.payg.t","Transactional")+'</div>')+
  sec(t("app.usage.addons","Add-ons"),t("app.usage.addons.d","Get even more of Geserd with add-ons."),'','<div class="pgi"><h3>'+t("app.usage.add.dom","Domains")+'</h3><p>'+t("app.usage.add.dom.p","Adds 10 domains on top of the number included in your plan. You need a paid plan to add more domains.")+'</p><a class="abtn" href="/pricing/">'+t("app.usage.viewpr","View pricing")+'</a></div><div class="pgi"><h3>'+t("app.usage.add.ip","Dedicated IP")+'</h3><p>'+t("app.usage.add.ip.p","We provision, warm up and monitor a dedicated IP for consistent deliverability. Available on request on the Business plan.")+'</p><a class="abtn" href="/contact/">'+t("app.usage.add.ip.b","Request dedicated IP")+'</a></div>')},
-billing:function(D){var A=window.GSApp,L=D.limits,lim=function(n){return n?A.num(n):t("app.usage.unl","Unlimited")};return sec(t("app.bill.plan","Plan"),t("app.bill.plan.d","Your current plan and what it includes."),D.plan==="enterprise"?'':'<a class="abtn pri" href="/pricing/">'+t("app.upgrade","Upgrade")+'</a>','<h3>'+t("app.plan."+D.plan,D.plan)+'</h3>'+rows([[I.mail,t("app.usage.tx","Transactional"),lim(L.monthly)+" / "+t("app.bill.mo","month")],[I.inb,t("app.usage.inb","Inbound"),lim(L.inbound)+" / "+t("app.bill.mo","month")],[I.globe,t("app.usage.domains","Domains"),lim(L.domains)]]))+
- sec(t("app.bill.pm","Payment method"),t("app.bill.pm.d","The card used for paid plans."),'<button class="abtn" type="button">'+t("app.bill.add","Add payment method")+'</button>','<div class="emptyb">'+t("app.bill.none","No payment method on file.")+'</div>')+
- sec(t("app.bill.inv","Invoices"),t("app.bill.inv.d","Receipts for every payment."),'','<div class="emptyb">'+t("app.bill.noinv","No invoices yet.")+'</div>')},
 team:function(){return sec(t("app.team.mem","Members"),t("app.team.mem.d","People with access to this workspace."),'<button class="abtn pri" type="button">'+t("app.team.invite","Invite member")+'</button>','<table class="stbl"><tbody><tr><td>'+I.user+'</td><td>'+t("app.team.you","You")+'</td><td class="sub">'+t("app.team.owner","Owner")+'</td></tr></tbody></table>')},
 };
 function mount(){
  var r=document.getElementById("settings-root");if(!r)return;
  var pg=r.dataset.page||"usage",A=window.GSApp;
  var top='<div class="ph"><h1>'+t("app.set.title","Settings")+'</h1></div><nav class="stabs">'+TABS.map(function(x){return '<a href="/app/settings/'+x[0]+'/"'+(x[0]===pg?' class="on"':'')+'>'+t(x[1],x[2])+'</a>'}).join('')+'</nav>';
+ if(pg==="billing"){if(window.GSBilling)GSBilling.mount(r,top);return}
  if(pg==="sending"){if(window.GSSending)GSSending.mount(r,top);return}
- if(pg!=="usage"&&pg!=="billing"){r.innerHTML=top+(P[pg]||P.usage)();return}
+ if(pg!=="usage"){r.innerHTML=top+(P[pg]||P.usage)();return}
  r.innerHTML=top+(A?A.loading():"");
  function load(){A.api("/usage").then(function(D){r.innerHTML=top+P[pg](D)},function(x){r.innerHTML=top+A.failed(x,"uRetry");var b=document.getElementById("uRetry");if(b)b.onclick=function(){r.innerHTML=top+A.loading();load()}})}
  load();

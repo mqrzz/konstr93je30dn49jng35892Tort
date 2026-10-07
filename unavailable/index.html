@@ -17,14 +17,36 @@
 <body class="auth-body gate-body">
 <div class="auth-shell">
 <div class="auth-bgimg"><picture><source media="(max-width:760px)" srcset="/assets/bg-site-m.webp"><img src="/assets/bg-site.webp?v=519359ff5f" alt=""></picture></div>
-<main class="gate">
+<main class="gate ug" id="ug" data-st="load">
 <img class="mark" src="/assets/logo-mark.svg?v=519359ff5f" alt="Geserd">
+<section class="ug-s" data-s="load" aria-live="polite">
+<h1 data-i18n="un.load.t">Checking your connection…</h1>
+<p data-i18n="un.load.p">Geserd is looking up the country of your IP address on its own server.</p>
+<div class="ug-sp" aria-hidden="true"></div>
+</section>
+<section class="ug-s" data-s="blocked">
 <h1 data-i18n="un.t">Not available in your region</h1>
 <p data-i18n="un.p">Geserd isn't available in your country right now.</p>
+<div class="ug-chip" id="ugC1" hidden><span data-i18n="un.det">Detected country</span><b></b></div>
 <p class="gate-s" data-i18n="un.p2">We are expanding step by step and will open more countries over time.</p>
-<a class="btn pri gate-btn" href="/countries/" data-i18n="un.btn">See supported countries</a>
+<div class="ug-act"><a class="btn pri gate-btn" href="/countries/" data-i18n="un.btn">See supported countries</a><button type="button" class="ug-ghost" data-ug-again data-i18n="un.again">Check again</button></div>
+</section>
+<section class="ug-s" data-s="ok">
+<div class="ug-ok" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+<h1 data-i18n="un.ok.t">Everything is fine, Geserd works</h1>
+<p data-i18n="un.ok.p">Your connection is not blocked. Geserd is available in your country and you can use the site and the API as usual.</p>
+<div class="ug-chip" id="ugC2" hidden><span data-i18n="un.det">Detected country</span><b></b></div>
+<p class="gate-s" data-i18n="un.ok.s">The check runs on the Geserd server using the IP address your request came from.</p>
+<div class="ug-act"><a class="btn pri gate-btn" href="/" data-i18n="un.ok.btn">Go to Geserd</a><a class="ug-ghost" href="/countries/" data-i18n="un.btn">See supported countries</a></div>
+</section>
+<section class="ug-s" data-s="err">
+<h1 data-i18n="un.err.t">We couldn't run the check</h1>
+<p data-i18n="un.err.p">The Geserd server did not answer. This is a problem on our side or in your network, not a block.</p>
+<div class="ug-act"><button type="button" class="btn pri gate-btn" data-ug-again data-i18n="un.again">Check again</button><a class="ug-ghost" href="/countries/" data-i18n="un.btn">See supported countries</a></div>
+</section>
 </main>
 </div>
 <script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/js/pages/unavailable.js?v=519359ff5f"></script>
 </body>
 </html>
