@@ -6,6 +6,6 @@ O.geoCheck=ask;
 O.geo=ask().then(function(j){
  if(!j)return null;
  O.geoData=j;O.country=j.country||null;O.blocked=j.blockedCountries||[];
- if(j.blocked&&!/^\/(unavailable|countries|assets|css|js|i18n)(\/|$)/.test(location.pathname))location.replace("/unavailable/");
+ if(j.blocked&&!/^\/(unavailable|countries|unsubscribe|assets|css|js|i18n)(\/|$)/.test(location.pathname))location.replace("/unavailable/");
  return O.country});
 })();

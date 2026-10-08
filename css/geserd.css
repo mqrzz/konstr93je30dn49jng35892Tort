@@ -787,3 +787,7 @@ h1,h2,h3{overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
 .wl-pop .wl-find{margin:0}
 .wl-main{padding-top:84px}
 @media(min-width:761px){.wl-main{padding-top:48px}}
+.ug b#usA{font-weight:500;color:#fff}
+.ug[data-st=ready] [data-s=ready],.ug[data-st=done] [data-s=done],.ug[data-st=back] [data-s=back]{display:block}
+.ug[data-st=done] .mark,.ug[data-st=back] .mark{display:none}
+.ug p b{font-weight:500;color:#fff;overflow-wrap:anywhere}

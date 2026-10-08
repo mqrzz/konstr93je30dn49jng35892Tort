@@ -1,7 +1,7 @@
 (function(){
 var A=window.GSApp;if(!A)return;
 var T=A.t,E=A.esc,data=[],unread=0,flt="all",root;
-var ICON={bounce:'<path d="M4 4h16v12H4zM4 8l8 5 8-5M9 20h6"/>',complaint:'<path d="M12 3 2 20h20zM12 10v4M12 17h.01"/>',quota:'<path d="M5 20V11M11 20V4M17 20v-6M3 20h18"/>',billing:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/>',domain:'<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>',ticket:'<path d="M4 5h16v11H9l-5 4z"/>'};
+var ICON={bounce:'<path d="M4 4h16v12H4zM4 8l8 5 8-5M9 20h6"/>',complaint:'<path d="M12 3 2 20h20zM12 10v4M12 17h.01"/>',quota:'<path d="M5 20V11M11 20V4M17 20v-6M3 20h18"/>',broadcast:'<path d="M3 11v2a1 1 0 0 0 1 1h3l8 4V6L7 10H4a1 1 0 0 0-1 1zM18.5 9a4.5 4.5 0 0 1 0 6"/>',billing:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/>',domain:'<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>',ticket:'<path d="M4 5h16v11H9l-5 4z"/>'};
 function title(n){var k=n.title;return T("nt.t."+k,k)}
 function body(n){
  if(n.title==="quota_80"||n.title==="quota_full"){var sc=String(n.body||"").split(":")[0];return T("nt.b.quota."+(sc==="daily"?"daily":"monthly"),sc==="daily"?"Daily sending limit":"Monthly sending limit")}
