@@ -1,8 +1,8 @@
 (function(){
 var A=window.GSApp;if(!A)return;
 var T=A.t,E=A.esc;
-var TOPICS=["general","billing","deliverability","domains","api","abuse","other"];
-var TD={general:"General",billing:"Billing",deliverability:"Deliverability",domains:"Domains",api:"API",abuse:"Abuse",other:"Other"};
+var TOPICS=["general","billing","deliverability","domains","api","abuse","feedback","other"];
+var TD={general:"General",billing:"Billing",deliverability:"Deliverability",domains:"Domains",api:"API",abuse:"Abuse",feedback:"Feedback",other:"Other"};
 var root,pg;
 var URL_LIST="/app/help/tickets/",URL_NEW="/app/help/tickets/new/",URL_VIEW="/app/help/tickets/view/";
 function topic(k){return T("hp.topic."+k,TD[k]||k)}
@@ -21,7 +21,7 @@ function list(){
    document.getElementById("hpF").onclick=function(e){var b=e.target.closest("button[data-f]");if(!b)return;filter=b.dataset.f;paint()}}
   paint()},function(x){fail(x,list)})}
 function create(){
- var sel="general";
+ var sel=new URLSearchParams(location.search).get("topic");if(TOPICS.indexOf(sel)<0)sel="general";
  var tips=[T("hp.tip1","Name the domain or the email id you are asking about."),T("hp.tip2","Paste the exact error text or the SMTP response."),T("hp.tip3","Say what you expected and what happened instead.")];
  root.innerHTML=head(T("hp.new","Create a ticket"),URL_LIST)+'<div class="hnew"><div class="ucard hform"><div class="pfld"><label>'+E(T("hp.f.topic","Topic"))+'</label><div class="chips2" id="hpT">'+TOPICS.map(function(k){return '<button type="button" data-t="'+k+'" class="'+(k===sel?"on":"")+'">'+E(topic(k))+'</button>'}).join("")+'</div></div><div class="pfld"><label for="hps">'+E(T("hp.f.subject","Subject"))+'</label><input id="hps" maxlength="160" autocomplete="off"></div><div class="pfld"><label for="hpm">'+E(T("hp.f.msg","Message"))+'</label><textarea id="hpm" rows="9" maxlength="5000"></textarea></div><div class="prow"><button type="button" class="abtn pri lg" id="hpGo">'+E(T("hp.send","Send"))+'</button><a class="abtn lg" href="'+URL_LIST+'">'+E(T("hp.cancel","Cancel"))+'</a></div></div><aside class="ucard htips"><h3>'+E(T("hp.tips","Faster answers"))+'</h3>'+tips.map(function(x,i){return '<div class="tip"><i>'+(i+1)+'</i><p>'+E(x)+'</p></div>'}).join("")+'<a class="abtn" href="/docs/" target="_blank" rel="noopener">'+E(T("ap.h.d3","Read docs"))+'</a></aside></div>';
  document.getElementById("hpT").onclick=function(e){var b=e.target.closest("button[data-t]");if(!b)return;sel=b.dataset.t;root.querySelectorAll("#hpT button").forEach(function(x){x.classList.toggle("on",x===b)})};
@@ -33,10 +33,22 @@ function view(id){
  root.innerHTML=head(T("hp.ticket","Ticket"),URL_LIST)+A.loading();
  A.api("/tickets/"+id).then(function(t){
   var closed=t.status==="closed",last=t.messages[t.messages.length-1]||{};
-  root.innerHTML=head(t.subject,URL_LIST)+'<div class="ucard"><div class="uh"><div><h3>'+E(topic(t.topic))+'</h3><p>'+E(A.date(t.created_at))+'</p></div>'+stat({status:t.status,last_author:last.author})+'<div class="prow">'+(closed?'<button type="button" class="abtn" id="hpRe">'+E(T("hp.reopen","Reopen"))+'</button>':'<button type="button" class="abtn" id="hpCl">'+E(T("hp.close","Close ticket"))+'</button>')+'</div></div><div class="thr">'+t.messages.map(function(m){return '<div class="msg '+(m.author==="staff"?"sf":"us")+'"><small>'+E(m.author==="staff"?T("hp.staff","Geserd support"):T("hp.you","You"))+' · '+E(A.ago(m.created_at))+'</small>'+E(m.body)+'</div>'}).join("")+'</div>'+(closed?'<div class="emptyb">'+E(T("hp.closed.note","This ticket is closed. Reopen it to reply."))+'</div>':'<div class="pfld"><label for="hpr">'+E(T("hp.reply","Your reply"))+'</label><textarea id="hpr" rows="4" maxlength="5000"></textarea></div><div class="prow"><button type="button" class="abtn pri lg" id="hpSend">'+E(T("hp.send","Send"))+'</button></div>')+'</div>';
-  var s=document.getElementById("hpSend");if(s)s.onclick=function(){var v=document.getElementById("hpr").value.trim();if(!v)return;s.disabled=true;A.api("/tickets/"+id+"/messages",{method:"POST",body:{message:v}}).then(function(){view(id)},function(e){s.disabled=false;A.toast(A.err(e),"err")})};
-  var c=document.getElementById("hpCl");if(c)c.onclick=function(){A.api("/tickets/"+id+"/close",{method:"POST"}).then(function(){view(id)},function(e){A.toast(A.err(e),"err")})};
-  var r=document.getElementById("hpRe");if(r)r.onclick=function(){A.api("/tickets/"+id+"/reopen",{method:"POST"}).then(function(){view(id)},function(e){A.toast(A.err(e),"err")})}
+  var ini=(window.GESERD&&GESERD.user&&GESERD.user.name||"Y").trim().charAt(0).toUpperCase()||"Y";
+  var TI={general:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/>',billing:'<rect x="3" y="6" width="18" height="12" rx="3"/><path d="M3 10h18M7 15h3"/>',deliverability:'<path d="m4 12 16-8-6 16-3-7z"/>',domains:A.IC.globe,api:A.IC.key,abuse:'<path d="M12 3 4 6v6c0 4.5 3.2 7.5 8 9 4.8-1.5 8-4.5 8-9V6z"/><path d="M12 8v5M12 16h.01"/>',feedback:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 9.5h7M8.5 12.5h4"/>',other:'<circle cx="6" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18" cy="12" r="1.5"/>'};
+  var msgs=t.messages.map(function(m){var sf=m.author==="staff";return'<div class="tm '+(sf?"sf":"us")+'"><span class="tm-a">'+(sf?A.icon('<path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8H4z"/><path d="M9 11h6M9 14h4"/>',16):E(ini))+'</span><div class="tm-b"><small>'+E(sf?T("hp.staff","Geserd support"):T("hp.you","You"))+' · '+E(A.ago(m.created_at))+"</small><p>"+E(m.body)+"</p></div></div>"}).join("");
+  var foot=closed?'<div class="tk-closed">'+A.icon('<rect x="5" y="11" width="14" height="9" rx="3"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',20)+'<div><b>'+E(T("hp.st.closed","Closed"))+"</b><span>"+E(T("hp.closed.note2","This ticket is closed. For a new question, create a new ticket."))+'</span></div><a class="abtn pri" href="'+URL_NEW+'">'+A.icon(A.IC.plus,16)+"<span>"+E(T("hp.new","Create a ticket"))+"</span></a></div>":'<div class="tk-comp"><textarea id="hpr" rows="1" maxlength="5000" aria-label="'+E(T("hp.reply","Your reply"))+'" placeholder="'+E(T("hp.reply.ph","Write a message…"))+'"></textarea><button type="button" class="tk-send" id="hpSend" aria-label="'+E(T("hp.send","Send"))+'">'+A.icon('<path d="M5 12h14M13 6l6 6-6 6"/>',20)+"</button></div>";
+  root.classList.add("tk-page");document.body.classList.add("tk-page");root.innerHTML=head(t.subject,URL_LIST)+'<div class="tk-wrap"><div class="tk-top"><a class="tk-back" href="'+URL_LIST+'" aria-label="'+E(T("hp.back","All tickets"))+'">'+A.icon(A.IC.back,16)+"<span>"+E(T("hp.back","All tickets"))+"</span></a>"+'<span class="tk-ic">'+A.icon(TI[t.topic]||TI.other,20)+'</span><div class="tk-meta"><b>'+E(topic(t.topic))+"</b><span>"+E(A.date(t.created_at))+"</span></div>"+stat({status:t.status,last_author:last.author})+(closed?"":'<button type="button" class="abtn" id="hpCl">'+A.icon('<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',16)+"<span>"+E(T("hp.close","Close ticket"))+"</span></button>")+'</div><div class="tk-thr">'+msgs+"</div>"+foot+"</div>";
+  var ta=document.getElementById("hpr"),s=document.getElementById("hpSend");
+  function grow(){ta.style.height="auto";ta.style.height=Math.min(160,ta.scrollHeight)+"px"}
+  function send(){var v=ta.value.trim();if(!v||s.disabled)return;s.disabled=true;A.api("/tickets/"+id+"/messages",{method:"POST",body:{message:v}}).then(function(){view(id)},function(e){s.disabled=false;A.toast(A.err(e),"err")})}
+  if(ta){ta.oninput=grow;ta.onkeydown=function(ev){if(ev.key==="Enter"&&(ev.ctrlKey||ev.metaKey)){ev.preventDefault();send()}};s.onclick=send}
+  var c=document.getElementById("hpCl");
+  if(c)c.onclick=function(){
+   var m=A.modal({title:T("hp.close.q","Close this ticket?"),body:'<p class="dim">'+E(T("hp.close.p","You will not be able to reply after it is closed. For a new question, create a new ticket."))+'</p><div class="prow"><button type="button" class="abtn" id="hpNo">'+E(T("au.cancel","Cancel"))+'</button><button type="button" class="abtn pri" id="hpYes">'+E(T("hp.close","Close ticket"))+"</button></div>"});
+   m.body.querySelector("#hpNo").onclick=m.close;
+   m.body.querySelector("#hpYes").onclick=function(){this.disabled=true;A.api("/tickets/"+id+"/close",{method:"POST"}).then(function(){m.close();view(id)},function(e){m.close();A.toast(A.err(e),"err")})}
+  };
+  var th=root.querySelector(".tk-thr");if(th)th.scrollTop=th.scrollHeight
  },function(x){if(x&&x.status===404){location.replace(URL_LIST);return}fail(x,function(){view(id)})})}
 A.ready(function(){root=document.getElementById("hp-root");if(!root)return;pg=root.dataset.page;
  if(pg==="new")return create();

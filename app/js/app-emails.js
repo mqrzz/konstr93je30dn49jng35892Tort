@@ -40,7 +40,7 @@ function fill(m,d){
  if(!tabsA.length)return;
  var body=m.body.querySelector("#cBody");
  function show(k){m.body.querySelectorAll("#cTabs button").forEach(function(b){b.classList.toggle("on",b.dataset.k===k)});body.innerHTML="";
-  if(k==="prev"){var f=document.createElement("iframe");f.setAttribute("sandbox","allow-popups allow-popups-to-escape-sandbox");f.setAttribute("referrerpolicy","no-referrer");f.className="pv";f.srcdoc='<base target="_blank"><style>body{font-family:Arial,Helvetica,sans-serif;margin:16px;color:#111}</style>'+d.html;body.appendChild(f)}
+  if(k==="prev"){body.appendChild(A.paperBox(d.html,"pv"))}
   else{var p=document.createElement("pre");p.className="src";p.textContent=k==="html"?d.html:d.text;body.appendChild(p)}}
  m.body.querySelector("#cTabs").onclick=function(ev){var b=ev.target.closest("button");if(b)show(b.dataset.k)};show(tabsA[0][0]);
 }
