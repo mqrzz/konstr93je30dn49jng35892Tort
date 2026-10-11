@@ -22,10 +22,11 @@ var IC_DOC='<path d="M6 3h12v18H6z"/><path d="M9 8h6M9 12h6"/>';
 var IC_HELP='<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5M12 17h.01"/>';
 var IC_HOME='<path d="m3 11 9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>';
 var IC_OUT='<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>';
+var IC_SET='<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>';
 var IC_USER='<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>';
 var IC_BELL='<path d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7M10 20a2 2 0 0 0 4 0"/>';
 function ws(id){return '<div class="wsb"><button type="button" data-pop="'+id+'" aria-haspopup="menu"><span class="who"><span class="av">P</span><span class="nm">'+t("app.workspace","Personal")+'</span></span>'+CH+'</button>'+
- '<div class="apop" id="'+id+'" role="menu"><a href="/app/account/">'+s(IC_USER)+t("app.nav.account","Account settings")+'</a><a href="/">'+s(IC_HOME)+t("app.nav.home","Homepage")+'</a><hr><a href="#" data-logout>'+s(IC_OUT)+t("app.logout","Log out")+'</a></div></div>'}
+ '<div class="apop" id="'+id+'" role="menu"><a href="/app/profile/">'+s(IC_USER)+t("app.nav.profile","Profile")+'</a><a href="/app/account/">'+s(IC_SET)+t("app.nav.account","Account settings")+'</a><a href="/">'+s(IC_HOME)+t("app.nav.home","Homepage")+'</a><hr><a href="#" data-logout>'+s(IC_OUT)+t("app.logout","Log out")+'</a></div></div>'}
 function bdg(a){return a[3]?'<em class="bdg" data-bdg="'+a[3]+'" hidden></em>':''}
 function build(){
  var nav=N().map(function(a){return '<li><a href="'+a[1]+'"'+(on(a[1])?' class="on"':'')+'>'+s(a[2],18,'ic ic-'+a[4])+'<span>'+a[0]+'</span>'+bdg(a)+'</a></li>'}).join('');

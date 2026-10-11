@@ -47,8 +47,13 @@ function invSec(){
  var body=D.invoices.length?'<table class="stbl bl-t bl-inv"><tbody>'+D.invoices.map(function(i){return"<tr><td>#"+i.id+" · "+esc(t("app.plan."+i.plan,i.plan))+'<span class="bl-d">'+A.date(i.paid_at||i.created_at)+"</span></td><td>"+rub(i.amount)+'</td><td class="bl-s s-'+i.status+'">'+t("bl.is."+i.status,i.status)+"</td></tr>"}).join("")+"</tbody></table>":'<div class="emptyb">'+t("app.bill.noinv","No invoices yet.")+"</div>";
  return sec(t("app.bill.inv","Invoices"),t("app.bill.inv.d","Receipts for every payment."),"",body)
 }
+function sibSec(){
+ if(D.region!=="ru")return"";
+ var on=D.tariff==="siberia";
+ return'<section class="gcard bl-sib"><span class="ib">'+A.icon('<path d="M3 20h18M5 20l4.5-9 3 5 2-3L19 20"/><path d="M15 6.5h.01M18 4h.01"/>',22)+'</span><div><h3>'+esc(on?t("bl.sib.on","The Siberia tariff is active"):t("bl.sib.t","Business in Siberia?"))+'</h3><p>'+esc(on?t("bl.sib.onp","Pro and Business cost half the usual price."):t("bl.sib.p","Get three times the free limits and 50% off Pro and Business."))+'</p></div><a class="abtn'+(on?'':' pri')+'" href="/siberia/">'+esc(on?t("bl.sib.d","Details"):t("bl.sib.b","Learn more"))+'</a></section>'
+}
 function draw(){
- R.innerHTML=top+planSec()+choose()+methodSec()+regionSec()+invSec();
+ R.innerHTML=top+sibSec()+planSec()+choose()+methodSec()+regionSec()+invSec();
  var au=document.getElementById("blAuto");if(au)au.onclick=function(){sel.pro=!sel.pro;au.classList.toggle("on",sel.pro)};
  R.querySelectorAll("[data-act]").forEach(function(b){b.onclick=function(){act(b)}});
  ["pro","business"].forEach(function(p){
