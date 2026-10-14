@@ -3,7 +3,18 @@ var t=function(k,d){return window.GESERD&&GESERD.t?GESERD.t(k,d):d};
 var s=function(d,n,c){n=n||16;return '<svg'+(c?' class="'+c+'"':'')+' viewBox="0 0 24 24" width="'+n+'" height="'+n+'" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>'};
 var CH=s('<path d="m7 9 5-5 5 5M7 15l5 5 5-5"/>',14);
 var NI={bc:'<path d="M3 11v2a1 1 0 0 0 1 1h3l8 4V6L7 10H4a1 1 0 0 0-1 1z"/><path class="i-w1" d="M18.5 9.5a3.5 3.5 0 0 1 0 5"/><path class="i-w2" d="M20.5 7a7 7 0 0 1 0 10"/>',aud:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><g class="i-u2"><circle cx="17" cy="9" r="2.5"/><path d="M17.5 14.2a5 5 0 0 1 4 4.8"/></g>',bc:'<path d="M3 11v2a1 1 0 0 0 1 1h3l8 4V6L7 10H4a1 1 0 0 0-1 1z"/><path class="i-w" d="M18.5 9a4.5 4.5 0 0 1 0 6"/>',aud:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><g class="i-u2"><circle cx="17" cy="9" r="2.5"/><path d="M17.5 14.2a5 5 0 0 1 4 4.8"/></g>',tpl:'<rect x="3" y="4" width="18" height="16" rx="3"/><path class="i-t1" d="M3 9h18"/><path class="i-t2" d="M9 9v11"/>',emails:'<rect x="3" y="5" width="18" height="14" rx="3"/><path class="i-flap" d="m3 8 9 6 9-6"/>',auth:'<path d="M12 3 4 6v6c0 4.5 3.2 7.8 8 9 4.8-1.2 8-4.5 8-9V6z"/><path class="i-ck" d="m9 12 2 2 4-4"/>',metrics:'<path class="i-b i-b1" d="M5 20v-9"/><path class="i-b i-b2" d="M11 20V4"/><path class="i-b i-b3" d="M17 20v-6"/><path d="M3 20h18"/>',domains:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path class="i-mer" d="M12 3c3 3 3 15 0 18-3-3-3-15 0-18"/>',logs:'<path class="i-l i-l1" d="M4 6h16"/><path class="i-l i-l2" d="M4 12h16"/><path class="i-l i-l3" d="M4 18h10"/>',keys:'<g class="i-key"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M16 7l3 3"/></g>',hooks:'<path class="i-h1" d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path class="i-h2" d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',bell:'<path class="i-bell" d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7"/><path class="i-clap" d="M10 20a2 2 0 0 0 4 0"/>',set:'<g class="i-gear"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></g>'};
-function N(){return [
+var ADM=location.pathname.indexOf("/app/admin/")===0;
+var AI={over:'<path d="M12 3 4 6v6c0 4.5 3.2 7.5 8 9 4.8-1.5 8-4.5 8-9V6z"/><path d="m9 12 2.2 2.2L15.5 10"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/>',flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',map:'<path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 9.5h7M8.5 12.5h4"/>',star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',tool:'<path d="M14.5 6.5a4 4 0 0 0 5 5L11 20a2.1 2.1 0 0 1-3-3l8.5-8.5a4 4 0 0 0-2-2z"/><path d="M5 5l3 3"/>',back:'<path d="M15 5l-7 7 7 7"/>'};
+function AN(){return [
+[t("ad.t.over","Overview"),"/app/admin/",AI.over,null,"ad-over"],
+[t("ad.t.users","Users"),"/app/admin/users/",AI.users,null,"ad-users"],
+[t("ad.t.review","Review"),"/app/admin/review/",AI.flag,null,"ad-flag"],
+[t("ad.t.sib","Applications"),"/app/admin/siberia/",AI.map,null,"ad-map"],
+[t("ad.t.tickets","Tickets"),"/app/admin/tickets/",AI.chat,null,"ad-chat"],
+[t("ad.t.rating","Rating rules"),"/app/admin/rating/",AI.star,null,"ad-star"],
+[t("ad.t.maint","Maintenance"),"/app/admin/maintenance/",AI.tool,null,"ad-tool"],
+[t("ad.t.back","Back to dashboard"),"/app/emails/",AI.back,null,"ad-back"]]}
+function N(){if(ADM)return AN();return [
 [t("app.nav.emails","Emails"),"/app/emails/",NI.emails,null,"mail"],
 [t("app.nav.templates","Templates"),"/app/templates/",NI.tpl,null,"tpl"],
 [t("app.nav.broadcasts","Broadcasts"),"/app/broadcasts/",NI.bc,null,"bc"],
@@ -17,7 +28,7 @@ function N(){return [
 [t("app.nav.notifications","Notifications"),"/app/notifications/",NI.bell,"nt","bell"],
 [t("app.nav.settings","Settings"),"/app/settings/sending/",NI.set,null,"gear"]]}
 var p=location.pathname;
-function on(u){return u.indexOf("/app/settings/")===0?p.indexOf("/app/settings/")===0:p.indexOf(u)===0}
+function on(u){if(ADM)return u==="/app/admin/"?(p==="/app/admin/"||p==="/app/admin"):p.indexOf(u)===0;return u.indexOf("/app/settings/")===0?p.indexOf("/app/settings/")===0:p.indexOf(u)===0}
 var IC_DOC='<path d="M6 3h12v18H6z"/><path d="M9 8h6M9 12h6"/>';
 var IC_HELP='<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5M12 17h.01"/>';
 var IC_HOME='<path d="m3 11 9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>';

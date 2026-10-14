@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DKIM, SPF and DMARC — Docs — Geserd</title>
+<meta name="description" content="Three checks that prove an email really comes from you.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/docs/js/theme.js?v=519359ff5f"></script>
+<link rel="stylesheet" href="/docs/css/docs.css?v=519359ff5f">
+</head>
+<body>
+<div id="dh"></div>
+<div id="dm"></div>
+<div id="bd"></div>
+<aside id="ds"></aside>
+<main id="dc"><div class="wrap">
+<article class="pg">
+<div class="crumb" data-i18n="doc.nav.begin">Beginners</div>
+<div class="hd">
+<h1 data-i18n="doc.bg.dkim-spf-dmarc.h1">DKIM, SPF and DMARC</h1>
+<div class="pa">
+<button type="button" class="c" aria-label="Copy page"><svg class="s" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+<button type="button" class="d" aria-label="More"><svg class="s" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
+</div>
+</div>
+<p class="sub" data-i18n="doc.bg.dkim-spf-dmarc.lead">Three checks that prove an email really comes from you.</p>
+<div class="body">
+
+<h2 data-i18n="doc.bg.dkim-spf-dmarc.h1">DKIM: the signature</h2>
+<p data-i18n="doc.bg.dkim-spf-dmarc.p1">Every message is signed with a private key. Receivers look up the matching public key in your DNS and confirm nothing changed on the way.</p>
+
+<h2 data-i18n="doc.bg.dkim-spf-dmarc.h2">SPF: the guest list</h2>
+<p data-i18n="doc.bg.dkim-spf-dmarc.p2">SPF lists which servers may send mail for your domain. A message from any other server looks suspicious.</p>
+
+<h2 data-i18n="doc.bg.dkim-spf-dmarc.h3">DMARC: the rule</h2>
+<p data-i18n="doc.bg.dkim-spf-dmarc.p3">DMARC tells receivers what to do when DKIM or SPF fails, and where to send reports. Start with p=none to watch, then tighten later.</p>
+
+<div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
+<div class="pn2"></div>
+</div>
+</article>
+<aside class="toc" id="toc"></aside>
+</div></main>
+<div id="sm"><div class="box"><div class="in"><svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" placeholder="Search docs..." data-i18n-ph="doc.search"><kbd>ESC</kbd><button type="button" class="x" aria-label="Close"><svg class="s" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="rs"></div></div></div>
+<script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/docs/js/docs.js?v=519359ff5f"></script>
+</body>
+</html>

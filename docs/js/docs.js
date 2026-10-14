@@ -17,6 +17,11 @@ var I_MOON=svg('<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/>');
 function PAGES(){return [
  {path:"/docs/",group:t("doc.nav.start","Get started"),title:t("doc.nav.intro","Introduction")},
  {path:"/docs/quickstart/",group:t("doc.nav.start","Get started"),title:t("doc.nav.qs","Quickstart")},
+ {path:"/docs/beginners/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.beginners","Start here")},
+ {path:"/docs/beginners/what-is-smtp/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.what-is-smtp","What is SMTP")},
+ {path:"/docs/beginners/dns-records/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.dns-records","DNS records")},
+ {path:"/docs/beginners/dkim-spf-dmarc/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.dkim-spf-dmarc","DKIM, SPF and DMARC")},
+ {path:"/docs/beginners/first-email/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.first-email","Your first email")},
  {path:"/docs/api/",group:t("doc.nav.ref","API reference"),title:t("doc.nav.ref","API reference")},
  {path:"/docs/errors/",group:t("doc.nav.more","Reference"),title:t("doc.nav.errors","Errors")},
  {path:"/docs/rate-limits/",group:t("doc.nav.more","Reference"),title:t("doc.nav.limits","Rate limits")}
@@ -24,6 +29,7 @@ function PAGES(){return [
 function navGroups(){
  return [
   [t("doc.nav.start","Get started"),[["/docs/",t("doc.nav.intro","Introduction")],["/docs/quickstart/",t("doc.nav.qs","Quickstart")]]],
+  [t("doc.nav.begin","Beginners"),[["/docs/beginners/",t("doc.nav.b.beginners","Start here")],["/docs/beginners/what-is-smtp/",t("doc.nav.b.what-is-smtp","What is SMTP")],["/docs/beginners/dns-records/",t("doc.nav.b.dns-records","DNS records")],["/docs/beginners/dkim-spf-dmarc/",t("doc.nav.b.dkim-spf-dmarc","DKIM, SPF and DMARC")],["/docs/beginners/first-email/",t("doc.nav.b.first-email","Your first email")]]],
   [t("doc.nav.ref","API reference"),[["/docs/api/",t("doc.nav.ref","API reference")]]],
   [t("doc.nav.more","Reference"),[["/docs/errors/",t("doc.nav.errors","Errors")],["/docs/rate-limits/",t("doc.nav.limits","Rate limits")]]]
  ]

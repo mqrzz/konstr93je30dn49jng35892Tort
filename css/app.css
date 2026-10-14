@@ -582,3 +582,5 @@ a.ad-tile:hover{box-shadow:inset 0 0 0 1px var(--a-tx3)}
 .app-frz a{color:#000;font-weight:600;text-decoration:underline}
 @media(max-width:860px){.ad-two{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:640px){.ad-uh .ad-act{width:100%}.ad-uh .ad-act .abtn{flex:1;justify-content:center}.ad-rr input{width:90px}.ad-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.ad-tile{padding:14px}.ad-tile b{font-size:26px}}
+
+.sh3+.ad-tiles{margin-top:16px}.ad-tiles+.sh3{margin-top:36px}.ad-pl .pill,.ad-pl span{white-space:nowrap}.ad-tbl .pill{white-space:nowrap}
