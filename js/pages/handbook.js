@@ -16,5 +16,6 @@ function init(){
   document.getElementById("hbNone").hidden=any})
  show(location.hash.slice(1))
 }
-(window.GESERD&&GESERD.ready?GESERD.ready:Promise.resolve()).then(function(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",init):init()})
+function go(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",init):init()}
+(function wait(n){if(window.GESERD&&GESERD.ready)return GESERD.ready.then(go,go);if(n>400)return go();setTimeout(function(){wait(n+1)},25)})(0)
 })();

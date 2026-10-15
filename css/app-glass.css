@@ -294,3 +294,4 @@ a:hover>.ic-bc .i-w2,a:focus-visible>.ic-bc .i-w2,a:active>.ic-bc .i-w2{animatio
 a:hover>.ic-aud .i-u2,a:focus-visible>.ic-aud .i-u2,a:active>.ic-aud .i-u2{animation:kU2 .6s ease-out}
 @keyframes kU2{0%{opacity:0;transform:translateX(-5px)}100%{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){a>.ic-bc .i-w1,a>.ic-bc .i-w2,a>.ic-aud .i-u2{animation:none!important}}
+.ric .app-ico[data-tip]:after{left:0;transform:translate(0,4px)}.ric .app-ico[data-tip]:hover:after,.ric .app-ico[data-tip]:focus-visible:after{transform:translate(0,0)}
