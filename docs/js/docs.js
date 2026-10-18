@@ -17,21 +17,38 @@ var I_MOON=svg('<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/>');
 function PAGES(){return [
  {path:"/docs/",group:t("doc.nav.start","Get started"),title:t("doc.nav.intro","Introduction")},
  {path:"/docs/quickstart/",group:t("doc.nav.start","Get started"),title:t("doc.nav.qs","Quickstart")},
- {path:"/docs/beginners/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.beginners","Start here")},
- {path:"/docs/beginners/what-is-smtp/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.what-is-smtp","What is SMTP")},
- {path:"/docs/beginners/dns-records/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.dns-records","DNS records")},
- {path:"/docs/beginners/dkim-spf-dmarc/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.dkim-spf-dmarc","DKIM, SPF and DMARC")},
- {path:"/docs/beginners/first-email/",group:t("doc.nav.begin","Beginners"),title:t("doc.nav.b.first-email","Your first email")},
- {path:"/docs/api/",group:t("doc.nav.ref","API reference"),title:t("doc.nav.ref","API reference")},
+ {path:"/docs/concepts/",group:t("doc.nav.start","Get started"),title:t("doc.nav.m.concepts","Core concepts")},
+ {path:"/docs/going-live/",group:t("doc.nav.start","Get started"),title:t("doc.nav.m.going-live","Going live checklist")},
+ {path:"/docs/node/",group:t("doc.nav.guides","Guides"),title:t("doc.nav.m.node","Send with Node.js")},
+ {path:"/docs/python/",group:t("doc.nav.guides","Guides"),title:t("doc.nav.m.python","Send with Python")},
+ {path:"/docs/php/",group:t("doc.nav.guides","Guides"),title:t("doc.nav.m.php","Send with PHP")},
+ {path:"/docs/receive-reply/",group:t("doc.nav.guides","Guides"),title:t("doc.nav.m.receive-reply","Receive and reply")},
+ {path:"/docs/beginners/",group:t("doc.nav.begin","I'm not a developer"),title:t("doc.nav.b.beginners","Start here")},
+ {path:"/docs/beginners/what-is-smtp/",group:t("doc.nav.begin","I'm not a developer"),title:t("doc.nav.b.what-is-smtp","What is SMTP")},
+ {path:"/docs/beginners/dns-records/",group:t("doc.nav.begin","I'm not a developer"),title:t("doc.nav.b.dns-records","DNS records")},
+ {path:"/docs/beginners/add-dns/",group:t("doc.nav.begin","I'm not a developer"),title:t("doc.nav.b.add-dns","Adding DNS records step by step")},
+ {path:"/docs/beginners/dkim-spf-dmarc/",group:t("doc.nav.begin","I'm not a developer"),title:t("doc.nav.b.dkim-spf-dmarc","DKIM, SPF and DMARC")},
+ {path:"/docs/beginners/first-email/",group:t("doc.nav.begin","I'm not a developer"),title:t("doc.nav.b.first-email","Your first email")},
+ {path:"/docs/beginners/troubleshooting/",group:t("doc.nav.begin","I'm not a developer"),title:t("doc.nav.b.troubleshooting","If an email does not arrive")},
+ {path:"/docs/api/",group:t("doc.nav.ref","API reference"),title:t("doc.nav.api.over","Overview")},
+ {path:"/docs/emails/",group:t("doc.nav.ref","API reference"),title:t("doc.nav.m.emails","Emails")},
+ {path:"/docs/domains/",group:t("doc.nav.ref","API reference"),title:t("doc.nav.m.domains","Domains")},
+ {path:"/docs/api-keys/",group:t("doc.nav.ref","API reference"),title:t("doc.nav.m.api-keys","API keys")},
+ {path:"/docs/webhooks/",group:t("doc.nav.ref","API reference"),title:t("doc.nav.m.webhooks","Webhooks")},
+ {path:"/docs/templates/",group:t("doc.nav.ref","API reference"),title:t("doc.nav.m.templates","Templates")},
  {path:"/docs/errors/",group:t("doc.nav.more","Reference"),title:t("doc.nav.errors","Errors")},
- {path:"/docs/rate-limits/",group:t("doc.nav.more","Reference"),title:t("doc.nav.limits","Rate limits")}
+ {path:"/docs/rate-limits/",group:t("doc.nav.more","Reference"),title:t("doc.nav.limits","Rate limits")},
+ {path:"/docs/idempotency/",group:t("doc.nav.more","Reference"),title:t("doc.nav.m.idempotency","Idempotency")},
+ {path:"/docs/security/",group:t("doc.nav.more","Reference"),title:t("doc.nav.m.security","Security")},
+ {path:"/docs/glossary/",group:t("doc.nav.more","Reference"),title:t("doc.nav.m.glossary","Glossary")}
 ]}
 function navGroups(){
  return [
-  [t("doc.nav.start","Get started"),[["/docs/",t("doc.nav.intro","Introduction")],["/docs/quickstart/",t("doc.nav.qs","Quickstart")]]],
-  [t("doc.nav.begin","Beginners"),[["/docs/beginners/",t("doc.nav.b.beginners","Start here")],["/docs/beginners/what-is-smtp/",t("doc.nav.b.what-is-smtp","What is SMTP")],["/docs/beginners/dns-records/",t("doc.nav.b.dns-records","DNS records")],["/docs/beginners/dkim-spf-dmarc/",t("doc.nav.b.dkim-spf-dmarc","DKIM, SPF and DMARC")],["/docs/beginners/first-email/",t("doc.nav.b.first-email","Your first email")]]],
-  [t("doc.nav.ref","API reference"),[["/docs/api/",t("doc.nav.ref","API reference")]]],
-  [t("doc.nav.more","Reference"),[["/docs/errors/",t("doc.nav.errors","Errors")],["/docs/rate-limits/",t("doc.nav.limits","Rate limits")]]]
+  [t("doc.nav.start","Get started"),[["/docs/",t("doc.nav.intro","Introduction")],["/docs/quickstart/",t("doc.nav.qs","Quickstart")],["/docs/concepts/",t("doc.nav.m.concepts","Core concepts")],["/docs/going-live/",t("doc.nav.m.going-live","Going live checklist")]]],
+  [t("doc.nav.guides","Guides"),[["/docs/node/",t("doc.nav.m.node","Send with Node.js")],["/docs/python/",t("doc.nav.m.python","Send with Python")],["/docs/php/",t("doc.nav.m.php","Send with PHP")],["/docs/receive-reply/",t("doc.nav.m.receive-reply","Receive and reply")]]],
+  [t("doc.nav.begin","I'm not a developer"),[["/docs/beginners/",t("doc.nav.b.beginners","Start here")],["/docs/beginners/what-is-smtp/",t("doc.nav.b.what-is-smtp","What is SMTP")],["/docs/beginners/dns-records/",t("doc.nav.b.dns-records","DNS records")],["/docs/beginners/add-dns/",t("doc.nav.b.add-dns","Adding DNS records step by step")],["/docs/beginners/dkim-spf-dmarc/",t("doc.nav.b.dkim-spf-dmarc","DKIM, SPF and DMARC")],["/docs/beginners/first-email/",t("doc.nav.b.first-email","Your first email")],["/docs/beginners/troubleshooting/",t("doc.nav.b.troubleshooting","If an email does not arrive")]]],
+  [t("doc.nav.ref","API reference"),[["/docs/api/",t("doc.nav.api.over","Overview")],["/docs/emails/",t("doc.nav.m.emails","Emails")],["/docs/domains/",t("doc.nav.m.domains","Domains")],["/docs/api-keys/",t("doc.nav.m.api-keys","API keys")],["/docs/webhooks/",t("doc.nav.m.webhooks","Webhooks")],["/docs/templates/",t("doc.nav.m.templates","Templates")]]],
+  [t("doc.nav.more","Reference"),[["/docs/errors/",t("doc.nav.errors","Errors")],["/docs/rate-limits/",t("doc.nav.limits","Rate limits")],["/docs/idempotency/",t("doc.nav.m.idempotency","Idempotency")],["/docs/security/",t("doc.nav.m.security","Security")],["/docs/glossary/",t("doc.nav.m.glossary","Glossary")]]]
  ]
 }
 function here(){return location.pathname.replace(/index\.html$/,"").replace(/([^/])$/,"$1/")}
@@ -55,14 +72,16 @@ function buildHeader(){
 function sideNav(){
  var h=here(),out="";
  navGroups().forEach(function(g){
-  out+='<div class="grp"><h5>'+g[0]+'</h5>';
+  var has=g[1].some(function(it){return h===it[0]}),multi=g[1].length>1;
+  out+='<div class="grp'+(multi?' fold':'')+((has||!multi)?' open':'')+'"><h5>'+(multi?'<button type="button" class="gh" aria-expanded="'+((has||!multi)?'true':'false')+'">'+g[0]+I_CHEV+'</button>':g[0])+'</h5><div class="gl">';
   g[1].forEach(function(it){out+='<a href="'+it[0]+'"'+(h===it[0]?' class="on"':'')+'>'+it[1]+'</a>'});
-  out+='</div>';
+  out+='</div></div>';
  });
  return out;
 }
 function buildSidebar(){
  return ''+
+ '<div class="dtop"><a href="/"><img src="/assets/logo.svg" alt="Geserd"></a><button type="button" class="dclose" aria-label="'+t("doc.close","Close")+'">'+svg('<path d="M6 6l12 12M18 6 6 18"/>')+'</button></div>'+
  '<div class="sb"><button type="button" class="sbtn" id="dSearchBtn2"><span class="l">'+I_SEARCH+t("doc.search","Search...")+'</span><kbd>Ctrl K</kbd></button></div>'+
  '<div class="mt">'+
   '<a href="/docs/" class="'+(here()==="/docs/api/"?"":"on")+'">'+svg('<path d="M4 4h16v16H4z" fill="none"/><path d="M8 8h8M8 12h8M8 16h5"/>')+t("doc.tab.docs","Documentation")+'</a>'+
@@ -265,6 +284,8 @@ function mount(){
  if(!dh||!ds)return;
  dh.innerHTML=buildHeader();
  ds.innerHTML=buildSidebar();
+ var dcl=ds.querySelector(".dclose");if(dcl)dcl.addEventListener("click",function(){var bd=document.getElementById("bd");if(bd)bd.click()});
+ ds.querySelectorAll(".gh").forEach(function(b){b.addEventListener("click",function(){var g=b.closest(".grp"),o=!g.classList.contains("open");g.classList.toggle("open",o);b.setAttribute("aria-expanded",o)})});
  if(toc){toc.innerHTML=buildToc();if(toc.innerHTML)scrollspy(toc)}
  var pager=document.querySelector(".pn2");if(pager)pager.innerHTML=buildPager();
  pageActions();

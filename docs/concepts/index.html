@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Core concepts — Docs — Geserd</title>
+<meta name="description" content="The handful of ideas that explain everything else in Geserd: domains, keys, emails, events and limits.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/docs/js/theme.js?v=519359ff5f"></script>
+<link rel="stylesheet" href="/docs/css/docs.css?v=519359ff5f">
+</head>
+<body>
+<div id="dh"></div>
+<div id="dm"></div>
+<div id="bd"></div>
+<aside id="ds"></aside>
+<main id="dc"><div class="wrap">
+<article class="pg">
+<div class="crumb" data-i18n="doc.nav.start">Get started</div>
+<div class="hd">
+<h1 data-i18n="doc.nav.m.concepts">Core concepts</h1>
+<div class="pa">
+<button type="button" class="c" aria-label="Copy page"><svg class="s" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+<button type="button" class="d" aria-label="More"><svg class="s" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
+</div>
+</div>
+<p class="sub" data-i18n="doc.mp.concepts.lead">The handful of ideas that explain everything else in Geserd: domains, keys, emails, events and limits.</p>
+<div class="body">
+<h2 data-i18n="doc.mp.concepts.1">Domains</h2>
+<p data-i18n="doc.mp.concepts.2">A domain is the address you send from, such as <code>mail.yourshop.com</code>. Geserd generates a DKIM key pair for it and shows the DNS records that prove you control it. Until the records are verified, the domain is in the sandbox and can send only to your own account address.</p>
+<h2 data-i18n="doc.mp.concepts.3">API keys</h2>
+<p data-i18n="doc.mp.concepts.4">A key lets your code talk to the API. It is shown once, stored only as a hash, and can be revoked at any time. Create separate keys for separate apps so that revoking one never breaks the others.</p>
+<h2 data-i18n="doc.mp.concepts.5">Emails and their life</h2>
+<p data-i18n="doc.mp.concepts.6">Sending returns an id immediately and the message is queued. It then moves through states: sent, delivered, or bounced and complained when something goes wrong. Every step is written to the event log and, if you set up a webhook, pushed to your server.</p>
+<h2 data-i18n="doc.mp.concepts.7">Events, webhooks and limits</h2>
+<ul>
+<li data-i18n="doc.mp.concepts.8.0"><b>Events</b> describe what happened to a message, for example <code>email.delivered</code>.</li>
+<li data-i18n="doc.mp.concepts.8.1"><b>Webhooks</b> deliver events to your server, signed so you can trust them.</li>
+<li data-i18n="doc.mp.concepts.8.2"><b>Limits</b> cap sending per day and per month on every plan.</li>
+</ul>
+
+<div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
+<div class="pn2"></div>
+</div>
+</article>
+<aside class="toc" id="toc"></aside>
+</div></main>
+<div id="sm"><div class="box"><div class="in"><svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" placeholder="Search docs..." data-i18n-ph="doc.search"><kbd>ESC</kbd><button type="button" class="x" aria-label="Close"><svg class="s" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="rs"></div></div></div>
+<script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/docs/js/docs.js?v=519359ff5f"></script>
+</body>
+</html>

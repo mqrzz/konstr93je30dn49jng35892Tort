@@ -41,6 +41,30 @@
 <h2 data-i18n="doc.rl.h2c">API request rate</h2>
 <p data-i18n="doc.rl.p2c">Independently of send limits, the API also limits how many requests per second a single API key can make, to protect the platform from accidental request loops. This limit is generous for normal use and only matters if a bug in your integration is retrying in a tight loop.</p>
 
+<!--mx-->
+<h2 data-i18n="doc.mx.xdocs-rate-limits-index-h.1">What counts toward a limit</h2>
+<ul>
+<li data-i18n="doc.mx.xdocs-rate-limits-index-h.2.0"><b>Accepted sends</b> count: every message you queue, including each recipient of a broadcast.</li>
+<li data-i18n="doc.mx.xdocs-rate-limits-index-h.2.1"><b>Rejected requests</b> do not count: invalid input, spam-check rejections and refusals at the limit itself.</li>
+<li data-i18n="doc.mx.xdocs-rate-limits-index-h.2.2"><b>Received mail</b> has its own monthly limit and does not reduce your sending.</li>
+</ul>
+<h2 data-i18n="doc.mx.xdocs-rate-limits-index-h.3">Staying inside the limits</h2>
+<ul>
+<li data-i18n="doc.mx.xdocs-rate-limits-index-h.4.0">Watch the Usage page. You get a notice at 80 percent of each limit.</li>
+<li data-i18n="doc.mx.xdocs-rate-limits-index-h.4.1">Spread large sends over the day instead of sending everything at once.</li>
+<li data-i18n="doc.mx.xdocs-rate-limits-index-h.4.2">A running broadcast pauses at the limit and continues when the period resets.</li>
+<li data-i18n="doc.mx.xdocs-rate-limits-index-h.4.3">If you need more, upgrade the plan. The change applies immediately.</li>
+</ul>
+<h2 data-i18n="doc.mx.xdocs-rate-limits-index-h.5">Back off the right way</h2>
+<div class="cb"><div class="ch"><b>backoff.js</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>const wait = n =&gt; new Promise(r =&gt; setTimeout(r, Math.min(30000, 500 * 2 ** n)));
+for (let n = 0; n &lt; 5; n++) {
+  const res = await send();
+  if (res.status !== 429 &amp;&amp; res.status &lt; 500) break;
+  await wait(n);
+}</pre></div>
+<p data-i18n="doc.mx.xdocs-rate-limits-index-h.7">Double the pause after each failure and cap it. Add a little randomness so many clients that failed together do not all return at the same second.</p>
+
+<!--/mx-->
 <div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
 <div class="pn2"></div>
 </div>

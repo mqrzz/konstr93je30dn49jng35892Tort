@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>What DNS records do — Docs — Geserd</title>
-<meta name="description" content="DNS tells the world which servers speak for your domain.">
+<title>DNS records — Docs — Geserd</title>
+<meta name="description" content="DNS tells the world which servers speak for your domain. A few small records there decide whether your email is trusted.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,17 +28,25 @@
 <div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
 </div>
 </div>
-<p class="sub" data-i18n="doc.bg.dns-records.lead">DNS tells the world which servers speak for your domain.</p>
+<p class="sub" data-i18n="doc.bg.dns-records.lead">DNS tells the world which servers speak for your domain. A few small records there decide whether your email is trusted.</p>
 <div class="body">
-
-<h2 data-i18n="doc.bg.dns-records.h1">The address book</h2>
-<p data-i18n="doc.bg.dns-records.p1">Every domain has a list of small text entries called records. Other servers read them to learn where to deliver your mail and who may send it.</p>
-
-<h2 data-i18n="doc.bg.dns-records.h2">The records you add</h2>
-<p data-i18n="doc.bg.dns-records.p2">Geserd shows you exactly what to add: a TXT record for DKIM, a TXT record for SPF, an MX record for receiving, and a TXT record for DMARC.</p>
-
-<h2 data-i18n="doc.bg.dns-records.h3">Where to add them</h2>
-<p data-i18n="doc.bg.dns-records.p3">Open the DNS settings at the company where you bought the domain, create each record as shown, save, and press verify in the dashboard. Changes usually appear within minutes.</p>
+<h2 data-i18n="doc.bg.dns-records.1">The address book of the internet</h2>
+<p data-i18n="doc.bg.dns-records.2">Every domain has a list of small text entries called records. Other servers read them to learn where to deliver your mail and who may send it. You never see them in daily life, but they are the reason a message from your shop is believed or sent to spam.</p>
+<h2 data-i18n="doc.bg.dns-records.3">Every record has three parts</h2>
+<ul>
+<li data-i18n="doc.bg.dns-records.4.0"><b>Type:</b> what kind of information it holds. We use <code>TXT</code> (a piece of text) and <code>MX</code> (where mail is delivered).</li>
+<li data-i18n="doc.bg.dns-records.4.1"><b>Name:</b> which part of your domain it belongs to. <code>@</code> means the domain itself, and a word such as <code>_dmarc</code> means a special place under it.</li>
+<li data-i18n="doc.bg.dns-records.4.2"><b>Value:</b> the content, usually a long line of letters. Copy it exactly, without adding spaces.</li>
+</ul>
+<h2 data-i18n="doc.bg.dns-records.5">The records Geserd asks you to add</h2>
+<div class="cb"><div class="ch"><b>DNS</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>Type  Name                  Value
+TXT   &lt;selector&gt;._domainkey  v=DKIM1; k=rsa; p=MIIBIjANBg...
+TXT   @                     v=spf1 ip4:&lt;server address&gt; ~all
+TXT   _dmarc                v=DMARC1; p=none
+MX    @                     &lt;mail server&gt;   priority 10</pre></div>
+<p data-i18n="doc.bg.dns-records.7">The first three are about trust and the last one is about receiving. The dashboard prints the real values for your domain, so you never type them from memory: you copy them from the screen.</p>
+<h2 data-i18n="doc.bg.dns-records.8">Where to add them</h2>
+<p data-i18n="doc.bg.dns-records.9">Open the DNS settings at the company where you bought the domain, create each record as shown, save, and press verify in the dashboard. Changes usually appear within minutes. The next guide shows each click.</p>
 
 <div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
 <div class="pn2"></div>

@@ -1,9 +1,9 @@
 (function(){
 var A=window.GSApp,t=A.t,e=A.esc,root,page,F={q:"",status:"",plan:"",flag:""},U={off:0,rows:[],total:0};
-var P={shield:'<path d="M12 3 4 6v6c0 4.5 3.2 7.5 8 9 4.8-1.5 8-4.5 8-9V6z"/><path d="m9 12 2.2 2.2L15.5 10"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/>',flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',map:'<path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 9.5h7M8.5 12.5h4"/>',star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 7.5 8.5 6 8.5-6"/>',lock:'<rect x="5" y="11" width="14" height="9" rx="3"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',pause:'<circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/>',ban:'<circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/>',ok:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',back:'<path d="m15 6-6 6 6 6"/>'};
+var P={key:'<circle cx="8" cy="15" r="4"/><path d="m11 12 8-8M16 7l3 3M14 9l2 2"/>',shield:'<path d="M12 3 4 6v6c0 4.5 3.2 7.5 8 9 4.8-1.5 8-4.5 8-9V6z"/><path d="m9 12 2.2 2.2L15.5 10"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/>',flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',map:'<path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 9.5h7M8.5 12.5h4"/>',star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 7.5 8.5 6 8.5-6"/>',lock:'<rect x="5" y="11" width="14" height="9" rx="3"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',pause:'<circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/>',ban:'<circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/>',ok:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',back:'<path d="m15 6-6 6 6 6"/>'};
 var TABS=[["","ad.t.over","Overview","/app/admin/",P.shield],["users","ad.t.users","Users","/app/admin/users/",P.users],["review","ad.t.review","Review","/app/admin/review/",P.flag],["siberia","ad.t.sib","Applications","/app/admin/siberia/",P.map],["tickets","ad.t.tickets","Tickets","/app/admin/tickets/",P.chat],["rating","ad.t.rating","Rating rules","/app/admin/rating/",P.star]];
 function head(){
- var ti={"":["ad.t.over","Overview"],users:["ad.t.users","Users"],user:["ad.t.users","Users"],review:["ad.t.review","Review"],siberia:["ad.t.sib","Applications"],tickets:["ad.t.tickets","Tickets"],rating:["ad.t.rating","Rating rules"],maint:["ad.t.maint","Maintenance"]}[page]||["ad.h","Admin"];
+ var ti={"":["ad.t.over","Overview"],users:["ad.t.users","Users"],user:["ad.t.users","Users"],review:["ad.t.review","Review"],siberia:["ad.t.sib","Applications"],tickets:["ad.t.tickets","Tickets"],rating:["ad.t.rating","Rating rules"],maint:["ad.t.maint","Maintenance"],sso:["ad.t.sso","SSO"],notice:["ad.t.notice","Notice"],staff:["ad.t.staff","Team"]}[page]||["ad.h","Admin"];
  return'<div class="ph"><h1>'+e(t(ti[0],ti[1]))+"</h1></div>"
 }
 function shell(inner){root.innerHTML=head()+inner}
@@ -143,6 +143,84 @@ function rating(){
   document.getElementById("adReset").onclick=function(){A.api("/admin/rating-rules/reset",{method:"POST"}).then(function(){A.toast(t("ad.m.done","Saved"));rating()})}
  },function(x){fail(x,"adRetry")})
 }
+
+function roleName(r){return t("ad.role."+r,r)}
+function sso(){
+ A.api("/admin/sso").then(function(d){
+  var h='<section class="gcard"><div class="trow"><div><b>'+e(t("ad.sso.uri","Redirect URI"))+'</b><span>'+e(t("ad.sso.uri.p","Give this address to the customer to register in their identity provider."))+'</span></div><button type="button" class="abtn" id="ssCp">'+A.icon(A.IC.copy,16)+'<span>'+e(t("au.copy","Copy"))+'</span></button></div><code class="brk ad-uri">'+e(d.redirect_uri)+'</code></section>';
+  h+='<div class="ad-act"><button type="button" class="abtn pri lg" id="ssAdd">'+e(t("ad.sso.add","Add connection"))+'</button></div>';
+  if(!d.items.length)h+=A.empty(P.key,t("ad.sso.none","No SSO connections"),t("ad.sso.none.p","Enterprise customers sign in with their own identity provider. Add the first connection when a contract is signed."));
+  else h+='<div class="dl">'+d.items.map(function(x,i){return'<div class="drow ad-ssr" data-i="'+i+'" style="--cols:minmax(0,1.3fr) minmax(0,2fr) minmax(0,.8fr) 270px"><div class="c strong ell" data-l="'+e(t("ad.sso.domain","Domain"))+'">'+e(x.domain)+'</div><div class="c ell dim" data-l="'+e(t("ad.sso.issuer","Issuer"))+'">'+e(x.issuer)+'</div><div class="c" data-l="'+e(t("ad.u.status","Status"))+'">'+A.pill(x.enabled?"ok":"dim",x.enabled?t("ad.sso.on","On"):t("ad.sso.off","Off"))+'</div><div class="c ad-btns"><button type="button" class="abtn" data-a="tg">'+e(x.enabled?t("ad.sso.disable","Turn off"):t("ad.sso.enable","Turn on"))+'</button><button type="button" class="abtn" data-a="ed">'+e(t("ad.sso.edit","Edit"))+'</button><button type="button" class="abtn dng" data-a="rm">'+e(t("ad.sso.rm","Delete"))+'</button></div></div>'}).join("")+"</div>";
+  shell(h);
+  document.getElementById("ssCp").onclick=function(){A.copy(d.redirect_uri,this)};
+  document.getElementById("ssAdd").onclick=function(){form(null)};
+  root.querySelectorAll(".ad-ssr").forEach(function(row){var x=d.items[+row.dataset.i];row.querySelectorAll("[data-a]").forEach(function(b){b.onclick=function(){var a=b.dataset.a;
+   if(a==="ed")return form(x);
+   if(a==="tg"){b.disabled=true;return A.api("/admin/sso/"+encodeURIComponent(x.domain),{method:"PATCH",body:{enabled:!x.enabled}}).then(function(){A.toast(t("ad.m.done","Saved"));sso()},function(z){b.disabled=false;A.toast(A.err(z),"err")})}
+   var m=A.modal({title:t("ad.sso.del.t","Delete this connection?"),body:'<p class="dim">'+e(t("ad.sso.del.p","People from {d} will no longer be able to sign in with SSO, and their identity links are removed. Their accounts stay.",{d:x.domain}))+'</p><div class="prow"><button type="button" class="abtn" id="adNo">'+e(t("au.cancel","Cancel"))+'</button><button type="button" class="abtn pri" id="adYes">'+e(t("ad.sso.rm","Delete"))+"</button></div>"});
+   m.body.querySelector("#adNo").onclick=m.close;
+   m.body.querySelector("#adYes").onclick=function(){var y=this;y.disabled=true;A.api("/admin/sso/"+encodeURIComponent(x.domain),{method:"DELETE"}).then(function(){m.close();A.toast(t("ad.m.done","Saved"));sso()},function(z){y.disabled=false;A.toast(A.err(z),"err")})}
+  }})});
+  function form(x){
+   var ed=!!x;
+   var m=A.modal({title:ed?t("ad.sso.edit.t","Edit connection"):t("ad.sso.add","Add connection"),wide:true,body:'<div class="pfld"><label for="ssD">'+e(t("ad.sso.domain","Domain"))+'</label><input id="ssD" autocomplete="off" maxlength="253" placeholder="company.com" value="'+e(ed?x.domain:"")+'"'+(ed?" disabled":"")+'><small class="dim">'+e(t("ad.sso.domain.h","People with an email on this domain sign in through this provider."))+'</small></div><div class="pfld"><label for="ssI">'+e(t("ad.sso.issuer","Issuer"))+'</label><input id="ssI" autocomplete="off" maxlength="300" placeholder="https://login.company.com" value="'+e(ed?x.issuer:"")+'"><small class="dim">'+e(t("ad.sso.issuer.h","The OpenID Connect issuer address. We find the rest from its discovery document."))+'</small></div><div class="pfld"><label for="ssC">'+e(t("ad.sso.cid","Client ID"))+'</label><input id="ssC" autocomplete="off" maxlength="300" value="'+e(ed?x.client_id:"")+'"></div><div class="pfld"><label for="ssS">'+e(t("ad.sso.sec","Client secret"))+'</label><input id="ssS" type="password" autocomplete="new-password" maxlength="2000" placeholder="'+e(ed?t("ad.sso.sec.keep","Leave empty to keep the current secret"):"")+'"></div><p class="ferr" id="ssE" hidden></p><div class="prow"><button type="button" class="abtn" id="ssT">'+e(t("ad.sso.test","Check provider"))+'</button><button type="button" class="abtn" id="adNo">'+e(t("au.cancel","Cancel"))+'</button><button type="button" class="abtn pri" id="adYes">'+e(t("ad.d.save","Save"))+"</button></div>"});
+   var er=m.body.querySelector("#ssE");
+   function show(c){er.textContent=c;er.hidden=!c}
+   m.body.querySelector("#adNo").onclick=m.close;
+   m.body.querySelector("#ssT").onclick=function(){var b=this;show("");b.disabled=true;A.api("/admin/sso/check",{method:"POST",body:{issuer:m.body.querySelector("#ssI").value}}).then(function(){b.disabled=false;A.toast(t("ad.sso.test.ok","The provider answered correctly"))},function(z){b.disabled=false;show(t("ad.sso.test.bad","The provider could not be reached or its settings are wrong."))})};
+   m.body.querySelector("#adYes").onclick=function(){var b=this;show("");b.disabled=true;
+    var body={issuer:m.body.querySelector("#ssI").value,client_id:m.body.querySelector("#ssC").value,client_secret:m.body.querySelector("#ssS").value};
+    var rq=ed?A.api("/admin/sso/"+encodeURIComponent(x.domain),{method:"PATCH",body:body}):A.api("/admin/sso",{method:"POST",body:Object.assign({domain:m.body.querySelector("#ssD").value},body)});
+    rq.then(function(){m.close();A.toast(t("ad.m.done","Saved"));sso()},function(z){b.disabled=false;show(A.err(z))})}
+  }
+ },function(x){fail(x,"adRetry")})
+}
+function staff(){
+ A.api("/admin/staff").then(function(d){
+  var h='<div class="ad-act"><button type="button" class="abtn pri lg" id="stAdd">'+e(t("ad.st.add","Add employee"))+'</button></div><div class="dl">'+d.items.map(function(x,i){var mine=x.id===d.me,can=!mine&&d.assignable.indexOf(x.role)>-1;return'<div class="drow ad-str" data-i="'+i+'" style="--cols:minmax(0,2.2fr) minmax(0,1fr) minmax(0,1fr) 230px"><div class="c" data-l="'+e(t("ad.u.acc","Account"))+'"><span class="ad-av">'+e((x.name||x.email).charAt(0).toUpperCase())+'</span><span class="ad-nm"><b class="ell">'+e(x.email)+'</b><small>'+e(x.name||"")+(mine?" · "+e(t("app.team.you","You")):"")+'</small></div><div class="c" data-l="'+e(t("ad.st.role","Role"))+'">'+A.pill(x.role==="owner"?"ok":x.role==="director"?"wait":"dim",roleName(x.role))+'</div><div class="c dim" data-l="'+e(t("ad.st.seen","Last seen"))+'">'+e(x.last_seen?A.ago(x.last_seen):t("au.never","Never"))+'</div><div class="c ad-btns">'+(can?'<button type="button" class="abtn" data-a="ro">'+e(t("ad.st.change","Change role"))+'</button><button type="button" class="abtn dng" data-a="rm">'+e(t("ad.st.remove","Remove"))+"</button>":"")+"</div></div>"}).join("")+"</div>";
+  h+='<section class="gcard ad-roles"><h2 class="sh3">'+e(t("ad.st.what","What each role can do"))+'</h2>'+["owner","director","admin","support"].map(function(r){return'<div class="ad-rr"><label>'+e(roleName(r))+'</label><span class="dim">'+e(t("ad.role."+r+".d",""))+"</span></div>"}).join("")+"</section>";
+  shell(h);
+  var opts=d.assignable.map(function(r){return[r,roleName(r)]});
+  document.getElementById("stAdd").onclick=function(){
+   var role=opts[opts.length-1][0];
+   var m=A.modal({title:t("ad.st.add","Add employee"),body:'<div class="pfld"><label for="stE">'+e(t("ad.sb.email","Email"))+'</label><input id="stE" type="email" autocomplete="off" maxlength="200"><small class="dim">'+e(t("ad.st.add.h","The person must have signed in to Geserd at least once."))+'</small></div><div class="pfld"><label>'+e(t("ad.st.role","Role"))+'</label><div id="stR"></div></div><p class="ferr" id="stX" hidden></p><div class="prow"><button type="button" class="abtn" id="adNo">'+e(t("au.cancel","Cancel"))+'</button><button type="button" class="abtn pri" id="adYes">'+e(t("ad.st.add","Add employee"))+"</button></div>"});
+   m.body.querySelector("#stR").appendChild(A.dropdown(opts,role,function(v){role=v}));
+   m.body.querySelector("#adNo").onclick=m.close;
+   m.body.querySelector("#adYes").onclick=function(){var b=this,er=m.body.querySelector("#stX");er.hidden=true;b.disabled=true;A.api("/admin/staff",{method:"POST",body:{email:m.body.querySelector("#stE").value,role:role}}).then(function(){m.close();A.toast(t("ad.m.done","Saved"));staff()},function(z){b.disabled=false;er.textContent=A.err(z);er.hidden=false})}
+  };
+  root.querySelectorAll(".ad-str").forEach(function(row){var x=d.items[+row.dataset.i];row.querySelectorAll("[data-a]").forEach(function(b){b.onclick=function(){
+   if(b.dataset.a==="rm"){var m=A.modal({title:t("ad.st.rm.t","Remove this employee?"),body:'<p class="dim">'+e(t("ad.st.rm.p","{e} loses access to the control panel. The account itself stays.",{e:x.email}))+'</p><div class="prow"><button type="button" class="abtn" id="adNo">'+e(t("au.cancel","Cancel"))+'</button><button type="button" class="abtn pri" id="adYes">'+e(t("ad.st.remove","Remove"))+"</button></div>"});m.body.querySelector("#adNo").onclick=m.close;m.body.querySelector("#adYes").onclick=function(){var y=this;y.disabled=true;A.api("/admin/staff/"+x.id,{method:"DELETE"}).then(function(){m.close();A.toast(t("ad.m.done","Saved"));staff()},function(z){y.disabled=false;A.toast(A.err(z),"err")})};return}
+   var role=x.role;var m2=A.modal({title:t("ad.st.change","Change role"),body:'<div class="pfld"><label>'+e(t("ad.st.role","Role"))+'</label><div id="stR"></div></div><div class="prow"><button type="button" class="abtn" id="adNo">'+e(t("au.cancel","Cancel"))+'</button><button type="button" class="abtn pri" id="adYes">'+e(t("ad.d.save","Save"))+"</button></div>"});
+   m2.body.querySelector("#stR").appendChild(A.dropdown(opts,role,function(v){role=v}));
+   m2.body.querySelector("#adNo").onclick=m2.close;
+   m2.body.querySelector("#adYes").onclick=function(){var y=this;y.disabled=true;A.api("/admin/staff/"+x.id,{method:"PATCH",body:{role:role}}).then(function(){m2.close();A.toast(t("ad.m.done","Saved"));staff()},function(z){y.disabled=false;A.toast(A.err(z),"err")})}
+  }})})
+ },function(x){fail(x,"adRetry")})
+}
+
+function notice(){
+ A.api("/admin/maintenance/notice").then(function(n){
+  var LG=["ru","en","fr","de"],names={ru:"Русский",en:"English",fr:"Français",de:"Deutsch"},cur=(window.GESERD&&GESERD.lang)||"ru";if(LG.indexOf(cur)<0)cur="en";
+  var texts=JSON.parse(JSON.stringify(n.texts||{})),on=!!n.active;
+  LG.forEach(function(l){if(!texts[l])texts[l]={title:"",message:""}});
+  shell('<section class="gcard mt-st'+(on?" hot":"")+'"><div class="trow"><div><b id="ntSt">'+e(t(on?"ad.nt.on":"ad.nt.off",on?"The notice is shown":"The notice is hidden"))+'</b><span>'+e(t("ad.nt.state","People see it as a banner in the dashboard, on the sign-in page and on the sign-up page. Nothing stops working."))+'</span></div><button type="button" class="tg'+(on?" on":"")+'" id="ntTg" role="switch" aria-checked="'+(on?"true":"false")+'"><i></i></button></div></section>'+
+  '<h2 class="sh3">'+e(t("ad.nt.text","Text"))+'</h2><section class="gcard"><div class="opts ad-lg" id="ntLg" role="tablist"></div><div class="pfld"><label for="ntT">'+e(t("ad.mt.title","Title"))+'</label><input id="ntT" maxlength="120" autocomplete="off" placeholder="'+e(t("ad.nt.title.p","Planned maintenance on Saturday"))+'"></div><div class="pfld"><label for="ntM">'+e(t("ad.mt.text","Details"))+'</label><textarea id="ntM" rows="4" maxlength="1000" placeholder="'+e(t("ad.nt.text.p","We will update the servers. Sending may pause for a few minutes."))+'"></textarea><span class="fhint">'+e(t("ad.nt.lang.h","Write each language you can. People whose language is empty see the English text."))+'</span></div></section>'+
+  '<h2 class="sh3">'+e(t("ad.nt.when","When"))+'</h2><section class="gcard"><div class="pfld"><label for="ntS">'+e(t("ad.nt.from","Starts"))+'</label><input id="ntS" type="datetime-local" value="'+e(mtDt(n.starts_at))+'"></div><div class="pfld"><label for="ntE">'+e(t("ad.nt.to","Ends"))+'</label><input id="ntE" type="datetime-local" value="'+e(mtDt(n.ends_at))+'"><span class="fhint">'+e(t("ad.nt.to.h","After this time the banner disappears by itself."))+'</span></div><div class="prow"><button type="button" class="abtn pri lg" id="ntSave">'+e(t("ac.save","Save"))+'</button><button type="button" class="abtn lg" id="ntMail">'+e(t("ad.nt.mail","Email everyone"))+'</button></div>'+(n.emailed_at?'<p class="dim ad-sent">'+e(t("ad.nt.sent","Last email: {n} people, {d}",{n:n.emailed_count,d:new Date(n.emailed_at).toLocaleString()}))+'</p>':'')+'</section>');
+  var lg=document.getElementById("ntLg"),ti=document.getElementById("ntT"),me=document.getElementById("ntM");
+  function keep(){texts[cur]={title:ti.value,message:me.value}}
+  function paint(){lg.innerHTML=LG.map(function(l){var f=texts[l].title||texts[l].message;return'<button type="button" class="opt'+(l===cur?" on":"")+'" data-l="'+l+'" role="tab" aria-selected="'+(l===cur?"true":"false")+'"><b>'+e(names[l])+'</b><span>'+e(f?t("ad.nt.filled","Filled"):t("ad.nt.empty","Empty"))+'</span></button>'}).join("");ti.value=texts[cur].title;me.value=texts[cur].message;lg.querySelectorAll("[data-l]").forEach(function(b){b.onclick=function(){keep();cur=b.dataset.l;paint()}})}
+  paint();
+  function body(a){keep();var s=document.getElementById("ntS").value,en=document.getElementById("ntE").value;return{active:a,texts:texts,starts_at:s?new Date(s).toISOString():null,ends_at:en?new Date(en).toISOString():null}}
+  function save(a,btn){if(btn)btn.disabled=true;return A.api("/admin/maintenance/notice",{method:"PUT",body:body(a)}).then(function(){if(btn)btn.disabled=false;A.toast(t("ad.m.done","Saved"));return true},function(z){if(btn)btn.disabled=false;A.toast(A.err(z),"err");return false})}
+  document.getElementById("ntSave").onclick=function(){save(on,this).then(function(ok){if(ok)notice()})};
+  document.getElementById("ntTg").onclick=function(){var b=this;save(!on,b).then(function(ok){if(ok)notice()})};
+  document.getElementById("ntMail").onclick=function(){
+   var m=A.modal({title:t("ad.nt.mail.t","Email everyone?"),body:'<p class="dim">'+e(t("ad.nt.mail.p","Every account that is not blocked gets a branded email in its own language, and a notification in the dashboard. The saved text is sent, so save first. This cannot be undone."))+'</p><div class="prow"><button type="button" class="abtn" id="adNo">'+e(t("au.cancel","Cancel"))+'</button><button type="button" class="abtn pri" id="adYes">'+e(t("ad.nt.mail","Email everyone"))+"</button></div>"});
+   m.body.querySelector("#adNo").onclick=m.close;
+   m.body.querySelector("#adYes").onclick=function(){var y=this;y.disabled=true;save(on).then(function(ok){if(!ok){y.disabled=false;return}A.api("/admin/maintenance/notice/email",{method:"POST"}).then(function(r){m.close();A.toast(t("ad.nt.done","Sent to {n} people",{n:r.sent}));notice()},function(z){y.disabled=false;A.toast(A.err(z),"err")})})}
+  }
+ },function(x){fail(x,"adRetry")})
+}
 function mtDt(v){if(!v)return"";var d=new Date(v);if(isNaN(d))return"";var o=d.getTimezoneOffset()*60000;return new Date(d.getTime()-o).toISOString().slice(0,16)}
 function maint(){
  A.api("/admin/maintenance").then(function(m){
@@ -160,10 +238,10 @@ function maint(){
 }
 function load(){
  root.innerHTML=head()+A.loading();
- if(page==="")ov();else if(page==="users"){shell('<div class="tool" id="adTool"></div><div id="adBody">'+A.loading()+"</div>");var p=new URLSearchParams(location.search);["status","q","plan","flag"].forEach(function(k){if(p.get(k)&&!F[k])F[k]=p.get(k)});usersTool();users(true)}else if(page==="maint")maint();else if(page==="user")user();else if(page==="review")review();else if(page==="siberia")sib();else if(page==="tickets")tickets();else if(page==="rating")rating()
+ if(page==="")ov();else if(page==="users"){shell('<div class="tool" id="adTool"></div><div id="adBody">'+A.loading()+"</div>");var p=new URLSearchParams(location.search);["status","q","plan","flag"].forEach(function(k){if(p.get(k)&&!F[k])F[k]=p.get(k)});usersTool();users(true)}else if(page==="maint")maint();else if(page==="user")user();else if(page==="review")review();else if(page==="siberia")sib();else if(page==="tickets")tickets();else if(page==="rating")rating();else if(page==="notice")notice();else if(page==="sso")sso();else if(page==="staff")staff()
 }
 A.ready(function(){
  root=document.getElementById("app-root");if(!root)return;page=root.dataset.page||"";
- A.api("/auth/me").then(function(me){if(!me.is_admin){location.replace("/app/");return}load()},function(){location.replace("/app/")})
+ A.api("/auth/me").then(function(me){if(!me.is_admin){location.replace("/app/");return}A.api("/admin/me").then(function(r){window.GSRole=r;var map={"":"overview",users:"users",user:"users",review:"review",siberia:"siberia",tickets:"tickets",rating:"rating-rules",maint:"maintenance",notice:"maintenance",sso:"sso",staff:"staff"};if(r.areas.indexOf(map[page])<0){location.replace("/app/admin/");return}document.querySelectorAll('a[href^="/app/admin/"]').forEach(function(a){var h=a.getAttribute("href"),k={"/app/admin/":"overview","/app/admin/users/":"users","/app/admin/review/":"review","/app/admin/siberia/":"siberia","/app/admin/tickets/":"tickets","/app/admin/rating/":"rating-rules","/app/admin/maintenance/":"maintenance","/app/admin/notice/":"maintenance","/app/admin/sso/":"sso","/app/admin/staff/":"staff"}[h];if(k&&r.areas.indexOf(k)<0){var li=a.parentNode.tagName==="LI"?a.parentNode:a;li.style.display="none"}});load()},function(){location.replace("/app/")})},function(){location.replace("/app/")})
 })
 })();

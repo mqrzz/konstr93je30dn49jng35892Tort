@@ -36,6 +36,7 @@
 
 <h2 data-i18n="doc.qs.h1b">2. Add the DNS records</h2>
 <p data-i18n="doc.qs.p1b">The dashboard shows the exact DKIM, SPF and MX records for your domain. Add them at your DNS provider, then click verify.</p>
+<p data-i18n="doc.qs.p1b2">Never done this before? The guide <a href="/docs/beginners/add-dns/">Adding DNS records step by step</a> shows each click, which name and value to paste, and the mistakes to avoid. The records are one DKIM TXT record named after your selector, one SPF TXT record on the domain itself, one DMARC TXT record named _dmarc, and one MX record for receiving.</p>
 <div class="note"><svg class="s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><div><p data-i18n="doc.qs.dnsnote">Most providers propagate DNS changes within minutes, though it can occasionally take longer.</p></div></div>
 
 <h2 id="api-key" data-i18n="doc.qs.h1c">3. Create an API key</h2>
@@ -52,6 +53,25 @@
 <h2 data-i18n="doc.qs.h1e">5. Receive email</h2>
 <p data-i18n="doc.qs.p1e">Point the MX record of your domain at your Geserd host and add a webhook endpoint in the dashboard. Incoming mail arrives at your endpoint as an email.received event, described in the API reference.</p>
 
+<!--mx-->
+<h2 data-i18n="doc.mx.xdocs-quickstart-index-ht.1">The DNS records in detail</h2>
+<p data-i18n="doc.mx.xdocs-quickstart-index-ht.2">For every domain Geserd shows four kinds of records. The exact values are in your dashboard under Domains; the table shows what each one is for. Copy the values exactly, without adding the domain name to the host twice.</p>
+<div class="tw"><table><thead><tr><th data-i18n="doc.mx.xdocs-quickstart-index-ht.3.h">Record</th><th data-i18n="doc.tb.desc">Description</th></tr></thead><tbody><tr><td><code>TXT  SPF</code></td><td data-i18n="doc.mx.xdocs-quickstart-index-ht.3.r0">Says Geserd may send for your domain.</td></tr><tr><td><code>TXT  DKIM</code></td><td data-i18n="doc.mx.xdocs-quickstart-index-ht.3.r1">Holds the public key that proves your messages are genuine.</td></tr><tr><td><code>MX</code></td><td data-i18n="doc.mx.xdocs-quickstart-index-ht.3.r2">Sends incoming mail to Geserd. Needed only to receive.</td></tr><tr><td><code>TXT  DMARC</code></td><td data-i18n="doc.mx.xdocs-quickstart-index-ht.3.r3">Tells receivers what to do when a check fails.</td></tr></tbody></table></div>
+<h2 data-i18n="doc.mx.xdocs-quickstart-index-ht.4">Check that the records are live</h2>
+<div class="cb"><div class="ch"><b>terminal</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>dig TXT mail.yourshop.com +short
+dig TXT geserd._domainkey.mail.yourshop.com +short
+dig MX mail.yourshop.com +short</pre></div>
+<p data-i18n="doc.mx.xdocs-quickstart-index-ht.6">If a command prints nothing, the record has not spread yet or was added under the wrong host. Wait a few minutes and try again, then compare the host name letter by letter with the dashboard.</p>
+<h2 data-i18n="doc.mx.xdocs-quickstart-index-ht.7">Common mistakes</h2>
+<ul>
+<li data-i18n="doc.mx.xdocs-quickstart-index-ht.8.0"><b>The domain is added twice.</b> Some panels append the domain themselves, so enter only <code>geserd._domainkey</code> and not the full name.</li>
+<li data-i18n="doc.mx.xdocs-quickstart-index-ht.8.1"><b>Quotes or line breaks</b> slipped into a long DKIM value. Paste it as one line.</li>
+<li data-i18n="doc.mx.xdocs-quickstart-index-ht.8.2"><b>Two SPF records.</b> A domain may have only one SPF record; merge the entries instead of adding a second.</li>
+</ul>
+<h2 data-i18n="doc.mx.xdocs-quickstart-index-ht.9">Sandbox and live mode</h2>
+<p data-i18n="doc.mx.xdocs-quickstart-index-ht.10">Until the domain is verified you can send only to your own account address. This is on purpose: it lets you test the whole flow safely. After verification the limit disappears and you can write to anyone.</p>
+
+<!--/mx-->
 <div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
 <div class="pn2"></div>
 </div>

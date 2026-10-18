@@ -1,4 +1,4 @@
-(function(){fetch("/api/maintenance",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(j){
+(function(){var rd=function(){return(window.GESERD&&GESERD.ready)?GESERD.ready:Promise.resolve()};fetch("/api/maintenance",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(j){return rd().then(function(){return j})}).then(function(j){
  if(!j||!j.active)return;
  var h=document.getElementById("mtH"),p=document.getElementById("mtP"),e=document.getElementById("mtE");
  if(j.title){h.removeAttribute("data-i18n");h.textContent=j.title}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Adding DNS records step by step — Docs — Geserd</title>
+<meta name="description" content="A walk through the screens you will meet when you paste Geserd’s records into your domain company’s DNS page.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/docs/js/theme.js?v=519359ff5f"></script>
+<link rel="stylesheet" href="/docs/css/docs.css?v=519359ff5f">
+</head>
+<body>
+<div id="dh"></div>
+<div id="dm"></div>
+<div id="bd"></div>
+<aside id="ds"></aside>
+<main id="dc"><div class="wrap">
+<article class="pg">
+<div class="crumb" data-i18n="doc.nav.begin">Beginners</div>
+<div class="hd">
+<h1 data-i18n="doc.nav.b.add-dns">Adding DNS records step by step</h1>
+<div class="pa">
+<button type="button" class="c" aria-label="Copy page"><svg class="s" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+<button type="button" class="d" aria-label="More"><svg class="s" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
+</div>
+</div>
+<p class="sub" data-i18n="doc.bg.add-dns.lead">A walk through the screens you will meet when you paste Geserd’s records into your domain company’s DNS page.</p>
+<div class="body">
+<h2 data-i18n="doc.bg.add-dns.1">Before you start</h2>
+<ul>
+<li data-i18n="doc.bg.add-dns.2.0"><b>Know where the DNS lives.</b> It is at the company that manages your domain. If you bought it at one place but moved the name servers to another, such as a website host, the records go to that second place.</li>
+<li data-i18n="doc.bg.add-dns.2.1"><b>Open the Domains page in Geserd</b> and leave it in a second tab. You will copy from it.</li>
+</ul>
+<h2 data-i18n="doc.bg.add-dns.3">Adding one record</h2>
+<ul>
+<li data-i18n="doc.bg.add-dns.4.0"><b>Find the DNS page.</b> Look for “DNS”, “DNS records”, “Zone editor” or “Name servers” in the domain’s settings.</li>
+<li data-i18n="doc.bg.add-dns.4.1"><b>Press “Add record”.</b> Choose the type exactly as Geserd shows it, TXT or MX.</li>
+<li data-i18n="doc.bg.add-dns.4.2"><b>Fill in the name.</b> Some companies want only the short name (<code>_dmarc</code>), others want the full name (<code>_dmarc.yourshop.com</code>). If one form is rejected, try the other. For the domain itself use <code>@</code>, or leave the field empty.</li>
+<li data-i18n="doc.bg.add-dns.4.3"><b>Paste the value.</b> Use the copy button in Geserd and paste. Do not retype it, and do not add quotation marks unless the form asks for them.</li>
+<li data-i18n="doc.bg.add-dns.4.4"><b>Leave the lifetime (TTL) alone.</b> The default, often called “Auto” or 3600, is fine.</li>
+<li data-i18n="doc.bg.add-dns.4.5"><b>Save.</b> Repeat for each record in the list, then return to Geserd and press verify.</li>
+</ul>
+<h2 data-i18n="doc.bg.add-dns.5">The mistakes that happen most</h2>
+<ul>
+<li data-i18n="doc.bg.add-dns.6.0"><b>Two SPF records.</b> A domain may have only one record starting with <code>v=spf1</code>. If you already have one from another service, add Geserd’s address to it instead of creating a second.</li>
+<li data-i18n="doc.bg.add-dns.6.1"><b>A hidden space or line break</b> at the end of the value. Paste again and check the end of the line.</li>
+<li data-i18n="doc.bg.add-dns.6.2"><b>The domain name added twice.</b> Some forms add <code>.yourshop.com</code> themselves, which turns the name into <code>_dmarc.yourshop.com.yourshop.com</code>. If verification fails, try the short name.</li>
+</ul>
+<h2 data-i18n="doc.bg.add-dns.7">How long it takes</h2>
+<p data-i18n="doc.bg.add-dns.8">Most companies publish a change within a few minutes. In rare cases it takes a few hours, and very rarely up to a day. If Geserd still shows a record as missing after an hour, open the record on your side, compare it character by character with the one in Geserd, and open a ticket if you cannot find a difference.</p>
+
+<div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
+<div class="pn2"></div>
+</div>
+</article>
+<aside class="toc" id="toc"></aside>
+</div></main>
+<div id="sm"><div class="box"><div class="in"><svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" placeholder="Search docs..." data-i18n-ph="doc.search"><kbd>ESC</kbd><button type="button" class="x" aria-label="Close"><svg class="s" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="rs"></div></div></div>
+<script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/docs/js/docs.js?v=519359ff5f"></script>
+</body>
+</html>

@@ -97,6 +97,25 @@ POST /api/auth-kit/verify
 <div class="ep"><i class="g" data-i18n="doc.api.live">Live</i>email.received</div>
 <p data-i18n="doc.api.prec">Mail sent to a verified domain is delivered to your webhook as an email.received event. Reply by sending a new email with in_reply_to set to the received message's id.</p>
 
+<!--mx-->
+<h2 data-i18n="doc.mx.xdocs-api-index-html.1">Conventions</h2>
+<ul>
+<li data-i18n="doc.mx.xdocs-api-index-html.2.0"><b>Base address:</b> <code>https://geserd.com/api</code>. Every path in this reference is relative to it.</li>
+<li data-i18n="doc.mx.xdocs-api-index-html.2.1"><b>Format:</b> requests and responses are JSON with <code>Content-Type: application/json</code>.</li>
+<li data-i18n="doc.mx.xdocs-api-index-html.2.2"><b>Authentication:</b> <code>Authorization: Bearer &lt;key&gt;</code> on every request.</li>
+<li data-i18n="doc.mx.xdocs-api-index-html.2.3"><b>Time:</b> timestamps are ISO 8601 in UTC.</li>
+<li data-i18n="doc.mx.xdocs-api-index-html.2.4"><b>Status codes:</b> <code>2xx</code> success, <code>4xx</code> your request, <code>5xx</code> our side.</li>
+</ul>
+<h2 data-i18n="doc.mx.xdocs-api-index-html.3">Reference pages</h2>
+<div class="tw"><table><thead><tr><th data-i18n="doc.mx.xdocs-api-index-html.4.h">Page</th><th data-i18n="doc.tb.desc">Description</th></tr></thead><tbody><tr><td><code>Emails</code></td><td data-i18n="doc.mx.xdocs-api-index-html.4.r0">Send a message, check it and read its status.</td></tr><tr><td><code>Domains</code></td><td data-i18n="doc.mx.xdocs-api-index-html.4.r1">Add, verify and remove domains.</td></tr><tr><td><code>API keys</code></td><td data-i18n="doc.mx.xdocs-api-index-html.4.r2">Create and revoke keys.</td></tr><tr><td><code>Webhooks</code></td><td data-i18n="doc.mx.xdocs-api-index-html.4.r3">Events and signature checks.</td></tr><tr><td><code>Templates</code></td><td data-i18n="doc.mx.xdocs-api-index-html.4.r4">Store messages and send them with variables.</td></tr></tbody></table></div>
+<h2 data-i18n="doc.mx.xdocs-api-index-html.5">A complete example</h2>
+<div class="cb"><div class="ch"><b>curl</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>curl -X POST https://geserd.com/api/emails \
+  -H "Authorization: Bearer $GESERD_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"from":"Shop &lt;orders@mail.yourshop.com&gt;","to":["client@example.com"],"subject":"Your order","text":"Thank you!"}'</pre></div>
+<div class="cb"><div class="ch"><b>202</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>{ "id": "8f2c1e0a-4b7d", "status": "queued" }</pre></div>
+
+<!--/mx-->
 <div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
 <div class="pn2"></div> </div>
 </article>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Your first email, step by step — Docs — Geserd</title>
-<meta name="description" content="From a new account to a delivered message in about ten minutes.">
+<title>Your first email — Docs — Geserd</title>
+<meta name="description" content="Once the domain is verified, sending takes a minute. Here is the shortest path, with and without code.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,20 +28,20 @@
 <div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
 </div>
 </div>
-<p class="sub" data-i18n="doc.bg.first-email.lead">From a new account to a delivered message in about ten minutes.</p>
+<p class="sub" data-i18n="doc.bg.first-email.lead">Once the domain is verified, sending takes a minute. Here is the shortest path, with and without code.</p>
 <div class="body">
-
-<h2 data-i18n="doc.bg.first-email.h1">1. Add your domain</h2>
-<p data-i18n="doc.bg.first-email.p1">In Domains, enter the domain you own. We suggest a subdomain such as mail.yourdomain.com so your main domain stays clean.</p>
-
-<h2 data-i18n="doc.bg.first-email.h2">2. Add the DNS records and verify</h2>
-<p data-i18n="doc.bg.first-email.p2">Copy each record from the dashboard into your DNS provider, then press verify. Green means you are ready.</p>
-
-<h2 data-i18n="doc.bg.first-email.h3">3. Create an API key</h2>
-<p data-i18n="doc.bg.first-email.p3">In API keys, create a key and copy it right away. It is shown once and we store only a hash.</p>
-
-<h2 data-i18n="doc.bg.first-email.h4">4. Send it</h2>
-<p data-i18n="doc.bg.first-email.p4">Run the example from the Quickstart, or use Send test in the dashboard. Then open Emails to watch it go from sent to delivered.</p>
+<h2 data-i18n="doc.bg.first-email.1">Check the domain is verified</h2>
+<p data-i18n="doc.bg.first-email.2">Open Domains in the dashboard. A verified domain shows a green status. Sending from a domain that is not verified yet is refused with a clear message, so there is no risk of sending something by accident.</p>
+<h2 data-i18n="doc.bg.first-email.3">Without code</h2>
+<p data-i18n="doc.bg.first-email.4">If you use a program that has SMTP settings, such as a shop engine or a website builder, paste the four values from the previous guide into its email settings, set the sender address to one on your verified domain, such as hello@yourshop.com, and use its “send a test email” button. The message should arrive within seconds.</p>
+<h2 data-i18n="doc.bg.first-email.5">With one line of code</h2>
+<p data-i18n="doc.bg.first-email.6">If someone builds your site, you can hand them this example. They only need to replace the key and the addresses.</p>
+<div class="cb"><div class="ch"><b>cURL</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>curl -X POST https://geserd.com/api/emails \
+  -H "Authorization: Bearer gs_xxxxxxxx" \
+  -H "Content-Type: application/json" \
+  -d '{"from":"hello@yourshop.com","to":"you@example.com","subject":"Hello","html":"&lt;strong&gt;It works&lt;/strong&gt;"}'</pre></div>
+<h2 data-i18n="doc.bg.first-email.8">After you send</h2>
+<p data-i18n="doc.bg.first-email.9">Open Logs in the dashboard. Every message appears with its state: accepted, delivered, or failed with the reason. If you do not see the message in your inbox, check the spam folder first, then the log.</p>
 
 <div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
 <div class="pn2"></div>

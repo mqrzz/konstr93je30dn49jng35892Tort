@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>What is SMTP — Docs — Geserd</title>
-<meta name="description" content="SMTP is how one mail server hands a message to another.">
+<meta name="description" content="SMTP is the language mail servers use to hand messages to each other. You will meet the word often, so it helps to know what it means.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,17 +28,23 @@
 <div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
 </div>
 </div>
-<p class="sub" data-i18n="doc.bg.what-is-smtp.lead">SMTP is how one mail server hands a message to another.</p>
+<p class="sub" data-i18n="doc.bg.what-is-smtp.lead">SMTP is the language mail servers use to hand messages to each other. You will meet the word often, so it helps to know what it means.</p>
 <div class="body">
-
-<h2 data-i18n="doc.bg.what-is-smtp.h1">The post office model</h2>
-<p data-i18n="doc.bg.what-is-smtp.p1">Think of your app dropping a letter at a post office. The post office checks the address, then passes the letter on until it reaches the recipient’s mailbox. SMTP is the set of rules for that handover.</p>
-
-<h2 data-i18n="doc.bg.what-is-smtp.h2">Two ways to send</h2>
-<p data-i18n="doc.bg.what-is-smtp.p2">With Geserd you can call the HTTP API, or connect any app that speaks SMTP using your API key as the password. Both end up in the same logs.</p>
-
-<h2 data-i18n="doc.bg.what-is-smtp.h3">Ports 465 and 587</h2>
-<p data-i18n="doc.bg.what-is-smtp.p3">Port 465 starts encrypted from the first byte. Port 587 starts plain and upgrades to encryption with STARTTLS. Either is fine; pick the one your app supports.</p>
+<h2 data-i18n="doc.bg.what-is-smtp.1">A postal system for the internet</h2>
+<p data-i18n="doc.bg.what-is-smtp.2">Think of SMTP as the rules of the postal service. When you post a letter, you write the address on the envelope, drop it at a post office, and the post office passes it from sorting centre to sorting centre until it reaches the right door. SMTP does the same for email: the sending server writes who the message is from and who it is for, then passes it on until the receiving server accepts it.</p>
+<h2 data-i18n="doc.bg.what-is-smtp.3">Why you might need it</h2>
+<p data-i18n="doc.bg.what-is-smtp.4">Many programs that send email, such as online shop engines, website builders and newsletter tools, have a settings page that asks for an SMTP server, a port, a username and a password. That page is simply asking where to hand the message. Geserd gives you those four values, so the program can use us without any code.</p>
+<h2 data-i18n="doc.bg.what-is-smtp.5">The four values</h2>
+<div class="cb"><div class="ch"><b>SMTP</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>server:   smtp.geserd.com
+port:     465 (encrypted from the start) or 587
+username: geserd
+password: your API key</pre></div>
+<ul>
+<li data-i18n="doc.bg.what-is-smtp.7.0"><b>Server:</b> the address of the post office. For Geserd it is <code>smtp.geserd.com</code>.</li>
+<li data-i18n="doc.bg.what-is-smtp.7.1"><b>Port:</b> which door to use. Use 465 if the program offers “SSL” or “TLS”, and 587 if it offers “STARTTLS”. When in doubt, try 465 first.</li>
+<li data-i18n="doc.bg.what-is-smtp.7.2"><b>Username and password:</b> the username is a fixed word and the password is an API key that you create in the dashboard. Treat it like a password: anyone who has it can send mail as you.</li>
+</ul>
+<div class="note"><div><p data-i18n="doc.bg.what-is-smtp.8">The server name and the exact values for your account are also shown in the dashboard under SMTP, ready to copy.</p></div></div>
 
 <div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
 <div class="pn2"></div>

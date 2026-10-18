@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Going live checklist — Docs — Geserd</title>
+<meta name="description" content="Ten minutes of checks before you send to real customers saves days of cleaning up reputation later.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/docs/js/theme.js?v=519359ff5f"></script>
+<link rel="stylesheet" href="/docs/css/docs.css?v=519359ff5f">
+</head>
+<body>
+<div id="dh"></div>
+<div id="dm"></div>
+<div id="bd"></div>
+<aside id="ds"></aside>
+<main id="dc"><div class="wrap">
+<article class="pg">
+<div class="crumb" data-i18n="doc.nav.start">Get started</div>
+<div class="hd">
+<h1 data-i18n="doc.nav.m.going-live">Going live checklist</h1>
+<div class="pa">
+<button type="button" class="c" aria-label="Copy page"><svg class="s" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+<button type="button" class="d" aria-label="More"><svg class="s" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div class="pm"><button type="button" data-a="copy" data-i18n="doc.copy">Copy page</button><button type="button" data-a="md">View as Markdown</button></div>
+</div>
+</div>
+<p class="sub" data-i18n="doc.mp.going-live.lead">Ten minutes of checks before you send to real customers saves days of cleaning up reputation later.</p>
+<div class="body">
+<h2 data-i18n="doc.mp.going-live.1">Before the first real send</h2>
+<ul>
+<li data-i18n="doc.mp.going-live.2.0"><b>The domain is verified.</b> Domains shows SPF, DKIM and MX as verified, not pending.</li>
+<li data-i18n="doc.mp.going-live.2.1"><b>DMARC exists.</b> Start with <code>p=none</code> and a report address, then tighten it after a few weeks.</li>
+<li data-i18n="doc.mp.going-live.2.2"><b>The From address is real.</b> Replies go somewhere a person reads.</li>
+<li data-i18n="doc.mp.going-live.2.3"><b>Keys are in environment variables,</b> never in the repository or in front-end code.</li>
+<li data-i18n="doc.mp.going-live.2.4"><b>A webhook is listening</b> for <code>email.bounced</code> and <code>email.complained</code>, so you stop writing to bad addresses.</li>
+</ul>
+<h2 data-i18n="doc.mp.going-live.3">The first week</h2>
+<p data-i18n="doc.mp.going-live.4">Start with a small, steady volume and increase it every day. Watch the delivery score on Metrics and the event log. If bounces climb above two percent, pause and clean the list before sending more.</p>
+<div class="note"><div><p data-i18n="doc.mp.going-live.5">The handbook article on why mail lands in spam explains every signal in more detail.</p></div></div>
+
+<div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>
+<div class="pn2"></div>
+</div>
+</article>
+<aside class="toc" id="toc"></aside>
+</div></main>
+<div id="sm"><div class="box"><div class="in"><svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" placeholder="Search docs..." data-i18n-ph="doc.search"><kbd>ESC</kbd><button type="button" class="x" aria-label="Close"><svg class="s" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="rs"></div></div></div>
+<script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/docs/js/docs.js?v=519359ff5f"></script>
+</body>
+</html>
