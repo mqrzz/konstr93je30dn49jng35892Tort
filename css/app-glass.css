@@ -295,3 +295,6 @@ a:hover>.ic-aud .i-u2,a:focus-visible>.ic-aud .i-u2,a:active>.ic-aud .i-u2{anima
 @keyframes kU2{0%{opacity:0;transform:translateX(-5px)}100%{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){a>.ic-bc .i-w1,a>.ic-bc .i-w2,a>.ic-aud .i-u2{animation:none!important}}
 .ric .app-ico[data-tip]:after{left:0;transform:translate(0,4px)}.ric .app-ico[data-tip]:hover:after,.ric .app-ico[data-tip]:focus-visible:after{transform:translate(0,0)}
+
+.an-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px}.an-g .gcard{margin:0}.an-l{display:grid;gap:2px;margin-top:12px}.an-r{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}.an-r:last-child{border:0}.an-r span{min-width:0;overflow-wrap:anywhere}.an-r b{font-weight:500}.an-ch{display:flex;align-items:flex-end;gap:6px;height:180px;margin-top:16px;overflow-x:auto;padding-bottom:4px}.an-c{flex:1 0 22px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}.an-c i{display:block;width:100%;max-width:34px;border-radius:8px 8px 3px 3px;background:var(--fg,#fff);opacity:.85}.an-c small{font-size:10px;color:var(--fg3)}
+.seg button{white-space:nowrap}
