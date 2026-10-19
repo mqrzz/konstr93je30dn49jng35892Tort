@@ -1,27 +1,27 @@
 body.app{font-family:var(--font-b);font-size:14px}
-.abtn,.abtn.lg,.abtn.cp{height:32px;padding:0 12px;border-radius:12px;font:500 14px/1 var(--font-b);gap:8px;letter-spacing:0}
+.abtn,.abtn.lg,.abtn.cp{height:32px;padding:0 12px;border-radius:14px;font:500 14px/1 var(--font-b);gap:8px;letter-spacing:0}
 .abtn.pri,.abtn.lg.pri{font-weight:600;background:var(--a-pri);border:1px solid var(--a-pri);color:var(--a-pritx);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .abtn:not(.pri){background:var(--a-fld);border:1px solid var(--g-bd);box-shadow:none;color:var(--a-tx2);backdrop-filter:none;-webkit-backdrop-filter:none}
 .abtn:not(.pri):hover{background:var(--a-hv);color:var(--a-tx)}
 .abtn svg{width:16px;height:16px}
-.app-ico,.app-ico.sm{width:32px;height:32px;border-radius:12px}
-.fld,select.fld,input.fld{height:32px;padding:0 12px;border:1px solid var(--g-bd);border-radius:12px;font:400 14px var(--font-b);background:var(--a-fld);box-shadow:none}
+.app-ico,.app-ico.sm{width:32px;height:32px;border-radius:14px}
+.fld,select.fld,input.fld{height:32px;padding:0 12px;border:1px solid var(--g-bd);border-radius:14px;font:400 14px var(--font-b);background:var(--a-fld);box-shadow:none}
 .fld:focus,.fld:focus-visible{border-color:var(--a-tx3);outline:0;box-shadow:none}
-.fld.ta,.fld.bx-ta,textarea.fld{height:auto;min-height:96px;padding:8px 12px;line-height:1.5;border-radius:12px}
+.fld.ta,.fld.bx-ta,textarea.fld{height:auto;min-height:96px;padding:8px 12px;line-height:1.5;border-radius:14px}
 .lab{font:500 14px var(--font-b)}
 .ph h1{font:500 28px/34px var(--font-b);letter-spacing:-.01em}
 .sh2{font:700 20px/28px var(--font-b);margin:28px 0 8px;letter-spacing:0}
 .sh3{font:500 16px/24px var(--font-b)}
-.gnav .gl{height:32px;padding:0 12px;border-radius:12px;font-size:14px;gap:8px}
-.sgc button,.sgc .btn{height:32px;border-radius:12px;font:600 14px var(--font-b);padding:0 12px}
-.sgc{border-radius:14px;padding:3px}
-.dd>button,.dd .ddb{height:32px;border-radius:12px;font:400 14px var(--font-b);padding:0 10px 0 12px;background:var(--a-fld);border:1px solid var(--g-bd);box-shadow:none}
+.gnav .gl{height:32px;padding:0 12px;border-radius:14px;font-size:14px;gap:8px}
+.sgc button,.sgc .btn{height:32px;border-radius:14px;font:600 14px var(--font-b);padding:0 12px}
+.sgc{border-radius:17px;padding:3px}
+.dd>button,.dd .ddb{height:32px;border-radius:14px;font:400 14px var(--font-b);padding:0 10px 0 12px;background:var(--a-fld);border:1px solid var(--g-bd);box-shadow:none}
 .gm .ma .abtn{height:32px}
 .gm .box input.fld,.gm .box textarea.fld{background:var(--a-fld)}
-.gl{min-height:32px;height:32px;gap:8px;padding:0 12px;border-radius:12px;font:400 14px var(--font-b)}
+.gl{min-height:32px;height:32px;gap:8px;padding:0 12px;border-radius:14px;font:400 14px var(--font-b)}
 .gl.on{font-weight:500}
 .gnav{gap:2px}
-.bx-search{height:32px;max-width:420px;padding:0 12px;gap:8px;border-radius:12px;background:var(--a-fld);border:1px solid var(--g-bd)}
+.bx-search{height:32px;max-width:420px;padding:0 12px;gap:8px;border-radius:14px;background:var(--a-fld);border:1px solid var(--g-bd)}
 .bx-search input{font-size:14px}
 .bx-search svg{width:14px;height:14px}
 .bx-bar{gap:8px}
@@ -31,3 +31,11 @@ body.app{font-family:var(--font-b);font-size:14px}
 .pgh .psub{font-size:14px}
 .tag,.pill{font-size:12px}
 .app-main h2{font:700 20px/28px var(--font-b);letter-spacing:0}.app-main .ph h1{font:500 28px/34px var(--font-b)}.dsh-p>header h3{font:600 16px var(--font-b)}
+.snav .bt{padding:8px}
+.snav .bt .ric{display:flex;flex-direction:column;align-items:stretch;gap:2px}
+.snav .bt .ric .app-ico{width:auto;height:32px;border-radius:14px;justify-content:flex-start;padding:0 12px;color:var(--a-tx2);font:400 14px var(--font-b)}
+.snav .bt .ric .app-ico .bl{display:flex;align-items:center;gap:8px}
+.snav .bt .ric .app-ico svg{width:16px;height:16px;flex:none}
+.snav .bt .ric .app-ico:hover,.snav .bt .ric .app-ico.on{background:var(--a-hv);color:var(--a-tx)}
+.ric .app-ico[data-tip]:after{display:none}
+.dsh-big{font-family:var(--font-b);font-weight:500;letter-spacing:-.025em}
