@@ -116,7 +116,7 @@
 body.ed-studio{overflow:hidden}
 body.ed-studio #app-nav{display:none}
 body.ed-studio .app-main{padding:0;margin:0}
-body.ed-studio #ed-root{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:var(--a-bg);background-image:radial-gradient(900px 500px at 85% -10%,rgba(255,255,255,.06),transparent 70%)}
+body.ed-studio #ed-root,body.ed-studio #app-root{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:var(--a-bg);background-image:radial-gradient(900px 500px at 85% -10%,rgba(255,255,255,.06),transparent 70%)}
 body.ed-studio #edTop{flex:none}
 body.ed-studio .edh{display:flex;align-items:center;gap:14px;flex-wrap:nowrap;padding:12px 16px;margin:0}
 body.ed-studio .edhome{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:14px;background:var(--a-fld);box-shadow:inset 0 0 0 1px var(--g-bd);color:var(--a-tx)}
@@ -168,3 +168,7 @@ body.ed-studio .pvf iframe{height:60vh}
 .edfloat{max-height:calc(100% - 32px);overflow:auto;scrollbar-width:none}.edfloat::-webkit-scrollbar{display:none}
 @media(max-width:860px){.edrow span{width:104px}}
 @media(max-width:860px){body.ed-studio .edbar{display:none}body.ed-studio .edt[data-pane=edit] .edr,body.ed-studio .edt[data-pane=view] .edr{display:flex;margin-bottom:12px}body.ed-studio .edt[data-pane=view] .edl{display:block}}
+.edsel{flex:1;min-width:0}.edsel .dd,.edsel .dd>button{width:100%}.edsel .dd>button{border:0;background:transparent;padding:0}
+body.ed-studio .edl .bx-f{margin-bottom:16px}
+.edrow .fld{border:0;background:transparent;height:auto;padding:0;border-radius:0}
+.edrow .fld:focus{border:0;outline:0}

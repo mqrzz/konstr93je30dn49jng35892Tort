@@ -1,6 +1,6 @@
 (function(){var t=function(k,d){return window.GESERD&&GESERD.t?GESERD.t(k,d):d};
 var C=[["Features",[["Sending|sending","/features/sending/"],["Receiving|receiving","/features/receiving/"],["Domains|domains","/features/domains/"],["Webhooks|webhooks","/features/webhooks/"],["Siberia tariff|siberia","/siberia/"]]],
-["Resources",[["Documentation|docs","/docs/"],["API reference|apiref","/docs/api/"],["Handbook|handbook","/handbook/"],["Changelog|changelog","/changelog/"],["Pricing|pricing","/pricing/"],["Security|security","/security/"]]],
+["Resources",[["Documentation|docs","/docs/"],["API reference|apiref","/docs/api/"],["Domain lookup|whois","/whois/"],["Handbook|handbook","/handbook/"],["Changelog|changelog","/changelog/"],["Pricing|pricing","/pricing/"],["Security|security","/security/"]]],
 ["Company",[["About|about","/about/"],["Blog|blog","/blog/"],["Contact|contact","/contact/"],["Official channels|official","/official/"],["Countries|countries","/countries/"]]],
 ["Help",[["Support|support","/contact/"],["Status|status","/status/"],["Knowledge base|kb","/docs/beginners/"],["Errors|errors","/docs/errors/"],["Rate limits|ratelimits","/docs/rate-limits/"]]],
 ["Legal",[["Terms|terms","/legal/terms/"],["Privacy|privacy","/legal/privacy/"],["Cookies|cookies","/legal/cookies/"],["Acceptable use|aup","/legal/aup/"],["Payment terms|payment","/legal/payment/"],["Refunds|refunds","/legal/refunds/"]]]];

@@ -18,3 +18,16 @@ body.app{font-family:var(--font-b);font-size:14px}
 .dd>button,.dd .ddb{height:32px;border-radius:12px;font:400 14px var(--font-b);padding:0 10px 0 12px;background:var(--a-fld);border:1px solid var(--g-bd);box-shadow:none}
 .gm .ma .abtn{height:32px}
 .gm .box input.fld,.gm .box textarea.fld{background:var(--a-fld)}
+.gl{min-height:32px;height:32px;gap:8px;padding:0 12px;border-radius:12px;font:400 14px var(--font-b)}
+.gl.on{font-weight:500}
+.gnav{gap:2px}
+.bx-search{height:32px;max-width:420px;padding:0 12px;gap:8px;border-radius:12px;background:var(--a-fld);border:1px solid var(--g-bd)}
+.bx-search input{font-size:14px}
+.bx-search svg{width:14px;height:14px}
+.bx-bar{gap:8px}
+.bx-act{gap:8px}
+.drow.dhead{font-size:12.5px}
+.empty h3,.emptyb h3{font:700 20px/28px var(--font-b)}
+.pgh .psub{font-size:14px}
+.tag,.pill{font-size:12px}
+.app-main h2{font:700 20px/28px var(--font-b);letter-spacing:0}.app-main .ph h1{font:500 28px/34px var(--font-b)}.dsh-p>header h3{font:600 16px var(--font-b)}
