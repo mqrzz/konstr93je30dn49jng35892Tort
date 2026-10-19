@@ -34,12 +34,13 @@ A.copy=function(text,btn){function ok(){if(btn){var o=btn.innerHTML;btn.classLis
  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(ok,fb);else fb()};
 
 A.modal=function(o){var m=document.createElement("div");m.className="gm";m.setAttribute("role","dialog");m.setAttribute("aria-modal","true");
- var acts=(o.actions||[]).map(function(a,i){return'<button type="button" class="abtn lg '+(a.cls||"")+'" data-i="'+i+'">'+A.esc(a.label)+"</button>"}).join("");
+ var al=(o.actions||[]).map(function(a,i){return{a:a,i:i,p:/\bpri\b/.test(a.cls||"")}});al.sort(function(x,y){return(y.p?1:0)-(x.p?1:0)||x.i-y.i});var seenPri=false,seenSec=false;
+ var acts=al.map(function(x){var kb="";if(x.p&&!seenPri){seenPri=true;kb='<kbd>Ctrl</kbd><kbd>Enter</kbd>'}else if(!x.p&&!seenSec){seenSec=true;kb='<kbd>Esc</kbd>'}return'<button type="button" class="abtn lg '+(x.a.cls||"")+'" data-i="'+x.i+'"><span>'+A.esc(x.a.label)+"</span>"+kb+"</button>"}).join("");
  m.innerHTML='<div class="box'+(o.wide?" wide":"")+'"><div class="mh2"><h2>'+A.esc(o.title||"")+'</h2>'+(o.persist?"":'<button type="button" class="mx" aria-label="'+A.esc(A.t("app.close","Close"))+'">'+A.icon(A.IC.x,18)+"</button>")+"</div>"+(o.desc?"<p class=\"md\">"+A.esc(o.desc)+"</p>":"")+'<div class="mb"></div>'+(acts?'<div class="ma">'+acts+"</div>":"")+"</div>";
  var body=m.querySelector(".mb");if(typeof o.body==="string")body.innerHTML=o.body;else if(o.body)body.appendChild(o.body);
  var prev=document.activeElement;
  function close(){document.removeEventListener("keydown",key);m.remove();document.documentElement.classList.remove("lock2");if(prev&&prev.focus)try{prev.focus()}catch(e){}if(o.onClose)o.onClose()}
- function key(e){if(e.key==="Escape"&&!o.persist)close()}
+ function key(e){if(e.key==="Escape"&&!o.persist)close();else if(e.key==="Enter"&&(e.ctrlKey||e.metaKey)){var pb=m.querySelector(".ma .pri");if(pb&&!pb.disabled){e.preventDefault();pb.click()}}}
  var api={el:m,body:body,close:close};
  m.addEventListener("mousedown",function(e){if(e.target===m&&!o.persist)close()});
  var x=m.querySelector(".mx");if(x)x.onclick=close;

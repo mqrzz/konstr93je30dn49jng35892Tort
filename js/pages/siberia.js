@@ -37,7 +37,7 @@ function map(){
   document.querySelectorAll(".sb-reg,.sb-chip,.sb-pg").forEach(function(x){var on=x.dataset.id===id;x.classList.toggle("on",on);if(x.hasAttribute("aria-pressed"))x.setAttribute("aria-pressed",on)});
   var g=host.querySelector('.sb-pg[data-id="'+id+'"]');if(g&&g.parentNode)g.parentNode.appendChild(g);
   var p=document.getElementById("sbPanel"),r=M.regions[id];
-  p.innerHTML='<span class="sb-pi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span class="sb-tg">'+esc(t("sb.m.in","Covered by the tariff"))+"</span><h3>"+esc(t("sb.r."+id,id))+'</h3><dl><div><dt>'+esc(t("sb.m.center","Regional centre"))+"</dt><dd>"+esc(t("sb.ct."+id,""))+"</dd></div><div><dt>"+esc(t("sb.m.code","Region code"))+"</dt><dd>"+esc(r.i)+"</dd></div></dl>"
+  p.innerHTML='<span class="sb-pi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><h3>'+esc(t("sb.r."+id,id))+'</h3><dl><div><dt>'+esc(t("sb.m.center","Regional centre"))+"</dt><dd>"+esc(t("sb.ct."+id,""))+"</dd></div></dl>"
  }
  host.addEventListener("pointerover",function(e){if(e.pointerType==="touch")return;var r=e.target.closest&&e.target.closest(".sb-reg");if(r)pick(r.dataset.id)});
  host.addEventListener("click",function(e){var r=e.target.closest&&e.target.closest(".sb-reg");if(r)pick(r.dataset.id)});

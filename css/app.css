@@ -606,3 +606,13 @@ a.ad-tile:hover{box-shadow:inset 0 0 0 1px var(--a-tx3)}
 .tf-key{display:block;text-align:center;margin:0 0 16px;font-size:14px;letter-spacing:.06em}
 .tf-codes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:16px 0}
 .tf-codes code{display:block;text-align:center;padding:10px 8px;border-radius:12px;background:var(--a-hv);font-size:14px;letter-spacing:.05em}
+.gm .box{max-width:440px;padding:24px;gap:16px;border-radius:30px}
+.mh2 h2{font:600 17px/1.3 var(--font-b);letter-spacing:0}
+.mh2 .mx{margin:-6px -8px 0 0}
+.gm .md{margin:-6px 0 0;font-size:14px;color:var(--a-tx2);line-height:1.5}
+.gm .ma{display:flex;justify-content:flex-start;flex-direction:row;gap:8px;margin-top:4px}
+.gm .ma .abtn{height:42px;padding:0 16px;gap:10px;font-size:14.5px}
+.gm .ma kbd{display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:7px;background:rgba(127,127,127,.28);font:600 11px var(--font-b);color:inherit;opacity:.8}
+.gm .ma .abtn.pri kbd{background:rgba(127,127,127,.4)}
+.gm .box label,.gm .pfld>label{font-size:14px;font-weight:500}
+@media(hover:none),(max-width:640px){.gm .ma kbd{display:none}.gm .ma .abtn{flex:1;justify-content:center}}

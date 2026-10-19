@@ -19,11 +19,15 @@ function drawList(ds,sd,us){
 function wire(){root.querySelectorAll("#dNew,[data-new]").forEach(function(b){b.onclick=add})}
 
 function add(){
- var f=document.createElement("div");f.innerHTML='<label class="lab" for="dName">'+e(t("au.d.name","Domain"))+'</label><input class="fld" id="dName" autocomplete="off" autocapitalize="none" spellcheck="false" inputmode="url" placeholder="example.com"><p class="ferr" id="dErr" hidden></p><p class="fhint">'+e(t("au.d.add.h","Use a domain or subdomain you control, for example mail.example.com."))+"</p>";
- var m=A.modal({title:t("au.d.add.t","Add domain"),desc:t("au.d.add.d","We generate a DKIM key and the DNS records you need."),body:f,actions:[{label:t("au.cancel","Cancel")},{label:t("au.d.add.b","Add"),cls:"pri",onClick:function(mm,b){go(mm,b)}}]});
- var i=f.querySelector("#dName");i.addEventListener("keydown",function(ev){if(ev.key==="Enter"){ev.preventDefault();go(m,m.el.querySelector(".ma .pri"))}});
- function go(mm,b){var er=f.querySelector("#dErr");er.hidden=true;var v=i.value.trim().toLowerCase().replace(/^https?:\/\//,"").replace(/\/.*$/,"");if(!v){i.focus();return}b.disabled=true;
-  A.api("/domains",{method:"POST",body:{name:v}}).then(function(d){mm.close();location.href="/app/domains/?id="+encodeURIComponent(d.id)},function(x){b.disabled=false;er.textContent=A.err(x);er.hidden=false})}
+ var gl='<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>';
+ root.innerHTML=back()+'<div class="wz"><div class="wzh"><span class="wzt">'+A.icon(gl,30)+'</span><div><h1>'+e(t("au.d.add.t","Add domain"))+'</h1><p>'+e(t("au.d.add.d2","Use a domain you own to send and receive emails."))+'</p></div></div><div class="wzb"><div class="wzs"><div class="wzst on"><i></i><div class="wzc"><h2>'+e(t("au.d.add.s1","Domain"))+'</h2><p>'+e(t("au.d.add.s1d","The domain or subdomain you will send from."))+'</p><label class="lab" for="dName">'+e(t("au.d.name","Domain"))+'</label><input class="fld" id="dName" autocomplete="off" autocapitalize="none" spellcheck="false" inputmode="url" placeholder="updates.example.com"><p class="ferr" id="dErr" hidden></p><p class="fhint">'+e(t("au.d.add.h","Use a domain or subdomain you control, for example mail.example.com."))+'</p><button type="button" class="abtn lg pri" id="dGo">'+A.icon(A.IC.plus,16)+"<span>"+e(t("ap.d.add","Add domain"))+'</span></button></div></div><div class="wzst"><i></i><div class="wzc"><h2>'+e(t("au.d.add.s2","DNS records"))+'</h2></div></div></div><div class="wzp" aria-hidden="true"><div class="wzm"><span class="wzav">Y</span><div><b>'+e(t("au.d.add.you","Your name"))+'</b> <em id="wzAddr">you@domain</em><small>'+e(t("au.d.add.tome","to me"))+'</small></div></div><div class="wzl"><i style="width:55%"></i><i style="width:88%"></i><i style="width:70%"></i></div></div></div></div>';
+ var i=root.querySelector("#dName"),er=root.querySelector("#dErr"),btn=root.querySelector("#dGo"),ad=root.querySelector("#wzAddr");
+ i.focus();
+ i.addEventListener("input",function(){var v=i.value.trim().toLowerCase().replace(/^https?:\/\//,"").replace(/\/.*$/,"");ad.textContent="you@"+(v||"domain");er.hidden=true;i.classList.remove("bad")});
+ i.addEventListener("keydown",function(ev){if(ev.key==="Enter"){ev.preventDefault();go()}});
+ btn.onclick=go;
+ function go(){er.hidden=true;var v=i.value.trim().toLowerCase().replace(/^https?:\/\//,"").replace(/\/.*$/,"");if(!v){i.classList.add("bad");i.focus();return}btn.disabled=true;
+  A.api("/domains",{method:"POST",body:{name:v}}).then(function(d){location.href="/app/domains/?id="+encodeURIComponent(d.id)},function(x){btn.disabled=false;i.classList.add("bad");er.textContent=A.err(x);er.hidden=false})}
 }
 
 function subCard(sd){
