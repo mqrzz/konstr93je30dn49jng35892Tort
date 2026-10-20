@@ -1009,3 +1009,4 @@ h1,h2,h3{overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
 #org-addresses .fad li{display:flex;flex-direction:column;gap:4px;padding:18px 20px;border-radius:20px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);text-align:left}
 #org-addresses .fad span{color:var(--fg3);font-size:14px}
 #org-addresses .fad a{color:var(--fg);text-decoration:none;font-weight:500;overflow-wrap:anywhere}
+#org-addresses .fad em{font-style:normal;color:var(--fg2);font-size:14px;line-height:1.5;margin-top:4px}

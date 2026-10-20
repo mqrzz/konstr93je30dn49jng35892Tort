@@ -8,9 +8,10 @@ function html(){return '<footer class="ftr"><div class="wrap"><div class="brand"
 C.map(function(c){return '<div><h4>'+t("footer."+c[0].toLowerCase(),c[0])+'</h4><ul>'+c[1].map(function(l){return '<li><a href="'+l[1]+'">'+t("footer.l."+l[0].split("|")[1],l[0].split("|")[0])+'</a></li>'}).join('')+'</ul></div>'}).join('')+'</div></div></footer>'}
 function mount(){var r=document.getElementById("site-footer");if(!r)return;r.innerHTML=html();var s=r.querySelector(".stat");
 fetch("/api/contact/addresses").then(function(x){return x.ok?x.json():{items:[]}}).then(function(d){var it=(d&&d.items)||[];if(!it.length)return;var esc=function(v){return String(v).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
-var KT={general:"General",support:"Support",government:"Government",legal:"Legal",press:"Press",security:"Security",billing:"Billing",custom:"Contact"};
-var rows=it.map(function(b){return'<li><span>'+esc(b.title)+'</span><a href="mailto:'+esc(b.address)+'">'+esc(b.address)+'</a></li>'}).join("");
-var br=r.querySelector(".brand");if(br){var u=document.createElement("ul");u.className="fad";u.innerHTML=rows;br.appendChild(u)}
+var lab=function(b){return t("ct2.k."+b.kind,b.title)};var dsc=function(b){var k="ct2.kd."+b.kind,v=t(k,"");return v&&v!==k?v:""};
+var rows=it.map(function(b){return'<li><span>'+esc(lab(b))+'</span><a href="mailto:'+esc(b.address)+'">'+esc(b.address)+'</a>'+(dsc(b)?'<em>'+esc(dsc(b))+'</em>':"")+'</li>'}).join("");
+var frows=it.map(function(b){return'<li><span>'+esc(lab(b))+'</span><a href="mailto:'+esc(b.address)+'">'+esc(b.address)+'</a></li>'}).join("");
+var br=r.querySelector(".brand");if(br){var u=document.createElement("ul");u.className="fad";u.innerHTML=frows;br.appendChild(u)}
 var cp=document.getElementById("org-addresses");if(cp)cp.innerHTML='<div class="wrap"><h2>'+esc(t("ct2.addr.t","Write to us directly"))+'</h2><p>'+esc(t("ct2.addr.p","Each address is read by the team responsible for it."))+'</p><ul class="fad big">'+rows+'</ul></div>'}).catch(function(){});
 fetch("/api/health",{cache:"no-store"}).then(function(x){return x.ok?x.json():Promise.reject()}).then(function(){s.classList.add("ok");s.lastChild.textContent=t("footer.ok","All systems operational")}).catch(function(){s.classList.add("bad");s.lastChild.textContent=t("footer.bad","Status unavailable")})}
 var go=function(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",mount):mount()};(window.GESERD&&GESERD.ready?GESERD.ready:Promise.resolve()).then(go)})();
