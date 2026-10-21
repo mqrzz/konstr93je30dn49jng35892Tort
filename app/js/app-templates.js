@@ -28,7 +28,7 @@ function load(){
  Promise.all([A.api("/templates"),A.api("/usage")]).then(function(r){
   rows0=r[0];limit=(r[1].limits||{}).templates||0;
   var sub=A.plural(rows0.length,"tp.used","{n} templates")+(limit?" · "+T("tp.of","limit")+" "+limit:"");
-  root.innerHTML=head(rows0.length?sub:"")+(rows0.length?bar()+'<div id="tpG">'+grid()+'</div>':A.empty('<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M9 9v11"/>',T("tp.none","No templates yet"),T("tp.none.d","Save a message once and send it with a template id and variables."),'<button type="button" class="abtn pri lg" id="tpNew2">'+E(T("tp.new","New template"))+'</button>'));
+  root.innerHTML=head(rows0.length?sub:"")+(rows0.length?bar()+'<div id="tpG">'+grid()+'</div>':A.empty(A.IC.tpl,T("tp.none","No templates yet"),T("tp.none.d","Save a message once and send it with a template id and variables."),'<button type="button" class="abtn pri lg" id="tpNew2">'+E(T("tp.new","New template"))+'</button>'));
   var n=document.getElementById("tpNew");if(n)n.onclick=chooser;var n2=document.getElementById("tpNew2");if(n2)n2.onclick=chooser;
   var qi=document.getElementById("tpQ");if(qi)qi.oninput=function(){q=qi.value.trim().toLowerCase();document.getElementById("tpG").innerHTML=grid();wireCards()};
   var sg=document.getElementById("tpS");if(sg)sg.onclick=function(e){var b=e.target.closest("button[data-val]");if(!b)return;sort=b.dataset.val;sg.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)});document.getElementById("tpG").innerHTML=grid();wireCards()};

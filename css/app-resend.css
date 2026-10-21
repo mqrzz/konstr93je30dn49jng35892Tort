@@ -77,3 +77,52 @@ body.app{font-family:var(--font-b);font-size:14px}
  .stbl:has(.tm-x) td.sub{grid-column:2}
  .stbl:has(.tm-x) td.tm-x{grid-column:1/-1;width:auto;text-align:left}
 }
+@media(max-width:860px){
+ .snav .nv a,.gnav .gl{height:46px;font-size:16px;gap:12px;padding:0 14px;border-radius:14px}
+ .snav .nv a svg,.gnav .gl svg{width:22px;height:22px}
+ .snav .nv{gap:2px}
+ .snav .bt .ric .app-ico{height:46px;font:400 16px var(--font-b);padding:0 14px}
+ .snav .bt .ric .app-ico svg{width:22px;height:22px}
+ .snav .bt .ric .app-ico .bl{gap:12px}
+}
+:root[data-theme=light]{--a-bg:#fdfdfd;--a-bg2:#fdfdfd;--a-fld:#e9e9e9;--a-hv:#e9e9e9;--a-on:#e9e9e9;--a-bd:#d7d7d7;--g-bd:#d7d7d7;--a-tx:#191919;--a-tx2:#6d6d6d;--a-tx3:#8f8f8f;--a-pri:#000;--a-pritx:#fff;--a-btn:#e9e9e9;--a-glass:#fdfdfd;--g-bg:#fdfdfd;--g-sh:none}
+:root[data-theme=light] body.app,:root[data-theme=light] body.app .app-main{background:#fdfdfd;background-image:none}
+:root[data-theme=light] body.app::before,:root[data-theme=light] body.app::after{display:none}
+@media(min-width:861px){
+:root[data-theme=light] .snav{padding:16px 16px 12px;background:#fdfdfd;border-right:1px solid #d7d7d7;backdrop-filter:none;-webkit-backdrop-filter:none}
+:root[data-theme=light] .snav .nv a{height:32px;border-radius:12px;font-size:14px;padding:0 12px;gap:10px;color:#191919}
+:root[data-theme=light] .snav .nv a.on{background:#e9e9e9;color:#191919;font-weight:500}
+:root[data-theme=light] .snav .nv a svg{width:18px;height:18px;color:#191919}
+:root[data-theme=light] .abtn,:root[data-theme=light] .fld,:root[data-theme=light] .bx-search,:root[data-theme=light] .dd>button,:root[data-theme=light] .gl{border-radius:12px}
+:root[data-theme=light] .abtn:not(.pri),:root[data-theme=light] .fld,:root[data-theme=light] .bx-search,:root[data-theme=light] .dd>button{background:#e9e9e9;border-color:transparent}
+:root[data-theme=light] .abtn.pri{background:#000;border-color:#000;color:#fff;box-shadow:none}
+body.app:not(.ed-studio) .app-content{max-width:1100px;margin-inline:auto;padding-top:28px}
+}
+@media(min-width:861px){
+.snav{box-shadow:none}
+:root[data-theme=light] .snav{border-right:1px solid #d7d7d7;box-shadow:none}
+.snav .bt{padding:8px 4px 4px}
+.snav .bt .ric{flex-direction:row;justify-content:flex-end;gap:4px}
+.snav .bt .ric .app-ico{width:32px;height:32px;padding:0;justify-content:center;border-radius:12px}
+.snav .bt .ric .app-ico .bl>span{display:none}
+.snav .bt .ric .app-ico svg{width:18px;height:18px}
+}
+.p2l{display:grid;gap:0;margin-top:24px}
+.p2r{display:grid;grid-template-columns:32px 1fr auto;gap:16px;align-items:start;padding:24px 0;border-top:1px solid var(--g-bd)}
+.p2r:last-child{border-bottom:1px solid var(--g-bd)}
+.p2m{width:28px;height:28px;border-radius:99px;background:var(--a-fld);display:flex;align-items:center;justify-content:center;font:500 13px var(--font-b);color:var(--a-tx2)}
+.p2r.done .p2m{background:var(--a-pri);color:var(--a-pritx)}
+.p2b h3{margin:3px 0 4px;font:600 16px/24px var(--font-b)}
+.p2b p{margin:0;color:var(--a-tx2);font-size:14px;line-height:22px;max-width:62ch}
+.p2c{position:relative;margin-top:16px;border-radius:16px;background:var(--a-fld);padding:16px 18px;overflow:auto}
+.p2c pre{margin:0;font:13px/1.7 ui-monospace,Menlo,monospace;color:var(--a-tx);white-space:pre}
+.p2c .abtn{position:absolute;top:10px;right:10px;height:28px}
+@media(max-width:860px){.p2r{grid-template-columns:28px 1fr}.p2r>.abtn{grid-column:2;justify-self:start}}
+.apop{min-width:244px;padding:6px 0;border-radius:16px}
+.apop .apm{padding:8px 16px 10px;font:400 12.5px var(--font-b);color:var(--a-tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.apop a,.apop button.it{display:flex;align-items:center;justify-content:space-between;gap:10px;height:34px;padding:0 16px;border-radius:0;font:400 14px var(--font-b);color:var(--a-tx2)}
+.apop a svg:not(.ext){display:none}
+.apop a:hover{background:var(--a-hv);color:var(--a-tx)}
+.apop hr{margin:4px 0;border:0;border-top:1px solid var(--g-bd)}
+.p2b{min-width:0}.p2c{max-width:100%}.p2c pre{overflow:auto}
+@media(max-width:860px){.p2c .abtn{position:static;margin-top:12px}}

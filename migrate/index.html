@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Migration guides — Geserd</title>
+<meta name="description" content="How to move sending and receiving to Geserd from another email provider.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css?v=519359ff5f">
+<link rel="stylesheet" href="/css/features.css?v=519359ff5f">
+<link rel="stylesheet" href="/css/fxmore.css?v=519359ff5f">
+</head>
+<body data-fx="migrate">
+<div id="site-header"></div>
+<main>
+<section class="fx-hero"><div class="wrap"><span class="fx-eye" data-i18n="mig.eye">Migration</span><h1 class="grad" data-i18n="mig.h1">Moving to Geserd without a gap</h1><p data-i18n="mig.lead">The steps are the same whichever provider you leave: bring the domain, move the sending, then switch the inbound and the webhooks.</p></div></section><section class="fx-sec"><div class="wrap"><div class="fx-hd"><span class="fx-eye" data-i18n="migs.eye">The plan</span><h2 class="fx-h2 grad" data-i18n="migs.h">Five steps, in this order</h2></div><ol class="fm-steps"><li class="rv" style="--s:0"><em>01</em><div><h3><span data-i18n="migs.0.t">Add your domain to Geserd</span></h3><p data-i18n="migs.0.p">Publish the DNS records from your dashboard next to the old ones. Both providers can sign your mail at the same time.</p></div></li><li class="rv" style="--s:1"><em>02</em><div><h3><span data-i18n="migs.1.t">Recreate templates and keys</span></h3><p data-i18n="migs.1.p">Rebuild the templates in the editor and create API keys, one per application.</p></div></li><li class="rv" style="--s:2"><em>03</em><div><h3><span data-i18n="migs.2.t">Switch a small part of traffic</span></h3><p data-i18n="migs.2.p">Send a few messages through Geserd and read the logs before you move the rest.</p></div></li><li class="rv" style="--s:3"><em>04</em><div><h3><span data-i18n="migs.3.t">Move your suppression list</span></h3><p data-i18n="migs.3.p">Import addresses that bounced, complained or unsubscribed, so nobody is mailed by mistake.</p></div></li><li class="rv" style="--s:4"><em>05</em><div><h3><span data-i18n="migs.4.t">Switch inbound and webhooks</span></h3><p data-i18n="migs.4.p">Change the MX record last, then point your webhook URL at Geserd events.</p></div></li></ol></div></section><section class="fx-sec"><div class="wrap"><div class="fx-hd"><span class="fx-eye" data-i18n="migc.eye">Mapping</span><h2 class="fx-h2 grad" data-i18n="migc.h">What changes in your code</h2></div><div class="fm-split"><div class="rv"><h3><span data-i18n="migc.c0.t">Usually only</span></h3><ul><li><span data-i18n="migc.c0.0">The API address and the key</span></li><li><span data-i18n="migc.c0.1">Field names for sender and recipient</span></li></ul></div><div class="rv"><h3><span data-i18n="migc.c1.t">Not needed</span></h3><ul><li><span data-i18n="migc.c1.0">Changing your domain</span></li><li><span data-i18n="migc.c1.1">Rewriting your email content</span></li></ul></div></div></div></section><section class="fx-sec"><div class="wrap fx-narrow"><h2 class="fx-h2 grad rv" data-i18n="mig.f.h">Questions about moving</h2><div class="qa" style="margin-top:32px"><details><summary data-i18n="mig.q0.q">Can I use both providers during the move?</summary><p data-i18n="mig.q0.a">Yes. Keep the old records until the logs show everything works, then remove them.</p></details></div></div></section><section class="fx-sec fx-cta"><div class="wrap"><h2 class="fx-h2 grad rv" data-i18n="mig.cta">Start your move</h2><div class="acts rv"><a class="btn" href="/signup/" data-i18n="cta.start">Get started</a><a class="btn ghost" href="/docs/" data-i18n="cta.docs">Documentation</a></div></div></section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/js/pages/features.js?v=519359ff5f"></script>
+</body>
+</html>

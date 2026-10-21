@@ -73,7 +73,7 @@ function reasons(){
 function draw(){
  var b=document.getElementById("mxBody"),any=false;
  for(var k in D.totals)if(D.totals[k])any=true;
- if(!any){b.innerHTML=A.empty('<path d="M3 3v18h18M7 15l4-4 3 3 5-6"/>',t("ap.m.h","No data yet"),t("ap.m.p","Metrics appear here once you send your first email."))+note();return}
+ if(!any){b.innerHTML=A.empty(A.IC.metrics,t("ap.m.h","No data yet"),t("ap.m.p","Metrics appear here once you send your first email."))+note();return}
  b.innerHTML=health()+tiles()+chartCard()+others()+'<div class="mx-two">'+recipients()+reasons()+"</div>"+note();
  b.querySelectorAll(".mx-tile").forEach(function(x){x.onclick=function(){metric=x.dataset.k;b.querySelectorAll(".mx-tile").forEach(function(y){var on=y===x;y.classList.toggle("on",on);y.setAttribute("aria-pressed",on)});var c=document.querySelector(".mx-chart");c.outerHTML=chartCard();chart()}});
  chart()

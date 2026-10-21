@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Email API — Geserd</title>
+<meta name="description" content="One HTTP call sends signed email from your own domain.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css?v=519359ff5f">
+<link rel="stylesheet" href="/css/features.css?v=519359ff5f">
+<link rel="stylesheet" href="/css/fxmore.css?v=519359ff5f">
+</head>
+<body data-fx="email-api">
+<div id="site-header"></div>
+<main>
+<section class="fx-hero"><div class="wrap"><span class="fx-eye" data-i18n="eap.eye">Email API</span><h1 class="grad" data-i18n="eap.h1">One call, one email</h1><p data-i18n="eap.lead">A small HTTP API for sending and receiving. Authenticate with a key, send JSON and get an id back right away.</p></div></section><section class="fx-sec"><div class="wrap"><div class="fx-hd"><span class="fx-eye" data-i18n="eapk.eye">Send</span><h2 class="fx-h2 grad" data-i18n="eapk.h">This is the whole request</h2></div><div class="fm-code rv"><pre>curl https://geserd.com/api/emails \
+  -H "Authorization: Bearer gs_live_..." \
+  -H "Idempotency-Key: order-1042" \
+  -d '{"from": "hi@yourdomain.com",
+       "to": "ada@example.com",
+       "subject": "Welcome",
+       "text": "Glad you are here."}'</pre></div></div></section><section class="fx-sec"><div class="wrap"><div class="fx-hd"><span class="fx-eye" data-i18n="eapr.eye">Details that matter</span><h2 class="fx-h2 grad" data-i18n="eapr.h">Made to be safe in production</h2></div><div class="fm-rows"><div class="rv"><h3><span data-i18n="eapr.0.t">Idempotency</span></h3><p data-i18n="eapr.0.p">Send the same key twice and the email goes out once, so retries are safe.</p></div><div class="rv"><h3><span data-i18n="eapr.1.t">Clear errors</span></h3><p data-i18n="eapr.1.p">Every error has a code and a message that says what to change.</p></div><div class="rv"><h3><span data-i18n="eapr.2.t">Rate limits</span></h3><p data-i18n="eapr.2.p">Limits are documented, and responses tell you when to try again.</p></div><div class="rv"><h3><span data-i18n="eapr.3.t">Webhooks</span></h3><p data-i18n="eapr.3.p">Delivery, bounce and inbound events are posted to your URL.</p></div></div></div></section><section class="fx-sec"><div class="wrap fx-narrow"><h2 class="fx-h2 grad rv" data-i18n="eap.f.h">Questions about the API</h2><div class="qa" style="margin-top:32px"><details><summary data-i18n="eap.q0.q">Which languages can I use?</summary><p data-i18n="eap.q0.a">Any language that can make an HTTP request. The documentation has examples for Node.js, Python and PHP.</p></details></div></div></section><section class="fx-sec fx-cta"><div class="wrap"><h2 class="fx-h2 grad rv" data-i18n="eap.cta">Get your API key</h2><div class="acts rv"><a class="btn" href="/signup/" data-i18n="cta.start">Get started</a><a class="btn ghost" href="/docs/" data-i18n="cta.docs">Documentation</a></div></div></section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/js/pages/features.js?v=519359ff5f"></script>
+</body>
+</html>

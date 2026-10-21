@@ -41,7 +41,7 @@ function more(){
 function draw(){
  var b=document.getElementById("lgBody");
  if(!rows.length){
-  var ic='<path d="M4 6h16M4 12h16M4 18h10"/>';
+  var ic=A.IC.logs;
   b.innerHTML=(filtered()?A.empty(ic,t("ap.lg.nomatch","Nothing matches these filters"),t("ap.lg.nomatch.p","Try another filter or clear the search.")):kind==="requests"?A.empty(ic,t("ap.l.h","No logs yet"),t("ap.l.p","Every API request appears here with its full details."),'<a class="abtn lg pri" href="/docs/quickstart/">'+e(t("ap.docs","Go to docs"))+"</a>"):A.empty(ic,t("ap.lg.ev.h","No events yet"),t("ap.lg.ev.p","Sent, delivered, bounced and received events appear here.")))+keepNote();
   return
  }

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SMTP — Geserd</title>
+<meta name="description" content="Connect any software that speaks SMTP to Geserd with a host, a port and your API key.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css?v=519359ff5f">
+<link rel="stylesheet" href="/css/features.css?v=519359ff5f">
+<link rel="stylesheet" href="/css/fxmore.css?v=519359ff5f">
+</head>
+<body data-fx="smtp">
+<div id="site-header"></div>
+<main>
+<section class="fx-hero"><div class="wrap"><span class="fx-eye" data-i18n="smp.eye">SMTP</span><h1 class="grad" data-i18n="smp.h1">Plain SMTP, your own domain</h1><p data-i18n="smp.lead">If your software only knows SMTP, point it at Geserd. The same signing, queue and log apply as for the API.</p></div></section><section class="fx-sec"><div class="wrap"><div class="fx-hd"><span class="fx-eye" data-i18n="smpt.eye">Settings</span><h2 class="fx-h2 grad" data-i18n="smpt.h">Connection details</h2></div><table class="fm-table rv"><tbody><tr><th><span data-i18n="smpt.0.t">Host</span></th><td><span data-i18n="smpt.0.p">smtp.geserd.com</span></td></tr><tr><th><span data-i18n="smpt.1.t">Port</span></th><td><span data-i18n="smpt.1.p">465 with SSL, or 587 with STARTTLS</span></td></tr><tr><th><span data-i18n="smpt.2.t">Username</span></th><td><span data-i18n="smpt.2.p">Any value</span></td></tr><tr><th><span data-i18n="smpt.3.t">Password</span></th><td><span data-i18n="smpt.3.p">Your API key, which starts with gs_</span></td></tr><tr><th><span data-i18n="smpt.4.t">Message size</span></th><td><span data-i18n="smpt.4.p">Up to 10 MB</span></td></tr></tbody></table></div></section><section class="fx-sec"><div class="wrap"><div class="fx-hd"><span class="fx-eye" data-i18n="smps.eye">Connecting</span><h2 class="fx-h2 grad" data-i18n="smps.h">Three minutes</h2></div><ol class="fm-steps"><li class="rv" style="--s:0"><em>01</em><div><h3><span data-i18n="smps.0.t">Verify a domain</span></h3><p data-i18n="smps.0.p">Add the DNS records shown in your dashboard. Mail can only be sent from verified addresses.</p></div></li><li class="rv" style="--s:1"><em>02</em><div><h3><span data-i18n="smps.1.t">Create an API key</span></h3><p data-i18n="smps.1.p">The key is shown once. Use it as the SMTP password.</p></div></li><li class="rv" style="--s:2"><em>03</em><div><h3><span data-i18n="smps.2.t">Enter the settings</span></h3><p data-i18n="smps.2.p">Paste the host and port into your software and send a test message.</p></div></li></ol></div></section><section class="fx-sec"><div class="wrap fx-narrow"><h2 class="fx-h2 grad rv" data-i18n="smp.f.h">Questions about SMTP</h2><div class="qa" style="margin-top:32px"><details><summary data-i18n="smp.q0.q">Is the connection encrypted?</summary><p data-i18n="smp.q0.a">Yes. Use port 465 for SSL or 587 for STARTTLS.</p></details></div></div></section><section class="fx-sec fx-cta"><div class="wrap"><h2 class="fx-h2 grad rv" data-i18n="smp.cta">Connect your software</h2><div class="acts rv"><a class="btn" href="/signup/" data-i18n="cta.start">Get started</a><a class="btn ghost" href="/docs/" data-i18n="cta.docs">Documentation</a></div></div></section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/js/pages/features.js?v=519359ff5f"></script>
+</body>
+</html>

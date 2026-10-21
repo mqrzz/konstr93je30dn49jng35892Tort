@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Templates — Geserd</title>
+<meta name="description" content="Build an email once, save it as a template and send it with an id and variables.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.svg?v=519359ff5f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/geserd.css?v=519359ff5f">
+<link rel="stylesheet" href="/css/features.css?v=519359ff5f">
+<link rel="stylesheet" href="/css/fxmore.css?v=519359ff5f">
+</head>
+<body data-fx="templates">
+<div id="site-header"></div>
+<main>
+<section class="fx-hero"><div class="wrap"><span class="fx-eye" data-i18n="tpp.eye">Templates</span><h1 class="grad" data-i18n="tpp.h1">Design once, send with variables</h1><p data-i18n="tpp.lead">Save a message as a template. Your code sends only the template id and the values to fill in, and the editor shows exactly what the recipient will see.</p></div></section><section class="fx-sec"><div class="wrap"><div class="fx-hd"><span class="fx-eye" data-i18n="tppk.eye">In your code</span><h2 class="fx-h2 grad" data-i18n="tppk.h">Send by template id</h2><p data-i18n="tppk.p">Variables are written as double braces in the template, for example the name placeholder, and replaced for each message.</p></div><div class="fm-code rv"><pre>curl https://geserd.com/api/emails \
+  -H "Authorization: Bearer gs_live_..." \
+  -d '{"from": "hi@yourdomain.com",
+       "to": "ada@example.com",
+       "template": "welcome",
+       "variables": {"name": "Ada"}}'</pre></div></div></section><section class="fx-sec"><div class="wrap"><div class="fx-hd"><span class="fx-eye" data-i18n="tppr.eye">The editor</span><h2 class="fx-h2 grad" data-i18n="tppr.h">What you can do</h2></div><div class="fm-rows"><div class="rv"><h3><span data-i18n="tppr.0.t">Blocks or HTML</span></h3><p data-i18n="tppr.0.p">Switch between the block editor and raw HTML. Both give the same email.</p></div><div class="rv"><h3><span data-i18n="tppr.1.t">Desktop and phone preview</span></h3><p data-i18n="tppr.1.p">Check both widths before you save, in light and dark.</p></div><div class="rv"><h3><span data-i18n="tppr.2.t">Version history</span></h3><p data-i18n="tppr.2.p">Every save keeps a version, and you can restore an earlier one.</p></div><div class="rv"><h3><span data-i18n="tppr.3.t">Test email</span></h3><p data-i18n="tppr.3.p">Send the template to yourself with sample values before it goes live.</p></div></div></div></section><section class="fx-sec"><div class="wrap fx-narrow"><h2 class="fx-h2 grad rv" data-i18n="tpp.f.h">Questions about templates</h2><div class="qa" style="margin-top:32px"><details><summary data-i18n="tpp.q0.q">What happens to old emails if I edit a template?</summary><p data-i18n="tpp.q0.a">Emails already sent are not affected. Only new messages use the new version.</p></details></div></div></section><section class="fx-sec fx-cta"><div class="wrap"><h2 class="fx-h2 grad rv" data-i18n="tpp.cta">Build your first template</h2><div class="acts rv"><a class="btn" href="/signup/" data-i18n="cta.start">Get started</a><a class="btn ghost" href="/docs/" data-i18n="cta.docs">Documentation</a></div></div></section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/boot.js?v=519359ff5f"></script>
+<script src="/js/pages/features.js?v=519359ff5f"></script>
+</body>
+</html>
