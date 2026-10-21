@@ -1010,3 +1010,5 @@ h1,h2,h3{overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
 #org-addresses .fad span{color:var(--fg3);font-size:14px}
 #org-addresses .fad a{color:var(--fg);text-decoration:none;font-weight:500;overflow-wrap:anywhere}
 #org-addresses .fad em{font-style:normal;color:var(--fg2);font-size:14px;line-height:1.5;margin-top:4px}
+
+body:not(.app) main h1,body:not(.app) main h2{font-family:var(--font-b);font-weight:500;letter-spacing:-.035em}

@@ -223,3 +223,13 @@ html[data-theme="light"] #dh .logo img{filter:invert(1) brightness(.3)}
  #ds .sb{padding-top:12px}
 }
 @media(max-width:1023px) and (prefers-color-scheme:dark){:root:not([data-theme]) #ds .dtop img{filter:none}}
+
+.pa{align-items:center;gap:10px}
+.pa .ai-top{display:flex;gap:6px;margin-right:4px}
+.pa .ai-b{width:34px;height:34px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--t2);display:flex;align-items:center;justify-content:center}
+.pa .ai-b:hover{background:var(--hov);color:var(--t1,currentColor)}
+.pa .ai-sep{height:1px;margin:6px 4px;background:var(--bd)}
+.pa .ai-i{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;font-size:14px;color:var(--t2);text-decoration:none}
+.pa .ai-i:hover{background:var(--hov)}
+.pa .pm{min-width:220px}
+@media(max-width:700px){.pa .ai-top{display:none}}

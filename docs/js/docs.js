@@ -146,8 +146,32 @@ function copyText(s){
  var ta=document.createElement("textarea");ta.value=s;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
  try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);return Promise.resolve();
 }
+
+var AI_LOGOS={claude:'<path d="M12 12L12.00 3.40" stroke-width="2.5"/><path d="M12 12L15.20 6.46" stroke-width="2.5"/><path d="M12 12L19.10 7.90" stroke-width="2.5"/><path d="M12 12L19.00 12.00" stroke-width="2.5"/><path d="M12 12L19.62 16.40" stroke-width="2.5"/><path d="M12 12L15.10 17.37" stroke-width="2.5"/><path d="M12 12L12.00 20.00" stroke-width="2.5"/><path d="M12 12L8.40 18.24" stroke-width="2.5"/><path d="M12 12L4.55 16.30" stroke-width="2.5"/><path d="M12 12L5.40 12.00" stroke-width="2.5"/><path d="M12 12L4.90 7.90" stroke-width="2.5"/><path d="M12 12L8.50 5.94" stroke-width="2.5"/>',chatgpt:'<ellipse cx="12.00" cy="7.40" rx="5.4" ry="2.7" transform="rotate(0 12.00 7.40)"/><ellipse cx="15.98" cy="9.70" rx="5.4" ry="2.7" transform="rotate(60 15.98 9.70)"/><ellipse cx="15.98" cy="14.30" rx="5.4" ry="2.7" transform="rotate(120 15.98 14.30)"/><ellipse cx="12.00" cy="16.60" rx="5.4" ry="2.7" transform="rotate(180 12.00 16.60)"/><ellipse cx="8.02" cy="14.30" rx="5.4" ry="2.7" transform="rotate(240 8.02 14.30)"/><ellipse cx="8.02" cy="9.70" rx="5.4" ry="2.7" transform="rotate(300 8.02 9.70)"/>',cursor:'<path d="M12 2.8 20 7.4v9.2l-8 4.6-8-4.6V7.4z"/><path d="M4 7.4l8 4.6 8-4.6M12 12v9.2"/><path d="M12 12 20 7.4v9.2l-8 4.6z" fill="currentColor" fill-opacity=".3" stroke="none"/>',perplexity:'<path d="M12 2.5v19M5.5 8.2 12 13l6.5-4.8M5.5 8.2v8.6L12 13l6.5 3.8V8.2M5.5 8.2 12 2.5l6.5 5.7"/>'};
+function aiPrompt(){
+ var h1=document.querySelector(".pg h1"),ttl=h1?h1.textContent.trim():document.title;
+ return t("doc.ai.prompt","I am reading the Geserd documentation page “{t}” at {u}. Read it and help me understand it: answer my questions, give examples and point out the steps I need.").replace("{t}",ttl).replace("{u}",location.href.split("#")[0]);
+}
+function aiTargets(){
+ var q=encodeURIComponent(aiPrompt());
+ return [["claude","Claude","https://claude.ai/new?q="+q],["chatgpt","ChatGPT","https://chatgpt.com/?q="+q],["cursor","Cursor","https://cursor.com/link/prompt?text="+q],["perplexity","Perplexity","https://www.perplexity.ai/search?q="+q]];
+}
+function aiMenu(el){
+ var pm=el.querySelector(".pm");if(!pm||pm.querySelector(".ai-i"))return;
+ var hr=document.createElement("div");hr.className="ai-sep";pm.appendChild(hr);
+ aiTargets().forEach(function(a){
+  var b=document.createElement("a");b.className="ai-i";b.target="_blank";b.rel="noopener";b.dataset.k=a[0];
+  b.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+AI_LOGOS[a[0]]+'</svg><span>'+t("doc.ai.open","Open in {x}").replace("{x}",a[1])+'</span>';
+  b.addEventListener("click",function(){b.href=aiTargets().filter(function(x){return x[0]===a[0]})[0][2]});
+  b.href=a[2];pm.appendChild(b);
+ });
+ var top=document.createElement("div");top.className="ai-top";
+ top.innerHTML=aiTargets().map(function(a){return '<a class="ai-b" target="_blank" rel="noopener" data-k="'+a[0]+'" href="'+a[2]+'" title="'+t("doc.ai.open","Open in {x}").replace("{x}",a[1])+'"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+AI_LOGOS[a[0]]+'</svg></a>'}).join("");
+ el.insertBefore(top,el.firstChild);
+}
+
 function pageActions(){
- var el=document.querySelector(".pa");if(!el)return;
+ var el=document.querySelector(".pa");if(!el)return;aiMenu(el);
  var main=el.querySelector(".c"),chev=el.querySelector(".d");
  function flash(){main.innerHTML=I_CHECK;setTimeout(function(){main.innerHTML=I_COPY},1400)}
  main.addEventListener("click",function(){copyText(pageMarkdown()).then(flash)});

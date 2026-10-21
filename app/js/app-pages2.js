@@ -3,7 +3,7 @@ var A=window.GSApp;if(!A)return;
 var T=A.t,E=A.esc,root=document.getElementById("pg2-root");if(!root)return;
 var pg=root.getAttribute("data-pg");
 function list(x){return Array.isArray(x)?x:(x&&(x.items||x.data||x.rows))||[]}
-var TB=[["sending","app.set.sending","Sending","/app/settings/sending/"],["usage","app.set.usage","Usage","/app/settings/usage/"],["billing","app.set.billing","Billing","/app/settings/billing/"],["team","app.set.team","Team","/app/settings/team/"],["onboarding","app.nav.onboarding","Onboarding","/app/onboarding/"],["integrations","app.nav.integrations","Integrations","/app/integrations/"],["documents","app.nav.documents","Documents","/app/documents/"]];
+var TB=[["sending","app.set.sending","Sending","/app/settings/sending/"],["usage","app.set.usage","Usage","/app/settings/usage/"],["billing","app.set.billing","Billing","/app/settings/billing/"],["team","app.set.team","Team","/app/settings/team/"],["onboarding","app.nav.onboarding","Onboarding","/app/onboarding/"],["integrations","app.nav.integrations","Integrations","/app/integrations/"],["documents","app.nav.documents","Documents","/app/documents/"],["labs","app.nav.labs","Labs","/app/labs/"]];
 function head(h,p){return '<div class="ph"><h1>'+E(T("app.set.title","Settings"))+'</h1></div><nav class="stabs">'+TB.map(function(x){return '<a href="'+x[3]+'"'+(x[0]===pg?' class="on"':'')+'>'+E(T(x[1],x[2]))+'</a>'}).join("")+'</nav><div class="ph pgh" style="margin-top:28px"><div><h2 style="margin:0">'+E(h)+'</h2><p class="psub">'+E(p)+'</p></div></div>'}
 function row(o){return '<div class="p2r'+(o.done?' done':'')+'"><div class="p2m">'+(o.mark||'')+'</div><div class="p2b"><h3>'+E(o.t)+'</h3><p>'+E(o.d)+'</p>'+(o.extra||'')+'</div>'+(o.href?'<a class="abtn'+(o.pri?' pri':'')+'" href="'+o.href+'"'+(o.blank?' target="_blank" rel="noopener"':'')+'>'+E(o.b)+'</a>':'')+'</div>'}
 function onboarding(){
@@ -25,5 +25,10 @@ function integrations(){
 function documents(){
  var D=[["dpa","Data processing agreement","Covers mail you send to your own recipients through Geserd. It applies once you sign up.","/legal/dpa/"],["terms","Terms of service","The rules that apply when you use Geserd.","/legal/terms/"],["privacy","Privacy policy","What we collect, why and on what basis, including a section for the European Union.","/legal/privacy/"],["subprocessors","Subprocessors","Companies that help us run the service.","/legal/subprocessors/"],["aup","Acceptable use","What you may and may not send.","/legal/aup/"],["payment","Payment terms","How billing, renewal and taxes work.","/legal/payment/"],["refunds","Refunds","When and how a payment is returned.","/legal/refunds/"],["cookies","Cookies","Which cookies we set and why.","/legal/cookies/"]];
  root.innerHTML=head(T("dc.h","Documents"),T("dc.p","Agreements and policies that apply to your account."))+'<div class="p2l">'+D.map(function(x){return row({t:T("dc."+x[0],x[1]),d:T("dc."+x[0]+".d",x[2]),b:T("dc.view","View"),href:x[3],blank:1})}).join("")+'</div>'}
-({onboarding:onboarding,integrations:integrations,documents:documents})[pg]();
+function labs(){
+ root.innerHTML=head(T("lb.h","Labs"),T("lb.p","Features that are new. They work, and they may change."))+'<div class="p2l">'+[
+  {t:T("lb.mcp","MCP server"),d:T("lb.mcpd","Let Claude Code, Cursor or another assistant send and read email with your API key."),b:T("lb.mcp.b","Read the guide"),href:"/features/mcp/",blank:1},
+  {t:T("lb.au","Automations"),d:T("lb.aud","Send an email by itself when an event arrives from your product, with waits in between."),b:T("lb.au.b","Open automations"),href:"/app/automations/"},
+  {t:T("lb.cli","Command line tool"),d:T("lb.clid","Send and read email from a terminal with one small file."),b:T("lb.cli.b","Read the guide"),href:"/features/cli/",blank:1}].map(row).join("")+'</div>'}
+({onboarding:onboarding,integrations:integrations,documents:documents,labs:labs})[pg]();
 })();

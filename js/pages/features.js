@@ -101,3 +101,4 @@ function init(){var f=document.body.dataset.fx;tabs();if(f==="hub")hub();if(f===
 function go(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",init):init()}
 (function wait(n){if(window.GESERD&&GESERD.ready)return GESERD.ready.then(go,go);if(n>400)return go();setTimeout(function(){wait(n+1)},25)})(0)
 })();
+(function(){document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-copy]");if(!b)return;var t=b.querySelector("span").textContent;var d=function(){b.classList.add("ok");setTimeout(function(){b.classList.remove("ok")},1400)};try{navigator.clipboard.writeText(t).then(d,d)}catch(x){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(y){}document.body.removeChild(a);d()}})})();
