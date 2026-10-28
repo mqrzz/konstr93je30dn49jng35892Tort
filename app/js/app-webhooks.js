@@ -15,9 +15,10 @@ function draw(hs,us){
   :A.empty(A.IC.hook,t("ap.w.h","No webhooks yet"),t("ap.w.p","Get notified at your own URL when emails are delivered, bounced or received."),'<button type="button" class="abtn lg pri" data-new>'+e(t("ap.w.add","Add webhook"))+"</button>");
  root.innerHTML=head(count)+body;wire()}
 function wire(){root.querySelectorAll("#wNew,[data-new]").forEach(function(b){b.onclick=add})}
-function picker(sel){var box=document.createElement("div");box.className="evchips";
- function paint(){box.innerHTML=EV.map(function(x){return'<button type="button" class="evchip'+(sel[x]?" on":"")+'" data-e="'+x+'">'+(sel[x]?A.icon(A.IC.check,13):"")+"<span>"+e(evName(x))+"</span></button>"}).join("")}
- paint();box.onclick=function(ev){var b=ev.target.closest(".evchip");if(!b)return;sel[b.dataset.e]=!sel[b.dataset.e];paint()};return box}
+function picker(sel){var box=document.createElement("div");box.className="evpick";var open=false;
+ function sum(){var a=EV.filter(function(x){return sel[x]});return a.length===EV.length?t("au.w.all","All events"):a.length===0?t("au.w.none","Select events"):a.length===1?evName(a[0]):A.plural(a.length,"au.w.events","{n} events")}
+ function paint(){box.innerHTML='<button type="button" class="fld evsum" aria-expanded="'+open+'"><span>'+e(sum())+"</span>"+A.icon(A.IC.chev,16)+'</button>'+(open?'<div class="evlist">'+EV.map(function(x){return'<button type="button" class="evrow'+(sel[x]?" on":"")+'" data-e="'+x+'"><i class="evbx">'+(sel[x]?A.icon(A.IC.check,12):"")+"</i><span>"+e(evName(x))+"</span></button>"}).join("")+"</div>":"")}
+ paint();box.onclick=function(ev){var r=ev.target.closest(".evrow");if(r){sel[r.dataset.e]=!sel[r.dataset.e];paint();return}if(ev.target.closest(".evsum")){open=!open;paint()}};return box}
 function chosen(sel){var a=EV.filter(function(x){return sel[x]});return a.length===EV.length?[]:a}
 function add(){
  var sel={};EV.forEach(function(x){sel[x]=true});

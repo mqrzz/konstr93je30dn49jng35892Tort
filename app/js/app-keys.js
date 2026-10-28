@@ -11,19 +11,22 @@ function draw(keys,us){
  var body;
  if(!keys.length)body=A.empty(A.IC.key,t("ap.k.h","No API keys yet"),t("ap.k.p","Create an API key to start sending emails from your app."),'<button type="button" class="abtn lg pri" data-new>'+e(t("ap.k.add","Create API key"))+"</button>");
  else body='<div class="dl"><div class="drow dhead" style="--cols:minmax(0,1.6fr) minmax(0,1.3fr) minmax(0,1.2fr) minmax(0,1.2fr) 40px"><div>'+e(t("au.k.name","Name"))+"</div><div>"+e(t("au.k.token","Token"))+"</div><div>"+e(t("au.k.created","Created"))+"</div><div>"+e(t("au.k.used","Last used"))+"</div><div></div></div>"+
-  keys.map(function(k){return'<div class="drow" style="--cols:minmax(0,1.6fr) minmax(0,1.3fr) minmax(0,1.2fr) minmax(0,1.2fr) 40px"><div class="c strong" data-l="'+e(t("au.k.name","Name"))+'">'+e(k.name)+'</div><div class="c" data-l="'+e(t("au.k.token","Token"))+'"><code class="mono">'+e(k.prefix)+"…</code></div><div class=\"c dim\" data-l=\""+e(t("au.k.created","Created"))+'">'+e(A.date(k.created_at))+'</div><div class="c dim" data-l="'+e(t("au.k.used","Last used"))+'">'+e(k.last_used_at?A.ago(k.last_used_at):t("au.never","Never"))+'</div><div class="c end"><button type="button" class="app-ico dng" data-rev="'+e(k.id)+'" data-name="'+e(k.name)+'" aria-label="'+e(t("au.k.revoke","Revoke"))+'" title="'+e(t("au.k.revoke","Revoke"))+'">'+A.icon(A.IC.trash,16)+"</button></div></div>"}).join("")+"</div>";
+  keys.map(function(k){return'<div class="drow" style="--cols:minmax(0,1.6fr) minmax(0,1.3fr) minmax(0,1.2fr) minmax(0,1.2fr) 40px"><div class="c strong" data-l="'+e(t("au.k.name","Name"))+'">'+e(k.name)+'<span class="ksub">'+e((k.permission==="sending"?t("au.k.perm.send","Sending access"):t("au.k.perm.full","Full access"))+" · "+(k.domain||t("au.k.dom.all","All domains")))+'</span></div><div class="c" data-l="'+e(t("au.k.token","Token"))+'"><code class="mono">'+e(k.prefix)+"…</code></div><div class=\"c dim\" data-l=\""+e(t("au.k.created","Created"))+'">'+e(A.date(k.created_at))+'</div><div class="c dim" data-l="'+e(t("au.k.used","Last used"))+'">'+e(k.last_used_at?A.ago(k.last_used_at):t("au.never","Never"))+'</div><div class="c end"><button type="button" class="app-ico dng" data-rev="'+e(k.id)+'" data-name="'+e(k.name)+'" aria-label="'+e(t("au.k.revoke","Revoke"))+'" title="'+e(t("au.k.revoke","Revoke"))+'">'+A.icon(A.IC.trash,16)+"</button></div></div>"}).join("")+"</div>";
  root.innerHTML=head(count)+body;bind();
  root.querySelectorAll("[data-rev]").forEach(function(b){b.onclick=function(){revoke(b.dataset.rev,b.dataset.name)}});
 }
 function bind(){root.querySelectorAll("#kNew,[data-new]").forEach(function(b){b.onclick=create})}
 function create(){
- var inp=document.createElement("div");inp.innerHTML='<label class="lab" for="kName">'+e(t("au.k.name","Name"))+'</label><input class="fld" id="kName" maxlength="60" autocomplete="off" placeholder="'+e(t("au.k.name.ph","e.g. Production"))+'"><p class="ferr" id="kErr" hidden></p>';
- var m=A.modal({title:t("au.k.new.t","Create API key"),desc:t("au.k.new.d","Give the key a name so you can recognise it later."),body:inp,actions:[
+ var inp=document.createElement("div");inp.innerHTML='<div class="pfld"><label class="lab" for="kName">'+e(t("au.k.name","Name"))+'</label><input class="fld" id="kName" maxlength="60" autocomplete="off" placeholder="'+e(t("au.k.name.ph","e.g. Production"))+'"></div><div class="pfld"><label class="lab" for="kPerm">'+e(t("au.k.perm","Permission"))+'</label><select class="fld" id="kPerm"><option value="full">'+e(t("au.k.perm.full","Full access"))+'</option><option value="sending">'+e(t("au.k.perm.send","Sending access"))+'</option></select><p class="fhint" id="kPermH" hidden>'+e(t("au.k.perm.h","Sending access can only send email. It cannot read or change anything else."))+'</p></div><div class="pfld"><label class="lab" for="kDom">'+e(t("au.k.dom","Domain"))+'</label><select class="fld" id="kDom"><option value="">'+e(t("au.k.dom.all","All domains"))+'</option></select></div><p class="ferr" id="kErr" hidden></p>';
+ var m=A.modal({title:t("au.k.new.t","Create API key"),body:inp,actions:[
   {label:t("au.cancel","Cancel")},
   {label:t("au.k.create","Create"),cls:"pri",onClick:function(mm,b){go(mm,b)}}]});
- var i=inp.querySelector("#kName");i.addEventListener("keydown",function(ev){if(ev.key==="Enter"){ev.preventDefault();go(m,m.el.querySelector(".ma .pri"))}});
+ var i=inp.querySelector("#kName"),pm=inp.querySelector("#kPerm"),dm=inp.querySelector("#kDom"),ph=inp.querySelector("#kPermH");
+ pm.addEventListener("change",function(){ph.hidden=pm.value!=="sending"});
+ A.api("/domains").then(function(ds){(ds||[]).forEach(function(d){var o=document.createElement("option");o.value=d.id;o.textContent=d.name;dm.appendChild(o)})},function(){});
+ i.addEventListener("keydown",function(ev){if(ev.key==="Enter"){ev.preventDefault();go(m,m.el.querySelector(".ma .pri"))}});
  function go(mm,b){var er=inp.querySelector("#kErr");er.hidden=true;b.disabled=true;
-  A.api("/api-keys",{method:"POST",body:{name:i.value.trim()}}).then(function(k){mm.close();reveal(k)},function(x){b.disabled=false;er.textContent=A.err(x);er.hidden=false})}
+  A.api("/api-keys",{method:"POST",body:{name:i.value.trim(),permission:pm.value,domain_id:dm.value||null}}).then(function(k){mm.close();reveal(k)},function(x){b.disabled=false;er.textContent=A.err(x);er.hidden=false})}
 }
 function reveal(k){
  var b=document.createElement("div");

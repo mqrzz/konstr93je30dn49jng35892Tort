@@ -1,5 +1,5 @@
 (function(){
-var A=window.GSApp,t=A.t,e=A.esc,root,dir,status="",rows=[],next=null,busy=false;
+var A=window.GSApp,t=A.t,e=A.esc,root,dir,status="",qv="",timer,rows=[],next=null,busy=false;
 var KIND={queued:"wait",sent:"dim",delivered:"ok",failed:"bad",bounced:"bad",complained:"bad",received:"ok"};
 var ST=["queued","sent","delivered","bounced","complained","failed"];
 function stName(s){return t("au.e.st."+s,s)}
@@ -7,15 +7,17 @@ function pill(s){return A.pill(KIND[s]||"dim",stName(s))}
 function tabs(){var on=function(d){return dir===d?' class="on"':""};return'<nav class="stabs"><a href="/app/emails/"'+on("out")+">"+e(t("ap.tab.send","Sending"))+'</a><a href="/app/emails/receiving/"'+on("in")+">"+e(t("ap.tab.recv","Receiving"))+'</a><a href="/app/emails/suppressions/">'+e(t("ap.tab.supp","Suppressions"))+'</a><a href="/app/emails/smtp/">'+e(t("ap.tab.smtp","SMTP"))+"</a></nav>"}
 function shell(){root.innerHTML='<div class="ph"><h1>'+e(t("ap.emails","Emails"))+"</h1></div>"+tabs()+'<div class="tool" id="eTool"></div><div id="eBody"></div>';
  var tool=document.getElementById("eTool");
+ var sb=document.createElement("div");sb.className="bx-search tool-s";sb.innerHTML=A.icon('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',16)+'<input id="eQ" type="search" autocomplete="off" placeholder="'+e(t("au.e.search","Search emails"))+'" value="'+e(qv)+'">';tool.appendChild(sb);
+ var qi=sb.querySelector("input");qi.addEventListener("input",function(){qv=qi.value.trim();clearTimeout(timer);timer=setTimeout(reload,250)});
  tool.appendChild(A.dropdown([[""  ,t("ap.allst","All statuses")]].concat((dir==="in"?["received"]:ST).map(function(s){return[s,stName(s)]})),status,function(v){status=v;reload()}));
  var rf=document.createElement("button");rf.type="button";rf.className="flt end";rf.innerHTML=A.icon(A.IC.refresh,14)+"<span>"+e(t("au.refresh","Refresh"))+"</span>";rf.onclick=reload;tool.appendChild(rf)}
-function qs(before){var q="?direction="+dir+"&limit=25";if(status)q+="&status="+encodeURIComponent(status);if(before)q+="&before="+encodeURIComponent(before);return q}
+function qs(before){var q="?direction="+dir+"&limit=25";if(status)q+="&status="+encodeURIComponent(status);if(qv)q+="&q="+encodeURIComponent(qv);if(before)q+="&before="+encodeURIComponent(before);return q}
 function reload(){rows=[];next=null;document.getElementById("eBody").innerHTML=A.loading();fetchPage()}
 function fetchPage(){if(busy)return;busy=true;
  A.api("/emails"+qs(next)).then(function(r){busy=false;rows=rows.concat(r.data);next=r.next;draw()},function(x){busy=false;document.getElementById("eBody").innerHTML=A.failed(x,"eRetry");document.getElementById("eRetry").onclick=reload})}
 function addrs(a){a=Array.isArray(a)?a:[a];return a.length>1?a[0]+" +"+(a.length-1):(a[0]||"")}
 function draw(){var b=document.getElementById("eBody");
- if(!rows.length){b.innerHTML=dir==="in"?A.empty(A.IC.inbox,t("ap.e2.h","No received emails yet"),t("ap.e2.p","Mail sent to your verified domains will show up here.")):status?A.empty(A.IC.mail,t("au.e.nomatch","No emails with this status"),""):A.empty(A.IC.mail,t("ap.e1.h","No sent emails yet"),t("ap.e1.p","Start sending emails to see insights and previews for every message."),'<a class="abtn lg pri" href="/docs/quickstart/">'+e(t("ap.docs","Go to docs"))+"</a>");return}
+ if(!rows.length){b.innerHTML=dir==="in"?A.empty(A.IC.inbox,t("ap.e2.h","No received emails yet"),t("ap.e2.p","Mail sent to your verified domains will show up here.")):(status||qv)?A.empty(A.IC.mail,t("au.e.nomatch","No emails match"),t("au.e.nomatch.p","Try another search or status.")):A.empty(A.IC.mail,t("ap.e1.h","No sent emails yet"),t("ap.e1.p","Start sending emails to see insights and previews for every message."),'<a class="abtn lg pri" href="/docs/quickstart/">'+e(t("ap.docs","Go to docs"))+"</a>");return}
  var C="minmax(0,1.5fr) minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) 24px",who=dir==="in"?t("au.e.from","From"):t("au.e.to","To");
  b.innerHTML='<div class="dl"><div class="drow dhead" style="--cols:'+C+'"><div>'+e(who)+"</div><div>"+e(t("au.e.subject","Subject"))+"</div><div>"+e(t("au.e.status","Status"))+"</div><div>"+e(dir==="in"?t("au.e.received","Received"):t("au.e.sent","Sent"))+"</div><div></div></div>"+
   rows.map(function(m){return'<button type="button" class="drow link" data-id="'+e(m.id)+'" style="--cols:'+C+'"><div class="c strong ell" data-l="'+e(who)+'">'+e(dir==="in"?m.from_addr:addrs(m.to_addrs))+'</div><div class="c ell" data-l="'+e(t("au.e.subject","Subject"))+'">'+e(m.subject||t("au.e.nosub","(no subject)"))+'</div><div class="c" data-l="'+e(t("au.e.status","Status"))+'">'+pill(m.status)+'</div><div class="c dim" data-l="'+e(dir==="in"?t("au.e.received","Received"):t("au.e.sent","Sent"))+'" title="'+e(A.date(m.created_at))+'">'+e(A.ago(m.created_at))+'</div><div class="c end">'+A.icon(A.IC.chev,16)+"</div></button>"}).join("")+"</div>"+(next?'<div class="more"><button type="button" class="abtn lg" id="eMore">'+e(t("au.e.more","Load more"))+"</button></div>":"");

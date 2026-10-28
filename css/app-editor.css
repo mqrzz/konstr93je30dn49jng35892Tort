@@ -3,7 +3,7 @@
 .tplc:hover{transform:translateY(-3px)}
 .tlink{position:absolute;inset:0;z-index:1;border-radius:28px}
 .tlink:focus-visible{outline:2px solid var(--a-tx);outline-offset:-2px}
-.tthumb{position:relative;height:190px;overflow:hidden;background:#f4f4f5;border-bottom:1px solid var(--g-bd)}
+.tthumb{position:relative;height:210px;overflow:hidden;padding:22px 26px 0;background:#efefef}
 .tthumb iframe{position:absolute;left:0;top:0;width:600px;height:480px;border:0;transform-origin:0 0;pointer-events:none;background:#f4f4f5}
 .tinfo{display:flex;flex-direction:column;gap:4px;padding:18px 20px 20px;min-width:0}
 .tinfo b{font:600 15px var(--font-b);color:var(--a-tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -100,11 +100,11 @@
 .vitem span{display:block;font-size:12.5px;color:var(--a-tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
 .tsearch{position:relative;flex:1;min-width:200px;max-width:360px}
-.tsearch svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--a-tx3);pointer-events:none}
-.tsearch input{width:100%;height:42px;border:0;border-radius:14px;background:var(--a-fld);box-shadow:inset 0 0 0 1px var(--g-bd);color:var(--a-tx);font:400 14.5px var(--font-b);padding:0 14px 0 40px;outline:none}
+.tsearch svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--a-tx3);pointer-events:none}
+.tsearch input{width:100%;height:var(--c-h);border:0;border-radius:var(--c-r-fld);background:var(--a-fld);box-shadow:inset 0 0 0 1px var(--g-bd);color:var(--a-tx);font:400 14px var(--font-b);padding:0 12px 0 36px;outline:none}
 .tsearch input:focus{box-shadow:inset 0 0 0 1px var(--a-tx3)}
 .tsent{font-size:12px;color:var(--a-tx3)}
-@media(max-width:860px){
+@media(max-width:860px){.tsearch input{height:44px;font-size:16px}
 .sgc.pane-tabs{display:flex;width:100%}
 .edh{padding-top:16px;margin-bottom:8px}
 .edbar{flex-direction:column;align-items:stretch;gap:10px}

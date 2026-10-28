@@ -62,7 +62,7 @@ function buildHeader(){
   '<a href="/docs/api/" class="'+(onApi?"on":"")+'">'+svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9l2 2-2 2M12 13h5"/>')+t("doc.tab.api","API Reference")+'</a>'+
  '</div>'+
  '<div class="end">'+
-  '<button type="button" class="hb o ask" id="dAsk" aria-label="'+t("doc.ai.btn","Ask AI")+'">'+svg('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/>')+'<span>'+t("doc.ai.btn","Ask AI")+'</span></button>'+
+  '<button type="button" class="hb o ask" id="dAsk" aria-label="'+t("doc.ai.btn","Ask AI")+'">'+svg('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/>')+'<span class="f">'+t("doc.ai.btn","Ask AI")+'</span><span class="s">'+t("doc.ai.btn.s","Ask AI")+'</span></button>'+
   '<span class="hlg">'+(window.GESERD&&GESERD.langMenu?GESERD.langMenu():'')+'</span>'+
   '<a class="hb o si" href="/login/">'+t("nav.login","Log in")+'</a>'+
   '<a class="hb k" href="/signup/">'+t("nav.start","Get started")+'</a>'+

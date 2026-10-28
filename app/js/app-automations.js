@@ -12,7 +12,7 @@ function listPage(){
  var nb=function(){var b=document.getElementById("amNew");if(b)b.onclick=function(){A.api("/automations",{method:"POST",body:{name:T("am.untitled","Untitled automation")}}).then(function(a){location.href="/app/automations/edit/?id="+a.id},function(x){A.toast(A.err(x),"err")})}};
  A.api("/automations").then(function(d){
   var rows=list(d);
-  var body=rows.length?'<div class="p2l">'+rows.map(function(a){return '<div class="p2r"><div class="p2m">'+ic(IC.bolt,14)+'</div><div class="p2b"><h3><a href="/app/automations/edit/?id='+a.id+'">'+E(a.name)+'</a></h3><p>'+E(a.trigger_event?T("am.when","When")+" "+a.trigger_event:T("am.notrig","No event chosen yet"))+" · "+E(A.plural?A.plural(a.steps.length,"am.stepsn","{n} steps"):a.steps.length+" steps")+" · "+E(a.runs+" "+T("am.runs","runs"))+'</p></div><span class="am-st'+(a.enabled?' on':'')+'">'+E(a.enabled?T("am.on","Enabled"):T("am.off","Disabled"))+'</span></div>'}).join("")+'</div>':A.empty(IC.bolt,T("am.none","No automations yet"),T("am.nonep","Pick an event from your product, then choose what to send and when."),'<button type="button" class="abtn pri lg" id="amNew2">'+E(T("am.new","New automation"))+'</button>');
+  var body=rows.length?'<div class="gstack">'+rows.map(function(a){return '<a class="gcard amrow" href="/app/automations/edit/?id='+a.id+'"><span class="amic">'+ic(IC.bolt,16)+'</span><span class="ambd"><h3 class="sh3">'+E(a.name)+'</h3><p class="gd">'+E(a.trigger_event?T("am.when","When")+" "+a.trigger_event:T("am.notrig","No event chosen yet"))+" · "+E(A.plural?A.plural(a.steps.length,"am.stepsn","{n} steps"):a.steps.length+" steps")+" · "+E(a.runs+" "+T("am.runs","runs"))+'</p></span><span class="am-st'+(a.enabled?' on':'')+'">'+E(a.enabled?T("am.on","Enabled"):T("am.off","Disabled"))+'</span></a>'}).join("")+'</div>':A.empty(IC.bolt,T("am.none","No automations yet"),T("am.nonep","Pick an event from your product, then choose what to send and when."),'<button type="button" class="abtn pri lg" id="amNew2">'+E(T("am.new","New automation"))+'</button>');
   root.innerHTML=headList()+body;nb();var b2=document.getElementById("amNew2");if(b2)b2.onclick=document.getElementById("amNew").onclick;
  },function(x){root.innerHTML=headList()+A.failed(x,"amRetry");nb();var b=document.getElementById("amRetry");if(b)b.onclick=listPage})
 }
@@ -28,7 +28,7 @@ function draw(){
  flow+=addBtn(0);
  steps.forEach(function(s,i){flow+=stepCard(s,i)+addBtn(i+1)});
  flow+='</div>';
- var code='<div class="p2c am-code"><pre>curl https://geserd.com/api/events \\\n  -H "Authorization: Bearer gs_live_..." \\\n  -d \'{"name": "'+E(a.trigger_event||"user.signup")+'",\n       "email": "ada@example.com",\n       "data": {"name": "Ada"}}\'</pre></div>';
+ var code='<div class="am-code"><pre class="src">curl https://geserd.com/api/events \\\n  -H "Authorization: Bearer gs_live_..." \\\n  -d \'{"name": "'+E(a.trigger_event||"user.signup")+'",\n       "email": "ada@example.com",\n       "data": {"name": "Ada"}}\'</pre></div>';
  var runs=list(a.runs||[]);
  var rt=runs.length?'<table class="am-runs"><tbody>'+runs.map(function(r){return '<tr><td>'+E(r.email)+'</td><td>'+E(T("am.rs."+r.status,r.status))+(r.error?' · '+E(r.error):'')+'</td><td>'+E(A.ago(r.created_at))+'</td></tr>'}).join("")+'</tbody></table>':'<p class="psub">'+E(T("am.noruns","No runs yet."))+'</p>';
  root.innerHTML=h+flow+'<h2 class="am-h2">'+E(T("am.api","Start it from your code"))+'</h2>'+code+'<h2 class="am-h2">'+E(T("am.recent","Recent runs"))+'</h2>'+rt;

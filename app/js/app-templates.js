@@ -1,16 +1,16 @@
 (function(){
 var A=window.GSApp,G=window.GSTpl;if(!A||!G)return;
 var T=A.t,E=A.esc,root,limit=0,rows0=[],q="",sort="recent";
-var NEW="/app/templates/edit/";
+var NEW="/app/templates/edit/";var TPAD='<style>html{background:#fff}body{margin:0!important;padding:40px 44px!important;box-sizing:border-box}</style>';
 var SN={blank:["tp.s.blank","Blank","Start from an empty message."],welcome:["tp.s.welcome","Welcome","Greet new users with a button."],code:["tp.s.code","Verification code","Send a one-time code."],receipt:["tp.s.receipt","Receipt","Confirm a payment."]};
 function head(sub){return '<div class="ph pgh"><div><h1>'+E(T("tp.h","Templates"))+'</h1>'+(sub?'<p class="psub">'+E(sub)+'</p>':'')+'</div><button type="button" class="abtn pri lg" id="tpNew">'+A.icon(A.IC.plus,16)+'<span>'+E(T("tp.new","New template"))+'</span></button></div>'}
 function chooser(){
  var cards=Object.keys(SN).map(function(k){return '<a class="stc" href="'+NEW+'?new=1&s='+k+'"><b>'+E(T(SN[k][0],SN[k][1]))+'</b><span>'+E(T(SN[k][0]+".d",SN[k][2]))+'</span></a>'}).join("");
  A.modal({title:T("tp.choose","Start from"),wide:true,body:'<div class="stg">'+cards+'</div>',actions:[{label:T("app.close","Close")}]})}
-function fit(){root.querySelectorAll(".tthumb").forEach(function(b){var f=b.firstElementChild;if(f)f.style.transform="scale("+(b.clientWidth/600)+")"})}
+function fit(){root.querySelectorAll(".tpaper").forEach(function(b){var f=b.firstElementChild;if(f)f.style.transform="scale("+(b.clientWidth/600)+")"})}
 function card(t){
  var vars=t.variables.slice(0,4).map(function(v){return '<i class="vchip">'+E(v)+'</i>'}).join("")+(t.variables.length>4?'<i class="vchip">+'+(t.variables.length-4)+'</i>':'');
- return '<div class="tplc" data-id="'+t.id+'"><a class="tlink" href="'+NEW+'?id='+t.id+'" aria-label="'+E(t.name)+'"></a>'+(t.thumb?'<div class="tthumb"><iframe sandbox="" tabindex="-1" loading="lazy" title="" srcdoc="'+E(t.thumb)+'"></iframe></div>':'<div class="tthumb ph0">'+A.icon('<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M9 9v11"/>',32)+'</div>')+'<div class="tinfo"><b>'+E(t.name)+'</b><span>'+E(t.subject||T("tp.nosubject","No subject"))+'</span><div class="tvars">'+vars+'</div><time>'+E(A.ago(t.updated_at))+(t.sent?' · <span class="tsent">'+E(A.plural(t.sent,"tp.sentn","Sent {n} times"))+'</span>':'')+'</time></div><div class="tact"><button type="button" class="app-ico" data-dup="'+t.id+'" aria-label="'+E(T("tp.dup","Duplicate"))+'">'+A.icon(A.IC.copy,16)+'</button><button type="button" class="app-ico dng" data-del="'+t.id+'" aria-label="'+E(T("tp.del","Delete"))+'">'+A.icon(A.IC.trash,16)+'</button></div></div>'}
+ return '<div class="tplc" data-id="'+t.id+'"><a class="tlink" href="'+NEW+'?id='+t.id+'" aria-label="'+E(t.name)+'"></a>'+(t.thumb?'<div class="tthumb"><div class="tpaper"><iframe sandbox="" tabindex="-1" loading="lazy" title="" srcdoc="'+E(TPAD+t.thumb)+'"></iframe></div></div>':'<div class="tthumb ph0">'+A.icon('<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M9 9v11"/>',32)+'</div>')+'<div class="tinfo"><b>'+E(t.name)+'</b><span>'+E(t.subject||T("tp.nosubject","No subject"))+'</span><div class="tvars">'+vars+'</div><time>'+E(A.ago(t.updated_at))+(t.sent?' · <span class="tsent">'+E(A.plural(t.sent,"tp.sentn","Sent {n} times"))+'</span>':'')+'</time></div><div class="tact"><button type="button" class="app-ico" data-dup="'+t.id+'" aria-label="'+E(T("tp.dup","Duplicate"))+'">'+A.icon(A.IC.copy,16)+'</button><button type="button" class="app-ico dng" data-del="'+t.id+'" aria-label="'+E(T("tp.del","Delete"))+'">'+A.icon(A.IC.trash,16)+'</button></div></div>'}
 function sorted(){
  var r=rows0.filter(function(t){var s=(t.name+" "+(t.subject||"")).toLowerCase();return !q||s.indexOf(q)>=0});
  if(sort==="name")r.sort(function(a,b){return a.name.localeCompare(b.name)});
