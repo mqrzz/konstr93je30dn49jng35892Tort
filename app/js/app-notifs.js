@@ -1,7 +1,7 @@
 (function(){
 var A=window.GSApp;if(!A)return;
 var T=A.t,E=A.esc,data=[],unread=0,flt="all",root;
-var ICON={bounce:'<path d="M4 4h16v12H4zM4 8l8 5 8-5M9 20h6"/>',complaint:'<path d="M12 3 2 20h20zM12 10v4M12 17h.01"/>',quota:'<path d="M5 20V11M11 20V4M17 20v-6M3 20h18"/>',broadcast:'<path d="M3 11v2a1 1 0 0 0 1 1h3l8 4V6L7 10H4a1 1 0 0 0-1 1zM18.5 9a4.5 4.5 0 0 1 0 6"/>',billing:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/>',domain:'<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>',ticket:'<path d="M4 5h16v11H9l-5 4z"/>'};
+var ICON={bounce:'<path d="M4 4h16v12H4zM4 8l8 5 8-5M9 20h6"/>',complaint:'<path d="M12 3 2 20h20zM12 10v4M12 17h.01"/>',quota:'<path d="M5 20V11M11 20V4M17 20v-6M3 20h18"/>',broadcast:'<path d="M3 11v2a1 1 0 0 0 1 1h3l8 4V6L7 10H4a1 1 0 0 0-1 1zM18.5 9a4.5 4.5 0 0 1 0 6"/>',billing:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/>',domain:'<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>',ticket:'<path d="M4 5h16v11H9l-5 4z"/>',account:'<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.2"/>'};ICON.ticket_reply=ICON.ticket;ICON.unfrozen=ICON.account;
 function title(n){var k=n.title;return T("nt.t."+k,k)}
 function body(n){
  if(n.title==="quota_80"||n.title==="quota_full"){var sc=String(n.body||"").split(":")[0];return T("nt.b.quota."+(sc==="daily"?"daily":"monthly"),sc==="daily"?"Daily sending limit":"Monthly sending limit")}
@@ -9,7 +9,7 @@ function body(n){
  if(n.title==="billing_failed"||n.title==="billing_expired")return T("app.plan."+n.body,n.body);
  return n.body||""}
 function item(n){
- var ic=ICON[n.type]||ICON.quota,link=n.link||"";
+ var ic=ICON[n.type]||ICON.info,link=n.link||"";
  return '<div class="nitem'+(n.read_at?'':' un')+'" data-id="'+n.id+'" data-link="'+E(link)+'"><span class="ni">'+A.icon(ic,20)+'</span><div><b>'+E(title(n))+'</b>'+(body(n)?'<p>'+E(body(n))+'</p>':'')+'<time>'+E(A.ago(n.created_at))+'</time></div><button type="button" class="x" data-del="'+n.id+'" aria-label="'+E(T("nt.del","Delete"))+'">'+A.icon(A.IC.x,16)+'</button></div>'}
 var FL=[["all","nt.f.all","All"],["unread","nt.f.unread","Unread"],["bounce","nt.f.bounce","Bounces"],["complaint","nt.f.complaint","Complaints"],["quota","nt.f.quota","Limits"],["domain","nt.f.domain","Domains"],["ticket","nt.f.ticket","Support"]];
 function head(){return '<div class="ph"><h1>'+E(T("nt.h","Notifications"))+'</h1></div>'}

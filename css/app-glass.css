@@ -26,7 +26,7 @@
 .pfld input[readonly]{color:var(--a-tx2)}
 .prow{display:flex;gap:10px;flex-wrap:wrap}
 .lgs{display:flex;flex-wrap:wrap;gap:8px}
-.lgs button{height:40px;padding:0 18px;border:0;border-radius:99px;background:var(--a-fld);box-shadow:inset 0 0 0 1px var(--g-bd);color:var(--a-tx2);font:500 14px var(--font-b);cursor:pointer;transition:background .2s,color .2s}
+.lgs button{height:40px;padding:0 18px;border:0;border-radius:var(--c-r-btn,14px);background:var(--a-fld);box-shadow:inset 0 0 0 1px var(--g-bd);color:var(--a-tx2);font:500 14px var(--font-b);cursor:pointer;transition:background .2s,color .2s}
 .lgs button:hover{color:var(--a-tx)}
 .lgs button.on{background:var(--a-pri);color:var(--a-pritx);box-shadow:none}
 .trow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--g-bd)}
@@ -65,7 +65,7 @@
 .msg small{display:block;margin-bottom:4px;font:500 12px var(--font-b);color:var(--a-tx3)}
 .tops{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:20px}
 .chips2{display:flex;gap:8px;flex-wrap:wrap}
-.chips2 button{height:36px;padding:0 16px;border:0;border-radius:99px;background:var(--a-fld);box-shadow:inset 0 0 0 1px var(--g-bd);color:var(--a-tx2);font:500 13.5px var(--font-b);cursor:pointer}
+.chips2 button{height:36px;padding:0 16px;border:0;border-radius:var(--c-r-btn,14px);background:var(--a-fld);box-shadow:inset 0 0 0 1px var(--g-bd);color:var(--a-tx2);font:500 13.5px var(--font-b);cursor:pointer}
 .chips2 button.on{background:var(--a-pri);color:var(--a-pritx);box-shadow:none}
 @media(max-width:860px){
 .ssec{padding:22px}
@@ -211,8 +211,8 @@ a:hover>.ic-gear .i-gear,a:focus-visible>.ic-gear .i-gear,a:active>.ic-gear .i-g
 }
 
 .sgc.pane-tabs{display:none;margin-bottom:16px}
-.sgc{display:inline-flex;gap:4px;padding:4px;border-radius:99px;background:var(--a-fld);box-shadow:inset 0 0 0 1px var(--g-bd);max-width:100%}
-.sgc button{height:32px;padding:0 16px;border:0;border-radius:99px;background:none;color:var(--a-tx2);font:500 13.5px var(--font-b);cursor:pointer;transition:background .2s,color .2s}
+.sgc{display:inline-flex;gap:4px;padding:4px;border-radius:calc(var(--c-r-btn,14px) + 3px);background:var(--a-fld);box-shadow:inset 0 0 0 1px var(--g-bd);max-width:100%}
+.sgc button{height:32px;padding:0 16px;border:0;border-radius:var(--c-r-btn,14px);background:none;color:var(--a-tx2);font:500 13.5px var(--font-b);cursor:pointer;transition:background .2s,color .2s}
 .sgc button:hover{color:var(--a-tx)}
 .sgc button.on{background:var(--a-pri);color:var(--a-pritx)}
 .vhint{margin:0;font-size:13px;color:var(--a-tx3);line-height:1.5}
@@ -312,3 +312,12 @@ a:hover>.ic-aud .i-u2,a:focus-visible>.ic-aud .i-u2,a:active>.ic-aud .i-u2{anima
 .wzl{display:grid;gap:10px;margin-top:20px}.wzl i{display:block;height:12px;border-radius:6px;background:var(--a-fld)}
 @media(max-width:860px){.wzb{grid-template-columns:minmax(0,1fr);gap:28px}.wzp{position:static}.wzh{gap:14px}.wzh h1{font-size:28px}.wzt{width:56px;height:56px;border-radius:18px}}
 .gh{display:flex;align-items:center;gap:12px;margin-bottom:16px}.gh>div{flex:1}.gh p{margin:4px 0 0;font-size:14px;color:var(--a-tx2)}
+
+.tmenu{position:fixed;z-index:300;min-width:208px;padding:6px;border-radius:var(--c-r-card,20px);background:var(--a-bg);box-shadow:0 0 0 1px var(--g-bd),0 12px 32px rgba(0,0,0,.18);animation:tmIn .14s ease-out}
+.tmenu button{display:flex;align-items:center;gap:10px;width:100%;height:36px;padding:0 10px;border:0;border-radius:calc(var(--c-r-btn) - 2px);background:none;color:var(--a-tx);font:400 14px var(--font-b);text-align:left;cursor:pointer}
+.tmenu button:hover,.tmenu button:focus-visible{background:var(--a-hv);outline:0}
+.tmenu button svg{flex:none;color:var(--a-tx2)}
+.tmenu button.dng,.tmenu button.dng svg{color:#e5484d}
+.tmenu hr{height:1px;margin:6px 4px;border:0;background:var(--g-bd)}
+@keyframes tmIn{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.tmenu{animation:none}}

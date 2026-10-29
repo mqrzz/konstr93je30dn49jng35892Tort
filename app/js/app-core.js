@@ -60,6 +60,23 @@ A.dropdown=function(opts,value,onChange,cls){var w=document.createElement("div")
 document.addEventListener("click",function(){document.querySelectorAll(".ddm.on").forEach(function(x){x.classList.remove("on")})});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")document.querySelectorAll(".ddm.on").forEach(function(x){x.classList.remove("on")})});
 
+
+A.menu=function(btn,items){
+ if(A._menu&&A._menu.btn===btn){A._menu.close();return}
+ if(A._menu)A._menu.close();
+ var el=document.createElement("div");el.className="tmenu";el.setAttribute("role","menu");
+ el.innerHTML=items.map(function(d,i){return d==="-"?"<hr>":'<button type="button" role="menuitem" data-i="'+i+'" class="'+(d.cls||"")+'">'+(d.icon?A.icon(d.icon,16):"")+"<span>"+A.esc(d.label)+"</span></button>"}).join("");
+ document.body.appendChild(el);
+ var r=btn.getBoundingClientRect(),w=el.offsetWidth,h=el.offsetHeight,left=Math.min(Math.max(8,r.right-w),window.innerWidth-w-8),top=r.bottom+6;
+ if(top+h>window.innerHeight-8)top=Math.max(8,r.top-h-6);
+ el.style.left=left+"px";el.style.top=top+"px";btn.setAttribute("aria-expanded","true");
+ function close(){el.remove();btn.setAttribute("aria-expanded","false");A._menu=null;document.removeEventListener("mousedown",out,true);document.removeEventListener("keydown",key,true);window.removeEventListener("scroll",close,true);window.removeEventListener("resize",close)}
+ function out(e){if(!el.contains(e.target)&&!btn.contains(e.target))close()}
+ function key(e){var b=[].slice.call(el.querySelectorAll("button")),i=b.indexOf(document.activeElement);
+  if(e.key==="Escape"){e.preventDefault();close();btn.focus()}else if(e.key==="ArrowDown"){e.preventDefault();b[(i+1)%b.length].focus()}else if(e.key==="ArrowUp"){e.preventDefault();b[(i<=0?b.length:i)-1].focus()}else if(e.key==="Tab")close()}
+ el.onclick=function(e){var b=e.target.closest("button[data-i]");if(!b)return;var d=items[+b.dataset.i];close();if(d&&d.fn)d.fn()};
+ document.addEventListener("mousedown",out,true);document.addEventListener("keydown",key,true);window.addEventListener("scroll",close,true);window.addEventListener("resize",close);
+ A._menu={btn:btn,close:close};var f=el.querySelector("button");if(f)f.focus()};
 A.ready=function(fn){function go(){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",fn):fn()}
  (function w(n){if(window.GESERD&&GESERD.ready)return GESERD.ready.then(go);if(n>200)return go();setTimeout(function(){w(n+1)},25)})(0)};
 
