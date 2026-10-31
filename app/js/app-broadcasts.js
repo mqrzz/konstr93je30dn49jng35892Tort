@@ -10,14 +10,17 @@ function loadList(){
  root.innerHTML=headList()+A.loading();
  A.api("/broadcasts?limit=100").then(drawList,function(x){root.innerHTML=headList()+A.failed(x,"bRetry");var b=document.getElementById("bRetry");if(b)b.onclick=loadList})
 }
+var LB={id:"bQ",q:"",placeholder:"",filters:[]};
+function btbl(all){var f=LB.filters[0]?LB.filters[0].value:"",list=all.filter(function(b){return(!f||b.status===f)&&(!LB.q||(String(b.name)+" "+String(b.audience_name||"")).toLowerCase().indexOf(LB.q.toLowerCase())>-1)});if(!list.length)return A.empty(A.IC.bc,t("bc.none","No broadcasts match"),"");var cols="--cols:minmax(0,1.6fr) minmax(0,1.2fr) minmax(0,1fr) minmax(0,.9fr) minmax(0,1.5fr) 24px";return '<div class="dl bcs"><div class="drow dhead" style="'+cols+'"><div>'+e(t("bc.c.name","Name"))+"</div><div>"+e(t("bc.c.aud","Audience"))+"</div><div>"+e(t("bc.c.status","Status"))+"</div><div>"+e(t("bc.c.prog","Delivered"))+"</div><div>"+e(t("bc.c.date","Date"))+"</div><div></div></div>"+
+ list.map(function(b){var dt=b.finished_at||b.scheduled_at||b.started_at||b.created_at,href=(b.status==="draft"?"/app/broadcasts/edit/?id=":"/app/broadcasts/view/?id=")+b.id;
+  return'<div class="drow link" style="'+cols+'" data-go="'+e(href)+'"><div class="c strong ell" data-l="'+e(t("bc.c.name","Name"))+'">'+e(b.name)+'</div><div class="c dim ell" data-l="'+e(t("bc.c.aud","Audience"))+'">'+e(b.audience_name||"—")+'</div><div class="c" data-l="'+e(t("bc.c.status","Status"))+'">'+pill(b.status)+'</div><div class="c" data-l="'+e(t("bc.c.prog","Delivered"))+'">'+(b.status==="draft"?"—":A.num(b.sent)+" / "+A.num(b.total))+'</div><div class="c dim" data-l="'+e(t("bc.c.date","Date"))+'">'+e(A.date(dt))+'</div><div class="c end">'+A.icon(A.IC.chev,16)+"</div></div>"}).join("")+"</div>"}
+function goRows(){root.querySelectorAll("[data-go]").forEach(function(r){r.onclick=function(){location.href=r.dataset.go}})}
 function drawList(d){
- var cols="--cols:minmax(0,1.6fr) minmax(0,1.2fr) minmax(0,1fr) minmax(0,1.1fr) minmax(0,1fr) 24px",body;
+ var body;
  if(!d.data.length)body=A.empty(A.IC.bc,t("bc.h","No broadcasts yet"),t("bc.p","Write an email once, pick an audience and Geserd sends it to every subscribed contact."),'<a class="abtn lg pri" href="/app/broadcasts/edit/">'+e(t("bc.new","Create broadcast"))+"</a>");
- else body='<div class="dl"><div class="drow dhead" style="'+cols+'"><div>'+e(t("bc.c.name","Name"))+"</div><div>"+e(t("bc.c.aud","Audience"))+"</div><div>"+e(t("bc.c.status","Status"))+"</div><div>"+e(t("bc.c.prog","Delivered"))+"</div><div>"+e(t("bc.c.date","Date"))+"</div><div></div></div>"+
- d.data.map(function(b){var dt=b.finished_at||b.scheduled_at||b.started_at||b.created_at,href=(b.status==="draft"?"/app/broadcasts/edit/?id=":"/app/broadcasts/view/?id=")+b.id;
-  return'<div class="drow link" style="'+cols+'" data-go="'+e(href)+'"><div class="c strong ell" data-l="'+e(t("bc.c.name","Name"))+'">'+e(b.name)+'</div><div class="c dim ell" data-l="'+e(t("bc.c.aud","Audience"))+'">'+e(b.audience_name||"—")+'</div><div class="c" data-l="'+e(t("bc.c.status","Status"))+'">'+pill(b.status)+'</div><div class="c" data-l="'+e(t("bc.c.prog","Delivered"))+'">'+(b.status==="draft"?"—":A.num(b.sent)+" / "+A.num(b.total))+'</div><div class="c dim" data-l="'+e(t("bc.c.date","Date"))+'">'+e(A.date(dt))+'</div><div class="c end">'+A.icon(A.IC.chev,16)+"</div></div>"}).join("")+"</div>";
- root.innerHTML=headList()+body;
- root.querySelectorAll("[data-go]").forEach(function(r){r.onclick=function(){location.href=r.dataset.go}})
+ else{var present=["draft","scheduled","sending","paused","sent","failed","canceled"].filter(function(x){return d.data.some(function(b){return b.status===x})});LB.placeholder=t("bc.search","Search broadcasts");LB.filters=[{id:"st",value:LB.filters[0]?LB.filters[0].value:"",options:[["",t("bc.f.all","All statuses")]].concat(present.map(function(x){return[x,t("bc.s."+x,x)]}))}];body=A.lbar(LB)+'<div id="bList">'+btbl(d.data.slice())+"</div>"}
+ root.innerHTML=headList()+body;goRows();
+ if(d.data.length)A.lbarWire(root,LB,function(){var l=document.getElementById("bList");l.innerHTML=btbl(d.data);goRows()})
 }
 function back(){return'<a class="backlnk" href="/app/broadcasts/">'+A.icon(A.IC.back,16)+"<span>"+e(t("bc.t","Broadcasts"))+"</span></a>"}
 function loadView(first){

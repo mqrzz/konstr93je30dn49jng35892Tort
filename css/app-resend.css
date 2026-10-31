@@ -291,3 +291,8 @@ html,body,.app-main,.evlist,.stabs{scroll-behavior:smooth}
 @media(max-width:860px){.drow .c.end .app-ico{width:44px;height:44px}}
 .tool{align-items:center}.tool .tool-s{flex:1;min-width:220px;max-width:420px}
 @media(max-width:860px){.tool .tool-s{grid-column:1/-1;max-width:none}}
+
+.tkmore{display:none}
+@media(max-width:860px){.tkmore{display:grid;flex:none;width:44px;height:44px;margin-left:auto;border-radius:var(--c-r-btn,18px)}.tk-top .tkclose{display:none}}
+@media(max-width:860px){.tk-top .tk-meta{min-width:0;flex:1}.tk-top .tk-meta b,.tk-top .tk-meta span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tk-top .stt{flex:none}}
+@media(max-width:860px){.amrow{gap:10px 14px}.amrow .ambd{flex:1 1 calc(100% - 60px);min-width:0}.amrow .am-st{flex:none;margin-left:54px;align-self:flex-start}.amrow .gd{overflow-wrap:anywhere}}

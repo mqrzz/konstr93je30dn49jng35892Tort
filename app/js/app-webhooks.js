@@ -9,11 +9,16 @@ function list(){
  root.innerHTML=head()+A.loading();wire();
  Promise.all([A.api("/webhooks"),A.api("/usage").catch(function(){return null})]).then(function(r){draw(r[0],r[1])},function(x){root.innerHTML=head()+A.failed(x,"wRetry");wire();document.getElementById("wRetry").onclick=list})}
 function scope(h){return h.events.length?(h.events.length===1?evName(h.events[0]):A.plural(h.events.length,"au.w.events","{n} events")):t("au.w.all","All events")}
+var LB={id:"wQ",q:"",placeholder:"",filters:[]};
+function wtbl(all){var f=LB.filters[0]?LB.filters[0].value:"",list=all.filter(function(h){return(!f||(f==="on"?h.active:!h.active))&&(!LB.q||String(h.url).toLowerCase().indexOf(LB.q.toLowerCase())>-1)});if(!list.length)return A.empty(A.IC.hook,t("ap.w.none","No webhooks match"),"");return '<div class="dl whs"><div class="drow dhead" style="--cols:'+C+'"><div>'+e(t("au.w.url","Endpoint"))+"</div><div>"+e(t("au.w.listen","Listens to"))+"</div><div>"+e(t("au.d.status","Status"))+"</div><div></div></div>"+list.map(function(h){return'<a class="drow link" href="/app/webhooks/?id='+e(h.id)+'" style="--cols:'+C+'"><div class="c strong ell" data-l="'+e(t("au.w.url","Endpoint"))+'">'+e(h.url)+'</div><div class="c dim" data-l="'+e(t("au.w.listen","Listens to"))+'">'+e(scope(h))+'</div><div class="c" data-l="'+e(t("au.d.status","Status"))+'">'+(h.active?A.pill("ok",t("au.w.active","Active")):A.pill("dim",t("au.w.paused","Paused")))+'</div><div class="c end">'+A.icon(A.IC.chev,16)+"</div></a>"}).join("")+"</div>"}
 function draw(hs,us){
  var count=us?t("au.w.count","{a} of {b} webhooks used",{a:A.num(hs.length),b:us.limits.webhooks?A.num(us.limits.webhooks):t("au.unlimited","Unlimited")}):"";
- var body=hs.length?'<div class="dl"><div class="drow dhead" style="--cols:'+C+'"><div>'+e(t("au.w.url","Endpoint"))+"</div><div>"+e(t("au.w.listen","Listens to"))+"</div><div>"+e(t("au.d.status","Status"))+"</div><div></div></div>"+hs.map(function(h){return'<a class="drow link" href="/app/webhooks/?id='+e(h.id)+'" style="--cols:'+C+'"><div class="c strong ell" data-l="'+e(t("au.w.url","Endpoint"))+'">'+e(h.url)+'</div><div class="c dim" data-l="'+e(t("au.w.listen","Listens to"))+'">'+e(scope(h))+'</div><div class="c" data-l="'+e(t("au.d.status","Status"))+'">'+(h.active?A.pill("ok",t("au.w.active","Active")):A.pill("dim",t("au.w.paused","Paused")))+'</div><div class="c end">'+A.icon(A.IC.chev,16)+"</div></a>"}).join("")+"</div>"
-  :A.empty(A.IC.hook,t("ap.w.h","No webhooks yet"),t("ap.w.p","Get notified at your own URL when emails are delivered, bounced or received."),'<button type="button" class="abtn lg pri" data-new>'+e(t("ap.w.add","Add webhook"))+"</button>");
- root.innerHTML=head(count)+body;wire()}
+ var body;
+ if(hs.length){LB.placeholder=t("ap.w.search","Search webhooks");LB.filters=[{id:"st",value:LB.filters[0]?LB.filters[0].value:"",options:[["",t("bc.f.all","All statuses")],["on",t("au.w.active","Active")],["off",t("au.w.paused","Paused")]]}];body=A.lbar(LB)+'<div id="wList">'+wtbl(hs)+"</div>"}
+ else body=A.empty(A.IC.hook,t("ap.w.h","No webhooks yet"),t("ap.w.p","Get notified at your own URL when emails are delivered, bounced or received."),'<button type="button" class="abtn lg pri" data-new>'+e(t("ap.w.add","Add webhook"))+"</button>");
+ root.innerHTML=head(count)+body;wire();
+ if(hs.length)A.lbarWire(root,LB,function(){document.getElementById("wList").innerHTML=wtbl(hs)})
+}
 function wire(){root.querySelectorAll("#wNew,[data-new]").forEach(function(b){b.onclick=add})}
 function picker(sel){var box=document.createElement("div");box.className="evpick";var open=false;
  function sum(){var a=EV.filter(function(x){return sel[x]});return a.length===EV.length?t("au.w.all","All events"):a.length===0?t("au.w.none","Select events"):a.length===1?evName(a[0]):A.plural(a.length,"au.w.events","{n} events")}

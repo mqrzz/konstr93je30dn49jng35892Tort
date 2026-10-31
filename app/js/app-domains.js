@@ -10,10 +10,10 @@ function list(){
 }
 function drawList(ds,sd,us){
  var count=us?t("au.d.count","{a} of {b} domains used",{a:A.num(ds.length),b:us.limits.domains?A.num(us.limits.domains):t("au.unlimited","Unlimited")}):"";
- var tbl=ds.length?'<div class="dl"><div class="drow dhead" style="--cols:'+COLS+'"><div>'+e(t("au.d.name","Domain"))+"</div><div>"+e(t("au.d.status","Status"))+"</div><div>"+e(t("au.d.added","Added"))+"</div><div></div></div>"+
+ var tbl=ds.length?'<div class="dl doml"><div class="drow dhead" style="--cols:'+COLS+'"><div>'+e(t("au.d.name","Domain"))+"</div><div>"+e(t("au.d.status","Status"))+"</div><div>"+e(t("au.d.added","Added"))+"</div><div></div></div>"+
   ds.map(function(d){return'<a class="drow link" href="/app/domains/?id='+e(d.id)+'" style="--cols:'+COLS+'"><div class="c strong" data-l="'+e(t("au.d.name","Domain"))+'">'+e(d.name)+'</div><div class="c" data-l="'+e(t("au.d.status","Status"))+'">'+stDom(d)+'</div><div class="c dim" data-l="'+e(t("au.d.added","Added"))+'">'+e(A.date(d.created_at))+'</div><div class="c end">'+A.icon(A.IC.chev,16)+"</div></a>"}).join("")+"</div>"
   :A.empty(A.IC.globe,t("ap.d.h","No domains yet"),t("ap.d.p","Verify a domain by adding a DNS record and start sending and receiving emails from your own address."),'<button type="button" class="abtn lg pri" data-new>'+e(t("ap.d.add","Add domain"))+"</button>");
- root.innerHTML=head(count)+subCard(sd)+'<h2 class="sh2">'+e(t("au.d.own","Your domains"))+"</h2>"+tbl;
+ root.innerHTML=head(count)+(ds.length?tbl+'<div class="sp24"></div>'+subCard(sd):subCard(sd)+'<div class="sp24"></div>'+tbl);
  wire();wireSub(sd);
 }
 function wire(){root.querySelectorAll("#dNew,[data-new]").forEach(function(b){b.onclick=add})}

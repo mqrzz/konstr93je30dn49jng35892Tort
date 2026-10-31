@@ -19,7 +19,7 @@ function listPage(){
 function stepCard(s,i){
  var del='<button type="button" class="am-x" data-del="'+i+'" aria-label="'+E(T("am.del","Remove step"))+'">'+ic(IC.trash,15)+'</button>';
  if(s.type==="wait")return '<div class="am-c"><div class="am-i">'+ic(IC.wait)+'</div><div class="am-b"><b>'+E(T("am.wait","Wait"))+'</b><div class="am-f"><input class="fld" type="number" min="1" max="43200" value="'+s.minutes+'" data-w="'+i+'" aria-label="'+E(T("am.minutes","Minutes"))+'"><span>'+E(T("am.min","minutes"))+'</span></div></div>'+del+'</div>';
- return '<div class="am-c"><div class="am-i">'+ic(IC.mail)+'</div><div class="am-b"><b>'+E(T("am.send","Send email"))+'</b><div class="am-f"><span class="am-dd" data-tp="'+i+'"></span></div><div class="am-f"><input class="fld" type="text" value="'+E(s.from||"")+'" placeholder="hi@'+E(doms[0]?doms[0].name:"yourdomain.com")+'" data-fr="'+i+'" aria-label="'+E(T("am.from","From"))+'"></div></div>'+del+'</div>'}
+ return '<div class="am-c"><div class="am-i">'+ic(IC.mail)+'</div><div class="am-b"><b>'+E(T("am.send","Send email"))+'</b><div class="am-f"><label class="am-l">'+E(T("am.tpl","Template"))+'</label><span class="am-dd" data-tp="'+i+'"></span></div><div class="am-f"><label class="am-l">'+E(T("am.from","From"))+'</label><input class="fld" type="text" value="'+E(s.from||"")+'" placeholder="hi@'+E(doms[0]?doms[0].name:"yourdomain.com")+'" data-fr="'+i+'" aria-label="'+E(T("am.from","From"))+'"></div></div>'+del+'</div>'}
 function addBtn(i){return '<div class="am-line"></div><button type="button" class="am-add" data-add="'+i+'" aria-label="'+E(T("am.add","Add step"))+'">'+ic(IC.plus,15)+'</button><div class="am-line"></div>'}
 var view={x:null,y:32,k:1},tab="canvas";
 function draw(){
@@ -85,5 +85,5 @@ function editPage(){
  root.innerHTML=A.loading();
  Promise.all([A.api("/automations/"+id),A.api("/templates").catch(function(){return[]}),A.api("/domains").catch(function(){return[]})]).then(function(r){cur=r[0];tpls=list(r[1]);doms=list(r[2]).filter(function(d){return d.status==="verified"});draw()},function(x){root.innerHTML=A.failed(x,"amRetry");var b=document.getElementById("amRetry");if(b)b.onclick=editPage})
 }
-if(id)editPage();else listPage();
+A.ready(function(){if(id)editPage();else listPage()});
 })();
