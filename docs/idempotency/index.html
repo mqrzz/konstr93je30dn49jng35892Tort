@@ -30,13 +30,26 @@
 </div>
 <p class="sub" data-i18n="doc.mp.idempotency.lead">Make a retry safe: the same request sent twice must not produce two emails.</p>
 <div class="body">
-<h2 data-i18n="doc.mp.idempotency.1">Why it matters</h2>
-<p data-i18n="doc.mp.idempotency.2">A network can fail after the server accepted your request but before you saw the answer. Retrying then sends the message twice. For a password reset that is annoying; for an invoice it is a problem.</p>
-<h2 data-i18n="doc.mp.idempotency.3">How to protect yourself</h2>
+<h2 data-i18n="doc.mp.idempotency.1">The Idempotency-Key header</h2>
+<p data-i18n="doc.mp.idempotency.2">Add an Idempotency-Key header to POST /api/emails. If the same key arrives again with the same body, Geserd returns the first answer and does not send the message a second time.</p>
+<div class="cb"><div class="ch"><b>curl</b><button type="button" class="cp" data-i18n="doc.copycode">Copy</button></div><pre>curl https://geserd.com/api/emails \
+  -H "Authorization: Bearer gs_live_..." \
+  -H "Idempotency-Key: order-1042-receipt" \
+  -H "Content-Type: application/json" \
+  -d '{"from":"hi@yourdomain.com","to":["ada@example.com"],"subject":"Receipt","text":"Thanks"}'</pre></div>
 <ul>
-<li data-i18n="doc.mp.idempotency.4.0">Generate one unique value for each logical message, for example the order id plus the message type.</li>
-<li data-i18n="doc.mp.idempotency.4.1">Store the id Geserd returned. Before retrying, look it up in <code>GET /api/emails/:id</code> instead of sending again.</li>
-<li data-i18n="doc.mp.idempotency.4.2">Keep a record in your own database that the message was requested, so a restarted worker does not repeat it.</li>
+<li data-i18n="doc.mp.idempotency.4.0">A repeated request returns the first response and the header Idempotent-Replayed: true.</li>
+<li data-i18n="doc.mp.idempotency.4.1">The same key with a different body returns 422 idempotency_key_reused.</li>
+<li data-i18n="doc.mp.idempotency.4.2">A send that failed does not use up the key, so you can retry it.</li>
+<li data-i18n="doc.mp.idempotency.4.3">A key is remembered for 24 hours and may be up to 255 printable characters.</li>
+</ul>
+<h2 data-i18n="doc.mp.idempotency.5">Why it matters</h2>
+<p data-i18n="doc.mp.idempotency.6">A network can fail after the server accepted your request but before you saw the answer. Retrying then sends the message twice. For a password reset that is annoying; for an invoice it is a problem.</p>
+<h2 data-i18n="doc.mp.idempotency.7">How to protect yourself</h2>
+<ul>
+<li data-i18n="doc.mp.idempotency.8.0">Generate one unique value for each logical message, for example the order id plus the message type.</li>
+<li data-i18n="doc.mp.idempotency.8.1">Store the id Geserd returned. Before retrying, look it up in <code>GET /api/emails/:id</code> instead of sending again.</li>
+<li data-i18n="doc.mp.idempotency.8.2">Keep a record in your own database that the message was requested, so a restarted worker does not repeat it.</li>
 </ul>
 
 <div class="hp"><span class="hlbl" data-i18n="doc.helpful">Was this page helpful?</span><div class="b"><button type="button" data-v="y"><svg class="s" viewBox="0 0 24 24"><path d="M7 22V11m0 11h11.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 19.7 13H14l1-5.5a1.5 1.5 0 0 0-2.6-1.2L7 11"/></svg><span data-i18n="doc.yes">Yes</span></button><button type="button" data-v="n"><svg class="s" viewBox="0 0 24 24"><path d="M17 2v11m0-11H5.5a2 2 0 0 0-2 1.6l-1.2 6A2 2 0 0 0 4.3 13H10l-1 5.5a1.5 1.5 0 0 0 2.6 1.2L17 13"/></svg><span data-i18n="doc.no">No</span></button></div></div>

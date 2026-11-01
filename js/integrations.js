@@ -5,7 +5,7 @@ document.addEventListener("click",function(e){
 var t=e.target.closest("[data-tabs] [data-t]");
 if(t){var box=t.closest("[data-tabs]"),i=t.dataset.t;box.querySelectorAll("[data-t]").forEach(function(b){b.classList.toggle("on",b===t)});box.querySelectorAll("[data-p]").forEach(function(p){p.classList.toggle("on",p.dataset.p===i)});return}
 var c=e.target.closest("[data-copy]");
-if(c){var src=c.parentNode.querySelector("pre,code");if(src)cp(c,src.textContent);return}
+if(c){var tm=c.closest("[data-cmd]");if(tm){cp(c,tm.getAttribute("data-cmd"));return}var src=c.parentNode.querySelector("pre,code");if(src)cp(c,src.textContent);return}
 var ch=e.target.closest("[data-copy-text]");
 if(ch)cp(ch,ch.textContent)});
 function cp(b,txt){var done=function(){b.classList.add("ok");setTimeout(function(){b.classList.remove("ok")},1300)};

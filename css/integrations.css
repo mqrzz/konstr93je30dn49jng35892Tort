@@ -151,3 +151,49 @@
 .cta h2{font:400 clamp(2.6rem,6vw,4.8rem)/1.05 var(--font-d)}
 .ix-split>*{min-width:0}.ix-tabs,.ix-win,.ix-ex{max-width:100%}
 @media(max-width:720px){.ix-hubw{overflow:hidden}.ix-hub{width:110%;max-width:none;margin:0 -5%}}
+
+.ix-term{position:relative}
+.ix-tb2{padding:22px 24px 26px;display:grid;gap:6px;font:13.5px/1.7 var(--font-m);color:var(--fg2);min-height:190px;align-content:start}
+.ix-tb2 b{color:#fff;font-weight:500;margin-right:6px}
+.ix-ln2.in2{padding-left:26px;color:var(--fg3)}
+.ix-ln2.ok2{display:flex;align-items:center;gap:10px;margin-top:10px;color:#fff}
+.ix-ln2.ok2 span{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#fff;color:#000}
+.ix-ln2.ok2 svg{width:12px;height:12px}.ix-ln2.ok2 em{font-style:normal}
+.ix-play .ix-ln2{animation:ixin .5s var(--d,0s) both}
+.ix-term .ix-cp{top:52px}
+.ix-note.l{margin:22px 0 0;max-width:26rem;text-align:left}
+.ix-wf{display:grid;grid-template-columns:300px minmax(0,1fr);max-width:960px;margin:0 auto;border:1px solid var(--line);border-radius:22px;background:#050506;overflow:hidden}
+.ix-tb.wf{flex-direction:column;gap:6px;padding:14px;border-right:1px solid var(--line);border-bottom:0}
+.ix-tb.wf button{display:grid;gap:4px;text-align:left;padding:14px 16px;border-radius:14px;color:var(--fg3)}
+.ix-tb.wf button b{font:500 15px var(--font-b);color:var(--fg2)}
+.ix-tb.wf button span{font:400 13px/1.45 var(--font-b);color:var(--fg3)}
+.ix-tb.wf button.on{background:rgba(255,255,255,.07)}.ix-tb.wf button.on b{color:#fff}
+.wfp{padding:0;display:grid;min-height:340px}
+.wfp .ix-pn{display:none;padding:28px;align-content:center;gap:16px}
+.wfp .ix-pn.on{display:grid;animation:ixin .45s both}
+.ix-ev{display:grid;gap:8px}
+.ix-ev span{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;background:rgba(255,255,255,.04);font:13.5px var(--font-m);color:#fff}
+.ix-ev i{width:8px;height:8px;border-radius:50%;background:#fff}.ix-ev span.d{color:var(--fg3)}.ix-ev span.d i{background:#3a3d42}
+.ix-mini{margin:0;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.04);font:13px/1.7 var(--font-m);color:var(--fg2);overflow:auto}
+.ix-file{max-width:860px;margin:0 auto}
+.ix-file .ix-code{max-height:520px;padding:18px 0;white-space:pre-wrap;word-break:break-word}
+.ix-file .ix-code .ln{float:left;margin-right:0}
+@media(max-width:720px){.ix-wf{grid-template-columns:1fr}.ix-tb.wf{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}.ix-tb.wf button{min-width:210px}.ix-tb.wf button span{display:none}.wfp{min-height:0}.wfp .ix-pn{padding:20px}.ix-tb2{padding:18px 16px 22px;font-size:12.5px}}
+
+.ixf{padding:18px 0;max-height:520px;overflow:auto;white-space:normal}
+.ixl{display:grid;grid-template-columns:48px minmax(0,1fr);font:13px/1.75 var(--font-m);color:var(--fg2)}
+.ixl .ln{display:block;width:auto;padding-right:16px;text-align:right;color:#4a4e55;user-select:none}
+.ixl span:last-child{white-space:pre-wrap;word-break:break-word;padding-right:20px}
+.ix-term .ix-cp{top:7px;right:10px;width:30px;height:30px}
+.ix-cmd{position:relative;margin:0 0 22px;border-radius:14px;background:rgba(255,255,255,.04)}
+.ix-cmd pre{margin:0;padding:16px 56px 16px 18px;font:13.5px/1.7 var(--font-m);color:#fff;overflow:auto}
+.ix-cmd .ix-cp{top:50%;transform:translateY(-50%)}
+.ix-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:960px;margin:0 auto}
+.ix-card{padding:22px;border:1px solid var(--line);border-radius:22px;background:#050506}
+.ix-card .ix-mini{margin-bottom:22px;min-height:104px}
+.ix-card b{display:block;font:500 18px var(--font-b);color:#fff;margin-bottom:6px}
+.ix-card p{margin:0;color:var(--fg2);font-size:15px}
+@media(max-width:720px){.ix-two{grid-template-columns:1fr}}
+.ix-ex>*,.ix-wf>*{min-width:0}.ix-ex,.ix-wf{max-width:100%}.ix-cmd pre,.ix-mini{max-width:100%}
+.ix-two>*,.ix-card{min-width:0}.ix-card .ix-mini{overflow:auto}
+@media(max-width:720px){.ix-cmd .ix-cp{top:8px;right:8px;transform:none;width:30px;height:30px}.ix-cmd pre{padding:44px 16px 16px;font-size:12.5px}}

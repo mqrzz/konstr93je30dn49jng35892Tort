@@ -1069,3 +1069,6 @@ main:has(.fr-tile) h1,main:has(.fr-tile) h2,main:has(.fr-hero) h1,main:has(.fr-h
 .pc2 img.c{left:auto}
 .pc2:has(.pl){background:radial-gradient(rgba(255,255,255,.1) 1px,transparent 1.5px) 0 0/14px 14px,radial-gradient(130% 100% at 0% 0%,#1b1b1f 0%,#0b0b0d 58%,#070708 100%)}
 .pc2 .pl{top:64%}
+
+.pop{background:rgba(12,12,14,.68);backdrop-filter:blur(36px) saturate(1.6);-webkit-backdrop-filter:blur(36px) saturate(1.6);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 40px 90px rgba(0,0,0,.5)}
+.pc2{background:radial-gradient(130% 100% at 0% 0%,rgba(255,255,255,.07) 0%,rgba(8,8,10,.55) 60%,rgba(6,6,8,.7) 100%)}
