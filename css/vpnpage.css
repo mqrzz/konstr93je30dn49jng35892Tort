@@ -1,0 +1,22 @@
+.vpp{padding:120px 0 120px}
+.vpp-ic{position:relative;width:132px;height:132px;margin:0 auto 36px;display:grid;place-items:center}
+.vpp-ic:before,.vpp-ic:after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);animation:vppR 4s ease-out infinite}
+.vpp-ic:after{animation-delay:2s}
+.vpp-ic span{position:relative;width:72px;height:72px;border-radius:26px;display:grid;place-items:center;background:linear-gradient(180deg,#1a1a1d,#0b0b0d);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 20px 60px rgba(0,0,0,.6);color:#ffc247}
+@keyframes vppR{0%{transform:scale(.55);opacity:.9}100%{transform:scale(1.15);opacity:0}}
+.vpp h1{margin:0 auto;max-width:14em}
+.vpp-p{max-width:36rem;margin:18px auto 0}
+.vpp-st{list-style:none;margin:48px auto 0;padding:0;width:min(560px,100%);text-align:left;position:relative}
+.vpp-st:before{content:"";position:absolute;left:19px;top:24px;bottom:24px;width:2px;background:rgba(255,255,255,.1)}
+.vpp-st li{position:relative;display:flex;gap:18px;align-items:flex-start;padding:0 0 28px}
+.vpp-st li:last-child{padding-bottom:0}
+.vpp-st i{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#0b0b0d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);font:500 15px var(--font-b);font-style:normal}
+.vpp-st div{display:flex;flex-direction:column;gap:4px;padding-top:6px;min-width:0}
+.vpp-st b{font:500 18px var(--font-b)}
+.vpp-st span{font-size:15px;line-height:1.6;color:rgba(255,255,255,.6)}
+.vpp-act{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:44px}
+.vpp-act .btn:disabled{opacity:.55;cursor:default}
+.vpp-msg{min-height:24px;margin:18px auto 0;font-size:14.5px;color:rgba(255,255,255,.65)}
+.vpp-msg.ok{color:#3ddc84}.vpp-msg.bad{color:#ffc247}
+@media(max-width:560px){.vpp{padding:96px 0 80px}.vpp-ic{width:112px;height:112px}.vpp-act{flex-direction:column}.vpp-act .btn{width:100%;justify-content:center}}
+@media(prefers-reduced-motion:reduce){.vpp-ic:before,.vpp-ic:after{animation:none}}
