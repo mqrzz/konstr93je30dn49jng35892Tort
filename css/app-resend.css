@@ -340,3 +340,6 @@ html,body,.app-main,.evlist,.stabs{scroll-behavior:smooth}
 .empty>h3{position:relative;margin:14px 0 0;font:500 20px/1.3 var(--font-b)}
 .empty>p{position:relative;max-width:30rem;margin:8px auto 0;color:var(--a-tx2);font-size:15px;line-height:1.6}
 .empty>.abtn{position:relative;margin-top:22px}
+.am-none{padding:36px 12px;text-align:center;color:var(--a-tx2)}
+.am-none[hidden],.drow[hidden]{display:none}
+.dl[hidden]{display:none}

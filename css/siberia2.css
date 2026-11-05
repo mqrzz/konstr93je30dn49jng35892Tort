@@ -43,3 +43,22 @@
 @media(max-width:900px){.sx-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.sx-hero{padding:110px 0 56px}.sx-grid{gap:14px;margin-top:32px}.sx-c{min-height:150px;padding:20px;border-radius:24px}.sx-pg{grid-template-columns:minmax(0,1fr)}.sx-fp{padding:26px}.sx-ft{width:100%}.sx-ft button{flex:1 1 40%}.sx-st{gap:18px}}
 @media(prefers-reduced-motion:reduce){.sx-pn2 li{opacity:1;transform:none;animation:none!important}}
+
+.sb-cs{position:relative}
+.sb-csb{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04);color:var(--fg);font:inherit;font-size:15px;text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.sb-csb svg{flex:none;opacity:.6;transition:transform .2s}
+.sb-cs.open .sb-csb svg{transform:rotate(180deg)}
+.sb-csv.ph{color:var(--mut,rgba(255,255,255,.5))}
+.sb-csb:focus-visible,.sb-cs.open .sb-csb{outline:0;border-color:rgba(255,255,255,.8);box-shadow:0 0 0 3px rgba(255,255,255,.18)}
+.sb-fl.bad .sb-csb{border-color:rgba(255,120,120,.7)}
+.sb-csl{position:absolute;z-index:30;left:0;right:0;top:calc(100% + 8px);max-height:280px;overflow:auto;padding:6px;border:1px solid var(--line);border-radius:18px;background:rgba(18,18,18,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(0,0,0,.55)}
+.sb-csl[hidden]{display:none}
+.sb-cso{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border:0;border-radius:12px;background:transparent;color:var(--fg);font:inherit;font-size:15px;text-align:left;cursor:pointer}
+.sb-cso svg{opacity:0;flex:none}
+.sb-cso.on svg{opacity:1}
+.sb-cso:hover,.sb-cso.hv{background:rgba(255,255,255,.08)}
+html[data-theme=light] .sb-csl{background:rgba(255,255,255,.98)}
+.sb-csb{height:54px;min-height:0;box-sizing:border-box}
+.sb-csb svg,.sb-cso svg{margin:0;width:16px;height:16px}
+.sb-csb{padding-top:0;padding-bottom:0}
+.sb-csv{display:block;margin:0;padding:0;line-height:24px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

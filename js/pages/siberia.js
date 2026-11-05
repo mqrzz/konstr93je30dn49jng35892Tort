@@ -90,7 +90,7 @@ function form(){
   if(v.site&&!/^https?:\/\/[^\s\/$.?#][^\s]*\.[^\s]{2,}$/i.test(v.site))bad.push("site");
   if(v.phone&&!/^[+\d][\d\s()\-]{5,}$/.test(v.phone))bad.push("phone");
   if(v.purpose.length<30||v.purpose.length>1000)bad.push("purpose");
-  if(bad.length){bad.forEach(function(x){er(x,true)});var el=f.querySelector(".sb-fl.bad input,.sb-fl.bad select,.sb-fl.bad textarea");if(el)el.focus();return}
+  if(bad.length){bad.forEach(function(x){er(x,true)});var el=f.querySelector(".sb-fl.bad input:not([type=hidden]),.sb-fl.bad .sb-csb,.sb-fl.bad textarea");if(el)el.focus();return}
   if(!document.getElementById("fok").checked){ge.textContent=t("sb.f.err.ok","Please confirm the statement first");ge.hidden=false;return}
   go.disabled=true;
   fetch((O.api||"/api")+"/siberia/apply",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(v)})
@@ -104,6 +104,29 @@ function form(){
    })
  })
 }
-function init(){map();counters();calc();form()}
+function csel(){
+ var w=document.getElementById("sbCs");if(!w)return;
+ var inp=document.getElementById("freg"),b=document.getElementById("sbCsB"),v=document.getElementById("sbCsV"),l=document.getElementById("sbCsL");
+ var ids=["altai_republic","altai_krai","tuva","khakassia","krasnoyarsk","irkutsk","kemerovo","novosibirsk","omsk","tomsk"],cur=-1;
+ function name(id){return t("sb.r."+id,id)}
+ function paint(){
+  l.innerHTML=ids.map(function(id,i){var on=inp.value===id;return'<button type="button" role="option" class="sb-cso'+(on?" on":"")+'" data-v="'+id+'" aria-selected="'+on+'" tabindex="-1"><span>'+esc(name(id))+'</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>'}).join("");
+  v.textContent=inp.value?name(inp.value):t("sb.f.region.ph","Choose a region");v.classList.toggle("ph",!inp.value);
+ }
+ function open(o){l.hidden=!o;b.setAttribute("aria-expanded",o?"true":"false");w.classList.toggle("open",o);if(o){var on=l.querySelector(".on")||l.firstChild;cur=ids.indexOf(on.dataset.v);on.scrollIntoView({block:"nearest"})}}
+ function pick(id){inp.value=id;paint();open(false);b.focus();var fl=w.closest(".sb-fl");if(fl){fl.classList.remove("bad");var e=fl.querySelector(".sb-er");if(e)e.hidden=true}}
+ function move(d){cur=Math.max(0,Math.min(ids.length-1,cur+d));var o=l.children[cur];Array.prototype.forEach.call(l.children,function(x){x.classList.remove("hv")});o.classList.add("hv");o.scrollIntoView({block:"nearest"})}
+ b.addEventListener("click",function(){open(l.hidden)});
+ b.addEventListener("keydown",function(e){
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();if(l.hidden)open(true);else move(e.key==="ArrowDown"?1:-1)}
+  else if((e.key==="Enter"||e.key===" ")&&!l.hidden&&cur>=0){e.preventDefault();pick(ids[cur])}
+  else if(e.key==="Escape"&&!l.hidden){e.preventDefault();open(false)}
+ });
+ l.addEventListener("click",function(e){var o=e.target.closest(".sb-cso");if(o)pick(o.dataset.v)});
+ document.addEventListener("click",function(e){if(!w.contains(e.target)&&!l.hidden)open(false)});
+ paint();
+ var lastLang=loc();setInterval(function(){if(loc()!==lastLang){lastLang=loc();paint()}},400);
+}
+function init(){map();counters();calc();form();csel()}
 wait(0);
 })();

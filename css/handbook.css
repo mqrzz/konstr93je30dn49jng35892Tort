@@ -112,3 +112,10 @@
 .bl-t p{color:var(--fg2);font-size:16px;line-height:1.65}
 @media(max-width:860px){.bl-card{flex-direction:column;gap:0;padding:26px 22px 30px}.bl-card .hb-bk{margin:-70px 0 22px}.bl-list{gap:70px;margin-top:40px}}
 @media(prefers-reduced-motion:reduce){.bl-h1{animation:none;opacity:1}}
+/* calm hero: same serif and size as every other page, no caps label */
+.hb-eye{font:400 15px/1.4 var(--font-b);letter-spacing:0;text-transform:none;color:var(--fg2);margin-bottom:18px}
+.hb-big{width:auto;margin-left:0;font:400 clamp(2.6rem,5.2vw,4.2rem)/1.06 var(--font-d);letter-spacing:-.02em}
+.bl-hero .hb-eye{margin-bottom:18px}
+.bl-h1{font:400 clamp(2.6rem,5.2vw,4.2rem)/1.06 var(--font-d);letter-spacing:-.02em}
+.hb-hero{padding-bottom:30px}
+.bl-meta,.hb-next small{letter-spacing:0;text-transform:none}

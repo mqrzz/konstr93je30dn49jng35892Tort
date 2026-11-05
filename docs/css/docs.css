@@ -232,3 +232,5 @@ html[data-theme="light"] #dh .logo img{filter:invert(1) brightness(.3)}
 
 html,body,#dc,#ds .sb{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html,body,#dc,#ds .sb{scroll-behavior:auto}}
+
+.lgb .lgc,.lgb .hdtip{display:none}
