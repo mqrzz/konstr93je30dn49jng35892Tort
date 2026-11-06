@@ -62,3 +62,4 @@ html[data-theme=light] .sb-csl{background:rgba(255,255,255,.98)}
 .sb-csb svg,.sb-cso svg{margin:0;width:16px;height:16px}
 .sb-csb{padding-top:0;padding-bottom:0}
 .sb-csv{display:block;margin:0;padding:0;line-height:24px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:700px){.sx-hero{padding-bottom:32px}main>.sec,main>div>.sec{padding-top:56px;padding-bottom:56px}}

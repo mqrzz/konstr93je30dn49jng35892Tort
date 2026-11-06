@@ -205,3 +205,11 @@ a.fx-tile span{color:var(--fg2)}
 @media (max-width:900px){.fx-anat{grid-template-columns:1fr}.fx-gates{grid-template-columns:1fr 1fr}.fx-gates li:last-child{grid-column:1/3}}
 @media (max-width:760px){.fx-chain{grid-template-columns:1fr;gap:56px}.fx-msg+.fx-msg:before{left:50%;top:-56px;width:1px;height:56px;transform-origin:top;transform:scaleY(0)}.fx-chain.in .fx-msg+.fx-msg:before{transform:scaleY(1)}.fx-lk{left:calc(50% + 10px);top:-34px;width:auto;text-align:left}.fx-gates{grid-template-columns:1fr}.fx-gates li:last-child{grid-column:auto}.fx-inbox li em{display:none}.fx-inbox li{grid-template-columns:40px 1fr}}
 @media (prefers-reduced-motion:reduce){.fx-gates li{animation:none}.fx-inbox li.enter{animation:none}}
+.fx-panel:not(:has(.fx-pane.on)){display:none}
+@media (max-width:900px){.fx-panel{margin-top:20px;min-height:0}}
+.fx-panel{scroll-margin-top:90px}
+.fx-rl em{font-style:normal}
+.fx-board{padding:0;background:none;box-shadow:none}
+.fx-row{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+@media (max-width:900px){.fx-hero{padding-bottom:40px}}
+@media (max-width:700px){.fx-sec{padding-top:56px;padding-bottom:56px}.fx-hero{padding-bottom:24px}}

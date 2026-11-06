@@ -6,10 +6,10 @@
 <title>SMTP — geserd</title>
 <meta name="description" content="Point any SMTP client at Geserd. Same signing, queue and log as the API, with your API key as the password.">
 <meta name="theme-color" content="#000000">
-<link rel="icon" href="/assets/favicon.svg?v=5d6c949827">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=472d855ce6"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=472d855ce6"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=472d855ce6">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/geserd.css?v=5d6c949827">
+<link rel="stylesheet" href="/css/geserd.css?v=472d855ce6">
 <link rel="stylesheet" href="/css/integrations.css?v=2">
 <link rel="stylesheet" href="/css/emailapi.css?v=1">
 <link rel="stylesheet" href="/css/fxsmtp.css?v=1">
@@ -64,8 +64,8 @@ config.action_mailer.smtp_settings = {
 }</pre><button type="button" class="ix-cp" data-copy aria-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="3"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button></div></div></div></section><section class="sec"><div class="wrap"><div class="ix-head c rv"><span class="ix-tag" data-i18n="sx.r.tag">What the server does</span><h2 class="grad" data-i18n="sx.r.h">One pipeline, two doors</h2><p class="sub" data-i18n="sx.r.sub">A message sent over SMTP is treated exactly like an API call.</p></div><ol class="ix-steps sx-st"><li class="rv"><span class="ix-n">1</span><div><b data-i18n="sx.s0.t">Authenticate</b><p data-i18n="sx.s0.p">The password must be an active API key starting with gs_. Wrong credentials get a 535 reply.</p></div></li><li class="rv"><span class="ix-n">2</span><div><b data-i18n="sx.s1.t">Check</b><p data-i18n="sx.s1.p">Your account’s allowed addresses and plan limits apply, and the From domain must be verified.</p></div></li><li class="rv"><span class="ix-n">3</span><div><b data-i18n="sx.s2.t">Send and log</b><p data-i18n="sx.s2.p">The message is signed, queued and sent. Its request shows up in Logs next to your API calls.</p></div></li></ol></div></section><section class="sec"><div class="wrap"><h2 class="grad rv" data-i18n="sx.f.h">Questions</h2><div class="qa" style="margin-top:32px"><details><summary data-i18n="sx.q0.q">What is the user name?</summary><p data-i18n="sx.q0.a">Use geserd. Only the password matters, and it must be an API key.</p></details><details><summary data-i18n="sx.q1.q">Does it receive mail too?</summary><p data-i18n="sx.q1.a">This port is for sending. To receive mail, point your MX record at Geserd and read messages in Emails or by webhook.</p></details><details><summary data-i18n="sx.q2.q">Is the connection encrypted?</summary><p data-i18n="sx.q2.a">Always. Port 465 is encrypted from the start and port 587 must upgrade with STARTTLS before you can log in.</p></details></div></div></section><section class="sec cta"><div class="wrap"><h2 class="grad rv" data-i18n="sx.cta.h">Send your first email over SMTP</h2><p class="sub rv" data-i18n="sx.cta.p">Create a key, copy four settings and you are live.</p><div class="acts rv" style="justify-content:center"><a class="btn" href="/signup/" data-i18n="cta.signup">Sign up for free</a></div></div></section>
 </main>
 <div id="site-footer"></div>
-<script src="/js/boot.js?v=5d6c949827"></script>
-<script src="/js/integrations.js?v=5d6c949827" defer></script>
-<script src="/js/fxsmtp.js?v=5d6c949827" defer></script>
+<script src="/js/boot.js?v=472d855ce6"></script>
+<script src="/js/integrations.js?v=472d855ce6" defer></script>
+<script src="/js/fxsmtp.js?v=472d855ce6" defer></script>
 </body>
 </html>

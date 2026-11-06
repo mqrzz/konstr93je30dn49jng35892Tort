@@ -34,8 +34,12 @@ function msg(code){
    network:["auth.error.network","Couldn't reach the server — check your connection and try again"]};
   var m=M[code]||M.network;return t(m[0],m[1]);
 }
+function gdHeaders(h){try{var d="";try{d=localStorage.getItem("gd_did");if(!d){d=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Math.random()).slice(2)+Date.now();localStorage.setItem("gd_did",d)}}catch(e){}
+ var n=navigator,s=screen,tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+ var fp=JSON.stringify({s:s.width+"x"+s.height+"@"+(window.devicePixelRatio||1),tz:tz,l:(n.languages||[n.language||""]).join(",").slice(0,40),p:n.platform||"",c:n.hardwareConcurrency||0,m:n.deviceMemory||0,t:n.maxTouchPoints||0});
+ if(d)h["x-gd-did"]=d;h["x-gd-fp"]=btoa(unescape(encodeURIComponent(fp)))}catch(e){}return h}
 function post(path,body){
-  return fetch(api()+path,{method:"POST",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify(body)})
+  return fetch(api()+path,{method:"POST",headers:gdHeaders({"Content-Type":"application/json"}),credentials:"same-origin",body:JSON.stringify(body)})
    .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok)throw{code:j.error||"network"};return j})},
          function(){throw{code:"network"}});
 }

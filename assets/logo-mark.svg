@@ -1,9 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78" role="img" aria-label="Geserd">
-  <defs>
-    <linearGradient id="geserdMetal" x1="10%" y1="90%" x2="85%" y2="5%">
-      <stop offset="0%" stop-color="#9a9a9a"/><stop offset="35%" stop-color="#e2e2e2"/><stop offset="55%" stop-color="#ffffff"/><stop offset="75%" stop-color="#d4d4d4"/><stop offset="100%" stop-color="#a8a8a8"/>
-    </linearGradient>
-  </defs>
-  <rect x="1" y="1" width="76" height="76" rx="21" fill="#0a0a0a" stroke="#fdfdfd" stroke-opacity=".1" stroke-width="2"/>
-  <text x="39" y="56" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="600" font-size="52" fill="url(#geserdMetal)">G</text>
-</svg>
+<svg role="img" aria-label="Geserd" viewBox="2.14 -3.00 95.60 96.99" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="5" fill="#ffffff"/><g stroke="#ffffff" stroke-width="8" stroke-linecap="round" fill="none"><path d="M50 50L50.00 7.00"/><path d="M50 50L67.33 24.30"/><path d="M50 50L82.71 28.76"/><path d="M50 50L76.90 52.35"/><path d="M50 50L87.75 68.41"/><path d="M50 50L65.44 80.29"/><path d="M50 50L52.53 78.89"/><path d="M50 50L27.07 83.99"/><path d="M50 50L22.01 67.49"/><path d="M50 50L12.14 46.69"/><path d="M50 50L24.83 37.73"/><path d="M50 50L31.84 14.36"/></g></svg>

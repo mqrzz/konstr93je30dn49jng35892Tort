@@ -8,9 +8,11 @@ function body(n){
  if(n.title==="billing_paid"){var a=String(n.body||"").split("|");return T("app.plan."+a[0],a[0])+(a[1]?" · ₽"+a[1]:"")}
  if(n.title==="billing_failed"||n.title==="billing_expired")return T("app.plan."+n.body,n.body);
  return n.body||""}
+function lbl(n){var m={bounced:"bounce",complained:"complaint",ticket_reply:"ticket"};var k=m[n.type]||n.type;var f=FL.filter(function(x){return x[0]===k})[0];return f?T(f[1],f[2]):T("nt.f.account","Account")}
 function item(n){
  var ic=ICON[n.type]||ICON.info,link=n.link||"";
- return '<div class="nitem'+(n.read_at?'':' un')+'" data-id="'+n.id+'" data-link="'+E(link)+'"><span class="ni">'+A.icon(ic,20)+'</span><div><b>'+E(title(n))+'</b>'+(body(n)?'<p>'+E(body(n))+'</p>':'')+'<time>'+E(A.ago(n.created_at))+'</time></div><button type="button" class="x" data-del="'+n.id+'" aria-label="'+E(T("nt.del","Delete"))+'">'+A.icon(A.IC.x,16)+'</button></div>'}
+ return '<div class="nitem'+(n.read_at?'':' un')+'" data-id="'+n.id+'" data-link="'+E(link)+'" tabindex="0"><span class="ni">'+A.icon(ic,20)+'</span><div class="nb"><div class="nh"><b>'+E(title(n))+'</b><time>'+E(A.ago(n.created_at))+'</time></div>'+(body(n)?'<p>'+E(body(n))+'</p>':'')+'<span class="nt-tag">'+E(lbl(n))+'</span></div><button type="button" class="x" data-del="'+n.id+'" aria-label="'+E(T("nt.del","Delete"))+'">'+A.icon(A.IC.x,16)+'</button></div>'}
+function dayKey(n){var d=new Date(n.created_at),t=new Date(),y=new Date(Date.now()-864e5);var same=function(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate()};return same(d,t)?"today":same(d,y)?"yesterday":"earlier"}
 var FL=[["all","nt.f.all","All"],["unread","nt.f.unread","Unread"],["bounce","nt.f.bounce","Bounces"],["complaint","nt.f.complaint","Complaints"],["quota","nt.f.quota","Limits"],["domain","nt.f.domain","Domains"],["ticket","nt.f.ticket","Support"]];
 function head(){return '<div class="ph"><h1>'+E(T("nt.h","Notifications"))+'</h1></div>'}
 function shown(){return data.filter(function(n){if(flt==="all")return true;if(flt==="unread")return !n.read_at;return n.type===flt||(flt==="bounce"&&n.type==="bounced")||(flt==="complaint"&&n.type==="complained")})}
@@ -22,7 +24,10 @@ function tops(){
  var acts='<div class="prow ntdesk">'+(unread?'<button type="button" class="abtn" id="ntAll">'+E(T("nt.markall","Mark all as read"))+'</button>':'')+(hasRead?'<button type="button" class="abtn" id="ntClr">'+E(T("nt.clear","Delete read"))+'</button>':'')+'</div>';
  var mob='<div class="ntmob"><div class="ntfd" id="ntFd"></div>'+(unread||hasRead?'<button type="button" class="app-ico ntmore" id="ntMore" aria-haspopup="menu" aria-expanded="false" aria-label="'+E(T("tp.m.open","Actions"))+'">'+A.icon('<circle cx="5.5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18.5" cy="12" r="1.2"/>',18)+'</button>':'')+'</div>';
  return '<div class="tops">'+chips+acts+mob+'</div>'}
-function list(){var r=shown();return r.length?'<div class="nlist" id="ntl">'+r.map(item).join("")+'</div>':'<div class="emptyb" style="padding:40px;text-align:center;color:var(--a-tx2)">'+E(flt==="all"?T("nt.allread","All caught up"):T("nt.nomatch","Nothing here."))+'</div>'}
+function list(){var r=shown();if(!r.length)return '<div class="emptyb" style="padding:40px;text-align:center;color:var(--a-tx2)">'+E(flt==="all"?T("nt.allread","All caught up"):T("nt.nomatch","Nothing here."))+'</div>';
+ var G={today:[],yesterday:[],earlier:[]};r.forEach(function(n){G[dayKey(n)].push(n)});
+ var H={today:["nt.g.today","Today"],yesterday:["nt.g.yday","Yesterday"],earlier:["nt.g.earlier","Earlier"]};
+ return '<div id="ntl">'+["today","yesterday","earlier"].filter(function(k){return G[k].length}).map(function(k){return '<section class="ngrp"><h2 class="ngh">'+E(T(H[k][0],H[k][1]))+'</h2><div class="nlist">'+G[k].map(item).join("")+'</div></section>'}).join("")+'</div>'}
 function paint(){
  root.innerHTML=head()+(data.length?tops()+list():A.empty(A.IC.bell,T("nt.none","No notifications yet"),T("nt.none.d","Bounces, spam complaints, plan limits and support replies will appear here.")));
  var f=document.getElementById("ntF");if(f)f.onclick=function(e){var b=e.target.closest("button[data-f]");if(!b)return;flt=b.dataset.f;paint()};

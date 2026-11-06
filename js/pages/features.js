@@ -29,13 +29,13 @@ function hub(){
  }
  sats.forEach(function(s,i){
   function pick(){auto=false;clearTimeout(tm);cur=i;show(s.dataset.k)}
-  s.addEventListener("mouseenter",pick);s.addEventListener("focus",pick);s.addEventListener("click",pick)
+  s.addEventListener("mouseenter",function(){if(window.innerWidth>900)pick()});s.addEventListener("focus",function(){if(window.innerWidth>900)pick()});s.addEventListener("click",function(){pick();if(window.innerWidth<=900){var pn=document.getElementById("fxPanel");setTimeout(function(){pn.scrollIntoView({behavior:"smooth",block:"start"})},60)}})
  });
  draw();window.addEventListener("resize",draw);
  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
  if(!reduce&&"IntersectionObserver"in window){
   var vis=false;new IntersectionObserver(function(es){vis=es[0].isIntersecting},{threshold:.3}).observe(map);
-  (function loop(){tm=setTimeout(function(){if(auto&&vis){cur=(cur+1)%sats.length;show(sats[cur].dataset.k)}if(auto)loop()},4200)})()
+  (function loop(){tm=setTimeout(function(){if(auto&&vis&&window.innerWidth>900){cur=(cur+1)%sats.length;show(sats[cur].dataset.k)}if(auto)loop()},4200)})()
  }
  var st=$("#fxStart");
  if(st){
