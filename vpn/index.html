@@ -5,25 +5,28 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Access paused — Geserd</title>
 <meta name="theme-color" content="#000000">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=bc32ea547d"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=bc32ea547d"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=bc32ea547d">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=d1be88167e"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=d1be88167e"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=d1be88167e">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/geserd.css?v=bc32ea547d">
+<link rel="stylesheet" href="/css/geserd.css?v=d1be88167e">
 <meta name="description" content="Turn off your VPN or proxy to continue.">
 <meta property="og:title" content="Access paused — Geserd">
 <meta property="og:description" content="Turn off your VPN or proxy to continue.">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="/css/pages2.css?v=bc32ea547d"><link rel="stylesheet" href="/css/vpnpage.css?v=1"><meta name="robots" content="noindex">
+<meta name="robots" content="noindex">
 </head>
-<body>
-<div id="site-header"></div>
-<main>
-<section class="pg vpp"><div class="wrap"><div class="vpp-ic" aria-hidden="true"><span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.4 3 7.6 7.5 9.5 4.5-1.9 7.5-5.1 7.5-9.5V6z"/><path d="m4 4 16 16"/></svg></span></div><h1 class="grad" data-i18n="vp.t">Turn off your VPN to continue</h1><p class="vpp-p" data-i18n="vp.p">We detected a VPN, proxy or Tor connection.</p>
-<ol class="vpp-st"><li><i>1</i><div><b data-i18n="vp.h1">Turn it off</b><span data-i18n="vp.s1">Disconnect your VPN app, proxy or Tor, and any browser extension that does the same.</span></div></li><li><i>2</i><div><b data-i18n="vp.h2">Check again</b><span data-i18n="vp.s2">Press Check again. The site opens as soon as the address is clean.</span></div></li><li><i>3</i><div><b data-i18n="vp.h3">Still stuck?</b><span data-i18n="vp.s3">If you are not using a VPN and this is a mistake, write to support. The contact page always stays open.</span></div></li></ol>
-<div class="vpp-act"><button type="button" class="btn" id="vpB" data-i18n="vp.chk">Check again</button><a class="btn ghost" href="/contact/" data-i18n="vp.sup">Contact support</a></div><p class="vpp-msg" id="vpM" role="status" aria-live="polite"></p></div></section>
+<body class="auth-body gate-body">
+<div class="auth-shell">
+<div class="auth-bgimg"><picture><source media="(max-width:760px)" srcset="/assets/bg-site-m.webp"><img src="/assets/bg-site.webp?v=d1be88167e" alt=""></picture></div>
+<main class="gate ug" id="ug" data-st="load">
+<img class="mark" src="/assets/logo-mark.svg?v=d1be88167e" alt="Geserd">
+<section class="ug-s" data-s="load" aria-live="polite"><h1 data-i18n="un.load.t">Checking your connection…</h1><p data-i18n="un.load.p">One moment…</p><div class="ug-sp" aria-hidden="true"></div></section>
+<section class="ug-s" data-s="blocked"><h1 data-i18n="vp.t">Turn off your VPN to continue</h1><p data-i18n="vp.p">We detected a VPN, proxy or Tor connection.</p><p class="gate-s" data-i18n="vp.s1">Disconnect your VPN app, proxy or Tor, and any browser extension that does the same.</p><p class="gate-s vpm" id="vpM" role="status" aria-live="polite"></p><div class="ug-act"><button type="button" class="btn pri gate-btn" id="vpB" data-i18n="vp.chk">Check again</button><a class="ug-ghost" href="/contact/" data-i18n="vp.sup">Contact support</a></div></section>
+<section class="ug-s" data-s="ok"><div class="ug-ok" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h1 data-i18n="vp.clear">No VPN detected. Opening the site.</h1></section>
+<section class="ug-s" data-s="err"><h1 data-i18n="un.err.t">We couldn't run the check</h1><p data-i18n="vp.err">Could not check right now. Try again in a moment.</p><div class="ug-act"><button type="button" class="btn pri gate-btn" id="vpB2" data-i18n="vp.chk">Check again</button></div></section>
 </main>
-<div id="site-footer"></div>
-<script src="/js/pages/vpn.js?v=bc32ea547d"></script>
-<script src="/js/boot.js?v=bc32ea547d"></script>
+</div>
+<script src="/js/boot.js?v=0"></script>
+<script src="/js/pages/vpn.js?v=0"></script>
 </body>
 </html>

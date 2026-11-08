@@ -41,7 +41,7 @@ code{font:400 14px/1.5 var(--font-m,monospace);overflow-wrap:anywhere;word-break
 @media(max-width:820px){.wh-g{grid-template-columns:minmax(0,1fr)}.wh-k.wide{grid-column:auto}}
 @media(max-width:640px){
  .wh{padding:96px 0 72px}
- .wh-f{flex-direction:column}
+ .wh-f{flex-direction:column;gap:12px}.wh-f input{flex:none;width:100%;height:64px;border-radius:22px;font-size:19px}.wh-f .btn{width:100%;height:60px;border-radius:20px}
  .wh-f input{height:64px;font-size:19px;padding:0 20px;width:100%;box-sizing:border-box}
  .wh-f .btn{width:100%;height:60px}
  .wh-h{padding:22px}.wh-k{padding:20px 18px 10px;border-radius:22px}

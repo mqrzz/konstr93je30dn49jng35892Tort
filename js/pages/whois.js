@@ -73,6 +73,7 @@ function init(){
   try{history.replaceState(null,"","?d="+encodeURIComponent(v))}catch(e){}
   o.innerHTML='<p class="wh-e">'+esc(t("wh.wait","Checking…"))+"</p>";
   fetch("/api/whois?domain="+encodeURIComponent(v)).then(function(r){return r.json().then(function(d){return{s:r.status,d:d}},function(){return{s:r.status,d:{}}})}).then(function(x){
+   if(x.s===451){location.href="/unavailable/";return}
    if(x.s===400){msg("wh.bad");return}
    if(x.s===429){msg("wh.rate");return}
    if(x.s!==200){msg("wh.err");return}
