@@ -1,8 +1,10 @@
 (function(){var O=window.GESERD,K="geserd_lang";
 function get(u){u+=(window.GESERD_BUILD&&window.GESERD_BUILD!=="dev"?"?v="+window.GESERD_BUILD:"");return fetch(u,{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()})}
 O.setLang=function(l){try{localStorage.setItem(K,l)}catch(e){}document.cookie=K+"="+l+";path=/;max-age=31536000;samesite=lax";location.reload()};
-function reveal(){document.documentElement.classList.add("i18n-ready")}
-setTimeout(reveal,1200);
+var ld=false,hd=false;function chk(){if(ld&&(hd||!document.getElementById("site-header")))document.documentElement.classList.add("i18n-ready")}
+function reveal(){ld=true;chk()}
+O.hdrDone=function(){hd=true;chk()};
+setTimeout(function(){ld=true;hd=true;chk()},5000);
 function setTitle(d){var s=location.pathname.replace(/^\/|\/$/g,"").replace(/\//g,".")||"home",v=d["title."+s];if(v){document.title=v;var m=document.querySelector('meta[property="og:title"]');if(m)m.setAttribute("content",v)}}
 O.setTitle=function(v){document.title=v};
 function apply(d){O.t=function(k,def){return d[k]!=null?d[k]:def};setTitle(d);document.querySelectorAll("[data-i18n]").forEach(function(el){var v=d[el.getAttribute("data-i18n")];if(v!=null)el.innerHTML=v});document.querySelectorAll("[data-i18n-ph]").forEach(function(el){var v=d[el.getAttribute("data-i18n-ph")];if(v!=null)el.setAttribute("placeholder",v)});reveal()}

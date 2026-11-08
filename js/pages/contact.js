@@ -14,7 +14,7 @@ function init(){
   fetch((O.api||"/api")+"/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(v)})
    .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok)throw j;return j})})
    .then(function(){f.hidden=true;document.getElementById("cdone").hidden=false;window.scrollTo({top:0,behavior:"smooth"})})
-   .catch(function(j){btn.disabled=false;var c=j&&j.error;if(c==="rate_limited")show("ct2.err.rate","Too many messages, please try again later");else if(c==="invalid_email")show("ct2.err.email","Enter a valid email address");else if(c==="message_too_short")show("ct2.err.short","Please write at least a couple of sentences");else show("ct2.err.net","Could not send the message, please try again")});
+   .catch(function(j){btn.disabled=false;var c=j&&j.error;if(c==="region_blocked"){location.href="/unavailable/";return}if(c==="rate_limited")show("ct2.err.rate","Too many messages, please try again later");else if(c==="invalid_email")show("ct2.err.email","Enter a valid email address");else if(c==="message_too_short")show("ct2.err.short","Please write at least a couple of sentences");else show("ct2.err.net","Could not send the message, please try again")});
  });
 }
 wait(0);

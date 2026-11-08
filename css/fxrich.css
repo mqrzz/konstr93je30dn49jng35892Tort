@@ -113,3 +113,4 @@
 @media(max-width:700px){.fr-app .main{padding:20px 16px}.mk-var div:nth-child(1){left:2%;right:6%}.mk-var div:nth-child(2){left:6%;right:4%}.mk-var div:nth-child(3){left:10%;right:2%}}
 .mk-bars{width:100%;display:grid;gap:14px}.mk-bars p{margin:0;display:grid;gap:6px;font-size:13px;color:#a1a1a6}.mk-bars i{display:block;height:8px;border-radius:99px;background:rgba(255,255,255,.08);position:relative;overflow:hidden}.mk-bars i:after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);border-radius:99px;background:linear-gradient(90deg,rgba(255,255,255,.35),rgba(255,255,255,.8))}
 @media(min-width:901px){.fr-bento.c5{grid-template-columns:repeat(6,minmax(0,1fr))}.fr-bento.c5>*{grid-column:span 2}.fr-bento.c5>:nth-child(n+4){grid-column:span 3}}
+@media(max-width:900px){.fr-card .v{height:auto;min-height:230px}}
