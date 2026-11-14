@@ -6,7 +6,7 @@ function stDom(d){return d.status==="verified"?A.pill("ok",t("au.d.verified","Ve
 function head(count){return'<div class="ph pgh"><div><h1>'+e(t("ap.d.t","Domains"))+"</h1>"+(count?'<p class="psub">'+e(count)+"</p>":"")+'</div><button type="button" class="abtn lg pri" id="dNew">'+A.icon(A.IC.plus,16)+"<span>"+e(t("ap.d.add","Add domain"))+"</span></button></div>"}
 function list(){
  root.innerHTML=head()+A.loading();wire();
- Promise.all([A.api("/domains"),A.api("/subdomain"),A.api("/usage").catch(function(){return null})]).then(function(r){drawList(r[0],r[1],r[2])},function(x){root.innerHTML=head()+A.failed(x,"dRetry");wire();var b=document.getElementById("dRetry");if(b)b.onclick=list});
+ Promise.all([A.api("/domains"),A.api("/address"),A.api("/usage").catch(function(){return null})]).then(function(r){drawList(r[0],r[1],r[2])},function(x){root.innerHTML=head()+A.failed(x,"dRetry");wire();var b=document.getElementById("dRetry");if(b)b.onclick=list});
 }
 function drawList(ds,sd,us){
  var count=us?t("au.d.count","{a} of {b} domains used",{a:A.num(ds.length),b:us.limits.domains?A.num(us.limits.domains):t("au.unlimited","Unlimited")}):"";
@@ -31,27 +31,29 @@ function add(){
 }
 
 function subCard(sd){
- var base=sd.base,items=sd.items||[],full=sd.limit&&items.length>=sd.limit;
- var mine=items.map(function(s){return'<div class="subrow"><div><div class="strong">'+e(s.domain)+'</div><div class="dim sm">'+e(t("au.sd.use","Send from anything@{d}",{d:s.domain}))+'</div></div><div class="subact"><button type="button" class="abtn cp" data-cps="'+e(s.domain)+'">'+A.icon(A.IC.copy,15)+"<span>"+e(t("au.copy","Copy"))+'</span></button><button type="button" class="app-ico dng" data-rel="'+e(s.slug)+'" aria-label="'+e(t("au.sd.release","Release"))+'" title="'+e(t("au.sd.release","Release"))+'">'+A.icon(A.IC.trash,16)+"</button></div></div>"}).join("");
- var form=full?'<p class="dim sm">'+e(t("au.sd.limit","Your plan includes {n} subdomains.",{n:A.num(sd.limit)}))+"</p>":
-  '<div class="slugrow"><input class="slug" id="sdIn" maxlength="30" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="'+e(t("au.sd.ph","your-name"))+'" aria-label="'+e(t("au.sd.t","Geserd subdomain"))+'"><span class="suf">.'+e(base)+'</span></div><button type="button" class="abtn lg pri" id="sdGo" disabled>'+e(t("au.sd.claim","Claim"))+'</button><p class="hint" id="sdHint" aria-live="polite"></p>';
- return'<section class="gcard sdcard"><div class="sdl"><h2>'+e(t("au.sd.t","Geserd subdomain"))+"</h2><p>"+e(t("au.sd.d","No domain of your own? Claim a free name and send from anything@name.geserd.com right away."))+"</p>"+(full?"":'<p class="dim sm">'+e(t("au.sd.free","On the Free plan, messages carry a small “Sent with Geserd” line."))+"</p>")+'</div><div class="sdr">'+(mine?'<div class="sublist">'+mine+"</div>":"")+(full?"":'<div class="'+(mine?"sdadd more":"sdadd")+'">'+form+"</div>")+"</div></section>";
+ var dom=sd.domain,items=sd.items||[],full=sd.limit&&items.length>=sd.limit;
+ var mine=items.map(function(s){return'<div class="subrow"><div><div class="strong">'+e(s.address)+'</div><div class="dim sm">'+e(t("au.sd.use","Send and receive on this address"))+'</div></div><div class="subact"><button type="button" class="abtn cp" data-cps="'+e(s.address)+'">'+A.icon(A.IC.copy,15)+"<span>"+e(t("au.copy","Copy"))+'</span></button><button type="button" class="app-ico dng" data-rel="'+e(s.handle)+'" aria-label="'+e(t("au.sd.release","Release"))+'" title="'+e(t("au.sd.release","Release"))+'">'+A.icon(A.IC.trash,16)+"</button></div></div>"}).join("");
+ var form=full?'<p class="dim sm">'+e(t("au.sd.limit","Your plan includes {n} addresses.",{n:A.num(sd.limit)}))+"</p>":
+  '<div class="slugrow"><input class="slug" id="sdIn" maxlength="30" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="'+e(t("au.sd.ph","your-name"))+'" aria-label="'+e(t("au.sd.t","Geserd address"))+'"><span class="suf">@'+e(dom)+'</span></div><button type="button" class="abtn lg pri" id="sdGo" disabled>'+e(t("au.sd.claim","Claim"))+'</button><p class="hint" id="sdHint" aria-live="polite"></p>';
+ return'<section class="gcard sdcard"><div class="sdl"><h2>'+e(t("au.sd.t","Geserd address"))+"</h2><p>"+e(t("au.sd.d","No domain of your own? Pick a name and use name@users.geserd.com to send and receive right away.",{d:dom}))+"</p>"+(full?"":'<p class="dim sm">'+e(t("au.sd.free","On the Free plan, messages carry a small “Sent with Geserd” line."))+"</p>")+'</div><div class="sdr">'+(mine?'<div class="sublist">'+mine+"</div>":"")+(full?"":'<div class="'+(mine?"sdadd more":"sdadd")+'">'+form+"</div>")+"</div></section>";
 }
 function wireSub(sd){
  root.querySelectorAll("[data-cps]").forEach(function(b){b.onclick=function(){A.copy(b.dataset.cps,b)}});
  root.querySelectorAll("[data-rel]").forEach(function(b){b.onclick=function(){
-  var d=b.dataset.rel+"."+sd.base;
-  A.modal({title:t("au.sd.release.t","Release {d}?",{d:d}),desc:t("au.sd.release.p","Anyone can claim this name afterwards, and you can no longer send from it."),actions:[{label:t("au.cancel","Cancel")},{label:t("au.sd.release","Release"),cls:"dng",onClick:function(m,bb){bb.disabled=true;A.api("/subdomain/"+encodeURIComponent(b.dataset.rel),{method:"DELETE"}).then(function(){m.close();A.toast(t("au.sd.released","Subdomain released"));list()},function(x){bb.disabled=false;A.toast(A.err(x))})}}]})}});
+  var d=b.dataset.rel+"@"+sd.domain;
+  A.modal({title:t("au.sd.release.t","Release {d}?",{d:d}),desc:t("au.sd.release.p","Anyone can claim this name afterwards, and you can no longer send or receive on it."),actions:[{label:t("au.cancel","Cancel")},{label:t("au.sd.release","Release"),cls:"dng",onClick:function(m,bb){bb.disabled=true;A.api("/address/"+encodeURIComponent(b.dataset.rel),{method:"DELETE"}).then(function(){m.close();A.toast(t("au.sd.released","Address released"));list()},function(x){bb.disabled=false;A.toast(A.err(x))})}}]})}});
  var inp=document.getElementById("sdIn");if(!inp)return;var go=document.getElementById("sdGo"),hint=document.getElementById("sdHint"),tm,seq=0;
+ var RXH=/^[a-z0-9][a-z0-9._-]{1,28}[a-z0-9]$/;
+ function okName(v){return RXH.test(v)&&!/[._-]{2}/.test(v)}
  function say(kind,msg){hint.className="hint "+(kind||"");hint.textContent=msg||""}
- inp.addEventListener("input",function(){var v=inp.value.toLowerCase().replace(/[^a-z0-9-]/g,"");if(v!==inp.value)inp.value=v;go.disabled=true;clearTimeout(tm);
+ inp.addEventListener("input",function(){var v=inp.value.toLowerCase().replace(/[^a-z0-9._-]/g,"");if(v!==inp.value)inp.value=v;go.disabled=true;clearTimeout(tm);
   if(!v){say();return}
-  if(!/^[a-z0-9][a-z0-9-]{1,28}[a-z0-9]$/.test(v)||v.indexOf("--")>-1){say("bad",t("au.sd.invalid","Use 3–30 letters, digits or hyphens, with no double hyphens."));return}
+  if(!okName(v)){say("bad",t("au.sd.invalid","Use 3–30 letters, digits, dots, hyphens or underscores, without doubled symbols."));return}
   say("",t("au.sd.checking","Checking…"));var n=++seq;
-  tm=setTimeout(function(){A.api("/subdomain/check/"+encodeURIComponent(v)).then(function(r){if(n!==seq)return;
-   if(r.available){say("ok",t("au.sd.avail","{d} is available",{d:v+"."+sd.base}));go.disabled=false}
-   else say("bad",r.reason==="reserved"?t("au.sd.reserved","This name is reserved."):r.reason==="invalid"?t("au.sd.invalid","Use 3–30 letters, digits or hyphens, with no double hyphens."):t("au.sd.taken","{d} is already taken",{d:v+"."+sd.base}))},function(x){if(n===seq)say("bad",A.err(x))})},350)});
- function claim(){var v=inp.value;if(go.disabled)return;go.disabled=true;A.api("/subdomain",{method:"POST",body:{slug:v}}).then(function(){A.toast(t("au.sd.claimed","Subdomain claimed"));list()},function(x){say("bad",A.err(x));go.disabled=false})}
+  tm=setTimeout(function(){A.api("/address/check/"+encodeURIComponent(v)).then(function(r){if(n!==seq)return;
+   if(r.available){say("ok",t("au.sd.avail","{d} is available",{d:v+"@"+sd.domain}));go.disabled=false}
+   else say("bad",r.reason==="reserved"?t("au.sd.reserved","This name is reserved."):r.reason==="invalid"?t("au.sd.invalid","Use 3–30 letters, digits, dots, hyphens or underscores, without doubled symbols."):t("au.sd.taken","{d} is already taken",{d:v+"@"+sd.domain}))},function(x){if(n===seq)say("bad",A.err(x))})},350)});
+ function claim(){var v=inp.value;if(go.disabled)return;go.disabled=true;A.api("/address",{method:"POST",body:{handle:v}}).then(function(){A.toast(t("au.sd.claimed","Address claimed"));list()},function(x){say("bad",A.err(x));go.disabled=false})}
  go.onclick=claim;inp.addEventListener("keydown",function(ev){if(ev.key==="Enter"){ev.preventDefault();claim()}});
 }
 

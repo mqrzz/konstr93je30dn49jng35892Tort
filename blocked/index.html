@@ -3,19 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Account blocked — Geserd</title>
-<meta name="robots" content="noindex"><meta name="description" content="The agreement between you and Geserd for the use of the email sending, receiving and authentication service.">
+<title>Account restricted — Geserd</title>
 <meta name="theme-color" content="#000000">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=d1be88167e"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=d1be88167e"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=d1be88167e">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=37dbc14852"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=37dbc14852"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=37dbc14852">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/geserd.css?v=d1be88167e">
-<link rel="stylesheet" href="/css/pages2.css?v=d1be88167e">
+<link rel="stylesheet" href="/css/geserd.css?v=37dbc14852">
+<meta name="description" content="Your account is restricted.">
+<meta property="og:title" content="Account restricted — Geserd">
+<meta property="og:description" content="Your account is restricted.">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex">
 </head>
-<body>
-<div id="site-header"></div>
-<main><section class="pg lg-hero" style="padding-bottom:120px"><div class="wrap"><span class="lg-badge" style="width:56px;height:56px;padding:0;justify-content:center;border-radius:50%"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></svg></span><h1 class="grad" data-i18n="bk.h">Account blocked</h1><p class="lg-lead" data-i18n="bk.p">This account was blocked, so you cannot use the dashboard or the API. If you think this is a mistake, write to us and explain the situation. A person will review it.</p><div class="sb-acts"><a class="btn" href="/contact/" data-i18n="bk.b">Write to us</a></div></div></section><!--p2--><section class="sec p2s"><div class="wrap"><h2 class="grad c rv" data-i18n="p2.bk.h">What happens next</h2><div class="st2g"><div class="st2 rv" style="--i:0"><b>1</b><h3 data-i18n="p2.bk.1t">You write to us</h3><p data-i18n="p2.bk.1p">Describe what you were doing and why you think the block is a mistake.</p></div><div class="st2 rv" style="--i:1"><b>2</b><h3 data-i18n="p2.bk.2t">A person reviews it</h3><p data-i18n="p2.bk.2p">We look at the account activity ourselves; nothing is decided by a script alone.</p></div><div class="st2 rv" style="--i:2"><b>3</b><h3 data-i18n="p2.bk.3t">You get a real reason</h3><p data-i18n="p2.bk.3p">The answer says what was found and whether the account can be restored.</p></div></div></div></section><!--/p2--></main>
-<div id="site-footer"></div>
-<script src="/js/boot.js?v=d1be88167e"></script>
+<body class="auth-body gate-body">
+<div class="auth-shell">
+<div class="auth-bgimg"><picture><source media="(max-width:760px)" srcset="/assets/bg-site-m.webp"><img src="/assets/bg-site.webp?v=37dbc14852" alt=""></picture></div>
+<main class="gate ug" id="ug" data-st="load">
+<img class="mark" src="/assets/logo-mark.svg?v=37dbc14852" alt="Geserd">
+<section class="ug-s" data-s="load" aria-live="polite"><h1 data-i18n="un.load.t">Checking your connection…</h1><p data-i18n="un.load.p">One moment…</p><div class="ug-sp" aria-hidden="true"></div></section>
+<section class="ug-s" data-s="blocked"><h1 data-i18n="bl.b.t">Your account is blocked</h1><p data-i18n="bl.b.p">We blocked your account for breaking the terms of use. The dashboard and sending are unavailable.</p><p class="gate-s" data-i18n="bl.b.s">You can download your data. If you think this is a mistake, write to support.</p><div class="ug-act"><a class="btn pri gate-btn" id="blDl" href="/api/standing/export" data-i18n="bl.dl">Download my data</a><button type="button" class="ug-ghost" data-go="form" data-i18n="bl.sup">Write to support</button><button type="button" class="ug-ghost" id="blOut" data-go="out" data-i18n="bl.out">Sign out</button></div></section>
+<section class="ug-s" data-s="frozen"><h1 data-i18n="bl.f.t">Your account is frozen</h1><p data-i18n="bl.f.p">We paused your account while we review its activity. Your data is kept, nothing is deleted.</p><p class="gate-s" data-i18n="bl.f.s">The dashboard and sending are unavailable until the review ends. If you can explain something, write to support.</p><div class="ug-act"><button type="button" class="btn pri gate-btn" data-go="form" data-i18n="bl.sup">Write to support</button><a class="ug-ghost" href="/api/standing/export" data-i18n="bl.dl">Download my data</a><button type="button" class="ug-ghost" data-go="out" data-i18n="bl.out">Sign out</button></div></section>
+<section class="ug-s" data-s="form"><h1 data-i18n="bl.form.t">Message to support</h1><p data-i18n="bl.form.p">Describe the situation. The reply comes to your account email.</p><input class="ug-in" id="blEm" type="email" maxlength="254" autocomplete="email" data-i18n-ph="bl.form.em" placeholder="Your email" hidden><textarea class="ug-ta" id="blT" rows="5" maxlength="5000" data-i18n-ph="bl.form.ph" placeholder="What would you like to tell us?"></textarea><p class="gate-s" id="blE" role="alert" hidden></p><div class="ug-act"><button type="button" class="btn pri gate-btn" id="blS" data-i18n="bl.form.send">Send</button><button type="button" class="ug-ghost" data-go="back" data-i18n="bl.form.back">Back</button></div></section>
+<section class="ug-s" data-s="sent"><div class="ug-ok" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h1 data-i18n="bl.sent.t">Message sent</h1><p><span data-i18n="bl.sent.p">We will reply to</span> <b id="blM"></b></p><div class="ug-act"><button type="button" class="ug-ghost" data-go="back" data-i18n="bl.form.back">Back</button></div></section>
+</main>
+</div>
+<script src="/js/boot.js?v=0"></script>
+<script src="/js/pages/blocked.js?v=0"></script>
 </body>
 </html>

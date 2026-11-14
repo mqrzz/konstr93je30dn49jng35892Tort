@@ -2,7 +2,7 @@
 var A=window.GSApp,t=A.t,e=A.esc;
 var IC={mail:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 8 8 5.5L20 8"/>',inbox:'<path d="M4 13.5 6.2 6.6A2 2 0 0 1 8.1 5.2h7.8a2 2 0 0 1 1.9 1.4L20 13.5"/><path d="M4 13.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3.5h-4.2a1 1 0 0 0-.9.6 3.3 3.3 0 0 1-5.8 0 1 1 0 0 0-.9-.6Z"/>',plus:'<path d="M12 5v14M5 12h14"/>',reply:'<path d="M9 8 4 12.5 9 17"/><path d="M4 12.5h9a7 7 0 0 1 7 7"/>',clip:'<path d="m20 11-8.2 8.2a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.5a1.7 1.7 0 0 1-2.4-2.4L15 7"/>',trash:'<path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12"/>',back:'<path d="M15 5l-7 7 7 7"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/>',send:'<path d="M20 4 10 14M20 4l-6 16-4-6-6-4Z"/>',x:'<path d="m6 6 12 12M18 6 6 18"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/>'};
 var KINDS=["general","support","government","legal","press","security","billing","partnerships","advertising","careers","abuse","custom"];
-var S={boxes:[],can:false,staff:[],domain:"",sel:"all",folder:"in",list:null,msg:null,mode:null,q:"",view:"list",root:null,head:null};
+var S={boxes:[],can:false,staff:[],domain:"",sel:"all",folder:"in",list:null,msg:null,mode:null,q:"",view:"list",page:"mail",root:null,head:null};
 function kindLabel(k){return t("ad.ml.k."+k,k)}
 function errMsg(x){var c=x&&x.code;var m={invalid_address:t("ad.ml.err.addr","Use letters, digits, dot, dash or underscore."),invalid_title:t("ad.ml.err.title","Enter a name."),exists:t("ad.ml.err.exists","This address already exists."),invalid_to:t("ad.ml.err.to","Check the recipient address."),empty:t("ad.ml.err.empty","The message is empty."),too_large:t("ad.ml.err.large","Attachments are larger than 10 MB."),attachment_blocked:t("ad.ml.err.att","This file type is not allowed."),send_failed:t("ad.ml.err.send","The message could not be sent.")+(x&&x.data&&x.data.detail?" ("+x.data.detail+")":"")}[c];return m||A.err(x)}
 function sz(n){return n>1048576?(n/1048576).toFixed(1)+" MB":Math.max(1,Math.round(n/1024))+" KB"}
@@ -39,11 +39,32 @@ function composePane(){
  var b=curBox();
  var opts=S.boxes.map(function(x){return'<option value="'+x.id+'"'+(b&&b.id===x.id?" selected":"")+'>'+e(x.title)+" — "+e(x.address)+'</option>'}).join("");
  return'<div class="ml-ph"><button type="button" class="abtn ml-bk" id="mlBk2" aria-label="'+e(t("ad.ml.back","Back"))+'">'+A.icon(IC.back,16)+'</button><div class="ml-pt"><h2>'+e(t("ad.ml.write","Write"))+'</h2></div><div class="ml-ma"><button type="button" class="abtn" id="mlCx">'+A.icon(IC.x,16)+'<span>'+e(t("au.cancel","Cancel"))+'</span><span class="ml-k">Esc</span></button><button type="button" class="abtn pri" id="mlCs">'+A.icon(IC.send,16)+'<span>'+e(t("ad.ml.send","Send"))+'</span></button></div></div><div class="ml-sc ml-cf"><label class="ml-row"><span>'+e(t("ad.ml.fromf","From"))+'</span><select class="fld" id="mcF">'+opts+'</select></label><label class="ml-row"><span>'+e(t("ad.ml.to","To"))+'</span><input class="fld" id="mcT" autocomplete="off" placeholder="name@example.com"></label><label class="ml-row"><span>'+e(t("ad.ml.subject","Subject"))+'</span><input class="fld" id="mcS" maxlength="300" autocomplete="off"></label><textarea class="fld ml-ta" id="mcB" aria-label="'+e(t("ad.ml.message","Message"))+'"></textarea><div class="ml-fl" id="mcL"></div><div class="ml-rb"><label class="abtn" for="mcU">'+A.icon(IC.clip,16)+'<span>'+e(t("ad.ml.attach","Attach file"))+'</span></label><input type="file" id="mcU" multiple hidden><small>'+e(t("ad.ml.limit","Up to 10 MB in total"))+'</small></div><p class="ferr" id="mcE" hidden></p></div>'}
+function tabsHtml(){
+ return'<div class="ak-seg" id="mlTabs" style="margin-bottom:22px"><button type="button" data-p="mail" class="'+(S.page==="mail"?"on":"")+'">'+e(t("ad.ml.tab.mail","Mail"))+(unreadAll()?"<em>"+A.num(unreadAll())+"</em>":"")+'</button><button type="button" data-p="boxes" class="'+(S.page==="boxes"?"on":"")+'">'+e(t("ad.ml.tab.boxes","Addresses"))+"<em>"+A.num(S.boxes.length)+"</em></button></div>"}
+function boxesPage(){
+ var un=unreadAll(),tot=S.boxes.reduce(function(a,b){return a+(b.total||0)},0),ids={};
+ S.boxes.forEach(function(b){(b.staff_ids||[]).forEach(function(i){ids[i]=1})});
+ function k(i,n,l,hot){return'<div class="ak-k'+(hot?" hot":"")+'"><span class="kg"></span><span class="ki">'+A.icon(i,20)+"</span><b>"+A.num(n)+"</b><span>"+e(l)+"</span></div>"}
+ var nm={};S.staff.forEach(function(u){nm[u.id]=u.name||u.email});
+ var cards=S.boxes.map(function(b){
+  var who=(b.staff_ids||[]).map(function(i){return nm[i]}).filter(Boolean);
+  return'<section class="ak-card pad ml-bx"><div class="ak-ch"><span class="ak-ci">'+A.icon(IC.mail,20)+'</span><div style="min-width:0"><h3>'+e(b.title)+'</h3><p class="ml-mono">'+e(b.address)+'</p></div></div><div class="ak-chips" style="margin-bottom:16px"><span class="ak-chip">'+e(kindLabel(b.kind))+"</span>"+(b.show_public?'<span class="ak-chip">'+e(t("ad.ml.public","Shown on the site"))+"</span>":"")+'</div><dl class="ak-kv" style="margin-bottom:18px"><div><dt>'+e(t("ad.ml.k.unread","Unread"))+"</dt><dd>"+A.num(b.unread||0)+"</dd></div><div><dt>"+e(t("ad.ml.k.total","Messages"))+"</dt><dd>"+A.num(b.total||0)+'</dd></div></dl><div class="ml-who">'+(who.length?who.slice(0,5).map(function(n){return'<span class="ak-av" title="'+e(n)+'">'+e(String(n).charAt(0).toUpperCase())+"</span>"}).join("")+(who.length>5?'<span class="ak-av">+'+(who.length-5)+"</span>":""):'<span class="dim sm">'+e(t("ad.ml.nostaff","Everyone with a full role"))+"</span>")+'</div><div class="ak-btns" style="margin-top:20px"><button type="button" class="abtn pri" data-o="'+b.id+'">'+e(t("ad.ml.open","Open inbox"))+"</button>"+(S.can?'<button type="button" class="abtn" data-e="'+b.id+'" aria-label="'+e(t("ad.ml.settings","Settings"))+'" title="'+e(t("ad.ml.settings","Settings"))+'">'+A.icon(IC.gear,16)+"</button>":"")+"</div></section>"}).join("");
+ var add=S.can?'<button type="button" class="ak-card ml-bx-add" id="mlAdd3"><span class="ak-ei" style="width:56px;height:56px;border-radius:19px;margin:0">'+A.icon(IC.plus,24)+"</span><b>"+e(t("ad.ml.add.first","Add address"))+"</b><span>"+e(t("ad.ml.noboxes.d","Create the first organization address."))+"</span></button>":"";
+ return'<div class="ak-k4">'+k(IC.mail,S.boxes.length,t("ad.ml.tab.boxes","Addresses"))+k(IC.inbox,un,t("ad.ml.k.unread","Unread"),!!un)+k(IC.mail,tot,t("ad.ml.k.total","Messages"))+k(IC.mail,S.boxes.filter(function(x){return x.show_public}).length,t("ad.ml.public","Shown on the site"))+'</div><div class="ak-three">'+cards+add+"</div>"}
 function paint(keep){
- var r=S.root,lw=r.querySelector(".ml-lw"),sc=lw?lw.scrollTop:0;
- r.innerHTML=S.head()+'<div class="ml" data-v="'+S.view+'"><aside class="ml-p ml-p1">'+side()+'</aside><section class="ml-p ml-p2">'+listPane()+'</section><section class="ml-p ml-p3">'+readPane()+'</section></div>';
+ var r=S.root;
+ if(S.page==="boxes"){
+  r.innerHTML=S.head()+tabsHtml()+boxesPage();
+  bindTabs();
+  r.querySelectorAll("[data-o]").forEach(function(b){b.onclick=function(){S.sel=b.dataset.o;S.folder="in";S.msg=null;S.mode=null;S.q="";S.page="mail";S.view="list";load()}});
+  r.querySelectorAll("[data-e]").forEach(function(b){b.onclick=function(){boxForm(S.boxes.filter(function(x){return x.id===b.dataset.e})[0])}});
+  var a3=r.querySelector("#mlAdd3");if(a3)a3.onclick=function(){boxForm()};
+  return}
+ var lw=r.querySelector(".ml-lw"),sc=lw?lw.scrollTop:0;
+ r.innerHTML=S.head()+tabsHtml()+'<div class="ml" data-v="'+S.view+'"><aside class="ml-p ml-p1">'+side()+'</aside><section class="ml-p ml-p2">'+listPane()+'</section><section class="ml-p ml-p3">'+readPane()+'</section></div>';
  var n=r.querySelector(".ml-lw");if(n&&keep)n.scrollTop=sc;
- bind()}
+ bindTabs();bind()}
+function bindTabs(){var tb=S.root.querySelector("#mlTabs");if(tb)tb.onclick=function(ev){var b=ev.target.closest("button");if(!b||b.dataset.p===S.page)return;S.page=b.dataset.p;history.replaceState(null,"",S.page==="boxes"?"#boxes":location.pathname);paint()}}
 function attachPicker(input,list,files,errEl){
  var tot=function(){return files.reduce(function(a,f){return a+f.size},0)};
  function draw(){list.innerHTML=files.map(function(f,i){return'<span class="ml-chip">'+A.icon(IC.clip,14)+'<span>'+e(f.name)+'</span><small>'+sz(f.size)+'</small><button type="button" data-i="'+i+'" aria-label="'+e(t("ad.ml.del","Delete"))+'">'+A.icon(IC.x,14)+'</button></span>'}).join("");list.querySelectorAll("button").forEach(function(b){b.onclick=function(){files.splice(+b.dataset.i,1);draw()}})}
@@ -118,5 +139,5 @@ function boxForm(edit){
  acts.push({label:t("au.cancel","Cancel")});
  A.modal({title:ed?t("ad.ml.edit","Address settings"):t("ad.ml.new","New address"),body:body,actions:acts})}
 document.addEventListener("keydown",function(ev){if(ev.key==="Escape"&&S.mode==="compose"&&S.root&&S.root.querySelector("#mlCx")&&!document.querySelector(".gm")){S.mode=null;S.view="list";paint(true)}});
-window.GSAdminMail={run:function(root,head){S.root=root;S.head=head;S.view="list";root.innerHTML=head()+A.loading();refreshBoxes().then(function(){load()},function(x){root.innerHTML=head()+A.failed(x,"mlRt");root.querySelector("#mlRt").onclick=function(){window.GSAdminMail.run(root,head)}})}};
+window.GSAdminMail={run:function(root,head){S.root=root;S.head=head;S.view="list";S.page=location.hash==="#boxes"?"boxes":"mail";root.innerHTML=head()+A.loading();refreshBoxes().then(function(){load()},function(x){root.innerHTML=head()+A.failed(x,"mlRt");root.querySelector("#mlRt").onclick=function(){window.GSAdminMail.run(root,head)}})}};
 })();

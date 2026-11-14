@@ -13,8 +13,8 @@ var CODE={
  curl:'curl https://geserd.com/api/emails \\\n  -H "Authorization: Bearer gs_live_xxxxxxxxx" \\\n  -H "Content-Type: application/json" \\\n  -d \'{"from":"hi@yourdomain.com",\n       "to":"you@example.com",\n       "subject":"Hello World",\n       "html":"<p>Congrats on sending your <strong>first email</strong>!</p>"}\''};
 function onboarding(){
  root.innerHTML='<div class="ob"><h1>'+E(T("ob.h","Send your first email"))+'</h1><p class="psub">'+E(T("ob.p","Follow the steps to send an email using the Geserd API."))+'</p>'+A.loading()+'</div>';
- Promise.all([A.api("/domains").catch(function(){return[]}),A.api("/subdomain").catch(function(){return null}),A.api("/api-keys").catch(function(){return[]}),A.api("/emails").catch(function(){return[]})]).then(function(r){
-  var d=list(r[0]).some(function(x){return x.status==="verified"||x.verified}),sd=r[1]&&(r[1].name||r[1].subdomain||r[1].claimed),k=list(r[2]).length>0,m=list(r[3]).length>0;
+ Promise.all([A.api("/domains").catch(function(){return[]}),A.api("/address").catch(function(){return null}),A.api("/api-keys").catch(function(){return[]}),A.api("/emails").catch(function(){return[]})]).then(function(r){
+  var d=list(r[0]).some(function(x){return x.status==="verified"||x.verified}),sd=!!(r[1]&&r[1].items&&r[1].items.length),k=list(r[2]).length>0,m=list(r[3]).length>0;
   var s=[d||!!sd,k,m],cur=s.indexOf(false);if(cur<0)cur=3;
   var tabs=[["node","Node.js"],["python","Python"],["php","PHP"],["curl","cURL"]];
   var cb='<div class="gcard cdcard"><div class="cdbar"><div class="seg2 sm">'+tabs.map(function(x,i){return '<button type="button" data-l="'+x[0]+'" class="'+(i?'':'on')+'">'+x[1]+'</button>'}).join("")+'</div><button type="button" class="abtn" id="p2cp">'+A.icon('<rect x="8" y="8" width="11" height="11" rx="2.5"/><path d="M5 15V7a2 2 0 0 1 2-2h8"/>',15)+'<span>'+E(T("ob.copy","Copy"))+'</span></button></div><pre class="src" id="p2pre">'+E(CODE.node)+'</pre></div>';
@@ -30,7 +30,7 @@ function onboarding(){
  })}
 function integrations(){
  root.innerHTML=head(T("ig.h","Integrations"),T("ig.p","Connect Geserd to the tools you already use."))+'<div class="gstack">'+[
-  {t:"SMTP",badge:"",d:T("ig.smtp","Use Geserd from any software that sends mail over SMTP, such as a sign-in provider or a CMS."),b:T("ig.smtp.b","SMTP settings"),href:"/app/settings/smtp/"},
+  {t:"SMTP",badge:"",d:T("ig.smtp","Use Geserd from any software that sends mail over SMTP, such as a sign-in provider or a CMS."),b:T("ig.smtp.b","SMTP settings"),href:"/app/emails/smtp/"},
   {t:T("ig.api","HTTP API"),d:T("ig.apid","Send and receive with one request. Examples for Node.js, Python and PHP."),b:T("ig.api.b","Open documentation"),href:"/docs/api/",blank:1},
   {t:T("ig.wh","Webhooks"),d:T("ig.whd","Get delivery, bounce and inbound events at your own URL."),b:T("ig.wh.b","Manage webhooks"),href:"/app/webhooks/"},
   {t:T("ig.au","Authentication"),d:T("ig.aud","Add one-time code sign-in to your app without building the email side yourself."),b:T("ig.au.b","Open authentication"),href:"/app/auth/"}].map(card).join("")+'</div>'}

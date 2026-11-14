@@ -10,7 +10,7 @@ A.IC={copy:'<rect x="9" y="9" width="11" height="11" rx="3"/><path d="M5 15V6a2 
 A.api=function(path,o){o=o||{};var h={};if(o.body!==undefined)h["Content-Type"]="application/json";
  return fetch((G().api||"/api")+path,{method:o.method||"GET",credentials:"same-origin",cache:"no-store",headers:h,body:o.body!==undefined?JSON.stringify(o.body):undefined}).then(function(r){
   if(r.status===401){location.href="/login/";return new Promise(function(){})}
-  return r.json().catch(function(){return{}}).then(function(j){if(!r.ok){var e=new Error(j.error||"server_error");e.code=j.error||"server_error";e.status=r.status;e.data=j;throw e}return j})
+  return r.json().catch(function(){return{}}).then(function(j){if(!r.ok){if(r.status===403&&(j.error==="account_blocked"||j.error==="account_frozen")){location.replace("/blocked/");return new Promise(function(){})}var e=new Error(j.error||"server_error");e.code=j.error||"server_error";e.status=r.status;e.data=j;throw e}return j})
  },function(){var e=new Error("network");e.code="network";throw e})};
 A.err=function(e){var c=(e&&e.code)||"server_error";return A.t("au.err."+c,A.t("au.err.generic","Something went wrong. Please try again."))};
 

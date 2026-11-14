@@ -98,9 +98,9 @@ function sendTest(){
   var v=vals();allVars().forEach(function(k){if(!v[k])v[k]="["+k+"]"});
   btn.disabled=true;var p=payload();
   A.api("/templates/test",{method:"POST",body:{from:from,subject:p.subject,html:p.html,text:p.text,variables:v}}).then(function(r){api.close();A.toast(T("tp.sent","Test sent to")+" "+r.to,"ok")},function(e){btn.disabled=false;A.toast(e.code==="domain_not_verified"?T("tp.err.domain","This sender domain is not verified."):A.err(e),"err")})}}]});
- Promise.all([A.api("/domains").catch(function(){return[]}),A.api("/subdomain").catch(function(){return{}})]).then(function(r){
+ Promise.all([A.api("/domains").catch(function(){return[]}),A.api("/address").catch(function(){return{}})]).then(function(r){
   var opts=[];(r[0]||[]).filter(function(d){return d.status==="verified"}).forEach(function(d){opts.push("hello@"+d.name)});
-  ((r[1]&&r[1].items)||[]).forEach(function(x){opts.push("hello@"+x.domain)});
+  ((r[1]&&r[1].items)||[]).forEach(function(x){opts.push(x.address)});
   var c=m.el.querySelector("#tsChips");if(!opts.length){m.el.querySelector("#tsHint").innerHTML=E(T("tp.nodomain","You have no verified domain yet."))+' <a href="/app/domains/">'+E(T("tp.adddomain","Add a domain"))+'</a>';return}
   c.innerHTML=opts.map(function(o){return '<button type="button" data-o="'+E(o)+'">'+E(o)+'</button>'}).join("");
   var inp=m.el.querySelector("#tsFrom");if(!inp.value)inp.value=opts[0];

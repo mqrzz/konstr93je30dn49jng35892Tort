@@ -57,9 +57,9 @@ function wire(){
  root.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.id==="akCode"){var b=document.getElementById("akVer");if(b)b.click()}})}
 A.ready(function(){root=document.getElementById("ak-root");if(!root)return;
  root.innerHTML=head()+A.loading();
- Promise.all([A.api("/auth/me"),A.api("/domains").catch(function(){return[]}),A.api("/subdomain").catch(function(){return{}}),A.api("/auth-kit/stats")]).then(function(r){
+ Promise.all([A.api("/auth/me"),A.api("/domains").catch(function(){return[]}),A.api("/address").catch(function(){return{}}),A.api("/auth-kit/stats")]).then(function(r){
   st.to=r[0].email;st.lang=(A.lang&&["en","ru","de","fr"].indexOf(A.lang())>=0)?A.lang():"en";
   (r[1]||[]).filter(function(d){return d.status==="verified"}).forEach(function(d){st.opts.push("hello@"+d.name)});
-  ((r[2]&&r[2].items)||[]).forEach(function(x){st.opts.push("hello@"+x.domain)});
+  ((r[2]&&r[2].items)||[]).forEach(function(x){st.opts.push(x.address)});
   st.from=st.opts[0]||"";stats=r[3];paint();wire()},function(x){root.innerHTML=head()+A.failed(x,"akRetry");var b=document.getElementById("akRetry");if(b)b.onclick=function(){location.reload()}})});
 })();

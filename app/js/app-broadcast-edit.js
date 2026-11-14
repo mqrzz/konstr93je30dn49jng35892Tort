@@ -76,7 +76,7 @@ function sendModal(){
   save().then(function(){return A.api("/broadcasts/"+encodeURIComponent(id)+"/send",{method:"POST",body:payload})}).then(function(){mm.close();location.href="/app/broadcasts/view/?id="+id},function(x){btn.disabled=false;er.textContent=x&&x.code==="domain_not_verified"&&x.data&&x.data.domain?t("au.err.domain_not_verified","This sender domain is not verified.")+" ("+x.data.domain+")":err(x);er.hidden=false})}
 }
 function defaults(){
- return Promise.all([A.api("/domains").catch(function(){return[]}),A.api("/subdomain").catch(function(){return{items:[]}})]).then(function(r){var d=(r[0]||[]).filter(function(x){return x.status==="verified"&&x.sending_ok})[0];if(d)return"hello@"+d.name;var s=r[1]&&r[1].items&&r[1].items[0];return s?"hello@"+s.domain:""})
+ return Promise.all([A.api("/domains").catch(function(){return[]}),A.api("/address").catch(function(){return{items:[]}})]).then(function(r){var d=(r[0]||[]).filter(function(x){return x.status==="verified"&&x.sending_ok})[0];if(d)return"hello@"+d.name;var s=r[1]&&r[1].items&&r[1].items[0];return s?s.address:""})
 }
 function init(){
  root.innerHTML=back()+A.loading();

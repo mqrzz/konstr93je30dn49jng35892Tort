@@ -1,4 +1,4 @@
-(function(){var P=location.pathname;if(/^\/(maintenance|assets|css|js|i18n|app\/admin)/.test(P))return;
+(function(){var P=location.pathname;if(/^\/(maintenance|contact|assets|css|js|i18n|app\/admin)/.test(P))return;
 var api=(window.GESERD&&window.GESERD.api)||"/api";
 var AUTH=/^\/(login|signup)/.test(P);
 function T(k,d){return(window.GESERD&&GESERD.t)?GESERD.t(k,d):d}

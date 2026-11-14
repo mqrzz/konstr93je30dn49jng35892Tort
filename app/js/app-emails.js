@@ -4,7 +4,7 @@ var KIND={queued:"wait",sent:"dim",delivered:"ok",failed:"bad",bounced:"bad",com
 var ST=["queued","sent","delivered","bounced","complained","failed"];
 function stName(s){return t("au.e.st."+s,s)}
 function pill(s){return A.pill(KIND[s]||"dim",stName(s))}
-function tabs(){var on=function(d){return dir===d?' class="on"':""};return'<nav class="stabs"><a href="/app/emails/"'+on("out")+">"+e(t("ap.tab.send","Sending"))+'</a><a href="/app/emails/receiving/"'+on("in")+">"+e(t("ap.tab.recv","Receiving"))+'</a><a href="/app/emails/suppressions/">'+e(t("ap.tab.supp","Suppressions"))+'</a><a href="/app/emails/smtp/">'+e(t("ap.tab.smtp","SMTP"))+"</a></nav>"}
+function tabs(){var on=function(d){return dir===d?' class="on"':""};return'<nav class="stabs"><a href="/app/emails/"'+on("out")+">"+e(t("ap.tab.send","Sending"))+'</a><a href="/app/emails/receiving/"'+on("in")+">"+e(t("ap.tab.recv","Receiving"))+'</a><a href="/app/emails/rules/">'+e(t("ib.tab.rules","Rules"))+'</a><a href="/app/emails/suppressions/">'+e(t("ap.tab.supp","Suppressions"))+"</a></nav>"}
 function shell(){root.innerHTML='<div class="ph"><h1>'+e(t("ap.emails","Emails"))+"</h1></div>"+tabs()+'<div class="tool" id="eTool"></div><div id="eBody"></div>';
  var tool=document.getElementById("eTool");
  var sb=document.createElement("div");sb.className="bx-search tool-s";sb.innerHTML=A.icon('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',16)+'<input id="eQ" type="search" autocomplete="off" placeholder="'+e(t("au.e.search","Search emails"))+'" value="'+e(qv)+'">';tool.appendChild(sb);
